@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  @apply w-screen font-inter bg-[#020202] text-white scroll-smooth antialiased;
+}
