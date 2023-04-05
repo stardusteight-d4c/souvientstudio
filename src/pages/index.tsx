@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Hero from './components/Hero'
 import Marquee from './components/Marquee'
 import Navbar from './components/Navbar'
+import Projects from './components/Projects'
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
         <Navbar />
         <Hero />
         <Marquee />
+        <Projects />
       </main>
     </>
   )
