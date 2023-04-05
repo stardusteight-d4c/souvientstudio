@@ -7,10 +7,6 @@ body {
   @apply font-inter bg-[#020202] text-white scroll-smooth antialiased;
 }
 
-/* a {
-  background: #3f348d;
-} */
-
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 12px;
