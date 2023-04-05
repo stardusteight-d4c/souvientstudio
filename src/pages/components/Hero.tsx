@@ -2,7 +2,7 @@ import fernanda from '../../assets/fernanda.png'
 
 export default function Hero() {
   return (
-    <section className="py-[150px] pt-[200px] md:pt-[100px] px-4 relative h-fit overflow-hidden">
+    <section className="pb-[100px] pt-[200px] md:pt-[125px] px-4 relative h-fit overflow-hidden">
       <div id="container-stars" className="inset-0 pointer-events-none">
         <div id="stars"></div>
         <div id="glow">

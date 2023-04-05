@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Hero from './components/Hero'
+import Marquee from './components/Marquee'
 import Navbar from './components/Navbar'
 
 export default function Home() {
@@ -14,6 +15,7 @@ export default function Home() {
       <main>
         <Navbar />
         <Hero />
+        <Marquee />
       </main>
     </>
   )
