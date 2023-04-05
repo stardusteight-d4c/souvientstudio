@@ -96,12 +96,7 @@ body {
   animation-duration: 200s;
 }
 
-
-
-
-
-
-
+/* Card Projects */
 .card {
   position: relative;
   display: flex;
@@ -120,23 +115,10 @@ body {
   flex-direction: column;
   align-items: center;
   transform: scale(0);
-  transition: 0.5s;
+  transition: 800ms;
 }
 .card:hover .content {
   transform: scale(1);
   bottom: 25px;
-}
-.content .title {
-  position: relative;
-  font-weight: 500;
-  line-height: 1em;
-  font-size: 1em;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  text-align: center;
-}
-.content .title span {
-  font-weight: 300;
-  font-size: 0.70em;
 }
 
