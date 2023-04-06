@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Dribbble from './components/Dribbble'
 import Hero from './components/Hero'
 import Marquee from './components/Marquee'
 import Navbar from './components/Navbar'
@@ -18,6 +19,7 @@ export default function Home() {
         <Hero />
         <Marquee />
         <Projects />
+        <Dribbble />
       </main>
     </>
   )

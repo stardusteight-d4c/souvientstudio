@@ -38,7 +38,7 @@ export default function Hero() {
         </p>
         <button
           type="button"
-          className="hover:scale-105  text-black z-50 relative bg-gradient-to-b from-[#f7ff00] to-[#ff00cc]  transition-all duration-300 rounded-full w-fit block py-3 px-8 active:scale-100 outline-none mx-auto mt-[40px]"
+          className="hover:scale-105 text-black z-50 relative bg-gradient-to-b from-[#f7ff00] to-[#ff00cc]  transition-all duration-300 rounded-full w-fit block py-3 px-8 active:scale-100 outline-none mx-auto mt-[40px]"
         >
           <strong>GET IN TOUCH</strong>
         </button>
