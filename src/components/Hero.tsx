@@ -28,16 +28,16 @@ export default function Hero() {
             </div>
             <img
               src={fernanda.src}
-              className="absolute  z-50 top-1 w-[100px] h-[100px] rounded-full object-fill"
+              className="absolute  z-50 top-1 w-[100px] h-[100px] rounded-full object-cover"
             />
           </div>
           <span className="text-transparent bg-[#fe5b30] bg-clip-text font-medium text-xl font-poppins !tracking-[-0.3px]">
-            Hi I'm Fernanda Sena
+            Hi! I'm Fernanda :-)
           </span>
         </div>
         <h1 className="text-[#2e2e2e] z-50 relative text-4xl md:text-[50px] mdd:text-[72px] text-center mt-[20px] leading-[40.4px] md:!leading-[58.4px]  mdd:!leading-[86.4px] mx-auto w-full max-w-[350px] sm:max-w-[928px] font-semibold font-poppins !tracking-[-1px]">
           Building digital products, <br className="hidden sm:block" />
-          &nbsp;brands and experiences.
+          &nbsp;brands and experiences
         </h1>
         <p className="text-[#505050] text-lg mt-[20px] w-full max-w-[350px] sm:max-w-[580px] mx-auto !leading-[28.8px] text-center">
           I am a graphic designer from Brazil, focused on visual identities for
