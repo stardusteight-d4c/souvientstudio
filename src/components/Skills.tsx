@@ -10,7 +10,7 @@ export default function Skills() {
   return (
     <section className="pb-[150px] pt-[100px]">
       <div className="max-w-[1200px] px-4 mx-auto">
-        <h2 className="text-[32px] block w-fit mx-auto !tracking-[-2px] font-medium !leading-[41.6px] font-poppins">
+        <h2 className="text-[32px] text-[#2e2e2e] block w-fit mx-auto !tracking-[-2px] font-medium !leading-[41.6px] font-poppins">
           Skills
         </h2>
         <div className="flex flex-col mdd:flex-row max-w-[1032px] items-center gap-y-6 mdd:justify-between mx-auto mt-[50px]">

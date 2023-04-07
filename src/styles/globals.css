@@ -7,22 +7,7 @@ body {
   @apply font-inter bg-[#F8F7E2] text-white scroll-smooth antialiased;
 }
 
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 12px;
-  height: 12px;
-  background: transparent;
-}
-::-moz-scrollbar {
-  background-color: transparent;
-}
-::-webkit-scrollbar-thumb {
-  cursor: pointer;
-  background: linear-gradient(115deg, #FE9BBA 0%, #F8F7E2 100%);
-  border-radius: 20px;
-}
-
-/* .blur-shadow1 {
+.blur-shadow1 {
   background-image: linear-gradient(#F8F7E2 35%, #FE9BBA);
   animation: spinning82341 10s linear infinite;
   box-shadow: 0px 0px 80px 0px #F8F7E2, 0px 5px 20px 0px #FE9BBA;
@@ -31,12 +16,29 @@ body {
   background-image: linear-gradient(#F8F7E2 35%, #FE9BBA);
   animation: spinning82342 10s linear infinite;
   box-shadow: 0px 0px 80px 0px #F8F7E2, 0px 5px 20px 0px #FE9BBA;
-} */
+}
 .spinner {
-  /* width: 110px;
-  height: 110px; */
   animation: spinning82341 10s linear infinite;
   text-align: center;
+}
+.spinner1 {
+  background-image: linear-gradient(#FE9BBA 35%, #F8F7E2);
+  animation: spinning82341 10s linear infinite;
+  text-align: center;
+  border-radius: 50px;
+  cursor: pointer;
+  filter: blur(3px);
+  box-shadow: 0px 0px 80px 0px #FE9BBA, 0px 2px 75px 0px #F8F7E2;
+}
+@keyframes spinning82341 {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes spinning82342 {
+  to {
+    transform: rotate(-360deg);
+  }
 }
 @keyframes spinning82341 {
   to {
@@ -53,6 +55,7 @@ body {
 #container-stars {
   position: absolute;
   transition: 0.5s;
+  z-index: 5;
 }
 #stars::before {
   content: '';
@@ -60,11 +63,13 @@ body {
   top: 0;
   left: -50%;
   width: 170%;
+  z-index: 5;
   height: 500%;
   animation: animStar 180s linear infinite;
 }
 #stars::before {
-  background-image: radial-gradient(#ffffff 1px, transparent 1%);
+  z-index: 5;
+  background-image: radial-gradient(#FE5B30 1px, transparent 1%);
   background-size: 50px 50px;
   opacity: 0.5;
 }
