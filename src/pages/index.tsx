@@ -5,6 +5,8 @@ import Marquee from './components/Marquee'
 import Navbar from './components/Navbar'
 import Projects from './components/Projects'
 import Skills from './components/Skills'
+import Services from './components/Services'
+import EmailMe from './components/EmailMe'
 
 export default function Home() {
   return (
@@ -22,6 +24,8 @@ export default function Home() {
         <Projects />
         <Dribbble />
         <Skills />
+        <Services />
+        <EmailMe />
       </main>
     </>
   )

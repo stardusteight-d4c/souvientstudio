@@ -8,7 +8,7 @@ import {
 
 export default function Skills() {
   return (
-    <section className="pb-[100px] pt-[50px]">
+    <section className="pb-[150px] pt-[100px]">
       <div className="max-w-[1200px] px-4 mx-auto">
         <h2 className="text-[32px] block w-fit mx-auto !tracking-[-2px] font-medium !leading-[41.6px] font-poppins">
           Skills
