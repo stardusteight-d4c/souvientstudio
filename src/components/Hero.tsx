@@ -1,4 +1,4 @@
-import fernanda from '../../assets/fernanda.png'
+import fernanda from '../assets/fernanda.png'
 
 export default function Hero() {
   return (

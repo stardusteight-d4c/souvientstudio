@@ -1,4 +1,4 @@
-import { cardServiceData } from '../../utils/data'
+import { cardServiceData } from '../utils/data'
 import ServiceCard from './integrate/ServiceCard'
 
 export default function Services() {

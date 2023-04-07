@@ -1,13 +1,13 @@
 import Head from 'next/head'
-import Dribbble from './components/Dribbble'
-import Hero from './components/Hero'
-import Marquee from './components/Marquee'
-import Navbar from './components/Navbar'
-import Projects from './components/Projects'
-import Skills from './components/Skills'
-import Services from './components/Services'
-import EmailMe from './components/EmailMe'
-import Footer from './components/Footer'
+import Dribbble from '../components/Dribbble'
+import Hero from '../components/Hero'
+import Marquee from '../components/Marquee'
+import Navbar from '../components/Navbar'
+import Projects from '../components/Projects'
+import Skills from '../components/Skills'
+import Services from '../components/Services'
+import EmailMe from '../components/EmailMe'
+import Footer from '../components/Footer'
 
 export default function Home() {
   return (

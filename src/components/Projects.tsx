@@ -10,7 +10,7 @@ import {
   mba,
   finalgirl,
   hellfire,
-} from '../../assets'
+} from '../assets'
 
 export default function Projects() {
   const [mounted, setMounted] = useState(false)

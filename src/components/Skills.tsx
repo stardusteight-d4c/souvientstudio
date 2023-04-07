@@ -4,7 +4,7 @@ import {
   afterEffects,
   figma,
   procreate,
-} from '../../assets'
+} from '../assets'
 
 export default function Skills() {
   return (
