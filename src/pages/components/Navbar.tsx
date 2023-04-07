@@ -27,7 +27,7 @@ export default function Navbar() {
       className={`${
         isGradientShadowOn &&
         'bg-gradient-to-b from-[#020202] via-[#020202]/90 to-transparent'
-      } fixed px-8 z-[1000] w-screen overflow-hidden inset-x-0 top-0`}
+      } fixed px-4 z-[1000] w-screen overflow-hidden inset-x-0 top-0`}
     >
       <div className="flex items-center max-w-[1032px] mx-auto justify-between py-8 ">
         <h2 className="font-bold text-[20px] tracking-[-1px] uppercase">
