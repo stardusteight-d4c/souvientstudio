@@ -26,7 +26,7 @@ export default function Navbar() {
     <nav
       className={`${
         isGradientShadowOn &&
-        'bg-gradient-to-b from-[#020202] via-[#020202]/90 to-transparent'
+        ''
       } fixed px-4 z-[1000] w-screen overflow-hidden inset-x-0 top-0`}
     >
       <div className="flex items-center max-w-[1032px] mx-auto justify-between py-8 ">

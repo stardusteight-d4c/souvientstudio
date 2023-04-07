@@ -1,8 +1,9 @@
 import fernanda from '../assets/fernanda.png'
+import star from '../assets/star.svg'
 
 export default function Hero() {
   return (
-    <section className="pb-[100px] pt-[200px] px-4 relative h-fit overflow-hidden">
+    <section className="pb-[100px] pt-[200px] bg-gradient-to-b from-[#FE9BBA] to-[#F8F7E2] px-4 relative h-fit overflow-hidden">
       <div id="container-stars" className="inset-0 pointer-events-none">
         <div id="stars"></div>
         <div id="glow">
@@ -14,8 +15,16 @@ export default function Hero() {
       <div className="max-w-[1200px] z-50 h-fit w-full mx-auto">
         <div className="mx-auto w-fit gap-y-[19px] flex flex-col items-center justify-center">
           <div className="relative flex items-center justify-center">
-            <div className="blur-shadow1 absolute -top-[20px] -left-[100px] md:-left-[300px] w-[32px] h-[32px] rounded-md" />
-            <div className="blur-shadow2 absolute -bottom-[20px] -right-[100px] md:-right-[300px] w-[24px] h-[24px] rounded-md" />
+            <img
+              src={star.src}
+              className="spinner absolute -top-[20px] -left-[100px] md:-left-[300px] w-[42px] h-[42px]"
+            />
+            <img
+              src={star.src}
+              className="spinner absolute -bottom-[20px] -right-[100px] md:-right-[300px] w-[34px] h-[34px]"
+            />
+            {/* <div className="blur-shadow1 absolute -top-[20px] -left-[100px] md:-left-[300px] w-[32px] h-[32px] rounded-md" /> */}
+            {/* <div className="blur-shadow2 absolute -bottom-[20px] -right-[100px] md:-right-[300px] w-[24px] h-[24px] rounded-md" /> */}
             <div className="spinner w-[110px] h-[110px]">
               <div className="spinner1" />
             </div>
@@ -24,7 +33,7 @@ export default function Hero() {
               className="absolute top-1 w-[100px] h-[100px] rounded-full object-fill"
             />
           </div>
-          <span className="text-transparent bg-gradient-to-l from-[#f7ff00] to-[#ff00cc] bg-clip-text font-medium text-xl font-poppins !tracking-[-0.3px]">
+          <span className="text-transparent bg-white bg-clip-text font-medium text-xl font-poppins !tracking-[-0.3px]">
             Hi I'm Fernanda Sena
           </span>
         </div>
@@ -38,7 +47,7 @@ export default function Hero() {
         </p>
         <button
           type="button"
-          className="hover:scale-105 text-black z-50 relative bg-gradient-to-b from-[#f7ff00] to-[#ff00cc]  transition-all duration-300 rounded-full w-fit block py-3 px-8 active:scale-100 outline-none mx-auto mt-[40px]"
+          className="hover:scale-105 text-white z-50 relative bg-gradient-to-t from-[#FE9BBA] to-[#F8F7E2]  transition-all duration-300 rounded-full w-fit block py-3 px-8 active:scale-100 outline-none mx-auto mt-[40px]"
         >
           <strong>GET IN TOUCH</strong>
         </button>
