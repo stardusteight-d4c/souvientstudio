@@ -11,12 +11,13 @@ export default function Services() {
         <h2 className="text-[32px] mb-12 block w-fit mx-auto !tracking-[-2px] font-medium !leading-[41.6px] font-poppins">
           I can help you with
         </h2>
-        <div className='flex justify-between items-center gap-x-16'>
-          {cardServiceData.map((card) => (
+        <div className='flex flex-col gap-y-6 mdd:flex-row justify-between items-center'>
+          {cardServiceData.map((card, index) => (
             <ServiceCard
               emoji={card.emoji}
               title={card.title}
               text={card.text}
+              index={index}
             />
           ))}
         </div>

@@ -13,7 +13,7 @@ export default function Skills() {
         <h2 className="text-[32px] block w-fit mx-auto !tracking-[-2px] font-medium !leading-[41.6px] font-poppins">
           Skills
         </h2>
-        <div className="flex max-w-[1032px]  items-center justify-between mx-auto mt-[50px]">
+        <div className="flex flex-col mdd:flex-row max-w-[1032px] items-center gap-y-6 mdd:justify-between mx-auto mt-[50px]">
           <img
             src={photoshop.src}
             alt=""
