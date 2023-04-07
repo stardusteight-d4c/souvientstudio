@@ -7,6 +7,22 @@ body {
   @apply font-inter bg-[#F8F7E2] text-white scroll-smooth antialiased;
 }
 
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+  background: #FE9BBA;
+}
+::-moz-scrollbar {
+  background-color: #FE9BBA;
+}
+::-webkit-scrollbar-thumb {
+  cursor: pointer;
+  background-image: linear-gradient(#FE9BBA 35%, #F8F7E2);
+  border-radius: 20px;
+}
+
+
 .blur-shadow1 {
   background-image: linear-gradient(#F8F7E2 35%, #FE9BBA);
   animation: spinning82341 10s linear infinite;
