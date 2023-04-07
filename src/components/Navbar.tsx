@@ -27,9 +27,9 @@ export default function Navbar() {
       className={`${
         isGradientShadowOn &&
         'bg-gradient-to-b from-[#FE9BBA] via-[#FE9BBA]/50 to-transparent'
-      } fixed px-4 z-[1000] w-screen overflow-hidden inset-x-0 top-0`}
+      } fixed px-14 z-[1000] w-screen overflow-hidden inset-x-0 top-0`}
     >
-      <div className="flex items-center max-w-[1032px] mx-auto justify-between py-8 ">
+      <div className="flex items-center max-w-[1445px] mx-auto justify-between py-8 ">
         <h2 className="font-bold cursor-pointer text-[20px] tracking-[-1px] uppercase">
           Fevient
         </h2>

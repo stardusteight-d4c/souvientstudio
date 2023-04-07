@@ -44,8 +44,8 @@ export default function Hero() {
           brands and audiovisual media.
         </p>
         <a
-          href="https://www.linkedin.com/in/fercsena/"
-          target="_blank"
+        href='https://www.linkedin.com/in/fercsena/'
+        target='_blank'
           className="hover:scale-105 text-white z-50 relative bg-[#FE9BBA] transition-all duration-300 rounded-full w-fit block py-3 px-8 active:scale-100 outline-none mx-auto mt-[40px]"
         >
           <strong>GET IN TOUCH</strong>
