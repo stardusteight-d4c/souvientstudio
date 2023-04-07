@@ -33,8 +33,8 @@ export default function Projects() {
             if (entry.target.id === 'projects') {
               anime({
                 targets: `#${entry.target.id}`,
-                translateY: [250, 0],
-                duration: 4000,
+                translateY: [100, 0],
+                duration: 5000,
               })
             }
           }

@@ -7,3 +7,10 @@ export { default as finbook } from './finbook.png'
 export { default as mba } from './mba.png'
 export { default as finalgirl } from './finalgirl.png'
 export { default as hellfire } from './hellfire.png'
+
+
+export { default as photoshop } from './tools/photoshop.png'
+export { default as illustrator } from './tools/illustrator.png'
+export { default as afterEffects } from './tools/after-effects.png'
+export { default as figma } from './tools/figma.png'
+export { default as procreate } from './tools/procreate.png'
