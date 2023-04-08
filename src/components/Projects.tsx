@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { motion, PanInfo } from 'framer-motion'
 import anime from 'animejs'
 import {
   jordan,
@@ -45,169 +46,138 @@ export default function Projects() {
     })
   }
 
+  const [cardSliderWidth, setCardSliderWidth] = useState(0)
+  const [onDrag, setOnDrag] = useState(0)
+  const cardSlider = useRef() as React.MutableRefObject<HTMLInputElement>
+  const items = [
+    jordan,
+    arca,
+    sushiRestaurant,
+    twentyOnePilots,
+    staart,
+    finbook,
+    mba,
+    finalgirl,
+    hellfire,
+  ]
+
+  useEffect(() => {
+    cardSlider.current &&
+      setCardSliderWidth(
+        cardSlider.current.scrollWidth - cardSlider.current.offsetWidth
+      )
+  }, [onDrag])
+
+  const dragAnimate = {
+    drag: 'x' as 'x',
+    ref: cardSlider,
+    onDrag: (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) =>
+      setOnDrag(info.offset.x),
+    dragConstraints: { right: 0, left: -cardSliderWidth },
+    className: 'flex gap-8',
+  }
+
   return (
     <section
       ref={projectsSection}
       id="projects"
-      className="py-[100px] px-14 relative h-fit "
+      className="py-[100px] md:px-4 lg:px-14 relative h-fit max-w-[1445px] mx-auto"
     >
-      {/* Colunm 1 */}
-      <div className=" flex  gap-3 w-fit mx-auto">
-        <div className="flex flex-col gap-3">
-          <div className="card-animate card rounded-3xl overflow-hidden transition-all duration-500 cursor-pointer w-full max-w-[400px] h-[300px] group relative">
-            <img
-              src={jordan.src}
-              alt=""
-              className="w-full h-full object-cover"
-            />
-            <b className="inset-x-0 transition-all bg-gradient-to-t from-[#FE9BBA]/90 to-transparent bottom-0 h-[100px] hidden group-hover:block"></b>
-            <div className="content">
-              <div className="title px-4 text-center">
-                <span className="font-semibold text-2xl uppercase">Jordan</span>
-                <br />
-                <span className="font-medium tracking-widest uppercase text-lg">
-                  Illustration and Composition
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div className="card-animate card rounded-3xl overflow-hidden transition-all duration-500 cursor-pointer w-full max-w-[400px] h-[600px] group relative">
-            <img src={arca.src} alt="" className="w-full h-full object-cover" />
-            <b className="inset-x-0 transition-all bg-gradient-to-t from-[#FE9BBA]/90 to-transparent bottom-0 h-[100px] hidden group-hover:block"></b>
-            <div className="content">
-              <div className="title px-4 text-center">
-                <span className="font-semibold text-2xl uppercase">Jordan</span>
-                <br />
-                <span className="font-medium tracking-widest uppercase text-lg">
-                  Illustration and Composition
-                </span>
-              </div>
-            </div>
+      <div className="mx-auto space-y-20">
+        <div>
+          <h2 className="text-[32px] px-4 md:px-0 text-[#2e2e2e] block w-fit !tracking-[-2px] font-medium !leading-[41.6px] font-poppins pb-4">
+            <span className='text-[#fe5b30]'>|</span> Visual Identities
+          </h2>
+          <div className="overflow-x-hidden h-fit relative">
+            <div className="absolute inset-y-0 w-[20px] md:w-[50px] z-50 left-0 bg-gradient-to-r from-[#F8F7E2] via-[#F8F7E2]/50 to-transparent" />
+            <div className="absolute inset-y-0 w-[20px] md:w-[50px] z-50 right-0 bg-gradient-to-l from-[#F8F7E2] via-[#F8F7E2]/50 to-transparent" />
+            <motion.div {...dragAnimate}>
+              {items.map((item, index) => (
+                <div className="card-animate card rounded-[50px] overflow-hidden transition-all duration-500 cursor-pointer w-full min-w-[300px] lg:min-w-[400px] h-[300px] group relative">
+                  <img
+                    src={item.src}
+                    alt=""
+                    className="w-full h-full object-cover pointer-events-none"
+                  />
+                  <b className="inset-x-0 transition-all bg-gradient-to-t from-[#FE9BBA]/90 to-transparent bottom-0 h-[100px] hidden group-hover:block"></b>
+                  <div className="content">
+                    <div className="title px-4 text-center">
+                      <span className="font-semibold text-2xl uppercase">
+                        Jordan
+                      </span>
+                      <br />
+                      <span className="font-medium tracking-widest uppercase text-lg">
+                        Illustration and Composition
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </motion.div>
           </div>
         </div>
-
-        {/* Colunm 2 */}
-
-        <div className="flex items-center flex-col gap-3">
-          <div className="card-animate card rounded-3xl overflow-hidden transition-all duration-500 cursor-pointer w-full max-w-[308px] h-[400px] group relative">
-            <img
-              src={sushiRestaurant.src}
-              alt=""
-              className="w-full h-full object-cover"
-            />
-            <b className="inset-x-0 transition-all bg-gradient-to-t from-[#FE9BBA]/90 to-transparent bottom-0 h-[100px] hidden group-hover:block"></b>
-            <div className="content">
-              <div className="title px-4 text-center">
-                <span className="font-semibold text-2xl uppercase">Jordan</span>
-                <br />
-                <span className="font-medium tracking-widest uppercase text-lg">
-                  Illustration and Composition
-                </span>
-              </div>
-            </div>
-          </div>
-          <div className="card-animate card rounded-3xl overflow-hidden transition-all duration-500 cursor-pointer w-full max-w-[308px] h-[500px] group relative">
-            <img
-              src={twentyOnePilots.src}
-              alt=""
-              className="w-full h-full object-cover"
-            />
-            <b className="inset-x-0 transition-all bg-gradient-to-t from-[#FE9BBA]/90 to-transparent bottom-0 h-[100px] hidden group-hover:block"></b>
-            <div className="content">
-              <div className="title px-4 text-center">
-                <span className="font-semibold text-2xl uppercase">Jordan</span>
-                <br />
-                <span className="font-medium tracking-widest uppercase text-lg">
-                  Illustration and Composition
-                </span>
-              </div>
-            </div>
+        <div>
+          <h2 className="text-[32px] px-4 md:px-0 text-[#2e2e2e] block w-fit !tracking-[-2px] font-medium !leading-[41.6px] font-poppins pb-4">
+          <span className='text-[#fe5b30]'>|</span> Open sequences
+          </h2>
+          <div className="overflow-x-hidden h-fit relative">
+            <div className="absolute inset-y-0 w-[20px] md:w-[50px] z-50 left-0 bg-gradient-to-r from-[#F8F7E2] via-[#F8F7E2]/50 to-transparent" />
+            <div className="absolute inset-y-0 w-[20px] md:w-[50px] z-50 right-0 bg-gradient-to-l from-[#F8F7E2] via-[#F8F7E2]/50 to-transparent" />
+            <motion.div {...dragAnimate}>
+              {items.map((item, index) => (
+                <div className="card-animate card rounded-[50px] overflow-hidden transition-all duration-500 cursor-pointer w-full min-w-[300px] lg:min-w-[400px] h-[300px] group relative">
+                  <img
+                    src={item.src}
+                    alt=""
+                    className="w-full h-full object-cover pointer-events-none"
+                  />
+                  <b className="inset-x-0 transition-all bg-gradient-to-t from-[#FE9BBA]/90 to-transparent bottom-0 h-[100px] hidden group-hover:block"></b>
+                  <div className="content">
+                    <div className="title px-4 text-center">
+                      <span className="font-semibold text-2xl uppercase">
+                        Jordan
+                      </span>
+                      <br />
+                      <span className="font-medium tracking-widest uppercase text-lg">
+                        Illustration and Composition
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </motion.div>
           </div>
         </div>
-        {/* Colunm 3 */}
-        <div className="flex flex-col gap-3">
-          <div className="card-animate card rounded-3xl overflow-hidden transition-all duration-500 cursor-pointer w-full max-w-[300px] h-[500px] group relative">
-            <img
-              src={hellfire.src}
-              alt=""
-              className="w-full h-full object-cover"
-            />
-            <b className="inset-x-0 transition-all bg-gradient-to-t from-[#FE9BBA]/90 to-transparent bottom-0 h-[100px] hidden group-hover:block"></b>
-            <div className="content">
-              <div className="title px-4 text-center">
-                <span className="font-semibold text-2xl uppercase">Staart</span>
-                <br />
-                <span className="font-medium tracking-widest uppercase text-lg">
-                  Visual Identity
-                </span>
-              </div>
-            </div>
-          </div>
-          <div className="card-animate card rounded-3xl overflow-hidden transition-all duration-500 cursor-pointer w-full max-w-[300px] h-[500px] group relative">
-            <img src={mba.src} alt="" className="w-full h-full object-cover" />
-            <b className="inset-x-0 transition-all bg-gradient-to-t from-[#FE9BBA]/90 to-transparent bottom-0 h-[100px] hidden group-hover:block"></b>
-            <div className="content">
-              <div className="title px-4 text-center">
-                <span className="font-semibold text-2xl uppercase">Staart</span>
-                <br />
-                <span className="font-medium tracking-widest uppercase text-lg">
-                  Visual Identity
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* <div className="card-animate card rounded-3xl overflow-hidden transition-all duration-500 cursor-pointer w-full max-w-[1032px] h-[250px] group col-span-2 relative">
-          <img src={staart.src} alt="" className="w-full h-full object-cover" />
-          <b className="inset-x-0 transition-all bg-gradient-to-t from-[#FE9BBA]/90 to-transparent bottom-0 h-[100px] hidden group-hover:block"></b>
-          <div className="content">
-            <div className="title px-4 text-center">
-              <span className="font-semibold text-2xl uppercase">Staart</span>
-              <br />
-              <span className="font-medium tracking-widest uppercase text-lg">
-                Visual Identity
-              </span>
-            </div>
-          </div>
-        </div> */}
-
-        {/* COLUNM 4 */}
-        <div className='flex flex-col gap-3'>
-          <div className="card-animate card rounded-3xl overflow-hidden transition-all duration-500 cursor-pointer w-full max-w-[400px] h-[500px] group relative">
-            <img
-              src={finbook.src}
-              alt=""
-              className="w-full h-full object-cover"
-            />
-            <b className="inset-x-0 transition-all bg-gradient-to-t from-[#FE9BBA]/90 to-transparent bottom-0 h-[100px] hidden group-hover:block"></b>
-            <div className="content">
-              <div className="title px-4 text-center">
-                <span className="font-semibold text-2xl uppercase">Staart</span>
-                <br />
-                <span className="font-medium tracking-widest uppercase text-lg">
-                  Visual Identity
-                </span>
-              </div>
-            </div>
-          </div>
-          <div className="card-animate card rounded-3xl overflow-hidden transition-all duration-500 cursor-pointer w-full max-w-[400px] h-[600px] group relative">
-            <img
-              src={finalgirl.src}
-              alt=""
-              className="w-full h-full object-cover"
-            />
-            <b className="inset-x-0 transition-all bg-gradient-to-t from-[#FE9BBA]/90 to-transparent bottom-0 h-[100px] hidden group-hover:block"></b>
-            <div className="content">
-              <div className="title px-4 text-center">
-                <span className="font-semibold text-2xl uppercase">Staart</span>
-                <br />
-                <span className="font-medium tracking-widest uppercase text-lg">
-                  Visual Identity
-                </span>
-              </div>
-            </div>
+        <div>
+          <h2 className="text-[32px] px-4 md:px-0 text-[#2e2e2e] block w-fit !tracking-[-2px] font-medium !leading-[41.6px] font-poppins pb-4">
+          <span className='text-[#fe5b30]'>|</span> Personal projects
+          </h2>
+          <div className="overflow-x-hidden h-fit relative">
+            <div className="absolute inset-y-0 w-[20px] md:w-[50px] z-50 left-0 bg-gradient-to-r from-[#F8F7E2] via-[#F8F7E2]/50 to-transparent" />
+            <div className="absolute inset-y-0 w-[20px] md:w-[50px] z-50 right-0 bg-gradient-to-l from-[#F8F7E2] via-[#F8F7E2]/50 to-transparent" />
+            <motion.div {...dragAnimate}>
+              {items.map((item, index) => (
+                <div className="card-animate card rounded-[50px] overflow-hidden transition-all duration-500 cursor-pointer w-full min-w-[300px] lg:min-w-[400px] h-[300px] group relative">
+                  <img
+                    src={item.src}
+                    alt=""
+                    className="w-full h-full object-cover pointer-events-none"
+                  />
+                  <b className="inset-x-0 transition-all bg-gradient-to-t from-[#FE9BBA]/90 to-transparent bottom-0 h-[100px] hidden group-hover:block"></b>
+                  <div className="content">
+                    <div className="title px-4 text-center">
+                      <span className="font-semibold text-2xl uppercase">
+                        Jordan
+                      </span>
+                      <br />
+                      <span className="font-medium tracking-widest uppercase text-lg">
+                        Illustration and Composition
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </motion.div>
           </div>
         </div>
       </div>
