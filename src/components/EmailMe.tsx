@@ -1,19 +1,27 @@
+import { useAppContext } from '@/context/ContextProvider'
+
 export default function EmailMe() {
+  const { localeContextText } = useAppContext()
+
+  if (!localeContextText) {
+    return <></>
+  }
+
   return (
     <section className="py-[100px]">
       <div className="max-w-[1032px] text-center lg:text-start px-4 lg:px-0 mx-auto">
         <span className="text-[#fe5b30] font-medium text-xl font-poppins !tracking-[-0.3px]">
-          Let's collaborate!
+          {localeContextText.emailMe.collab}
         </span>
         <span className="block mt-1 text-[#2e2e2e] text-[32px] md:text-[48px] !leading-[52.8px] !tracking-[-1px] font-semibold">
-          Have a project? Let's talk!
+          {localeContextText.emailMe.haveAproject}
         </span>
         <a
           href="mailto:fernandasenactt@gmail.com"
           className="cursor-pointer text-[#2e2e2e] group mx-auto md:mt-3 lg:mt-0 lg:mx-0 w-fit flex flex-col md:flex-row items-center gap-x-2 text-[32px] md:text-[48px] !leading-[52.8px] !tracking-[-1px] font-semibold"
         >
           <span className="group-hover:text-[#fe5b30]">
-            Contact
+            {localeContextText.emailMe.contact}
           </span>{' '}
           <svg
             xmlns="http://www.w3.org/2000/svg"

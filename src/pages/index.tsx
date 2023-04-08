@@ -8,8 +8,26 @@ import Skills from '../components/Skills'
 import Services from '../components/Services'
 import EmailMe from '../components/EmailMe'
 import Footer from '../components/Footer'
+import { useEffect } from 'react'
+import axios from 'axios'
+import { useAppContext } from '@/context/ContextProvider'
 
 export default function Home() {
+  const { lang } = useAppContext()
+  const { localeContextText, setLocaleContextText }: any = useAppContext()
+
+  useEffect(() => {
+    ;(async () => {
+      await axios
+        .get(`/api/locales/home/${lang}`)
+        .then((res) => setLocaleContextText(() => res.data))
+    })()
+  }, [lang])
+
+  if (!localeContextText) {
+    return <></>
+  }
+
   return (
     <>
       <Head>

@@ -1,10 +1,19 @@
+import { useAppContext } from '@/context/ContextProvider'
+
 export default function Footer() {
+  const { localeContextText } = useAppContext()
+
+  if (!localeContextText) {
+    return <></>
+  }
+
   return (
     <footer className="pt-20 pb-4">
       <div className="max-w-[1032px] px-4 lg:px-0 mx-auto">
         <div className="text-sm text-[#2e2e2e] flex flex-col gap-y-4 md:flex-row items-center justify-between">
-          <span>
-            ©2023 - ©{new Date().getFullYear()} Fevient, built by Stardusteight.
+          <span className='text-center md:text-left'>
+            ©2023 - ©{new Date().getFullYear()} Fevient,{' '}
+            {localeContextText.footer} Stardusteight.
           </span>
           <ul className="flex items-center gap-x-4">
             <li>

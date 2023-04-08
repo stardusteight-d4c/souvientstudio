@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { brazilFlag, euaFlag } from '@/assets'
+import { useAppContext } from '@/context/ContextProvider'
 
 export default function Navbar() {
   const [isGradientShadowOn, setIsGradientShadowOn] = useState(false)
   const [isOpenMenu, setIsOPenMenu] = useState(false)
+  const { lang, setLang } = useAppContext()
+  const { localeContextText } = useAppContext()
 
   useEffect(() => {
     window.addEventListener('scroll', handlegradientShadowOnScroll)
@@ -24,6 +28,10 @@ export default function Navbar() {
     }
   }
 
+  if (!localeContextText) {
+    return <></>
+  }
+
   return (
     <nav
       className={`${
@@ -39,8 +47,29 @@ export default function Navbar() {
           Fevient
         </Link>
         <ul className="hidden text-[#F8F7E2] sm:flex items-center gap-x-[40px]">
-          <li className="cursor-pointer font-medium">About</li>
-          <li className="cursor-pointer font-medium">Contact</li>
+          <li className="cursor-pointer font-medium">
+            {localeContextText.nav.about}
+          </li>
+          <li className="cursor-pointer font-medium">
+            {localeContextText.nav.contact}
+          </li>
+          <li>
+            {lang === 'en' ? (
+              <img
+                src={euaFlag.src}
+                alt=""
+                onClick={() => setLang('pt-BR')}
+                className="w-[25px] cursor-pointer"
+              />
+            ) : (
+              <img
+                src={brazilFlag.src}
+                alt=""
+                onClick={() => setLang('en')}
+                className="w-[25px] cursor-pointer"
+              />
+            )}
+          </li>
         </ul>
         <div className="sm:hidden">
           {isOpenMenu ? (
@@ -77,13 +106,32 @@ export default function Navbar() {
           {isOpenMenu && (
             <>
               <div className="bg-gradient-to-b -z-10 from-[#FE9BBA]/90 to-[#F8F7E2]/50 h-screen fixed inset-0" />
-              <div className="absolute px-[30px] -bottom-24 left-0">
-                <li className="text-3xl cursor-pointer font-medium list-none">
-                  About
-                </li>
-                <li className="text-3xl cursor-pointer font-medium list-none">
-                  Contact
-                </li>
+              <div className="absolute px-[30px] -bottom-48 left-0 w-full">
+                <div className="w-fit mx-auto flex items-center justify-center flex-col gap-y-4">
+                  <li className="text-3xl cursor-pointer font-medium list-none">
+                    {localeContextText.nav.about}
+                  </li>
+                  <li className="text-3xl cursor-pointer font-medium list-none">
+                    {localeContextText.nav.contact}
+                  </li>
+                  <li className="text-3xl cursor-pointer font-medium list-none">
+                    {lang === 'en' ? (
+                      <img
+                        src={euaFlag.src}
+                        alt=""
+                        onClick={() => setLang('pt-BR')}
+                        className="w-[40px] cursor-pointer"
+                      />
+                    ) : (
+                      <img
+                        src={brazilFlag.src}
+                        alt=""
+                        onClick={() => setLang('en')}
+                        className="w-[40px] cursor-pointer"
+                      />
+                    )}
+                  </li>
+                </div>
               </div>
             </>
           )}

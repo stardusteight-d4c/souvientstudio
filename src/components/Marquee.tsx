@@ -1,4 +1,12 @@
+import { useAppContext } from "@/context/ContextProvider"
+
 export default function Marquee() {
+  const { localeContextText } = useAppContext()
+
+  if (!localeContextText) {
+    return <></>
+  }
+
   return (
     <section className="max-w-[100vw] pb-[20px] overflow-x-hidden relative">
       <div className="relative ease-linear transition-all duration-300">
@@ -8,7 +16,7 @@ export default function Marquee() {
           <div className="animate-marquee text-4xl md:text-[50px] mdd:text-[62px] font-semibold gap-x-3 flex w-fit whitespace-nowrap">
             <div className="min-w-fit max-w-fit">
               <span className="flex items-center !leading-[140%]">
-                Selected Work{' '}
+                {localeContextText.marquee.selectedWork}{' '}
                 <span className="text-transparent bg-gradient-to-t from-[#F8F7E2] to-[#FE9BBA] bg-clip-text block ml-3">
                   /
                 </span>
@@ -16,7 +24,7 @@ export default function Marquee() {
             </div>
             <div className="min-w-fit max-w-fit">
               <span className="flex items-center !leading-[140%]">
-                Selected Work{' '}
+                {localeContextText.marquee.selectedWork}{' '}
                 <span className="text-transparent bg-gradient-to-t from-[#F8F7E2] to-[#FE9BBA] bg-clip-text block ml-3">
                   /
                 </span>
@@ -24,7 +32,7 @@ export default function Marquee() {
             </div>
             <div className="min-w-fit max-w-fit">
               <span className="flex items-center !leading-[140%]">
-                Selected Work{' '}
+                {localeContextText.marquee.selectedWork}{' '}
                 <span className="text-transparent bg-gradient-to-t from-[#F8F7E2] to-[#FE9BBA] bg-clip-text block ml-3">
                   /
                 </span>
@@ -32,7 +40,7 @@ export default function Marquee() {
             </div>
             <div className="min-w-fit max-w-fit">
               <span className="flex items-center !leading-[140%]">
-                Selected Work{' '}
+                {localeContextText.marquee.selectedWork}{' '}
                 <span className="text-transparent bg-gradient-to-t from-[#F8F7E2] to-[#FE9BBA] bg-clip-text block ml-3">
                   /
                 </span>
@@ -40,7 +48,7 @@ export default function Marquee() {
             </div>
             <div className="min-w-fit max-w-fit">
               <span className="flex items-center !leading-[140%]">
-                Selected Work{' '}
+                {localeContextText.marquee.selectedWork}{' '}
                 <span className="text-transparent bg-gradient-to-t from-[#F8F7E2] to-[#FE9BBA] bg-clip-text block ml-3">
                   /
                 </span>
@@ -48,7 +56,7 @@ export default function Marquee() {
             </div>
             <div className="min-w-fit max-w-fit">
               <span className="flex items-center !leading-[140%]">
-                Selected Work{' '}
+                {localeContextText.marquee.selectedWork}{' '}
                 <span className="text-transparent bg-gradient-to-t from-[#F8F7E2] to-[#FE9BBA] bg-clip-text block ml-3">
                   /
                 </span>
@@ -56,7 +64,7 @@ export default function Marquee() {
             </div>
             <div className="min-w-fit max-w-fit">
               <span className="flex items-center !leading-[140%]">
-                Selected Work{' '}
+                {localeContextText.marquee.selectedWork}{' '}
                 <span className="text-transparent bg-gradient-to-t from-[#F8F7E2] to-[#FE9BBA] bg-clip-text block ml-3">
                   /
                 </span>
@@ -64,7 +72,7 @@ export default function Marquee() {
             </div>
             <div className="min-w-fit max-w-fit">
               <span className="flex items-center !leading-[140%]">
-                Selected Work{' '}
+                {localeContextText.marquee.selectedWork}{' '}
                 <span className="text-transparent bg-gradient-to-t from-[#F8F7E2] to-[#FE9BBA] bg-clip-text block ml-3">
                   /
                 </span>
@@ -72,7 +80,7 @@ export default function Marquee() {
             </div>
             <div className="min-w-fit max-w-fit">
               <span className="flex items-center !leading-[140%]">
-                Selected Work{' '}
+                {localeContextText.marquee.selectedWork}{' '}
                 <span className="text-transparent bg-gradient-to-t from-[#F8F7E2] to-[#FE9BBA] bg-clip-text block ml-3">
                   /
                 </span>
@@ -80,7 +88,7 @@ export default function Marquee() {
             </div>
             <div className="min-w-fit max-w-fit">
               <span className="flex items-center !leading-[140%]">
-                Selected Work{' '}
+                {localeContextText.marquee.selectedWork}{' '}
                 <span className="text-transparent bg-gradient-to-t from-[#F8F7E2] to-[#FE9BBA] bg-clip-text block ml-3">
                   /
                 </span>
@@ -88,7 +96,7 @@ export default function Marquee() {
             </div>
             <div className="min-w-fit max-w-fit">
               <span className="flex items-center !leading-[140%]">
-                Selected Work{' '}
+                {localeContextText.marquee.selectedWork}{' '}
                 <span className="text-transparent bg-gradient-to-t from-[#F8F7E2] to-[#FE9BBA] bg-clip-text block ml-3">
                   /
                 </span>
@@ -96,7 +104,7 @@ export default function Marquee() {
             </div>
             <div className="min-w-fit max-w-fit">
               <span className="flex items-center !leading-[140%]">
-                Selected Work{' '}
+                {localeContextText.marquee.selectedWork}{' '}
                 <span className="text-transparent bg-gradient-to-t from-[#F8F7E2] to-[#FE9BBA] bg-clip-text block ml-3">
                   /
                 </span>
@@ -104,7 +112,7 @@ export default function Marquee() {
             </div>
             <div className="min-w-fit max-w-fit">
               <span className="flex items-center !leading-[140%]">
-                Selected Work{' '}
+                {localeContextText.marquee.selectedWork}{' '}
                 <span className="text-transparent bg-gradient-to-t from-[#F8F7E2] to-[#FE9BBA] bg-clip-text block ml-3">
                   /
                 </span>
@@ -112,7 +120,7 @@ export default function Marquee() {
             </div>
             <div className="min-w-fit max-w-fit">
               <span className="flex items-center !leading-[140%]">
-                Selected Work{' '}
+                {localeContextText.marquee.selectedWork}{' '}
                 <span className="text-transparent bg-gradient-to-t from-[#F8F7E2] to-[#FE9BBA] bg-clip-text block ml-3">
                   /
                 </span>
@@ -120,7 +128,7 @@ export default function Marquee() {
             </div>
             <div className="min-w-fit max-w-fit">
               <span className="flex items-center !leading-[140%]">
-                Selected Work{' '}
+                {localeContextText.marquee.selectedWork}{' '}
                 <span className="text-transparent bg-gradient-to-t from-[#F8F7E2] to-[#FE9BBA] bg-clip-text block ml-3">
                   /
                 </span>
@@ -128,7 +136,7 @@ export default function Marquee() {
             </div>
             <div className="min-w-fit max-w-fit">
               <span className="flex items-center !leading-[140%]">
-                Selected Work{' '}
+                {localeContextText.marquee.selectedWork}{' '}
                 <span className="text-transparent bg-gradient-to-t from-[#F8F7E2] to-[#FE9BBA] bg-clip-text block ml-3">
                   /
                 </span>
@@ -136,7 +144,7 @@ export default function Marquee() {
             </div>
             <div className="min-w-fit max-w-fit">
               <span className="flex items-center !leading-[140%]">
-                Selected Work{' '}
+                {localeContextText.marquee.selectedWork}{' '}
                 <span className="text-transparent bg-gradient-to-t from-[#F8F7E2] to-[#FE9BBA] bg-clip-text block ml-3">
                   /
                 </span>
@@ -144,7 +152,7 @@ export default function Marquee() {
             </div>
             <div className="min-w-fit max-w-fit">
               <span className="flex items-center !leading-[140%]">
-                Selected Work{' '}
+                {localeContextText.marquee.selectedWork}{' '}
                 <span className="text-transparent bg-gradient-to-t from-[#F8F7E2] to-[#FE9BBA] bg-clip-text block ml-3">
                   /
                 </span>
@@ -152,7 +160,7 @@ export default function Marquee() {
             </div>
             <div className="min-w-fit max-w-fit">
               <span className="flex items-center !leading-[140%]">
-                Selected Work{' '}
+                {localeContextText.marquee.selectedWork}{' '}
                 <span className="text-transparent bg-gradient-to-t from-[#F8F7E2] to-[#FE9BBA] bg-clip-text block ml-3">
                   /
                 </span>
@@ -160,7 +168,7 @@ export default function Marquee() {
             </div>
             <div className="min-w-fit max-w-fit">
               <span className="flex items-center !leading-[140%]">
-                Selected Work{' '}
+                {localeContextText.marquee.selectedWork}{' '}
                 <span className="text-transparent bg-gradient-to-t from-[#F8F7E2] to-[#FE9BBA] bg-clip-text block ml-3">
                   /
                 </span>
@@ -168,7 +176,7 @@ export default function Marquee() {
             </div>
             <div className="min-w-fit max-w-fit">
               <span className="flex items-center !leading-[140%]">
-                Selected Work{' '}
+                {localeContextText.marquee.selectedWork}{' '}
                 <span className="text-transparent bg-gradient-to-t from-[#F8F7E2] to-[#FE9BBA] bg-clip-text block ml-3">
                   /
                 </span>
@@ -176,7 +184,7 @@ export default function Marquee() {
             </div>
             <div className="min-w-fit max-w-fit">
               <span className="flex items-center !leading-[140%]">
-                Selected Work{' '}
+                {localeContextText.marquee.selectedWork}{' '}
                 <span className="text-transparent bg-gradient-to-t from-[#F8F7E2] to-[#FE9BBA] bg-clip-text block ml-3">
                   /
                 </span>
@@ -184,7 +192,7 @@ export default function Marquee() {
             </div>
             <div className="min-w-fit max-w-fit">
               <span className="flex items-center !leading-[140%]">
-                Selected Work{' '}
+                {localeContextText.marquee.selectedWork}{' '}
                 <span className="text-transparent bg-gradient-to-t from-[#F8F7E2] to-[#FE9BBA] bg-clip-text block ml-3">
                   /
                 </span>
@@ -192,7 +200,7 @@ export default function Marquee() {
             </div>
             <div className="min-w-fit max-w-fit">
               <span className="flex items-center !leading-[140%]">
-                Selected Work{' '}
+                {localeContextText.marquee.selectedWork}{' '}
                 <span className="text-transparent bg-gradient-to-t from-[#F8F7E2] to-[#FE9BBA] bg-clip-text block ml-3">
                   /
                 </span>
@@ -200,7 +208,7 @@ export default function Marquee() {
             </div>
             <div className="min-w-fit max-w-fit">
               <span className="flex items-center !leading-[140%]">
-                Selected Work{' '}
+                {localeContextText.marquee.selectedWork}{' '}
                 <span className="text-transparent bg-gradient-to-t from-[#F8F7E2] to-[#FE9BBA] bg-clip-text block ml-3">
                   /
                 </span>
@@ -208,7 +216,7 @@ export default function Marquee() {
             </div>
             <div className="min-w-fit max-w-fit">
               <span className="flex items-center !leading-[140%]">
-                Selected Work{' '}
+                {localeContextText.marquee.selectedWork}{' '}
                 <span className="text-transparent bg-gradient-to-t from-[#F8F7E2] to-[#FE9BBA] bg-clip-text block ml-3">
                   /
                 </span>
@@ -216,7 +224,7 @@ export default function Marquee() {
             </div>
             <div className="min-w-fit max-w-fit">
               <span className="flex items-center !leading-[140%]">
-                Selected Work{' '}
+                {localeContextText.marquee.selectedWork}{' '}
                 <span className="text-transparent bg-gradient-to-t from-[#F8F7E2] to-[#FE9BBA] bg-clip-text block ml-3">
                   /
                 </span>
@@ -224,7 +232,7 @@ export default function Marquee() {
             </div>
             <div className="min-w-fit max-w-fit">
               <span className="flex items-center !leading-[140%]">
-                Selected Work{' '}
+                {localeContextText.marquee.selectedWork}{' '}
                 <span className="text-transparent bg-gradient-to-t from-[#F8F7E2] to-[#FE9BBA] bg-clip-text block ml-3">
                   /
                 </span>
@@ -232,7 +240,7 @@ export default function Marquee() {
             </div>
             <div className="min-w-fit max-w-fit">
               <span className="flex items-center !leading-[140%]">
-                Selected Work{' '}
+                {localeContextText.marquee.selectedWork}{' '}
                 <span className="text-transparent bg-gradient-to-t from-[#F8F7E2] to-[#FE9BBA] bg-clip-text block ml-3">
                   /
                 </span>
@@ -240,7 +248,7 @@ export default function Marquee() {
             </div>
             <div className="min-w-fit max-w-fit">
               <span className="flex items-center !leading-[140%]">
-                Selected Work{' '}
+                {localeContextText.marquee.selectedWork}{' '}
                 <span className="text-transparent bg-gradient-to-t from-[#F8F7E2] to-[#FE9BBA] bg-clip-text block ml-3">
                   /
                 </span>
@@ -248,7 +256,7 @@ export default function Marquee() {
             </div>
             <div className="min-w-fit max-w-fit">
               <span className="flex items-center !leading-[140%]">
-                Selected Work{' '}
+                {localeContextText.marquee.selectedWork}{' '}
                 <span className="text-transparent bg-gradient-to-t from-[#F8F7E2] to-[#FE9BBA] bg-clip-text block ml-3">
                   /
                 </span>

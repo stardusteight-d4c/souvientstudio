@@ -1,3 +1,4 @@
+import { useAppContext } from '@/context/ContextProvider'
 import {
   photoshop,
   illustrator,
@@ -7,11 +8,17 @@ import {
 } from '../assets'
 
 export default function Skills() {
+  const { localeContextText } = useAppContext()
+
+  if (!localeContextText) {
+    return <></>
+  }
+
   return (
     <section className="pb-[150px] pt-[100px]">
       <div className="max-w-[1200px] px-4 mx-auto">
         <h2 className="text-[32px] text-[#2e2e2e] block w-fit mx-auto !tracking-[-2px] font-medium !leading-[41.6px] font-poppins">
-          Skills
+          {localeContextText.skills}
         </h2>
         <div className="flex flex-col mdd:flex-row max-w-[1032px] items-center gap-y-6 mdd:justify-between mx-auto mt-[50px]">
           <img

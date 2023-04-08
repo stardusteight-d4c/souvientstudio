@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { motion, PanInfo } from 'framer-motion'
-import anime from 'animejs'
 import {
   jordan,
   arca,
@@ -12,43 +11,15 @@ import {
   finalgirl,
   hellfire,
 } from '../assets'
+import { useAppContext } from '@/context/ContextProvider'
 
 export default function Projects() {
   const [mounted, setMounted] = useState(false)
-
-  useEffect(() => setMounted(true), [])
-  useEffect(() => {
-    if (mounted) {
-      handleObserver()
-    }
-  }, [mounted])
-
-  const projectsSection = useRef<HTMLDivElement>(null)
-  const boxes = [projectsSection]
-
-  function handleObserver() {
-    boxes.forEach((box) => {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            if (entry.target.id === 'projects') {
-              anime({
-                targets: `#${entry.target.id}`,
-                translateY: [100, 0],
-                duration: 5000,
-              })
-            }
-          }
-        })
-      })
-      observer.observe(box.current!)
-      return () => observer.disconnect()
-    })
-  }
-
   const [cardSliderWidth, setCardSliderWidth] = useState(0)
   const [onDrag, setOnDrag] = useState(0)
   const cardSlider = useRef() as React.MutableRefObject<HTMLInputElement>
+  const { localeContextText } = useAppContext()
+
   const items = [
     jordan,
     arca,
@@ -77,23 +48,30 @@ export default function Projects() {
     className: 'flex gap-8',
   }
 
+  if (!localeContextText) {
+    return <></>
+  }
+
   return (
     <section
-      ref={projectsSection}
       id="projects"
       className="py-[100px] md:px-4 lg:px-14 relative h-fit max-w-[1445px] mx-auto"
     >
       <div className="mx-auto space-y-20">
         <div>
-          <h2 className="text-[32px] px-4 md:px-0 text-[#2e2e2e] block w-fit !tracking-[-2px] font-medium !leading-[41.6px] font-poppins pb-4">
-            <span className='text-[#fe5b30]'>|</span> Visual Identities
+          <h2 className="text-[32px] px-4 md:px-0 text-[#2e2e2e] block w-fit !tracking-[-2px] font-medium !leading-[41.6px] font-poppins pb-5">
+            <span className="text-[#fe5b30]">|</span>{' '}
+            {localeContextText.projects.visualIdentities}
           </h2>
           <div className="overflow-x-hidden h-fit relative">
             <div className="absolute inset-y-0 w-[20px] md:w-[50px] z-50 left-0 bg-gradient-to-r from-[#F8F7E2] via-[#F8F7E2]/50 to-transparent" />
             <div className="absolute inset-y-0 w-[20px] md:w-[50px] z-50 right-0 bg-gradient-to-l from-[#F8F7E2] via-[#F8F7E2]/50 to-transparent" />
             <motion.div {...dragAnimate}>
               {items.map((item, index) => (
-                <div className="card-animate card rounded-[50px] overflow-hidden transition-all duration-500 cursor-pointer w-full min-w-[300px] lg:min-w-[400px] h-[300px] group relative">
+                <div
+                  key={index}
+                  className="card-animate card rounded-[50px] overflow-hidden transition-all duration-500 cursor-pointer w-full min-w-[300px] lg:min-w-[400px] h-[300px] group relative"
+                >
                   <img
                     src={item.src}
                     alt=""
@@ -117,15 +95,19 @@ export default function Projects() {
           </div>
         </div>
         <div>
-          <h2 className="text-[32px] px-4 md:px-0 text-[#2e2e2e] block w-fit !tracking-[-2px] font-medium !leading-[41.6px] font-poppins pb-4">
-          <span className='text-[#fe5b30]'>|</span> Open sequences
+          <h2 className="text-[32px] px-4 md:px-0 text-[#2e2e2e] block w-fit !tracking-[-2px] font-medium !leading-[41.6px] font-poppins pb-5">
+            <span className="text-[#fe5b30]">|</span>{' '}
+            {localeContextText.projects.openSequences}
           </h2>
           <div className="overflow-x-hidden h-fit relative">
             <div className="absolute inset-y-0 w-[20px] md:w-[50px] z-50 left-0 bg-gradient-to-r from-[#F8F7E2] via-[#F8F7E2]/50 to-transparent" />
             <div className="absolute inset-y-0 w-[20px] md:w-[50px] z-50 right-0 bg-gradient-to-l from-[#F8F7E2] via-[#F8F7E2]/50 to-transparent" />
             <motion.div {...dragAnimate}>
               {items.map((item, index) => (
-                <div className="card-animate card rounded-[50px] overflow-hidden transition-all duration-500 cursor-pointer w-full min-w-[300px] lg:min-w-[400px] h-[300px] group relative">
+                <div
+                  key={index}
+                  className="card-animate card rounded-[50px] overflow-hidden transition-all duration-500 cursor-pointer w-full min-w-[300px] lg:min-w-[400px] h-[300px] group relative"
+                >
                   <img
                     src={item.src}
                     alt=""
@@ -149,15 +131,19 @@ export default function Projects() {
           </div>
         </div>
         <div>
-          <h2 className="text-[32px] px-4 md:px-0 text-[#2e2e2e] block w-fit !tracking-[-2px] font-medium !leading-[41.6px] font-poppins pb-4">
-          <span className='text-[#fe5b30]'>|</span> Personal projects
+          <h2 className="text-[32px] px-4 md:px-0 text-[#2e2e2e] block w-fit !tracking-[-2px] font-medium !leading-[41.6px] font-poppins pb-5">
+            <span className="text-[#fe5b30]">|</span>{' '}
+            {localeContextText.projects.personalProjects}
           </h2>
           <div className="overflow-x-hidden h-fit relative">
             <div className="absolute inset-y-0 w-[20px] md:w-[50px] z-50 left-0 bg-gradient-to-r from-[#F8F7E2] via-[#F8F7E2]/50 to-transparent" />
             <div className="absolute inset-y-0 w-[20px] md:w-[50px] z-50 right-0 bg-gradient-to-l from-[#F8F7E2] via-[#F8F7E2]/50 to-transparent" />
             <motion.div {...dragAnimate}>
               {items.map((item, index) => (
-                <div className="card-animate card rounded-[50px] overflow-hidden transition-all duration-500 cursor-pointer w-full min-w-[300px] lg:min-w-[400px] h-[300px] group relative">
+                <div
+                  key={index}
+                  className="card-animate card rounded-[50px] overflow-hidden transition-all duration-500 cursor-pointer w-full min-w-[300px] lg:min-w-[400px] h-[300px] group relative"
+                >
                   <img
                     src={item.src}
                     alt=""
