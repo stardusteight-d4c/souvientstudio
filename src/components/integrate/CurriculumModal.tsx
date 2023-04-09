@@ -7,7 +7,6 @@ export default function CurriculumModal() {
   const { localeContextText, showCurriculum, setShowCurriculum } =
     useAppContext()
   const [mounted, setMounted] = useState(false)
-  const nextBox = document.getElementById('__next')
 
   useEffect(() => {
     setMounted(true)
@@ -34,10 +33,10 @@ export default function CurriculumModal() {
     <section className="absolute grid place-items-center bg-[#F8F7E2]/80 z-[1200] inset-0">
       <div
         id="curriculum-box"
-        className="bg-paper-texture bg-100% absolute top-0 mx-2 w-fit mt-12 shadow-lg shadow-[#2e2e2e]/20 xll:max-w-[1300px] bg-[#F8F7E2] text-[#2e2e2e] border-[4px] border-[#fe5b30]/80 md:px-8 md:py-6 xll:w-full h-fit !scrollbar-hide 2xl:mx-auto"
+        className="bg-paper-texture bg-100% absolute top-0 mx-2 w-fit mt-12 xll:max-w-[1300px] bg-[#F8F7E2] text-[#2e2e2e] border-[4px] border-[#fe5b30]/80 md:px-8 md:py-6 xll:w-full h-fit 2xl:mx-auto"
       >
-        <div className="relative h-full">
-          <div className="sticky md:relative p-4 mb-8 md:p-0 md:mb-0 shadow-md md:shadow-none shadow-black/20 bg-[#F8F7E2] md:bg-transparent top-0">
+        <div className="relative">
+          <div className="sticky md:relative p-4 mb-8 md:p-0 md:mb-0 bg-[#F8F7E2] md:bg-transparent top-0">
             <div className="flex items-center gap-x-4 ml-auto w-fit">
               <div className="cursor-pointer">
                 <svg
@@ -396,6 +395,6 @@ export default function CurriculumModal() {
         </div>
       </div>
     </section>,
-    nextBox!
+    document.body
   )
 }
