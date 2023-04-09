@@ -1,30 +1,28 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { brazilFlag, euaFlag } from '@/assets'
-import { useAppContext } from '@/context/ContextProvider'
+import { useAppContext } from '@/@context/ContextProvider'
 import CurriculumModal from './integrate/CurriculumModal'
 
 export default function Navbar() {
   const [isGradientShadowOn, setIsGradientShadowOn] = useState(false)
-  const [isOpenMenu, setIsOPenMenu] = useState(false)
-  const [showCurriculumModal, setShowCurriculumModal] = useState(false)
+  const [isOpenMenu, setIsOpenMenu] = useState(false)
   const { lang, setLang } = useAppContext()
-  const { localeContextText } = useAppContext()
+  const { localeContextText, showCurriculum, setShowCurriculum } =
+    useAppContext()
 
   useEffect(() => {
-    window.addEventListener('scroll', handlegradientShadowOnScroll)
-    // executeAnimation();
+    window.addEventListener('scroll', handleGradientShadowOnScroll)
     return () => {
-      window.removeEventListener('scroll', handlegradientShadowOnScroll)
+      window.removeEventListener('scroll', handleGradientShadowOnScroll)
     }
   }, [])
 
-  function handlegradientShadowOnScroll() {
+  function handleGradientShadowOnScroll() {
     if (window.scrollY >= 100) {
       setIsGradientShadowOn(true)
     } else if (window.scrollY === 0) {
       setIsGradientShadowOn(false)
-      // executeAnimation();
     } else {
       setIsGradientShadowOn(false)
     }
@@ -50,7 +48,12 @@ export default function Navbar() {
         </Link>
         <ul className="hidden text-[#F8F7E2] sm:flex items-center gap-x-[40px]">
           <li
-            onClick={() => setShowCurriculumModal(true)}
+            onClick={() => {
+              window.scrollTo({ top: 0, behavior: 'auto' })
+              setTimeout(() => {
+                setShowCurriculum(true)
+              }, 200)
+            }}
             className="cursor-pointer font-medium"
           >
             {localeContextText.nav.about}
@@ -59,7 +62,7 @@ export default function Navbar() {
             {localeContextText.nav.contact}
           </li>
 
-          {showCurriculumModal && <CurriculumModal />}
+          {showCurriculum && <CurriculumModal />}
           <li>
             {lang === 'en' ? (
               <img
@@ -81,7 +84,7 @@ export default function Navbar() {
         <div className="sm:hidden">
           {isOpenMenu ? (
             <div
-              onClick={() => setIsOPenMenu(false)}
+              onClick={() => setIsOpenMenu(false)}
               className="sm:hidden cursor-pointer"
             >
               <svg
@@ -96,7 +99,7 @@ export default function Navbar() {
             </div>
           ) : (
             <div
-              onClick={() => setIsOPenMenu(true)}
+              onClick={() => setIsOpenMenu(true)}
               className="sm:hidden cursor-pointer"
             >
               <svg
@@ -115,7 +118,16 @@ export default function Navbar() {
               <div className="bg-gradient-to-b -z-10 from-[#FE9BBA]/90 to-[#F8F7E2]/50 h-screen fixed inset-0" />
               <div className="absolute px-[30px] -bottom-48 left-0 w-full">
                 <div className="w-fit mx-auto flex items-center justify-center flex-col gap-y-4">
-                  <li className="text-3xl cursor-pointer font-medium list-none">
+                  <li
+                    onClick={() => {
+                      window.scrollTo({ top: 0, behavior: 'auto' })
+                      setTimeout(() => {
+                        setShowCurriculum(true)
+                      }, 200)
+                      setIsOpenMenu(false)
+                    }}
+                    className="text-3xl cursor-pointer font-medium list-none"
+                  >
                     {localeContextText.nav.about}
                   </li>
                   <li className="text-3xl cursor-pointer font-medium list-none">

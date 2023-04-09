@@ -1,4 +1,4 @@
-import { useAppContext } from '@/context/ContextProvider'
+import { useAppContext } from '@/@context/ContextProvider'
 import { fernanda, star } from '@/assets'
 
 export default function Hero() {

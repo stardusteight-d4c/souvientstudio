@@ -1,10 +1,46 @@
 import ReactDOM from 'react-dom'
 import { fernanda } from '@/assets'
+import { useAppContext } from '@/@context/ContextProvider'
+import { useEffect, useState } from 'react'
 
 export default function CurriculumModal() {
+  const { localeContextText, showCurriculum, setShowCurriculum } =
+    useAppContext()
+
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleHideModalOnScroll)
+    return () => {
+      window.removeEventListener('scroll', handleHideModalOnScroll)
+    }
+  }, [mounted])
+
+  function handleHideModalOnScroll() {
+    const element = document.getElementById('curriculum-box')!
+    const curriculumHeight = element?.offsetHeight
+    console.log('curriculumHeight', curriculumHeight);
+    console.log('window.scrollY', window.scrollY);
+    
+    if (mounted) {
+      console.log(mounted);
+      
+      if (window.scrollY >= curriculumHeight) {
+        setShowCurriculum(false)
+      }
+    }
+  }
+
   return ReactDOM.createPortal(
     <main className="absolute grid place-items-center bg-[#F8F7E2]/50  z-[1500] inset-0">
-      <div className="bg-paper-texture bg-100% absolute top-0 max-w-[96vw] md:inset-x-2 w-fit mt-12 shadow-lg shadow-[#2e2e2e]/20 xll:max-w-[1300px] max-h-fit bg-[#F8F7E2] text-[#2e2e2e] border-[4px] border-[#fe5b30]/80 md:px-8 md:py-6 xll:w-full h-fit !scrollbar-hide mx-auto">
+      <div
+        id="curriculum-box"
+        className="bg-paper-texture bg-100% absolute top-0 max-w-[96vw] md:inset-x-2 w-fit mt-12 shadow-lg shadow-[#2e2e2e]/20 xll:max-w-[1300px] max-h-fit bg-[#F8F7E2] text-[#2e2e2e] border-[4px] border-[#fe5b30]/80 md:px-8 md:py-6 xll:w-full h-fit !scrollbar-hide mx-auto"
+      >
         <div className="relative  h-full">
           <div className="sticky md:relative p-4 mb-8 md:p-0 md:mb-0 shadow-md md:shadow-none shadow-black/20 bg-[#F8F7E2] md:bg-transparent top-0">
             <div className="flex items-center gap-x-4 ml-auto w-fit">
@@ -19,7 +55,10 @@ export default function CurriculumModal() {
                   <path d="M224,152v56a16,16,0,0,1-16,16H48a16,16,0,0,1-16-16V152a8,8,0,0,1,16,0v56H208V152a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,132.69V40a8,8,0,0,0-16,0v92.69L93.66,106.34a8,8,0,0,0-11.32,11.32Z"></path>
                 </svg>
               </div>
-              <div className="cursor-pointer">
+              <div
+                onClick={() => setShowCurriculum(false)}
+                className="cursor-pointer"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="32"
@@ -32,7 +71,7 @@ export default function CurriculumModal() {
               </div>
             </div>
           </div>
-          <div className='p-4 md:p-0'>
+          <div className="p-4 md:p-0">
             <div className="flex flex-col md:flex-row items-center justify-between">
               <div className="flex flex-col md:flex-row items-center gap-x-4">
                 <img

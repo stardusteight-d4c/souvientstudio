@@ -10,7 +10,7 @@ import EmailMe from '../components/EmailMe'
 import Footer from '../components/Footer'
 import { useEffect } from 'react'
 import axios from 'axios'
-import { useAppContext } from '@/context/ContextProvider'
+import { useAppContext } from '@/@context/ContextProvider'
 
 export default function Home() {
   const { lang } = useAppContext()

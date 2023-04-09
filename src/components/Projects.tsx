@@ -11,7 +11,7 @@ import {
   finalgirl,
   hellfire,
 } from '../assets'
-import { useAppContext } from '@/context/ContextProvider'
+import { useAppContext } from '@/@context/ContextProvider'
 
 export default function Projects() {
   const [mounted, setMounted] = useState(false)

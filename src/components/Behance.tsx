@@ -1,4 +1,4 @@
-import { useAppContext } from '@/context/ContextProvider'
+import { useAppContext } from '@/@context/ContextProvider'
 
 export default function Dribbble() {
   const { localeContextText } = useAppContext()
