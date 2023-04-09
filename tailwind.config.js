@@ -8,7 +8,9 @@ module.exports = {
       md: '768px',
       mdd: '950px',
       lg: '1024px',
+      lgg: '1150px',
       xl: '1280px',
+      'xll': '1320px',
       '2xl': '1536px',
     },
     fontFamily: {

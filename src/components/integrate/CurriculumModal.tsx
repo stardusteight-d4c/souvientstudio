@@ -4,7 +4,7 @@ import { fernanda } from '@/assets'
 export default function CurriculumModal() {
   return ReactDOM.createPortal(
     <main className="absolute grid place-items-center bg-[#F8F7E2]/50  z-[1500] inset-0">
-      <div className="bg-paper-texture bg-100% absolute top-0 mt-12 shadow-lg shadow-[#2e2e2e]/20 max-w-[1300px] max-h-fit overflow-y-scroll bg-[#F8F7E2] text-[#2e2e2e] border-[4px] border-[#fe5b30]/80 px-8 py-6 w-full h-fit overflow-hidden !scrollbar-hide mx-auto ">
+      <div className="bg-paper-texture  bg-100% absolute top-0 inset-x-2 w-fit mt-12 shadow-lg shadow-[#2e2e2e]/20 xll:max-w-[1300px] max-h-fit overflow-y-scroll bg-[#F8F7E2] text-[#2e2e2e] border-[4px] border-[#fe5b30]/80 px-8 py-6 xll:w-full h-fit overflow-hidden !scrollbar-hide mx-auto">
         <div className="flex items-center gap-x-4 ml-auto w-fit">
           <div className="cursor-pointer">
             <svg
@@ -37,7 +37,7 @@ export default function CurriculumModal() {
                 className="w-[125px] h-[125px] rounded-full object-cover mr-5"
                 alt=""
               />
-              <span className="text-[#505050] font-normal block text-sm max-w-[600px]">
+              <span className="text-[#505050] font-normal block text-sm w-full mdd:min-w-[450px] xl:max-w-[600px]">
                 Hi, my name is Fernanda Chagas de Sena but i go by{' '}
                 <strong className="font-semibold">Fevient</strong>, I am an{' '}
                 <strong className="font-semibold">Graphic Designer</strong> from
@@ -54,11 +54,12 @@ export default function CurriculumModal() {
             </div>
           </div>
           <div className="flex gap-8 font-poppins mt-8">
+            {/* Column 1 */}
             <div>
               <h2 className="text-2xl font-light font-inter mb-4 tracking-tighter">
                 Education
               </h2>
-              <div className="flex flex-col gap-y-4 w-[480px]">
+              <div className="flex flex-col gap-y-4 lgg:w-[480px]">
                 <div>
                   <h3 className="font-medium text-base">
                     Industrial Design And Product Development Engineering
@@ -122,6 +123,8 @@ export default function CurriculumModal() {
                 </div>
               </div>
             </div>
+            {/* Column 2 */}
+
             <div>
               <h2 className="text-2xl font-light font-inter mb-4 tracking-tighter">
                 Experience
@@ -160,77 +163,131 @@ export default function CurriculumModal() {
                   </ul>
                 </div>
               </div>
-              <h2 className="text-2xl font-light font-inter mb-4 mt-8 tracking-tighter">
-                Software
-              </h2>
-              <div className="flex flex-col gap-y-2">
+              <div className="flex gap-x-8 mdd:justify-between items-start">
                 <div>
-                  <h3 className="font-medium text-base">Photoshop</h3>
-                  <div className="flex items-center gap-x-1">
-                    <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                    <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                    <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                    <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                    <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                    <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                    <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                    <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                    <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                    <div className="border border-[#2e2e2e] rounded-full w-3 h-3" />
+                  <h2 className="text-2xl font-light font-inter mb-4 mt-8 tracking-tighter">
+                    Software
+                  </h2>
+                  <div className="flex flex-col gap-y-2">
+                    <div>
+                      <h3 className="font-medium text-base">Photoshop</h3>
+                      <div className="flex items-center gap-x-1">
+                        <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
+                        <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
+                        <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
+                        <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
+                        <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
+                        <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
+                        <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
+                        <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
+                        <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
+                        <div className="border border-[#2e2e2e] rounded-full w-3 h-3" />
+                      </div>
+                    </div>
+                    <div>
+                      <h3 className="font-medium text-base">Illustrator</h3>
+                      <div className="flex items-center gap-x-1">
+                        <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
+                        <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
+                        <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
+                        <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
+                        <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
+                        <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
+                        <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
+                        <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
+                        <div className="border border-[#2e2e2e] rounded-full w-3 h-3" />
+                        <div className="border border-[#2e2e2e] rounded-full w-3 h-3" />
+                      </div>
+                    </div>
+                    <div>
+                      <h3 className="font-medium text-base">After Effects</h3>
+                      <div className="flex items-center gap-x-1">
+                        <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
+                        <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
+                        <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
+                        <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
+                        <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
+                        <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
+                        <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
+                        <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
+                        <div className="border border-[#2e2e2e] rounded-full w-3 h-3" />
+                        <div className="border border-[#2e2e2e] rounded-full w-3 h-3" />
+                      </div>
+                    </div>
+                    <div>
+                      <h3 className="font-medium text-base">Procreate</h3>
+                      <div className="flex items-center gap-x-1">
+                        <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
+                        <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
+                        <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
+                        <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
+                        <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
+                        <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
+                        <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
+                        <div className="border border-[#2e2e2e] rounded-full w-3 h-3" />
+                        <div className="border border-[#2e2e2e] rounded-full w-3 h-3" />
+                        <div className="border border-[#2e2e2e] rounded-full w-3 h-3" />
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div>
-                  <h3 className="font-medium text-base">Illustrator</h3>
-                  <div className="flex items-center gap-x-1">
-                    <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                    <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                    <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                    <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                    <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                    <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                    <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                    <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                    <div className="border border-[#2e2e2e] rounded-full w-3 h-3" />
-                    <div className="border border-[#2e2e2e] rounded-full w-3 h-3" />
-                  </div>
-                </div>
-                <div>
-                  <h3 className="font-medium text-base">After Effects</h3>
-                  <div className="flex items-center gap-x-1">
-                    <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                    <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                    <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                    <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                    <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                    <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                    <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                    <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                    <div className="border border-[#2e2e2e] rounded-full w-3 h-3" />
-                    <div className="border border-[#2e2e2e] rounded-full w-3 h-3" />
-                  </div>
-                </div>
-                <div>
-                  <h3 className="font-medium text-base">Procreate</h3>
-                  <div className="flex items-center gap-x-1">
-                    <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                    <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                    <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                    <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                    <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                    <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                    <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                    <div className="border border-[#2e2e2e] rounded-full w-3 h-3" />
-                    <div className="border border-[#2e2e2e] rounded-full w-3 h-3" />
-                    <div className="border border-[#2e2e2e] rounded-full w-3 h-3" />
+                <div className="xl:hidden block mt-8">
+                  <h2 className="text-2xl font-light font-inter mb-4 tracking-tighter">
+                    Contact
+                  </h2>
+                  <div className="flex flex-col gap-y-6">
+                    <div>
+                      <h3 className="font-medium text-base mb-1">Email</h3>
+                      <span className="block -mt-[2px] text-[#505050] text-sm">
+                        fernandasenactt@gmail.com
+                      </span>
+                    </div>
+                    <div>
+                      <h3 className="font-medium text-base mb-1">Languages</h3>
+                      <span className="block -mt-[2px] text-[#505050] text-sm mb-1">
+                        Portuguese | Native
+                      </span>
+                      <span className="block -mt-[2px] text-[#505050] text-sm">
+                        English | Fluent
+                      </span>
+                    </div>
+                    <div>
+                      <h3 className="font-medium text-base mb-1">Abilities</h3>
+                      <ul>
+                        <li className="list-disc ml-[14px] text-sm">
+                          Responsible
+                        </li>
+                        <li className="list-disc ml-[14px] text-sm">
+                          Organized
+                        </li>
+                        <li className="list-disc ml-[14px] text-sm">
+                          Creative
+                        </li>
+                        <li className="list-disc ml-[14px] text-sm">
+                          Positive
+                        </li>
+                        <li className="list-disc ml-[14px] text-sm">
+                          Teamwork
+                        </li>
+                        <li className="list-disc ml-[14px] text-sm">
+                          Initiative and autonomy
+                        </li>
+                        <li className="list-disc ml-[14px] text-sm">
+                          Verbal communication skills
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div>
+            {/* Column 3 */}
+
+            <div className="hidden xl:block">
               <h2 className="text-2xl font-light font-inter mb-4 tracking-tighter">
                 Contact
               </h2>
-              <div className="flex flex-col gap-y-6">
+              <div className="flex flex-row justify-between xl:flex-col gap-y-6">
                 <div>
                   <h3 className="font-medium text-base mb-1">Email</h3>
                   <span className="block -mt-[2px] text-[#505050] text-sm">
