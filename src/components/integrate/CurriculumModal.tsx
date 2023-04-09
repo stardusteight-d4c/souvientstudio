@@ -36,8 +36,8 @@ export default function CurriculumModal() {
         id="curriculum-box"
         className="bg-paper-texture bg-100% absolute top-0 max-w-[98vw] md:inset-x-2 w-fit mt-12 shadow-lg shadow-[#2e2e2e]/20 xll:max-w-[1300px] bg-[#F8F7E2] text-[#2e2e2e] border-[4px] border-[#fe5b30]/80 md:px-8 md:py-6 xll:w-full h-fit !scrollbar-hide mx-auto"
       >
-        <div className="relative  h-full">
-          <div className="sticky md:relative p-4 mb-8 md:p-0 md:mb-0 shadow-md md:shadow-none shadow-black/20 bg-[#F8F7E2] md:bg-transparent top-0">
+        <div className="relative h-full">
+          <div className=" md:relative p-4 mb-8 md:p-0 md:mb-0 shadow-md md:shadow-none shadow-black/20 bg-[#F8F7E2] md:bg-transparent top-0">
             <div className="flex items-center gap-x-4 ml-auto w-fit">
               <div className="cursor-pointer">
                 <svg
