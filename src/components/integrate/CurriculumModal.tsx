@@ -4,7 +4,7 @@ import { fernanda } from '@/assets'
 export default function CurriculumModal() {
   return ReactDOM.createPortal(
     <main className="absolute grid place-items-center bg-[#F8F7E2]/50  z-[1500] inset-0">
-      <div className="bg-paper-texture  bg-100% absolute top-0 inset-x-2 w-fit mt-12 shadow-lg shadow-[#2e2e2e]/20 xll:max-w-[1300px] max-h-fit overflow-y-scroll bg-[#F8F7E2] text-[#2e2e2e] border-[4px] border-[#fe5b30]/80 px-8 py-6 xll:w-full h-fit overflow-hidden !scrollbar-hide mx-auto">
+      <div className="bg-paper-texture bg-100% absolute top-0 max-w-[96vw] md:inset-x-2 w-fit mt-12 shadow-lg shadow-[#2e2e2e]/20 xll:max-w-[1300px] max-h-fit overflow-y-scroll bg-[#F8F7E2] text-[#2e2e2e] border-[4px] border-[#fe5b30]/80 px-4 md:px-8 py-6 xll:w-full h-fit overflow-hidden !scrollbar-hide mx-auto">
         <div className="flex items-center gap-x-4 ml-auto w-fit">
           <div className="cursor-pointer">
             <svg
@@ -30,14 +30,14 @@ export default function CurriculumModal() {
           </div>
         </div>
         <div>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-x-4">
+          <div className="flex flex-col md:flex-row items-center justify-between">
+            <div className="flex flex-col md:flex-row items-center gap-x-4">
               <img
                 src={fernanda.src}
-                className="w-[125px] h-[125px] rounded-full object-cover mr-5"
+                className="w-[100px] h-[100px] md:w-[125px] md:h-[125px] rounded-full object-cover mr-5"
                 alt=""
               />
-              <span className="text-[#505050] font-normal block text-sm w-full mdd:min-w-[450px] xl:max-w-[600px]">
+              <span className="text-center md:text-left text-[#505050] my-8 md:my-0 font-normal block text-sm md:w-full mdd:min-w-[450px] xl:max-w-[600px]">
                 Hi, my name is Fernanda Chagas de Sena but i go by{' '}
                 <strong className="font-semibold">Fevient</strong>, I am an{' '}
                 <strong className="font-semibold">Graphic Designer</strong> from
@@ -46,14 +46,14 @@ export default function CurriculumModal() {
                 and my work in this CV!
               </span>
             </div>
-            <div className="text-right w-full max-w-md font-poppins">
+            <div className="text-center md:text-right w-full md:max-w-md font-poppins">
               <h2 className="text-2xl font-medium">Fevient</h2>
               <span className="block">Fernanda Chagas de Sena</span>
               <span className="block">Graphic Designer</span>
               <span className="block font-light">D.O.B.: 07/01/1997</span>
             </div>
           </div>
-          <div className="flex gap-8 font-poppins mt-8">
+          <div className="flex flex-col md:flex-row gap-8 font-poppins mt-8">
             {/* Column 1 */}
             <div>
               <h2 className="text-2xl font-light font-inter mb-4 tracking-tighter">
@@ -163,7 +163,7 @@ export default function CurriculumModal() {
                   </ul>
                 </div>
               </div>
-              <div className="flex gap-x-8 mdd:justify-between items-start">
+              <div className="flex flex-col md:flex-row gap-x-8 mdd:justify-between items-start">
                 <div>
                   <h2 className="text-2xl font-light font-inter mb-4 mt-8 tracking-tighter">
                     Software
@@ -322,8 +322,9 @@ export default function CurriculumModal() {
               </div>
             </div>
           </div>
-          <footer className="mt-10 flex justify-between items-center">
-            <div className="flex items-center gap-x-4">
+          {/* Footer */}
+          <footer className="mt-10 flex flex-col md:flex-row justify-between items-center">
+            <div className="flex flex-col md:flex-row items-center gap-x-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="58"
@@ -334,7 +335,7 @@ export default function CurriculumModal() {
                 <path d="M160,80a8,8,0,0,1,8-8h64a8,8,0,0,1,0,16H168A8,8,0,0,1,160,80Zm-24,78a42,42,0,0,1-42,42H32a8,8,0,0,1-8-8V64a8,8,0,0,1,8-8H90a38,38,0,0,1,25.65,66A42,42,0,0,1,136,158ZM40,116H90a22,22,0,0,0,0-44H40Zm80,42a26,26,0,0,0-26-26H40v52H94A26,26,0,0,0,120,158Zm128-6a8,8,0,0,1-8,8H169a32,32,0,0,0,56.59,11.2,8,8,0,0,1,12.8,9.61A48,48,0,1,1,248,152Zm-17-8a32,32,0,0,0-62,0Z"></path>
               </svg>
               <div className="flex items-start flex-col">
-                <span className="text-lg font-medium">Behance</span>
+                <span className="text-lg font-medium mx-auto md:mx-0">Behance</span>
                 <a
                   href="https://www.behance.net/fersena"
                   target="_blank"
