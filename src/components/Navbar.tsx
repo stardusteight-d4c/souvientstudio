@@ -115,7 +115,7 @@ export default function Navbar() {
           )}
           {isOpenMenu && (
             <>
-              <div className="bg-gradient-to-b -z-10 from-[#FE9BBA]/90 to-[#F8F7E2]/50 h-screen fixed inset-0" />
+              <div className="bg-gradient-to-b backdrop-blur-sm -z-10 from-[#FE9BBA]/90 to-[#F8F7E2]/50 h-screen fixed inset-0" />
               <div className="absolute px-[30px] -bottom-48 left-0 w-full">
                 <div className="w-fit mx-auto flex items-center justify-center flex-col gap-y-4">
                   <li
