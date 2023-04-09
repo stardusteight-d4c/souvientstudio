@@ -22,6 +22,11 @@ body {
   border-radius: 20px;
 }
 
+#__next {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
 .blur-shadow1 {
   background-image: linear-gradient(#F8F7E2 35%, #FE9BBA);
