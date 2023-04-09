@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { brazilFlag, euaFlag } from '@/assets'
 import { useAppContext } from '@/context/ContextProvider'
+import CurriculumModal from './integrate/CurriculumModal'
 
 export default function Navbar() {
   const [isGradientShadowOn, setIsGradientShadowOn] = useState(false)
   const [isOpenMenu, setIsOPenMenu] = useState(false)
+  const [showCurriculumModal, setShowCurriculumModal] = useState(false)
   const { lang, setLang } = useAppContext()
   const { localeContextText } = useAppContext()
 
@@ -53,12 +55,13 @@ export default function Navbar() {
           <li className="cursor-pointer font-medium">
             {localeContextText.nav.contact}
           </li>
-          <Link
-            href="/curriculum"
+          <li
+            onClick={() => setShowCurriculumModal(true)}
             className="cursor-pointer font-medium"
           >
             Curriculum
-          </Link>
+          </li>
+          {showCurriculumModal && <CurriculumModal />}
           <li>
             {lang === 'en' ? (
               <img

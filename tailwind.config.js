@@ -15,7 +15,14 @@ module.exports = {
       inter: 'Inter, sans-serif',
       poppins: 'Poppins, sans-serif',
     },
-    extend: {},
+    extend: {
+      backgroundSize: {
+        '100%': '100% 100%',
+      },
+      backgroundImage: {
+        'paper-texture': "url('/paper-texture.png')",
+      },
+    },
   },
   plugins: [require('tailwind-scrollbar-hide')],
 }
