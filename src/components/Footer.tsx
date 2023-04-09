@@ -11,8 +11,8 @@ export default function Footer() {
     <footer className="pt-20 pb-4">
       <div className="max-w-[1032px] px-4 lg:px-0 mx-auto">
         <div className="text-sm text-[#2e2e2e] flex flex-col gap-y-4 md:flex-row items-center justify-between">
-          <span className='text-center md:text-left'>
-            ©2023 - ©{new Date().getFullYear()} Fevient,{' '}
+          <span className="text-center md:text-left">
+            ©2023 - {new Date().getFullYear()} Fevient,{' '}
             {localeContextText.footer} Stardusteight.
           </span>
           <ul className="flex items-center gap-x-4">
@@ -30,15 +30,15 @@ export default function Footer() {
               </a>
             </li>
             <li>
-              <a href="">
+              <a href="https://www.behance.net/fersena" target="_blank">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
+                  width="22"
+                  height="22"
                   fill="#2e2e2e"
                   viewBox="0 0 256 256"
                 >
-                  <path d="M245.66,77.66l-29.9,29.9C209.72,177.58,150.67,232,80,232c-14.52,0-26.49-2.3-35.58-6.84-7.33-3.67-10.33-7.6-11.08-8.72a8,8,0,0,1,3.85-11.93c.26-.1,24.24-9.31,39.47-26.84a110.93,110.93,0,0,1-21.88-24.2c-12.4-18.41-26.28-50.39-22-98.18a8,8,0,0,1,13.65-4.92c.35.35,33.28,33.1,73.54,43.72V88a47.87,47.87,0,0,1,14.36-34.3A46.87,46.87,0,0,1,168.1,40a48.66,48.66,0,0,1,41.47,24H240a8,8,0,0,1,5.66,13.66Z"></path>
+                  <path d="M92,120H64V96H92a12,12,0,0,1,0,24Zm4,16H64v32H96a16,16,0,0,0,0-32Zm80-16a24,24,0,0,0-22.62,16h45.24A24,24,0,0,0,176,120Zm64-64V200a16,16,0,0,1-16,16H32a16,16,0,0,1-16-16V56A16,16,0,0,1,32,40H224A16,16,0,0,1,240,56ZM144,88a8,8,0,0,0,8,8h48a8,8,0,0,0,0-16H152A8,8,0,0,0,144,88Zm-16,64a32,32,0,0,0-14.13-26.53A28,28,0,0,0,92,80H56a8,8,0,0,0-8,8v88a8,8,0,0,0,8,8H96A32,32,0,0,0,128,152Zm88-8a40,40,0,1,0-13.54,30,8,8,0,0,0-10.59-12,24,24,0,0,1-38.49-10H208A8,8,0,0,0,216,144Z"></path>
                 </svg>
               </a>
             </li>

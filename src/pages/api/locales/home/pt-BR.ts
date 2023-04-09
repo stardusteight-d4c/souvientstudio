@@ -30,8 +30,8 @@ export default function handler(
       personalProjects: 'Projetos pessoais',
     },
     dribbble: {
-      span: 'E muitos outros trabalhos em pequena escala, experimentos e estudos de caso completos no meu perfil do Dribbble.',
-      button: 'Siga-me no Dribbble',
+      span: 'E muitos outros trabalhos em pequena escala, experimentos e estudos de caso completos no meu perfil do Behance.',
+      button: 'Siga-me no Behance',
     },
     skills: 'Habilidades',
     services: {

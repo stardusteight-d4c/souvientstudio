@@ -49,18 +49,16 @@ export default function Navbar() {
           Fevient
         </Link>
         <ul className="hidden text-[#F8F7E2] sm:flex items-center gap-x-[40px]">
-          <li className="cursor-pointer font-medium">
+          <li
+            onClick={() => setShowCurriculumModal(true)}
+            className="cursor-pointer font-medium"
+          >
             {localeContextText.nav.about}
           </li>
           <li className="cursor-pointer font-medium">
             {localeContextText.nav.contact}
           </li>
-          <li
-            onClick={() => setShowCurriculumModal(true)}
-            className="cursor-pointer font-medium"
-          >
-            Curriculum
-          </li>
+
           {showCurriculumModal && <CurriculumModal />}
           <li>
             {lang === 'en' ? (

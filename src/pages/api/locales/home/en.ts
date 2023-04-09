@@ -28,8 +28,8 @@ export default function handler(
       personalProjects: 'Personal projects',
     },
     dribbble: {
-      span: 'And many more small scale works, experiments and full case studies on my Dribbble profile.',
-      button: 'Follow on Dribbble',
+      span: 'And many more small scale works, experiments and full case studies on my Behance profile.',
+      button: 'Follow on Behance',
     },
     skills: 'Skills',
     services: {
