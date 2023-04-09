@@ -1,7 +1,5 @@
-import { ILocaleContextHome } from '@/@interfaces/LocaleContexts'
 import { useAppContext } from '@/context/ContextProvider'
-import fernanda from '../assets/fernanda.png'
-import star from '../assets/star.svg'
+import { fernanda, star } from '@/assets'
 
 export default function Hero() {
   const { localeContextText } = useAppContext()

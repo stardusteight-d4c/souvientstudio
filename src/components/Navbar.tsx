@@ -53,6 +53,12 @@ export default function Navbar() {
           <li className="cursor-pointer font-medium">
             {localeContextText.nav.contact}
           </li>
+          <Link
+            href="/curriculum"
+            className="cursor-pointer font-medium"
+          >
+            Curriculum
+          </Link>
           <li>
             {lang === 'en' ? (
               <img
@@ -114,6 +120,7 @@ export default function Navbar() {
                   <li className="text-3xl cursor-pointer font-medium list-none">
                     {localeContextText.nav.contact}
                   </li>
+
                   <li className="text-3xl cursor-pointer font-medium list-none">
                     {lang === 'en' ? (
                       <img

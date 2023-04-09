@@ -18,7 +18,7 @@ body {
 }
 ::-webkit-scrollbar-thumb {
   cursor: pointer;
-  background-image: linear-gradient(#FE9BBA 35%, #F8F7E2);
+  background-color:#F8F7E2;
   border-radius: 20px;
 }
 

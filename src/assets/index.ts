@@ -1,3 +1,6 @@
+export { default as fernanda } from './fernanda.png'
+export { default as star } from './star.svg'
+
 export { default as jordan } from './jordan.png'
 export { default as arca } from './arca.png'
 export { default as sushiRestaurant } from './sushi-restaurant.png'
@@ -21,3 +24,5 @@ export { default as starEmoji } from './star-emoji.webp'
 export { default as brazilFlag } from './brazil-flag.png'
 export { default as euaFlag } from './eua-flag.png'
 
+export { default as blurRoseEffect } from './blur-rose-effect.svg'
+export { default as paperTexture } from './paper-texture.jpg'
