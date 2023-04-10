@@ -45,6 +45,7 @@ body {
   transform: scale(1);
 }
 
+/* Blur and Spinners */
 .blur-shadow1 {
   background-image: linear-gradient(#F8F7E2 35%, #FE9BBA);
   animation: spinning82341 10s linear infinite;
@@ -89,13 +90,13 @@ body {
   }
 }
 
-/* Background hero animation */
-#container-stars {
+/* Background Hero Dotted Grid Animation */
+#container-dotted-grid {
   position: absolute;
   transition: 0.5s;
   z-index: 5;
 }
-#stars::before {
+#dots::before {
   content: '';
   position: absolute;
   top: 0;
@@ -105,7 +106,7 @@ body {
   height: 500%;
   animation: animStar 180s linear infinite;
 }
-#stars::before {
+#dots::before {
   z-index: 5;
   background-image: radial-gradient(#FE5B30 1px, transparent 1%);
   background-size: 50px 50px;

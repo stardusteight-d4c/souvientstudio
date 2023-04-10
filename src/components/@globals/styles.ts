@@ -16,3 +16,11 @@ export const navbarStyles = {
   mobileUnorderedList: `w-fit mx-auto flex items-center justify-center flex-col gap-y-4`,
   mobileListItem: `effect-underline text-3xl cursor-pointer font-medium list-none`,
 }
+
+export const footerStyles = {
+  wrapper: `pt-20 pb-4`,
+  container: `max-w-[1032px] px-4 lg:px-0 mx-auto`,
+  contentContainer: `text-sm text-[#2E2E2E] flex flex-col gap-y-4 md:flex-row items-center justify-between`,
+  span: `text-center md:text-left`,
+  unorderedList: `flex items-center gap-x-4`,
+}

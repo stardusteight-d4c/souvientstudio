@@ -1,61 +1,60 @@
 import { useAppContext } from '@/@context/ContextProvider'
 import { fernanda, star } from '@/assets'
+import Image from 'next/legacy/image'
+import { heroStyles as css } from './styles'
 
 export default function Hero() {
-  const { homeLocaleContextText } = useAppContext()
+  const { localeContextHome } = useAppContext()
   const { lang } = useAppContext()
 
-  if (!homeLocaleContextText) {
-    return <></>
-  }
-
   return (
-    <section className="pb-[100px] pt-[200px] bg-gradient-to-b from-[#FE9BBA] to-[#F8F7E2] px-4 relative h-fit overflow-hidden">
-      <div id="container-stars" className="inset-0 z-10 pointer-events-none">
-        <div id="stars"></div>
+    <section className={css.wrapper}>
+      <div id="container-dotted-grid" className={css.dottedGridContainer}>
+        <div id="dots" />
         <div id="glow">
-          <div className="circle"></div>
-          <div className="circle"></div>
+          <div className={css.circle} />
+          <div className={css.circle} />
         </div>
       </div>
 
-      <div className="max-w-[1200px] z-50 h-fit w-full mx-auto">
-        <div className="mx-auto w-fit gap-y-[19px] flex flex-col items-center justify-center">
-          <div className="relative flex items-center justify-center">
-            <img
-              src={star.src}
-              className="spinner absolute -top-[50px] -left-[100px] md:-left-[300px] w-[84px] h-[84px]"
-            />
-            <img
-              src={star.src}
-              className="spinner absolute -bottom-[30px] -right-[100px] md:-right-[300px] w-[64px] h-[64px]"
-            />
-            <div className="spinner1 z-50 w-[110px] h-[110px]">
-              <div className="spinner1" />
+      <div className={css.container}>
+        <div className={css.presentationWrapper}>
+          <div className={css.avatarContainer}>
+            <div className={css.spinnerLeft}>
+              <Image src={star.src} width={84} height={84} />
             </div>
-            <img
-              src={fernanda.src}
-              className="absolute  z-50 top-1 w-[100px] h-[100px] rounded-full object-cover"
-            />
+            <div className={css.spinnerRight}>
+              <Image src={star.src} width={64} height={64} />
+            </div>
+            <div className={css.spinnerBlurEffect}>
+              <div className={css.spinnerBlurEffectComplement} />
+            </div>
+            <div className={css.avatar}>
+              <Image
+                src={fernanda.src}
+                width={100}
+                height={100}
+                quality={100}
+                className={css.avatar}
+              />
+            </div>
           </div>
-          <span className="text-transparent bg-[#fe5b30] bg-clip-text font-medium text-xl font-poppins !tracking-[-0.3px]">
-            {homeLocaleContextText.hero.presentation}
+          <span className={css.presentationTxt}>
+            {localeContextHome?.hero.presentation}
           </span>
         </div>
-        <h1 className="text-[#2e2e2e] z-50 relative text-4xl md:text-[50px] mdd:text-[72px] text-center mt-[20px] leading-[40.4px] md:!leading-[58.4px]  mdd:!leading-[86.4px] mx-auto w-full max-w-[350px] sm:max-w-[928px] font-semibold font-poppins !tracking-[-1px]">
-          {homeLocaleContextText.hero.title1}
-          {lang === 'en' && <br className="hidden sm:block" />}
-          &nbsp;{homeLocaleContextText.hero.title2}
+        <h1 className={css.headingOne}>
+          {localeContextHome?.hero.title1}
+          {lang === 'en' && <br className={css.breakLine} />}
+          &nbsp;{localeContextHome?.hero.title2}
         </h1>
-        <p className="text-[#505050] text-lg mt-[20px] w-full max-w-[350px] sm:max-w-[580px] mx-auto !leading-[28.8px] text-center">
-          {homeLocaleContextText.hero.subtitle}
-        </p>
+        <p className={css.subtitle}>{localeContextHome?.hero.subtitle}</p>
         <a
           href="https://www.linkedin.com/in/fercsena/"
           target="_blank"
-          className="hover:scale-105 uppercase text-white z-50 relative bg-[#FE9BBA] transition-all duration-300 rounded-full w-fit block py-3 px-8 active:scale-100 outline-none mx-auto mt-[40px]"
+          className={css.linkButton}
         >
-          <strong>{homeLocaleContextText.hero.button}</strong>
+          <strong>{localeContextHome?.hero.button}</strong>
         </a>
       </div>
     </section>

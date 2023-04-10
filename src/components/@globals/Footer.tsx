@@ -1,21 +1,18 @@
 import { useAppContext } from '@/@context/ContextProvider'
+import { footerStyles as css } from './styles'
 
 export default function Footer() {
-  const { homeLocaleContextText } = useAppContext()
-
-  if (!homeLocaleContextText) {
-    return <></>
-  }
+  const { localeContextHome } = useAppContext()
 
   return (
-    <footer className="pt-20 pb-4">
-      <div className="max-w-[1032px] px-4 lg:px-0 mx-auto">
-        <div className="text-sm text-[#2E2E2E] flex flex-col gap-y-4 md:flex-row items-center justify-between">
-          <span className="text-center md:text-left">
+    <footer className={css.wrapper}>
+      <div className={css.container}>
+        <div className={css.contentContainer}>
+          <span className={css.span}>
             ©2023 - {new Date().getFullYear()} Fevient,{' '}
-            {homeLocaleContextText.footer} Stardusteight.
+            {localeContextHome?.footer} Stardusteight.
           </span>
-          <ul className="flex items-center gap-x-4">
+          <ul className={css.unorderedList}>
             <li>
               <a href="https://www.instagram.com/fevient/" target="_blank">
                 <svg

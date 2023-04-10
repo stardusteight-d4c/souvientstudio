@@ -4,7 +4,7 @@ import { useAppContext } from '@/@context/ContextProvider'
 import { useEffect, useState } from 'react'
 
 export default function CurriculumModal() {
-  const { homeLocaleContextText, showCurriculum, setShowCurriculum } =
+  const { localeContextHome, showCurriculum, setShowCurriculum } =
     useAppContext()
   const [mounted, setMounted] = useState(false)
 

@@ -3,9 +3,9 @@ import { cardServiceData } from '../../utils/data'
 import ServiceCard from './integrate/ServiceCard'
 
 export default function Services() {
-  const { homeLocaleContextText } = useAppContext()
+  const { localeContextHome } = useAppContext()
 
-  if (!homeLocaleContextText) {
+  if (!localeContextHome) {
     return <></>
   }
 
@@ -13,18 +13,18 @@ export default function Services() {
     <section className="pb-[100px] pt-[50px]">
       <div className="max-w-[1032px] px-4 lg:px-0 text-center mx-auto">
         <span className="text-[#fe5b30] font-medium text-xl font-poppins !tracking-[-0.3px]">
-          {homeLocaleContextText.services.heading.span}
+          {localeContextHome.services.heading.span}
         </span>
         <h2 className="text-[32px] text-[#2e2e2e] mb-12 block w-fit mx-auto !tracking-[-2px] font-medium !leading-[41.6px] font-poppins">
-          {homeLocaleContextText.services.heading.title}
+          {localeContextHome.services.heading.title}
         </h2>
         <div className="flex flex-col gap-y-6 mdd:flex-row justify-between items-center">
           {cardServiceData.map((card, index) => (
             <ServiceCard
               key={index}
               emoji={card.emoji}
-              title={homeLocaleContextText.services.cards[index].title}
-              text={homeLocaleContextText.services.cards[index].text}
+              title={localeContextHome.services.cards[index].title}
+              text={localeContextHome.services.cards[index].text}
               index={index}
             />
           ))}

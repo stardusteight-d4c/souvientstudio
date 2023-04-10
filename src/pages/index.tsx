@@ -16,17 +16,17 @@ import Footer from '../components/@globals/Footer'
 
 export default function Home() {
   const { lang } = useAppContext()
-  const { homeLocaleContextText, setHomeLocaleContextText } = useAppContext()
+  const { localeContextHome, setLocaleContextHome } = useAppContext()
 
   useEffect(() => {
     ;(async () => {
       await axios
         .get(`/api/locales/home/${lang}`)
-        .then((res) => setHomeLocaleContextText(() => res.data))
+        .then((res) => setLocaleContextHome(() => res.data))
     })()
   }, [lang])
 
-  if (!homeLocaleContextText) {
+  if (!localeContextHome) {
     return <>Loading...</>
   }
 

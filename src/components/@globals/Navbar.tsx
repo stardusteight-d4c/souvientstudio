@@ -10,7 +10,7 @@ export default function Navbar() {
   const [isGradientShadowOn, setIsGradientShadowOn] = useState(false)
   const [isOpenMenu, setIsOpenMenu] = useState(false)
   const { lang, setLang } = useAppContext()
-  const { homeLocaleContextText, showCurriculum, setShowCurriculum } =
+  const { localeContextHome, showCurriculum, setShowCurriculum } =
     useAppContext()
 
   // Salvar preferência do idioma em local storage, cachear as traduções
@@ -39,10 +39,6 @@ export default function Navbar() {
     }, 200)
   }
 
-  if (!homeLocaleContextText) {
-    return <>Loading...</>
-  }
-
   return (
     <nav className={css.handleWrapper(isGradientShadowOn)}>
       <div className={css.container}>
@@ -54,10 +50,10 @@ export default function Navbar() {
             onClick={() => handleOpenCurriculum()}
             className={css.desktopListItem}
           >
-            {homeLocaleContextText.nav.about}
+            {localeContextHome?.nav.about}
           </li>
           <li className={css.desktopListItem}>
-            {homeLocaleContextText.nav.contact}
+            {localeContextHome?.nav.contact}
           </li>
           {showCurriculum && <CurriculumModal />}
           <li>
@@ -126,10 +122,10 @@ export default function Navbar() {
                     }}
                     className={css.mobileListItem}
                   >
-                    {homeLocaleContextText.nav.about}
+                    {localeContextHome?.nav.about}
                   </li>
                   <li className={css.mobileListItem}>
-                    {homeLocaleContextText.nav.contact}
+                    {localeContextHome?.nav.contact}
                   </li>
                   <li>
                     {lang === 'en' ? (
