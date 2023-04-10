@@ -16,3 +16,14 @@ export const heroStyles = {
   subtitle: `text-[#505050] text-lg mt-[20px] w-full max-w-[350px] sm:max-w-[580px] mx-auto !leading-[28.8px] text-center`,
   linkButton: `hover:scale-105 uppercase text-white z-50 relative bg-[#FE9BBA] transition-all duration-300 rounded-full w-fit block py-3 px-8 active:scale-100 outline-none mx-auto mt-[40px]`,
 }
+
+export const marqueeStyles = {
+  wrapper: `relative max-w-[100vw] pb-[20px] overflow-x-hidden relative`,
+  leftOverlay: `z-[100] bg-gradient-to-r from-[#F8F7E2] via-[#F8F7E2]/80 to-transparent inset-y-0 w-[50px] md:w-[200px] absolute left-0`,
+  rightOverlay: `z-[100] bg-gradient-to-l from-[#F8F7E2] via-[#F8F7E2]/80 to-transparent inset-y-0 w-[50px] md:w-[200px] absolute right-0`,
+  marqueeWrapper: `w-fit text-[#2e2e2e] cursor-default justify-center relative flex items-center`,
+  marqueeAnimateContainer: `animate-marquee text-4xl md:text-[50px] mdd:text-[62px] font-semibold gap-x-3 flex w-fit whitespace-nowrap`,
+  itemWrapper: `min-w-fit max-w-fit`,
+  spanContainer: `flex items-center !leading-[140%]`,
+  slashDivider: `text-transparent bg-gradient-to-t from-[#F8F7E2] to-[#FE9BBA] bg-clip-text block ml-3`,
+}
