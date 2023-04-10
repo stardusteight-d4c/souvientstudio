@@ -16,8 +16,8 @@ export default function Marquee() {
       <div className={css.rightOverlay} />
       <div className={css.marqueeWrapper}>
         <div className={css.marqueeAnimateContainer}>
-          {repeatMarqueeItem.map(() => (
-            <div className={css.itemWrapper}>
+          {repeatMarqueeItem.map((_, index) => (
+            <div key={index} className={css.itemWrapper}>
               <span className={css.spanContainer}>
                 {localeContextHome?.marquee.selectedWork}{' '}
                 <span className={css.slashDivider}>/</span>

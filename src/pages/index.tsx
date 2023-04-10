@@ -33,7 +33,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Fevient | Graphic Designer</title>
+        <title>Fevient / Graphic Designer</title>
         <meta
           name="souvientstudio |  Graphic Designer"
           content="Graphic Designer, Visual Design, Product Strategy"

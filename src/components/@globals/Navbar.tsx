@@ -5,13 +5,18 @@ import { brazilFlag, euaFlag } from '@/assets'
 import { useAppContext } from '@/@context/ContextProvider'
 import CurriculumModal from '../home/integrate/CurriculumModal'
 import { navbarStyles as css } from './styles'
+import { useRouter } from 'next/router'
 
 export default function Navbar() {
   const [isGradientShadowOn, setIsGradientShadowOn] = useState(false)
   const [isOpenMenu, setIsOpenMenu] = useState(false)
+  const router = useRouter()
   const { lang, setLang } = useAppContext()
   const { localeContextHome, showCurriculum, setShowCurriculum } =
     useAppContext()
+
+   const isDashboardRoute = router.pathname === '/dashboard'
+    
 
   // Salvar preferência do idioma em local storage, cachear as traduções
 
@@ -40,12 +45,15 @@ export default function Navbar() {
   }
 
   return (
-    <nav className={css.handleWrapper(isGradientShadowOn)}>
+    <nav className={css.handleWrapper(isGradientShadowOn, isDashboardRoute)}>
       <div className={css.container}>
         <Link href="/" className={css.fevientLogo}>
           Fevient
         </Link>
         <ul className={css.desktopUnorderedList}>
+          <li className={css.desktopListItem}>
+            <Link href="/dashboard">Dashboard</Link>
+          </li>
           <li
             onClick={() => handleOpenCurriculum()}
             className={css.desktopListItem}

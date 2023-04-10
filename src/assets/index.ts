@@ -24,4 +24,5 @@ export { default as starEmoji } from './star-emoji.webp'
 export { default as brazilFlag } from './brazil-flag.png'
 export { default as euaFlag } from './eua-flag.png'
 
-export { default as blurRoseEffect } from './blur-rose-effect.svg'
+export { default as club } from './club.png'
+

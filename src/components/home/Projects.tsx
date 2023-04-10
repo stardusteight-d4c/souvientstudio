@@ -12,6 +12,7 @@ import {
   hellfire,
 } from '../../assets'
 import { useAppContext } from '@/@context/ContextProvider'
+import Link from 'next/link'
 
 export default function Projects() {
   const [mounted, setMounted] = useState(false)
@@ -68,9 +69,10 @@ export default function Projects() {
             <div className="absolute inset-y-0 w-[20px] md:w-[50px] z-50 right-0 bg-gradient-to-l from-[#F8F7E2] via-[#F8F7E2]/50 to-transparent" />
             <motion.div {...dragAnimate}>
               {items.map((item, index) => (
-                <div
+                <Link
+                  href={`/project/slugggg`}
                   key={index}
-                  className="card-animate card rounded-[50px] overflow-hidden transition-all duration-500 cursor-pointer w-full min-w-[300px] lg:min-w-[400px] h-[300px] group relative"
+                  className="card-animate card rounded-3xl overflow-hidden transition-all duration-500 cursor-pointer w-full min-w-[300px] lg:min-w-[400px] h-[300px] group relative"
                 >
                   <img
                     src={item.src}
@@ -89,7 +91,7 @@ export default function Projects() {
                       </span>
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </motion.div>
           </div>
@@ -106,7 +108,7 @@ export default function Projects() {
               {items.map((item, index) => (
                 <div
                   key={index}
-                  className="card-animate card rounded-[50px] overflow-hidden transition-all duration-500 cursor-pointer w-full min-w-[300px] lg:min-w-[400px] h-[300px] group relative"
+                  className="card-animate card rounded-3xl overflow-hidden transition-all duration-500 cursor-pointer w-full min-w-[300px] lg:min-w-[400px] h-[300px] group relative"
                 >
                   <img
                     src={item.src}
@@ -142,7 +144,7 @@ export default function Projects() {
               {items.map((item, index) => (
                 <div
                   key={index}
-                  className="card-animate card rounded-[50px] overflow-hidden transition-all duration-500 cursor-pointer w-full min-w-[300px] lg:min-w-[400px] h-[300px] group relative"
+                  className="card-animate card rounded-3xl overflow-hidden transition-all duration-500 cursor-pointer w-full min-w-[300px] lg:min-w-[400px] h-[300px] group relative"
                 >
                   <img
                     src={item.src}
