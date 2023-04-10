@@ -15,8 +15,7 @@ export default function Navbar() {
   const { localeContextHome, showCurriculum, setShowCurriculum } =
     useAppContext()
 
-   const isDashboardRoute = router.pathname === '/dashboard'
-    
+  const isDashboardRoute = router.pathname === '/dashboard'
 
   // Salvar preferência do idioma em local storage, cachear as traduções
 
@@ -51,9 +50,9 @@ export default function Navbar() {
           Fevient
         </Link>
         <ul className={css.desktopUnorderedList}>
-          <li className={css.desktopListItem}>
-            <Link href="/dashboard">Dashboard</Link>
-          </li>
+          <Link href="/dashboard" className={css.desktopListItem}>
+            Dashboard
+          </Link>
           <li
             onClick={() => handleOpenCurriculum()}
             className={css.desktopListItem}
