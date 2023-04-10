@@ -10,7 +10,7 @@ import {
   mba,
   finalgirl,
   hellfire,
-} from '../assets'
+} from '../../assets'
 import { useAppContext } from '@/@context/ContextProvider'
 
 export default function Projects() {
@@ -18,7 +18,7 @@ export default function Projects() {
   const [cardSliderWidth, setCardSliderWidth] = useState(0)
   const [onDrag, setOnDrag] = useState(0)
   const cardSlider = useRef() as React.MutableRefObject<HTMLInputElement>
-  const { localeContextText } = useAppContext()
+  const { homeLocaleContextText } = useAppContext()
 
   const items = [
     jordan,
@@ -48,7 +48,7 @@ export default function Projects() {
     className: 'flex gap-8',
   }
 
-  if (!localeContextText) {
+  if (!homeLocaleContextText) {
     return <></>
   }
 
@@ -61,7 +61,7 @@ export default function Projects() {
         <div>
           <h2 className="text-[32px] px-4 md:px-0 text-[#2e2e2e] block w-fit !tracking-[-2px] font-medium !leading-[41.6px] font-poppins pb-5">
             <span className="text-[#fe5b30]">|</span>{' '}
-            {localeContextText.projects.visualIdentities}
+            {homeLocaleContextText.projects.visualIdentities}
           </h2>
           <div className="overflow-x-hidden h-fit relative">
             <div className="absolute inset-y-0 w-[20px] md:w-[50px] z-50 left-0 bg-gradient-to-r from-[#F8F7E2] via-[#F8F7E2]/50 to-transparent" />
@@ -97,7 +97,7 @@ export default function Projects() {
         <div>
           <h2 className="text-[32px] px-4 md:px-0 text-[#2e2e2e] block w-fit !tracking-[-2px] font-medium !leading-[41.6px] font-poppins pb-5">
             <span className="text-[#fe5b30]">|</span>{' '}
-            {localeContextText.projects.openSequences}
+            {homeLocaleContextText.projects.openSequences}
           </h2>
           <div className="overflow-x-hidden h-fit relative">
             <div className="absolute inset-y-0 w-[20px] md:w-[50px] z-50 left-0 bg-gradient-to-r from-[#F8F7E2] via-[#F8F7E2]/50 to-transparent" />
@@ -133,7 +133,7 @@ export default function Projects() {
         <div>
           <h2 className="text-[32px] px-4 md:px-0 text-[#2e2e2e] block w-fit !tracking-[-2px] font-medium !leading-[41.6px] font-poppins pb-5">
             <span className="text-[#fe5b30]">|</span>{' '}
-            {localeContextText.projects.personalProjects}
+            {homeLocaleContextText.projects.personalProjects}
           </h2>
           <div className="overflow-x-hidden h-fit relative">
             <div className="absolute inset-y-0 w-[20px] md:w-[50px] z-50 left-0 bg-gradient-to-r from-[#F8F7E2] via-[#F8F7E2]/50 to-transparent" />

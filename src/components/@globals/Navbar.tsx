@@ -1,15 +1,19 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/legacy/image'
 import { brazilFlag, euaFlag } from '@/assets'
 import { useAppContext } from '@/@context/ContextProvider'
-import CurriculumModal from './integrate/CurriculumModal'
+import CurriculumModal from '../home/integrate/CurriculumModal'
+import { navbarStyles as css } from './styles'
 
 export default function Navbar() {
   const [isGradientShadowOn, setIsGradientShadowOn] = useState(false)
   const [isOpenMenu, setIsOpenMenu] = useState(false)
   const { lang, setLang } = useAppContext()
-  const { localeContextText, showCurriculum, setShowCurriculum } =
+  const { homeLocaleContextText, showCurriculum, setShowCurriculum } =
     useAppContext()
+
+  // Salvar preferência do idioma em local storage, cachear as traduções
 
   useEffect(() => {
     window.addEventListener('scroll', handleGradientShadowOnScroll)
@@ -28,64 +32,61 @@ export default function Navbar() {
     }
   }
 
-  if (!localeContextText) {
-    return <></>
+  function handleOpenCurriculum() {
+    window.scrollTo({ top: 0, behavior: 'auto' })
+    setTimeout(() => {
+      setShowCurriculum(true)
+    }, 200)
+  }
+
+  if (!homeLocaleContextText) {
+    return <>Loading...</>
   }
 
   return (
-    <nav
-      className={`${
-        isGradientShadowOn &&
-        'bg-gradient-to-b from-[#FE9BBA] via-[#FE9BBA]/50 to-transparent'
-      } fixed z-[1000] w-screen inset-x-0 top-0`}
-    >
-      <div className="flex relative items-center max-w-[1445px] px-8 md:px-14 mx-auto justify-between py-8">
-        <Link
-          href="/"
-          className="font-bold cursor-pointer text-[20px] tracking-[-1px] uppercase"
-        >
+    <nav className={css.handleWrapper(isGradientShadowOn)}>
+      <div className={css.container}>
+        <Link href="/" className={css.fevientLogo}>
           Fevient
         </Link>
-        <ul className="hidden text-[#F8F7E2] sm:flex items-center gap-x-[40px]">
+        <ul className={css.desktopUnorderedList}>
           <li
-            onClick={() => {
-              window.scrollTo({ top: 0, behavior: 'auto' })
-              setTimeout(() => {
-                setShowCurriculum(true)
-              }, 200)
-            }}
-            className="cursor-pointer font-medium"
+            onClick={() => handleOpenCurriculum()}
+            className={css.desktopListItem}
           >
-            {localeContextText.nav.about}
+            {homeLocaleContextText.nav.about}
           </li>
-          <li className="cursor-pointer font-medium">
-            {localeContextText.nav.contact}
+          <li className={css.desktopListItem}>
+            {homeLocaleContextText.nav.contact}
           </li>
-
           {showCurriculum && <CurriculumModal />}
           <li>
             {lang === 'en' ? (
-              <img
+              <Image
                 src={euaFlag.src}
-                alt=""
                 onClick={() => setLang('pt-BR')}
-                className="w-[25px] cursor-pointer"
+                alt="united-states-flag/icon"
+                width={25}
+                height={25}
+                className={css.cursorPointer}
               />
             ) : (
-              <img
+              <Image
                 src={brazilFlag.src}
-                alt=""
                 onClick={() => setLang('en')}
-                className="w-[25px] cursor-pointer"
+                alt="brazil-flag/icon"
+                width={25}
+                height={25}
+                className={css.cursorPointer}
               />
             )}
           </li>
         </ul>
-        <div className="sm:hidden">
+        <div className={css.hideMobileMenu}>
           {isOpenMenu ? (
             <div
               onClick={() => setIsOpenMenu(false)}
-              className="sm:hidden cursor-pointer"
+              className={css.cursorPointer}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -100,7 +101,7 @@ export default function Navbar() {
           ) : (
             <div
               onClick={() => setIsOpenMenu(true)}
-              className="sm:hidden cursor-pointer"
+              className={css.cursorPointer}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -115,43 +116,41 @@ export default function Navbar() {
           )}
           {isOpenMenu && (
             <>
-              <div className="bg-gradient-to-b backdrop-blur-sm -z-10 from-[#FE9BBA]/90 to-[#F8F7E2]/50 h-screen fixed inset-0" />
-              <div className="absolute px-[30px] -bottom-48 left-0 w-full">
-                <div className="w-fit mx-auto flex items-center justify-center flex-col gap-y-4">
+              <div className={css.wrapperMobileMenu} />
+              <div className={css.containerMobileMenu}>
+                <ul className={css.mobileUnorderedList}>
                   <li
                     onClick={() => {
-                      window.scrollTo({ top: 0, behavior: 'auto' })
-                      setTimeout(() => {
-                        setShowCurriculum(true)
-                      }, 200)
+                      handleOpenCurriculum()
                       setIsOpenMenu(false)
                     }}
-                    className="text-3xl cursor-pointer font-medium list-none"
+                    className={css.mobileListItem}
                   >
-                    {localeContextText.nav.about}
+                    {homeLocaleContextText.nav.about}
                   </li>
-                  <li className="text-3xl cursor-pointer font-medium list-none">
-                    {localeContextText.nav.contact}
+                  <li className={css.mobileListItem}>
+                    {homeLocaleContextText.nav.contact}
                   </li>
-
-                  <li className="text-3xl cursor-pointer font-medium list-none">
+                  <li>
                     {lang === 'en' ? (
-                      <img
+                      <Image
                         src={euaFlag.src}
-                        alt=""
                         onClick={() => setLang('pt-BR')}
-                        className="w-[40px] cursor-pointer"
+                        alt="united-states-flag/icon"
+                        width={40}
+                        height={40}
                       />
                     ) : (
-                      <img
+                      <Image
                         src={brazilFlag.src}
-                        alt=""
                         onClick={() => setLang('en')}
-                        className="w-[40px] cursor-pointer"
+                        alt="brazil-flag/icon"
+                        width={40}
+                        height={40}
                       />
                     )}
                   </li>
-                </div>
+                </ul>
               </div>
             </>
           )}

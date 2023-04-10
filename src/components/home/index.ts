@@ -1,0 +1,7 @@
+export { default as Hero } from './Hero'
+export { default as Marquee } from './Marquee'
+export { default as Projects } from './Projects'
+export { default as Behance } from './Behance'
+export { default as Skills } from './Skills'
+export { default as Services } from './Services'
+export { default as EmailMe } from './EmailMe'

@@ -2,10 +2,10 @@ import { useAppContext } from '@/@context/ContextProvider'
 import { fernanda, star } from '@/assets'
 
 export default function Hero() {
-  const { localeContextText } = useAppContext()
+  const { homeLocaleContextText } = useAppContext()
   const { lang } = useAppContext()
 
-  if (!localeContextText) {
+  if (!homeLocaleContextText) {
     return <></>
   }
 
@@ -39,23 +39,23 @@ export default function Hero() {
             />
           </div>
           <span className="text-transparent bg-[#fe5b30] bg-clip-text font-medium text-xl font-poppins !tracking-[-0.3px]">
-            {localeContextText.hero.presentation}
+            {homeLocaleContextText.hero.presentation}
           </span>
         </div>
         <h1 className="text-[#2e2e2e] z-50 relative text-4xl md:text-[50px] mdd:text-[72px] text-center mt-[20px] leading-[40.4px] md:!leading-[58.4px]  mdd:!leading-[86.4px] mx-auto w-full max-w-[350px] sm:max-w-[928px] font-semibold font-poppins !tracking-[-1px]">
-          {localeContextText.hero.title1}
+          {homeLocaleContextText.hero.title1}
           {lang === 'en' && <br className="hidden sm:block" />}
-          &nbsp;{localeContextText.hero.title2}
+          &nbsp;{homeLocaleContextText.hero.title2}
         </h1>
         <p className="text-[#505050] text-lg mt-[20px] w-full max-w-[350px] sm:max-w-[580px] mx-auto !leading-[28.8px] text-center">
-          {localeContextText.hero.subtitle}
+          {homeLocaleContextText.hero.subtitle}
         </p>
         <a
           href="https://www.linkedin.com/in/fercsena/"
           target="_blank"
           className="hover:scale-105 uppercase text-white z-50 relative bg-[#FE9BBA] transition-all duration-300 rounded-full w-fit block py-3 px-8 active:scale-100 outline-none mx-auto mt-[40px]"
         >
-          <strong>{localeContextText.hero.button}</strong>
+          <strong>{homeLocaleContextText.hero.button}</strong>
         </a>
       </div>
     </section>

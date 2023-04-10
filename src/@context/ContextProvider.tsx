@@ -10,8 +10,8 @@ interface ContextAPI {
   setShowCurriculum: React.Dispatch<React.SetStateAction<boolean>>
   lang: string
   setLang: React.Dispatch<React.SetStateAction<string>>
-  localeContextText: null | ILocaleContextHome
-  setLocaleContextText: React.Dispatch<
+  homeLocaleContextText: null | ILocaleContextHome
+  setHomeLocaleContextText: React.Dispatch<
     React.SetStateAction<null | ILocaleContextHome>
   >
 }
@@ -21,14 +21,14 @@ export const MyContext = createContext<ContextAPI>({
   setShowCurriculum: () => {},
   lang: 'en',
   setLang: () => {},
-  localeContextText: null,
-  setLocaleContextText: () => {},
+  homeLocaleContextText: null,
+  setHomeLocaleContextText: () => {},
 })
 
 export const ContextProvider = ({ children }: Props) => {
   const [showCurriculum, setShowCurriculum] = useState(false)
   const [lang, setLang] = useState('en')
-  const [localeContextText, setLocaleContextText] =
+  const [homeLocaleContextText, setHomeLocaleContextText] =
     useState<null | ILocaleContextHome>(null)
 
   const contextValue: ContextAPI = {
@@ -36,8 +36,8 @@ export const ContextProvider = ({ children }: Props) => {
     setShowCurriculum,
     lang,
     setLang,
-    localeContextText,
-    setLocaleContextText,
+    homeLocaleContextText,
+    setHomeLocaleContextText,
   }
 
   return (

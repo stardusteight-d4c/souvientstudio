@@ -22,6 +22,29 @@ body {
   border-radius: 20px;
 }
 
+/* Underline Effect */
+.effect-underline:after {
+  content: '';
+  position: absolute;
+  display: inline-block;
+  height: 1em;
+  width: 102%;
+  border-bottom: 1px solid;
+  margin-top: 10px;
+  bottom: -2px;
+  left: 1px;
+  opacity: 0;
+  -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+  transition: opacity 0.35s, transform 0.35s;
+  -webkit-transform: scale(0, 1);
+  transform: scale(0, 1);
+}
+.effect-underline:hover:after {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+
 .blur-shadow1 {
   background-image: linear-gradient(#F8F7E2 35%, #FE9BBA);
   animation: spinning82341 10s linear infinite;
