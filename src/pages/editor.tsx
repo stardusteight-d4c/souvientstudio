@@ -95,6 +95,16 @@ export default function Editor() {
     }
   }
 
+  async function submitProject() {
+    await axios.post('/api/database/project', {
+      type: selectedProjectType,
+      coverImage: coverImage,
+      title: editorInputsValue.title,
+      subtitle: editorInputsValue.subtitle,
+      body: editorInputsValue.textarea,
+    })
+  }
+
   function closeSavePopUp() {
     setIsOpenSavePopUp(false)
   }
@@ -163,7 +173,9 @@ export default function Editor() {
                 <div className="flex items-center gap-x-2">
                   <button
                     onClick={onClickUpload}
-                    className={`${uploadedFile ? 'bg-[#fe5b30]' : 'bg-[#FE9BBA]'} block w-fit py-2 px-4 text-[#F8F7E2] font-medium rounded-full`}
+                    className={`${
+                      uploadedFile ? 'bg-[#fe5b30]' : 'bg-[#FE9BBA]'
+                    } block w-fit py-2 px-4 text-[#F8F7E2] font-medium rounded-full`}
                   >
                     {uploadedFile
                       ? 'Uploaded cover image'
@@ -278,7 +290,7 @@ export default function Editor() {
                   value={editorInputsValue.textarea}
                   className="rounded-b-xl h-[300px] mb-2 w-full outline-none  border-[2px] border-[#fc81a8] border-t-0 bg-[#fc81a8]/50 resize-none p-4 text-[#2e2e2e]"
                 />
-                <button className="block ml-auto w-fit bg-[#FE9BBA] py-2 px-4 text-[#F8F7E2] font-medium rounded-full">
+                <button onClick={submitProject} className="block ml-auto w-fit bg-[#FE9BBA] py-2 px-4 text-[#F8F7E2] font-medium rounded-full">
                   Submit
                 </button>
               </div>
