@@ -1,13 +1,15 @@
 import React from 'react'
 
-interface Props {}
+interface Props {
+  size?: number
+}
 
 export const Download = (props: Props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="32"
-      height="32"
+      width={`${props.size ?? '32'}`}
+      height={`${props.size ?? '32'}`}
       fill="currentColor"
       viewBox="0 0 256 256"
     >

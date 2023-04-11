@@ -6,6 +6,7 @@ import { useAppContext } from '@/@context/ContextProvider'
 import CurriculumModal from '../home/integrate/CurriculumModal'
 import { navbarStyles as css } from './styles'
 import { useRouter } from 'next/router'
+import { Menu, X } from './atoms'
 
 export default function Navbar() {
   const [isGradientShadowOn, setIsGradientShadowOn] = useState(false)
@@ -15,7 +16,8 @@ export default function Navbar() {
   const { localeContextHome, showCurriculum, setShowCurriculum } =
     useAppContext()
 
-  const isDashboardRoute = router.pathname === '/dashboard'
+  const isEditorRoute = router.pathname === '/editor'
+  const isIndexRoute = router.pathname === '/'
 
   // Salvar preferência do idioma em local storage, cachear as traduções
 
@@ -44,21 +46,23 @@ export default function Navbar() {
   }
 
   return (
-    <nav className={css.handleWrapper(isGradientShadowOn, isDashboardRoute)}>
+    <nav className={css.handleWrapper(isGradientShadowOn, isEditorRoute)}>
       <div className={css.container}>
         <Link href="/" className={css.fevientLogo}>
           Fevient
         </Link>
         <ul className={css.desktopUnorderedList}>
-          <Link href="/dashboard" className={css.desktopListItem}>
-            Dashboard
+          <Link href="/editor" className={css.desktopListItem}>
+            Editor
           </Link>
-          <li
-            onClick={() => handleOpenCurriculum()}
-            className={css.desktopListItem}
-          >
-            {localeContextHome?.nav.about}
-          </li>
+          {isIndexRoute && (
+            <li
+              onClick={() => handleOpenCurriculum()}
+              className={css.desktopListItem}
+            >
+              Resume
+            </li>
+          )}
           <li className={css.desktopListItem}>
             {localeContextHome?.nav.contact}
           </li>
@@ -91,30 +95,14 @@ export default function Navbar() {
               onClick={() => setIsOpenMenu(false)}
               className={css.cursorPointer}
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
-                fill="#F8F7E2"
-                viewBox="0 0 256 256"
-              >
-                <path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path>
-              </svg>
+              <X />
             </div>
           ) : (
             <div
               onClick={() => setIsOpenMenu(true)}
               className={css.cursorPointer}
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
-                fill="#F8F7E2"
-                viewBox="0 0 256 256"
-              >
-                <path d="M228,128a12,12,0,0,1-12,12H40a12,12,0,0,1,0-24H216A12,12,0,0,1,228,128ZM40,76H216a12,12,0,0,0,0-24H40a12,12,0,0,0,0,24ZM216,180H40a12,12,0,0,0,0,24H216a12,12,0,0,0,0-24Z"></path>
-              </svg>
+              <Menu />
             </div>
           )}
           {isOpenMenu && (

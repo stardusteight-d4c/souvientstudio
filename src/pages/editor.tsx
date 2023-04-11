@@ -1,23 +1,37 @@
-import { useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import Head from 'next/head'
 import { useAppContext } from '@/@context/ContextProvider'
 import Navbar from '@/components/@globals/Navbar'
 import axios from 'axios'
 import { handleMarkdown } from '@/utils/handle-markdown'
 import * as Icon from '@/components/@globals/atoms'
+import Footer from '@/components/@globals/Footer'
+import { detectClickOutsideElement } from '@/utils/detect-click-outside-element'
+import { SavePopUp } from '@/components/editor/integrate/SavePopUp'
+import { ImportSavePopUp } from '@/components/editor/integrate/ImportSavePopUp'
 
-export default function Dashboard() {
-  const projectsTypes = [
-    'Visual identities',
-    'Open sequences',
-    'Personal projects',
-  ]
+export default function Editor() {
+  const [editorInputsValue, setEditorInputsValue] = useState({
+    title: '',
+    subtitle: '',
+    textarea: '',
+    search: '',
+  })
+  const [isOpenSavePopUp, setIsOpenSavePopUp] = useState(false)
+  const [isOpenImportSavePopUp, setIsOpenImportSavePopUp] = useState(false)
+  const [coverImage, setCoverImage] = useState('')
   const [showSelectDropdown, setShowSelectDropdown] = useState(false)
+  const projectsTypes = [
+    'Visual identity',
+    'Open sequence',
+    'Personal project',
+  ]
   const { lang } = useAppContext()
   const { localeContextHome, setLocaleContextHome } = useAppContext()
   const [selectedProjectType, setSelectedProjectType] = useState(
     projectsTypes[0]
   )
+  const textareaElement = useRef<HTMLTextAreaElement>(null)
 
   useEffect(() => {
     ;(async () => {
@@ -27,14 +41,66 @@ export default function Dashboard() {
     })()
   }, [lang])
 
-  function handleSelected(type: string): void {
-    const textareaElement = document.getElementById(
-      'textarea'
-    ) as HTMLTextAreaElement
-    if (!textareaElement) {
-      return
+  useEffect(() => {
+    function handleClickOutsideOfNetworksListDropDown(event: MouseEvent) {
+      const { clickedOutside } = detectClickOutsideElement(
+        event,
+        'selectProjectTypeElement'
+      )
+      if (clickedOutside && showSelectDropdown === true) {
+        setShowSelectDropdown(false)
+      }
     }
-    handleMarkdown(textareaElement, type)
+    document.addEventListener('click', handleClickOutsideOfNetworksListDropDown)
+    return () => {
+      document.removeEventListener(
+        'click',
+        handleClickOutsideOfNetworksListDropDown
+      )
+    }
+  }, [showSelectDropdown])
+
+  function handleInputChange(
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) {
+    const { name, value } = event.target
+    setEditorInputsValue({ ...editorInputsValue, [name]: value })
+  }
+
+  function handleSelected(type: string): void {
+    handleMarkdown(textareaElement.current!, type)
+  }
+
+  function onClickUpload(): void {
+    const inputFile = document.getElementById('file-input')!
+    const clickEvent = new MouseEvent('click', { bubbles: true })
+    inputFile.dispatchEvent(clickEvent)
+  }
+
+  function onFileChange(event: ChangeEvent<HTMLInputElement>): void {
+    const input = event.target as HTMLInputElement
+    const files = input.files as FileList
+    const maxFileSize = 3 * 1024 * 1024 // 3MB
+    const file = files[0]
+    if (file && file.size > maxFileSize) {
+      alert('ERROR The selected file is larger than 3MB!')
+      input.value = ''
+    } else {
+      const reader = new FileReader()
+      // fileUploaded.value = files
+      reader.readAsDataURL(file)
+      reader.onload = () => {
+        const base64 = reader.result
+        setCoverImage(String(base64))
+      }
+    }
+  }
+
+  function closeSavePopUp() {
+    setIsOpenSavePopUp(false)
+  }
+  function closeImportSavePopUp() {
+    setIsOpenImportSavePopUp(false)
   }
 
   const iconsFirstSection = [
@@ -50,15 +116,15 @@ export default function Dashboard() {
     { Icon: Icon.AlignRight, name: 'align-right' },
   ]
   const iconsSecondSection = [
-    { Icon: Icon.Eye, execute: '() => handleShowPreview()' },
-    { Icon: Icon.Disk, execute: '() => (proceedToSave.value = true)' },
-    { Icon: Icon.Download, execute: '() => (proceedToImport.value = true)' },
+    { Icon: Icon.Eye, execute: () => console.log('hello') },
+    { Icon: Icon.Disk, execute: () => setIsOpenSavePopUp(true) },
+    { Icon: Icon.Download, execute: () => setIsOpenImportSavePopUp(true) },
   ]
 
   return (
     <>
       <Head>
-        <title>Fevient / Dashboard</title>
+        <title>Fevient / Editor</title>
         <meta
           name="souvientstudio |  Graphic Designer"
           content="Graphic Designer, Visual Design, Product Strategy"
@@ -66,14 +132,42 @@ export default function Dashboard() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      {isOpenSavePopUp && <SavePopUp emitClosed={closeSavePopUp} />}
+      {isOpenImportSavePopUp && (
+        <ImportSavePopUp emitClosed={closeImportSavePopUp} />
+      )}
       <main className="bg-gradient-to-b from-[#FE9BBA] to-transparent overflow-hidden">
         <Navbar />
         <section className="grid py-20 text-[#2e2e2e] place-items-center">
           <div className="bg-[#F8F7E2] rounded-xl flex flex-col gap-2 p-4 w-[800px] h-fit shadow-xl shadow-[#2e2e2e]/10">
-            <button className="block w-fit bg-[#FE9BBA] py-2 px-4 text-[#F8F7E2] font-medium rounded-full">
-              Upload cover image
-            </button>
-            <div className="relative w-fit">
+            <div className="flex justify-between items-center">
+              <button
+                onClick={onClickUpload}
+                className="block w-fit bg-[#FE9BBA] py-2 px-4 text-[#F8F7E2] font-medium rounded-full"
+              >
+                Upload cover image
+              </button>
+              <input
+                type="file"
+                id="file-input"
+                onChange={(e) => onFileChange(e)}
+                className="hidden"
+                accept="image/png, image/jpeg"
+              />
+              <div className="relative w-72 h-8 rounded-full">
+                <div className="absolute top-1 left-2 text-[#2e2e2e]/80">
+                  <Icon.Search size={24} />
+                </div>
+                <input
+                  placeholder="Search for a project"
+                  type="text"
+                  name="search"
+                  onChange={handleInputChange}
+                  className="h-full w-full pl-8 pr-3 bg-[#F8F7E2]  border-[2px] border-[#2e2e2e] focus:border-[#fe5b30] outline-none rounded-full"
+                />
+              </div>
+            </div>
+            <div id="selectProjectTypeElement" className="relative w-fit">
               <div
                 onClick={() => setShowSelectDropdown(!showSelectDropdown)}
                 className="text-sm flex  justify-center gap-x-2 px-2 cursor-pointer border-[2px] border-[#FE9BBA] py-1 rounded-full"
@@ -84,24 +178,17 @@ export default function Dashboard() {
                     showSelectDropdown && '-rotate-180'
                   } transition-all duration-150`}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    fill="#2e2e2e"
-                    viewBox="0 0 256 256"
-                  >
-                    <path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"></path>
-                  </svg>
+                  <Icon.Caret size={18} />
                 </div>
               </div>
               {showSelectDropdown && (
-                <div className="absolute bg-[#FE9BBA] mt-1 w-full rounded-lg overflow-hidden">
+                <div className="absolute z-50 bg-[#FE9BBA] mt-1 w-full rounded-lg overflow-hidden">
                   <ul className="text-center">
                     {projectsTypes.map((type) => {
                       if (type !== selectedProjectType) {
                         return (
                           <li
+                            key={type}
                             onClick={() => {
                               setSelectedProjectType(type)
                               setShowSelectDropdown(false)
@@ -120,10 +207,16 @@ export default function Dashboard() {
             <div className="flex flex-col gap-y-6 mb-4">
               <input
                 placeholder="Title"
+                name="title"
+                value={editorInputsValue.title}
+                onChange={handleInputChange}
                 className="text-[32px] placeholder:text-[#505050] transition-all duration-300 focus:translate-x-2 rounded-md font-semibold bg-transparent outline-none"
               />
               <input
                 placeholder="Subtitle"
+                name="subtitle"
+                value={editorInputsValue.subtitle}
+                onChange={handleInputChange}
                 className="text-[24px] placeholder:text-[#505050] transition-all duration-300 focus:translate-x-2 rounded-md font-light -mt-8 bg-transparent outline-none"
               />
             </div>
@@ -134,7 +227,7 @@ export default function Dashboard() {
                     <li
                       key={index}
                       onClick={() => handleSelected(item.name)}
-                      className="cursor-pointer rounded-sm p-1 hover:bg-[#fe5b30]/80 hover:text-[#F8F7E2] w-fit"
+                      className="cursor-pointer rounded-sm p-1 hover:bg-[#fe5b30] hover:text-[#F8F7E2] w-fit"
                     >
                       <item.Icon />
                     </li>
@@ -144,6 +237,7 @@ export default function Dashboard() {
                   {iconsSecondSection.map((item, index) => (
                     <li
                       key={index}
+                      onClick={() => item.execute()}
                       className="cursor-pointer rounded-sm p-1 hover:bg-[#fe5b30]/80 hover:text-[#F8F7E2] w-fit"
                     >
                       <item.Icon />
@@ -152,6 +246,10 @@ export default function Dashboard() {
                 </ul>
               </div>
               <textarea
+                spellCheck="false"
+                ref={textareaElement}
+                name="textarea"
+                onChange={handleInputChange}
                 id="textarea"
                 className="inner-shadoww rounded-b-xl h-[300px] mb-2 w-full outline-none  border-[2px] border-[#fc81a8] border-t-0 bg-[#fc81a8]/50 resize-none p-4 text-[#2e2e2e]"
               />
@@ -162,6 +260,7 @@ export default function Dashboard() {
           </div>
         </section>
       </main>
+      <Footer />
     </>
   )
 }

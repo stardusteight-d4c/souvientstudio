@@ -72,7 +72,7 @@ export default function Projects() {
                 <Link
                   href={`/project/slugggg`}
                   key={index}
-                  className="card-animate card rounded-3xl overflow-hidden transition-all duration-500 cursor-pointer w-full min-w-[300px] lg:min-w-[400px] h-[300px] group relative"
+                  className="card-animate card rounded-3xl overflow-hidden transition-all duration-500 cursor-pointer w-full min-w-[300px] lg:min-w-[400px] h-[300px] group relative select-none"
                 >
                   <img
                     src={item.src}
@@ -108,7 +108,7 @@ export default function Projects() {
               {items.map((item, index) => (
                 <div
                   key={index}
-                  className="card-animate card rounded-3xl overflow-hidden transition-all duration-500 cursor-pointer w-full min-w-[300px] lg:min-w-[400px] h-[300px] group relative"
+                  className="card-animate card rounded-3xl overflow-hidden transition-all duration-500 cursor-pointer w-full min-w-[300px] lg:min-w-[400px] h-[300px] group relative select-none"
                 >
                   <img
                     src={item.src}
@@ -144,7 +144,7 @@ export default function Projects() {
               {items.map((item, index) => (
                 <div
                   key={index}
-                  className="card-animate card rounded-3xl overflow-hidden transition-all duration-500 cursor-pointer w-full min-w-[300px] lg:min-w-[400px] h-[300px] group relative"
+                  className="card-animate card rounded-3xl overflow-hidden transition-all duration-500 cursor-pointer w-full min-w-[300px] lg:min-w-[400px] h-[300px] group relative select-none"
                 >
                   <img
                     src={item.src}
