@@ -29,7 +29,7 @@ function markdownParse(text: string, type: string) {
   } else if (type === 'underline') {
     return { text: `<u>${text}</u>`, cursorOffset: 3 }
   } else if (type === 'link') {
-    return { text: `[${text}](link)`, cursorOffset: 1 }
+    return { text: `<a href="https://exemplo.com" target="_blank">${text}</a>`, cursorOffset: 46 }
   } else if (type === 'image') {
     return { text: `![description](img_url)`, cursorOffset: 23 }
   } else if (type === 'code-block') {
@@ -52,6 +52,11 @@ function markdownParse(text: string, type: string) {
     return {
       text: `<div style="text-align: right;">${text}</div>`,
       cursorOffset: 32,
+    }
+  } else if (type === 'break-line') {
+    return {
+      text: `<br /><br />`,
+      cursorOffset: 12,
     }
   } else if (type === 'tab') {
     return {

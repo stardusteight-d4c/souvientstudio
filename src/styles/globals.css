@@ -11,14 +11,14 @@ body {
 ::-webkit-scrollbar {
   width: 12px;
   height: 12px;
-  background: #FE9BBA;
+  background: #fe9bba;
 }
 ::-moz-scrollbar {
-  background-color: #FE9BBA;
+  background-color: #fe9bba;
 }
 ::-webkit-scrollbar-thumb {
   cursor: pointer;
-  background-color:#F8F7E2;
+  background-color: #f8f7e2;
   border-radius: 20px;
 }
 
@@ -47,27 +47,27 @@ body {
 
 /* Blur and Spinners */
 .blur-shadow1 {
-  background-image: linear-gradient(#F8F7E2 35%, #FE9BBA);
+  background-image: linear-gradient(#f8f7e2 35%, #fe9bba);
   animation: spinning82341 10s linear infinite;
-  box-shadow: 0px 0px 80px 0px #F8F7E2, 0px 5px 20px 0px #FE9BBA;
+  box-shadow: 0px 0px 80px 0px #f8f7e2, 0px 5px 20px 0px #fe9bba;
 }
 .blur-shadow2 {
-  background-image: linear-gradient(#F8F7E2 35%, #FE9BBA);
+  background-image: linear-gradient(#f8f7e2 35%, #fe9bba);
   animation: spinning82342 10s linear infinite;
-  box-shadow: 0px 0px 80px 0px #F8F7E2, 0px 5px 20px 0px #FE9BBA;
+  box-shadow: 0px 0px 80px 0px #f8f7e2, 0px 5px 20px 0px #fe9bba;
 }
 .spinner {
   animation: spinning82341 10s linear infinite;
   text-align: center;
 }
 .spinner1 {
-  background-image: linear-gradient(#FE9BBA 35%, #F8F7E2);
+  background-image: linear-gradient(#fe9bba 35%, #f8f7e2);
   animation: spinning82341 10s linear infinite;
   text-align: center;
   border-radius: 50px;
   cursor: pointer;
   filter: blur(3px);
-  box-shadow: 0px 0px 80px 0px #FE9BBA, 0px 2px 75px 0px #F8F7E2;
+  box-shadow: 0px 0px 80px 0px #fe9bba, 0px 2px 75px 0px #f8f7e2;
 }
 @keyframes spinning82341 {
   to {
@@ -108,7 +108,7 @@ body {
 }
 #dots::before {
   z-index: 5;
-  background-image: radial-gradient(#FE5B30 1px, transparent 1%);
+  background-image: radial-gradient(#fe5b30 1px, transparent 1%);
   background-size: 50px 50px;
   opacity: 0.5;
 }
@@ -161,7 +161,102 @@ body {
   bottom: 25px;
 }
 
-
-.inner-shadoww {
-  box-shadow: inset 0px 2px 5px rgb(0, 0, 0, 0.2);
+/* Project Article */
+#article-body hr {
+  height: 1px;
+  background-color: #181818;
+  border: none;
+}
+/* HEADINGS */
+#article-body h2 {
+  font-size: 1.875rem /* 30px */ !important;
+  line-height: 2.25rem /* 36px */ !important;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+#article-body h3 {
+  font-size: 1.5rem /* 24px */ !important;
+  line-height: 2rem /* 32px */ !important;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+#article-body h4 {
+  font-size: 1.25rem /* 20px */ !important;
+  line-height: 1.75rem /* 28px */ !important;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+#article-body h5 {
+  font-size: 1.125rem /* 18px */ !important;
+  line-height: 1.75rem /* 28px */ !important;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+#article-body h6 {
+  font-size: 1rem /* 16px */ !important;
+  line-height: 1.5rem /* 24px */ !important;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+/* CODE BLOCK */
+#article-body pre {
+  max-width: 100%;
+  background-color: #181818;
+  margin-block: 8px;
+  border-radius: 0.125rem /* 2px */;
+  font-size: 1rem /* 16px */;
+  line-height: 1.5rem /* 24px */;
+  text-align: left !important;
+  overflow-x: scroll;
+  border-radius: 2px;
+  background: #181818;
+  box-shadow: inset 7px 7px 14px #111111, inset -7px -7px 14px #1f1f1f;
+  padding: 1em !important;
+  box-sizing: content-box;
+}
+#article-body code {
+  width: 90%;
+  color: #f8f7e2;
+  font-weight: 300;
+  background-color: transparent;
+  text-align: left !important;
+  box-sizing: content-box;
+  border-radius: 0.125rem /* 2px */;
+  cursor: text;
+}
+/* TABLE */
+#article-body table {
+  width: fit-content;
+  margin-inline: auto;
+}
+#article-body th {
+  text-align: center;
+  padding: 8px;
+  border: 1px solid #181818;
+}
+#article-body td {
+  text-align: center;
+  padding: 8px;
+  border: 1px solid #181818;
+  margin-inline: auto;
+}
+/* IMAGE */
+#article-body img {
+  border-radius: 50px;
+  width: 600px;
+  margin-inline: auto;
+  object-fit: cover;
+}
+/* BLOCKQUOTE */
+#article-body blockquote {
+  border-left: 2px solid #18181895;
+  padding-left: 8px;
+}
+/* STRONG */
+#article-body strong {
+  font-weight: 700;
+}
+/* Link */
+#article-body a {
+  text-decoration-line: underline;
 }

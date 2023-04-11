@@ -22,6 +22,7 @@ export default function Editor() {
   const [isOpenImportSavePopUp, setIsOpenImportSavePopUp] = useState(false)
   const [showPreview, setShowPreview] = useState(false)
   const [coverImage, setCoverImage] = useState('')
+  const [uploadedFile, setUploadedFile] = useState<FileList | null>(null)
   const [showSelectDropdown, setShowSelectDropdown] = useState(false)
   const projectsTypes = ['Visual identity', 'Open sequence', 'Personal project']
   const { lang } = useAppContext()
@@ -85,7 +86,7 @@ export default function Editor() {
       input.value = ''
     } else {
       const reader = new FileReader()
-      // fileUploaded.value = files
+      setUploadedFile(files)
       reader.readAsDataURL(file)
       reader.onload = () => {
         const base64 = reader.result
@@ -111,6 +112,7 @@ export default function Editor() {
     { Icon: Icon.Bold, name: 'bold' },
     { Icon: Icon.Italic, name: 'italic' },
     { Icon: Icon.Underline, name: 'underline' },
+    { Icon: Icon.BreakLine, name: 'break-line' },
     { Icon: Icon.Link, name: 'link' },
     { Icon: Icon.Image, name: 'image' },
     { Icon: Icon.HeadingTwo, name: 'heading-two' },
@@ -140,7 +142,11 @@ export default function Editor() {
       {isOpenImportSavePopUp && (
         <ImportSavePopUp emitClosed={closeImportSavePopUp} />
       )}
-      <main className="bg-gradient-to-b from-[#FE9BBA] to-transparent overflow-hidden">
+      <main
+        className={`${
+          showPreview ? 'bg-[#F8F7E2]' : 'bg-gradient-to-b'
+        }  from-[#FE9BBA] to-transparent overflow-hidden`}
+      >
         <Navbar notFixed={showPreview ? false : true} />
         {showPreview ? (
           <ProjectShowdown
@@ -154,12 +160,17 @@ export default function Editor() {
           <section className="grid py-20 text-[#2e2e2e] place-items-center">
             <div className="bg-[#F8F7E2] rounded-xl flex flex-col gap-2 p-4 w-[800px] h-fit shadow-xl shadow-[#2e2e2e]/10">
               <div className="flex justify-between items-center">
-                <button
-                  onClick={onClickUpload}
-                  className="block w-fit bg-[#FE9BBA] py-2 px-4 text-[#F8F7E2] font-medium rounded-full"
-                >
-                  Upload cover image
-                </button>
+                <div className="flex items-center gap-x-2">
+                  <button
+                    onClick={onClickUpload}
+                    className={`${uploadedFile ? 'bg-[#fe5b30]' : 'bg-[#FE9BBA]'} block w-fit py-2 px-4 text-[#F8F7E2] font-medium rounded-full`}
+                  >
+                    {uploadedFile
+                      ? 'Uploaded cover image'
+                      : 'Upload cover image'}
+                  </button>
+                  <span>{uploadedFile && uploadedFile[0].name}</span>
+                </div>
                 <input
                   type="file"
                   id="file-input"
@@ -167,8 +178,8 @@ export default function Editor() {
                   className="hidden"
                   accept="image/png, image/jpeg"
                 />
-                <div className="relative w-72 h-8 rounded-full">
-                  <div className="absolute top-1 left-2 text-[#2e2e2e]/80">
+                <div className="relative group w-72 h-8 rounded-full">
+                  <div className="absolute group-focus-within:text-[#fe5b30] top-1 left-2 text-[#2e2e2e]/80">
                     <Icon.Search size={24} />
                   </div>
                   <input
@@ -240,7 +251,7 @@ export default function Editor() {
                       <li
                         key={index}
                         onClick={() => handleSelected(item.name)}
-                        className="cursor-pointer rounded-sm p-1 hover:bg-[#fe5b30] hover:text-[#F8F7E2] w-fit"
+                        className="cursor-pointer rounded-md p-1 hover:bg-[#fe5b30]/80 hover:text-[#F8F7E2] w-fit"
                       >
                         <item.Icon />
                       </li>
@@ -251,7 +262,7 @@ export default function Editor() {
                       <li
                         key={index}
                         onClick={() => item.execute()}
-                        className="cursor-pointer rounded-sm p-1 hover:bg-[#fe5b30]/80 hover:text-[#F8F7E2] w-fit"
+                        className="cursor-pointer rounded-md p-1 hover:bg-[#fe5b30]/80 hover:text-[#F8F7E2] w-fit"
                       >
                         <item.Icon />
                       </li>
@@ -265,7 +276,7 @@ export default function Editor() {
                   onChange={handleInputChange}
                   id="textarea"
                   value={editorInputsValue.textarea}
-                  className="inner-shadoww rounded-b-xl h-[300px] mb-2 w-full outline-none  border-[2px] border-[#fc81a8] border-t-0 bg-[#fc81a8]/50 resize-none p-4 text-[#2e2e2e]"
+                  className="rounded-b-xl h-[300px] mb-2 w-full outline-none  border-[2px] border-[#fc81a8] border-t-0 bg-[#fc81a8]/50 resize-none p-4 text-[#2e2e2e]"
                 />
                 <button className="block ml-auto w-fit bg-[#FE9BBA] py-2 px-4 text-[#F8F7E2] font-medium rounded-full">
                   Submit

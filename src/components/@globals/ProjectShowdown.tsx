@@ -24,7 +24,7 @@ export function ProjectShowdown(props: Props) {
           />
           <button
             onClick={props.emitBack}
-            className="block relative left-1/2 -translate-x-1/2 -mt-12 z-50 w-fit text-[#FE9BBA] py-2 px-4 bg-[#F8F7E2] font-medium rounded-full"
+            className="block relative left-1/2 -translate-x-1/2 -mt-12 z-50 font-bold uppercase w-fit text-[#2e2e2e] py-2 px-4 bg-[#F8F7E2] rounded-full"
           >
             Back to editor
           </button>
@@ -38,6 +38,7 @@ export function ProjectShowdown(props: Props) {
           {props.subtitle === '' ? 'No subtitle' : props.subtitle}
         </h2>
         <div
+          id="article-body"
           dangerouslySetInnerHTML={{
             __html:
               props.body === ''
