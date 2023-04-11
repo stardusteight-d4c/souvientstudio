@@ -46,7 +46,7 @@ export default function Project() {
               className="object-cover relative w-full h-[300px]"
             />
           </div>
-          <div className="max-w-[800px] text-[#2e2e2e] w-full mx-auto">
+          <div className="max-w-[800px] mt-8 text-[#2e2e2e] w-full mx-auto">
             <h1 className="text-[72px] font-semibold">Jordan</h1>
             <h2 className="text-[50px] font-light -mt-4">
               Illustration and Composition

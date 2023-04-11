@@ -8,7 +8,11 @@ import { navbarStyles as css } from './styles'
 import { useRouter } from 'next/router'
 import { Menu, X } from './atoms'
 
-export default function Navbar() {
+interface Props {
+  notFixed?: boolean
+}
+
+export default function Navbar({ notFixed = false }: Props) {
   const [isGradientShadowOn, setIsGradientShadowOn] = useState(false)
   const [isOpenMenu, setIsOpenMenu] = useState(false)
   const router = useRouter()
@@ -16,7 +20,6 @@ export default function Navbar() {
   const { localeContextHome, showCurriculum, setShowCurriculum } =
     useAppContext()
 
-  const isEditorRoute = router.pathname === '/editor'
   const isIndexRoute = router.pathname === '/'
 
   // Salvar preferência do idioma em local storage, cachear as traduções
@@ -46,7 +49,7 @@ export default function Navbar() {
   }
 
   return (
-    <nav className={css.handleWrapper(isGradientShadowOn, isEditorRoute)}>
+    <nav className={css.handleWrapper(isGradientShadowOn, notFixed)}>
       <div className={css.container}>
         <Link href="/" className={css.fevientLogo}>
           Fevient

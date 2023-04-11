@@ -25,4 +25,5 @@ export { default as brazilFlag } from './brazil-flag.png'
 export { default as euaFlag } from './eua-flag.png'
 
 export { default as club } from './club.png'
+export { default as coverPlaceholder } from './cover-placeholder.png'
 

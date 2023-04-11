@@ -9,6 +9,7 @@ import Footer from '@/components/@globals/Footer'
 import { detectClickOutsideElement } from '@/utils/detect-click-outside-element'
 import { SavePopUp } from '@/components/editor/integrate/SavePopUp'
 import { ImportSavePopUp } from '@/components/editor/integrate/ImportSavePopUp'
+import { ProjectShowdown } from '@/components/@globals/ProjectShowdown'
 
 export default function Editor() {
   const [editorInputsValue, setEditorInputsValue] = useState({
@@ -19,13 +20,10 @@ export default function Editor() {
   })
   const [isOpenSavePopUp, setIsOpenSavePopUp] = useState(false)
   const [isOpenImportSavePopUp, setIsOpenImportSavePopUp] = useState(false)
+  const [showPreview, setShowPreview] = useState(false)
   const [coverImage, setCoverImage] = useState('')
   const [showSelectDropdown, setShowSelectDropdown] = useState(false)
-  const projectsTypes = [
-    'Visual identity',
-    'Open sequence',
-    'Personal project',
-  ]
+  const projectsTypes = ['Visual identity', 'Open sequence', 'Personal project']
   const { lang } = useAppContext()
   const { localeContextHome, setLocaleContextHome } = useAppContext()
   const [selectedProjectType, setSelectedProjectType] = useState(
@@ -99,8 +97,14 @@ export default function Editor() {
   function closeSavePopUp() {
     setIsOpenSavePopUp(false)
   }
-  function closeImportSavePopUp() {
+  function closeImportSavePopUp(value?: string) {
+    if (value) {
+      setEditorInputsValue({ ...editorInputsValue, textarea: value })
+    }
     setIsOpenImportSavePopUp(false)
+  }
+  function backToEditor() {
+    setShowPreview(false)
   }
 
   const iconsFirstSection = [
@@ -116,7 +120,7 @@ export default function Editor() {
     { Icon: Icon.AlignRight, name: 'align-right' },
   ]
   const iconsSecondSection = [
-    { Icon: Icon.Eye, execute: () => console.log('hello') },
+    { Icon: Icon.Eye, execute: () => setShowPreview(true) },
     { Icon: Icon.Disk, execute: () => setIsOpenSavePopUp(true) },
     { Icon: Icon.Download, execute: () => setIsOpenImportSavePopUp(true) },
   ]
@@ -137,128 +141,139 @@ export default function Editor() {
         <ImportSavePopUp emitClosed={closeImportSavePopUp} />
       )}
       <main className="bg-gradient-to-b from-[#FE9BBA] to-transparent overflow-hidden">
-        <Navbar />
-        <section className="grid py-20 text-[#2e2e2e] place-items-center">
-          <div className="bg-[#F8F7E2] rounded-xl flex flex-col gap-2 p-4 w-[800px] h-fit shadow-xl shadow-[#2e2e2e]/10">
-            <div className="flex justify-between items-center">
-              <button
-                onClick={onClickUpload}
-                className="block w-fit bg-[#FE9BBA] py-2 px-4 text-[#F8F7E2] font-medium rounded-full"
-              >
-                Upload cover image
-              </button>
-              <input
-                type="file"
-                id="file-input"
-                onChange={(e) => onFileChange(e)}
-                className="hidden"
-                accept="image/png, image/jpeg"
-              />
-              <div className="relative w-72 h-8 rounded-full">
-                <div className="absolute top-1 left-2 text-[#2e2e2e]/80">
-                  <Icon.Search size={24} />
-                </div>
+        <Navbar notFixed={showPreview ? false : true} />
+        {showPreview ? (
+          <ProjectShowdown
+            coverImage={coverImage}
+            title={editorInputsValue.title}
+            subtitle={editorInputsValue.subtitle}
+            body={editorInputsValue.textarea}
+            emitBack={backToEditor}
+          />
+        ) : (
+          <section className="grid py-20 text-[#2e2e2e] place-items-center">
+            <div className="bg-[#F8F7E2] rounded-xl flex flex-col gap-2 p-4 w-[800px] h-fit shadow-xl shadow-[#2e2e2e]/10">
+              <div className="flex justify-between items-center">
+                <button
+                  onClick={onClickUpload}
+                  className="block w-fit bg-[#FE9BBA] py-2 px-4 text-[#F8F7E2] font-medium rounded-full"
+                >
+                  Upload cover image
+                </button>
                 <input
-                  placeholder="Search for a project"
-                  type="text"
-                  name="search"
+                  type="file"
+                  id="file-input"
+                  onChange={(e) => onFileChange(e)}
+                  className="hidden"
+                  accept="image/png, image/jpeg"
+                />
+                <div className="relative w-72 h-8 rounded-full">
+                  <div className="absolute top-1 left-2 text-[#2e2e2e]/80">
+                    <Icon.Search size={24} />
+                  </div>
+                  <input
+                    placeholder="Search for a project"
+                    type="text"
+                    name="search"
+                    onChange={handleInputChange}
+                    className="h-full w-full pl-8 pr-3 bg-[#F8F7E2]  border-[2px] border-[#2e2e2e] focus:border-[#fe5b30] outline-none rounded-full"
+                  />
+                </div>
+              </div>
+              <div id="selectProjectTypeElement" className="relative w-fit">
+                <div
+                  onClick={() => setShowSelectDropdown(!showSelectDropdown)}
+                  className="text-sm flex  justify-center gap-x-2 px-2 cursor-pointer border-[2px] border-[#FE9BBA] py-1 rounded-full"
+                >
+                  {selectedProjectType}
+                  <div
+                    className={`${
+                      showSelectDropdown && '-rotate-180'
+                    } transition-all duration-150`}
+                  >
+                    <Icon.Caret size={18} />
+                  </div>
+                </div>
+                {showSelectDropdown && (
+                  <div className="absolute z-50 bg-[#FE9BBA] mt-1 w-full rounded-lg overflow-hidden">
+                    <ul className="text-center">
+                      {projectsTypes.map((type) => {
+                        if (type !== selectedProjectType) {
+                          return (
+                            <li
+                              key={type}
+                              onClick={() => {
+                                setSelectedProjectType(type)
+                                setShowSelectDropdown(false)
+                              }}
+                              className="text-sm font-medium cursor-pointer hover:bg-[#fc81a8] text-[#F8F7E2] py-[2px]"
+                            >
+                              {type}
+                            </li>
+                          )
+                        }
+                      })}
+                    </ul>
+                  </div>
+                )}
+              </div>
+              <div className="flex flex-col gap-y-6 mb-4">
+                <input
+                  placeholder="Title"
+                  name="title"
+                  value={editorInputsValue.title}
                   onChange={handleInputChange}
-                  className="h-full w-full pl-8 pr-3 bg-[#F8F7E2]  border-[2px] border-[#2e2e2e] focus:border-[#fe5b30] outline-none rounded-full"
+                  className="text-[32px] placeholder:text-[#505050] transition-all duration-300 focus:translate-x-2 rounded-md font-semibold bg-transparent outline-none"
+                />
+                <input
+                  placeholder="Subtitle"
+                  name="subtitle"
+                  value={editorInputsValue.subtitle}
+                  onChange={handleInputChange}
+                  className="text-[24px] placeholder:text-[#505050] transition-all duration-300 focus:translate-x-2 rounded-md font-light -mt-8 bg-transparent outline-none"
                 />
               </div>
-            </div>
-            <div id="selectProjectTypeElement" className="relative w-fit">
-              <div
-                onClick={() => setShowSelectDropdown(!showSelectDropdown)}
-                className="text-sm flex  justify-center gap-x-2 px-2 cursor-pointer border-[2px] border-[#FE9BBA] py-1 rounded-full"
-              >
-                {selectedProjectType}
-                <div
-                  className={`${
-                    showSelectDropdown && '-rotate-180'
-                  } transition-all duration-150`}
-                >
-                  <Icon.Caret size={18} />
-                </div>
-              </div>
-              {showSelectDropdown && (
-                <div className="absolute z-50 bg-[#FE9BBA] mt-1 w-full rounded-lg overflow-hidden">
-                  <ul className="text-center">
-                    {projectsTypes.map((type) => {
-                      if (type !== selectedProjectType) {
-                        return (
-                          <li
-                            key={type}
-                            onClick={() => {
-                              setSelectedProjectType(type)
-                              setShowSelectDropdown(false)
-                            }}
-                            className="text-sm font-medium cursor-pointer hover:bg-[#fc81a8] text-[#F8F7E2] py-[2px]"
-                          >
-                            {type}
-                          </li>
-                        )
-                      }
-                    })}
+              <div className="h-full">
+                <div className="flex items-center justify-between w-full rounded-t-xl border-[2px] border-b-0 border-[#fc81a8]">
+                  <ul className="p-2 gap-x-1 flex items-center">
+                    {iconsFirstSection.map((item, index) => (
+                      <li
+                        key={index}
+                        onClick={() => handleSelected(item.name)}
+                        className="cursor-pointer rounded-sm p-1 hover:bg-[#fe5b30] hover:text-[#F8F7E2] w-fit"
+                      >
+                        <item.Icon />
+                      </li>
+                    ))}
+                  </ul>
+                  <ul className="p-2 gap-x-1 flex items-center">
+                    {iconsSecondSection.map((item, index) => (
+                      <li
+                        key={index}
+                        onClick={() => item.execute()}
+                        className="cursor-pointer rounded-sm p-1 hover:bg-[#fe5b30]/80 hover:text-[#F8F7E2] w-fit"
+                      >
+                        <item.Icon />
+                      </li>
+                    ))}
                   </ul>
                 </div>
-              )}
-            </div>
-            <div className="flex flex-col gap-y-6 mb-4">
-              <input
-                placeholder="Title"
-                name="title"
-                value={editorInputsValue.title}
-                onChange={handleInputChange}
-                className="text-[32px] placeholder:text-[#505050] transition-all duration-300 focus:translate-x-2 rounded-md font-semibold bg-transparent outline-none"
-              />
-              <input
-                placeholder="Subtitle"
-                name="subtitle"
-                value={editorInputsValue.subtitle}
-                onChange={handleInputChange}
-                className="text-[24px] placeholder:text-[#505050] transition-all duration-300 focus:translate-x-2 rounded-md font-light -mt-8 bg-transparent outline-none"
-              />
-            </div>
-            <div className="h-full">
-              <div className="flex items-center justify-between w-full rounded-t-xl border-[2px] border-b-0 border-[#fc81a8]">
-                <ul className="p-2 gap-x-1 flex items-center">
-                  {iconsFirstSection.map((item, index) => (
-                    <li
-                      key={index}
-                      onClick={() => handleSelected(item.name)}
-                      className="cursor-pointer rounded-sm p-1 hover:bg-[#fe5b30] hover:text-[#F8F7E2] w-fit"
-                    >
-                      <item.Icon />
-                    </li>
-                  ))}
-                </ul>
-                <ul className="p-2 gap-x-1 flex items-center">
-                  {iconsSecondSection.map((item, index) => (
-                    <li
-                      key={index}
-                      onClick={() => item.execute()}
-                      className="cursor-pointer rounded-sm p-1 hover:bg-[#fe5b30]/80 hover:text-[#F8F7E2] w-fit"
-                    >
-                      <item.Icon />
-                    </li>
-                  ))}
-                </ul>
+                <textarea
+                  spellCheck="false"
+                  ref={textareaElement}
+                  name="textarea"
+                  onChange={handleInputChange}
+                  id="textarea"
+                  value={editorInputsValue.textarea}
+                  className="inner-shadoww rounded-b-xl h-[300px] mb-2 w-full outline-none  border-[2px] border-[#fc81a8] border-t-0 bg-[#fc81a8]/50 resize-none p-4 text-[#2e2e2e]"
+                />
+                <button className="block ml-auto w-fit bg-[#FE9BBA] py-2 px-4 text-[#F8F7E2] font-medium rounded-full">
+                  Submit
+                </button>
               </div>
-              <textarea
-                spellCheck="false"
-                ref={textareaElement}
-                name="textarea"
-                onChange={handleInputChange}
-                id="textarea"
-                className="inner-shadoww rounded-b-xl h-[300px] mb-2 w-full outline-none  border-[2px] border-[#fc81a8] border-t-0 bg-[#fc81a8]/50 resize-none p-4 text-[#2e2e2e]"
-              />
-              <button className="block ml-auto w-fit bg-[#FE9BBA] py-2 px-4 text-[#F8F7E2] font-medium rounded-full">
-                Submit
-              </button>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
       </main>
       <Footer />
     </>

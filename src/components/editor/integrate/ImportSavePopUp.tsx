@@ -3,7 +3,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 interface Props {
-  emitClosed: () => void
+  emitClosed: (value?: string) => void
 }
 
 export function ImportSavePopUp({ emitClosed }: Props) {
@@ -18,7 +18,7 @@ export function ImportSavePopUp({ emitClosed }: Props) {
       'textarea'
     ) as HTMLTextAreaElement
     textareaElement.value = savedText
-    emitClosed()
+    emitClosed(savedText)
   }
 
   return ReactDOM.createPortal(
@@ -40,13 +40,13 @@ export function ImportSavePopUp({ emitClosed }: Props) {
         <div className="flex items-center justify-center gap-x-4 mt-4">
           <button
             onClick={getSave}
-            className="hover:scale-105 uppercase text-white z-50 relative bg-[#fe5b30] transition-all duration-300 rounded-full block w-[105px] p-2 active:scale-100 outline-none"
+            className="hover:scale-105 text-white z-50 relative bg-[#fe5b30] transition-all duration-300 rounded-full block w-[105px] p-2 active:scale-100 outline-none"
           >
             Import
           </button>
           <button
-            onClick={emitClosed}
-            className="hover:scale-105 uppercase text-white z-50 relative bg-[#505050] transition-all duration-300 rounded-full block w-[105px] p-2 active:scale-100 outline-none"
+            onClick={() => emitClosed()}
+            className="hover:scale-105 text-white z-50 relative bg-[#505050] transition-all duration-300 rounded-full block w-[105px] p-2 active:scale-100 outline-none"
           >
             Cancel
           </button>

@@ -34,13 +34,13 @@ export function SavePopUp({ emitClosed }: Props) {
         <div className="flex items-center justify-center gap-x-4 mt-4">
           <button
             onClick={saveText}
-            className="hover:scale-105 uppercase text-white z-50 relative bg-[#FE9BBA] transition-all duration-300 rounded-full block w-[105px] p-2 active:scale-100 outline-none"
+            className="hover:scale-105 text-white z-50 relative bg-[#FE9BBA] transition-all duration-300 rounded-full block w-[105px] p-2 active:scale-100 outline-none"
           >
             Save
           </button>
           <button
             onClick={emitClosed}
-            className="hover:scale-105 uppercase text-white z-50 relative bg-[#505050] transition-all duration-300 rounded-full block w-[105px] p-2 active:scale-100 outline-none"
+            className="hover:scale-105 text-white z-50 relative bg-[#505050] transition-all duration-300 rounded-full block w-[105px] p-2 active:scale-100 outline-none"
           >
             Cancel
           </button>
