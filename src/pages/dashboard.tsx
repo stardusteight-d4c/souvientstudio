@@ -4,21 +4,7 @@ import { useAppContext } from '@/@context/ContextProvider'
 import Navbar from '@/components/@globals/Navbar'
 import axios from 'axios'
 import { handleMarkdown } from '@/utils/handle-markdown'
-import {
-  Bold,
-  Italic,
-  Underline,
-  Link,
-  Image,
-  HeadingTwo,
-  Quotes,
-  AlignLeft,
-  AlignCenter,
-  AlignRight,
-  Eye,
-  Disk,
-  Download,
-} from '@/components/@globals/atoms'
+import * as Icon from '@/components/@globals/atoms'
 
 export default function Dashboard() {
   const projectsTypes = [
@@ -50,6 +36,24 @@ export default function Dashboard() {
     }
     handleMarkdown(textareaElement, type)
   }
+
+  const iconsFirstSection = [
+    { Icon: Icon.Bold, name: 'bold' },
+    { Icon: Icon.Italic, name: 'italic' },
+    { Icon: Icon.Underline, name: 'underline' },
+    { Icon: Icon.Link, name: 'link' },
+    { Icon: Icon.Image, name: 'image' },
+    { Icon: Icon.HeadingTwo, name: 'heading-two' },
+    { Icon: Icon.Quotes, name: 'quotes' },
+    { Icon: Icon.AlignLeft, name: 'align-left' },
+    { Icon: Icon.AlignCenter, name: 'align-center' },
+    { Icon: Icon.AlignRight, name: 'align-right' },
+  ]
+  const iconsSecondSection = [
+    { Icon: Icon.Eye, execute: '() => handleShowPreview()' },
+    { Icon: Icon.Disk, execute: '() => (proceedToSave.value = true)' },
+    { Icon: Icon.Download, execute: '() => (proceedToImport.value = true)' },
+  ]
 
   return (
     <>
@@ -126,50 +130,25 @@ export default function Dashboard() {
             <div className="h-full">
               <div className="flex items-center justify-between w-full rounded-t-xl border-[2px] border-b-0 border-[#fc81a8]">
                 <ul className="p-2 gap-x-1 flex items-center">
-                  <li
-                    onClick={() => handleSelected('bold')}
-                    className="cursor-pointer rounded-sm p-1 hover:bg-[#fe5b30]/80 hover:text-[#F8F7E2] w-fit"
-                  >
-                    <Bold />
-                  </li>
-                  <li className="cursor-pointer rounded-sm p-1 hover:bg-[#fe5b30]/80 hover:text-[#F8F7E2] w-fit">
-                    <Italic />
-                  </li>
-                  <li className="cursor-pointer rounded-sm p-1 hover:bg-[#fe5b30]/80 hover:text-[#F8F7E2] w-fit">
-                    <Underline />
-                  </li>
-                  <li className="cursor-pointer rounded-sm p-1 hover:bg-[#fe5b30]/80 hover:text-[#F8F7E2] w-fit">
-                    <Link />
-                  </li>
-                  <li className="cursor-pointer rounded-sm p-1 hover:bg-[#fe5b30]/80 hover:text-[#F8F7E2] w-fit">
-                    <Image />
-                  </li>
-                  <li className="cursor-pointer rounded-sm p-1 hover:bg-[#fe5b30]/80 hover:text-[#F8F7E2] w-fit">
-                    <HeadingTwo />
-                  </li>
-                  <li className="cursor-pointer rounded-sm p-1 hover:bg-[#fe5b30]/80 hover:text-[#F8F7E2] w-fit">
-                    <Quotes />
-                  </li>
-                  <li className="cursor-pointer rounded-sm p-1 hover:bg-[#fe5b30]/80 hover:text-[#F8F7E2] w-fit">
-                    <AlignLeft />
-                  </li>
-                  <li className="cursor-pointer rounded-sm p-1 hover:bg-[#fe5b30]/80 hover:text-[#F8F7E2] w-fit">
-                    <AlignCenter />
-                  </li>
-                  <li className="cursor-pointer rounded-sm p-1 hover:bg-[#fe5b30]/80 hover:text-[#F8F7E2] w-fit">
-                    <AlignRight />
-                  </li>
+                  {iconsFirstSection.map((item, index) => (
+                    <li
+                      key={index}
+                      onClick={() => handleSelected(item.name)}
+                      className="cursor-pointer rounded-sm p-1 hover:bg-[#fe5b30]/80 hover:text-[#F8F7E2] w-fit"
+                    >
+                      <item.Icon />
+                    </li>
+                  ))}
                 </ul>
                 <ul className="p-2 gap-x-1 flex items-center">
-                  <li className="cursor-pointer rounded-sm p-1 hover:bg-[#fe5b30]/80 hover:text-[#F8F7E2] w-fit">
-                    <Eye />
-                  </li>
-                  <li className="cursor-pointer rounded-sm p-1 hover:bg-[#fe5b30]/80 hover:text-[#F8F7E2] w-fit">
-                    <Disk />
-                  </li>
-                  <li className="cursor-pointer rounded-sm p-1 hover:bg-[#fe5b30]/80 hover:text-[#F8F7E2] w-fit">
-                    <Download />
-                  </li>
+                  {iconsSecondSection.map((item, index) => (
+                    <li
+                      key={index}
+                      className="cursor-pointer rounded-sm p-1 hover:bg-[#fe5b30]/80 hover:text-[#F8F7E2] w-fit"
+                    >
+                      <item.Icon />
+                    </li>
+                  ))}
                 </ul>
               </div>
               <textarea
