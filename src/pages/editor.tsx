@@ -18,11 +18,12 @@ export default function Editor() {
     textarea: '',
     search: '',
   })
+  const [isLoading, setIsLoading] = useState(false)
   const [isOpenSavePopUp, setIsOpenSavePopUp] = useState(false)
   const [isOpenImportSavePopUp, setIsOpenImportSavePopUp] = useState(false)
   const [showPreview, setShowPreview] = useState(false)
   const [coverImage, setCoverImage] = useState('')
-  const [uploadedFile, setUploadedFile] = useState<FileList | null>(null)
+  const [uploadedFile, setUploadedFile] = useState<File | null>(null)
   const [showSelectDropdown, setShowSelectDropdown] = useState(false)
   const projectsTypes = ['Visual identity', 'Open sequence', 'Personal project']
   const { lang } = useAppContext()
@@ -82,11 +83,11 @@ export default function Editor() {
     const maxFileSize = 3 * 1024 * 1024 // 3MB
     const file = files[0]
     if (file && file.size > maxFileSize) {
-      alert('ERROR The selected file is larger than 3MB!')
+      alert('The selected file is larger than 3MB!')
       input.value = ''
     } else {
       const reader = new FileReader()
-      setUploadedFile(files)
+      setUploadedFile(file)
       reader.readAsDataURL(file)
       reader.onload = () => {
         const base64 = reader.result
@@ -96,13 +97,37 @@ export default function Editor() {
   }
 
   async function submitProject() {
+    setIsLoading(true)
+    if (coverImage === '') {
+      alert('Select a cover image!')
+      return
+    } else if (editorInputsValue.title === '') {
+      alert('Enter a title!')
+      return
+    } else if (editorInputsValue.subtitle === '') {
+      alert('Enter a subtitle')
+      return
+    } else if (editorInputsValue.textarea === '') {
+      alert('Please write some article!')
+      return
+    }
     await axios.post('/api/database/projects', {
       type: selectedProjectType,
-      coverImage: coverImage,
+      coverImageFile: {
+        type: uploadedFile?.type,
+        name: uploadedFile?.name,
+        base64: coverImage,
+      },
       title: editorInputsValue.title,
       subtitle: editorInputsValue.subtitle,
       body: editorInputsValue.textarea,
     })
+    alert('The Project has been published!')
+    setIsLoading(false)
+  }
+
+  async function searchByProject(searchTerm: string) {
+    await axios.get(`/api/database/projects/${searchTerm}`)
   }
 
   function closeSavePopUp() {
@@ -182,7 +207,7 @@ export default function Editor() {
                       : 'Upload cover image'}
                   </button>
                   <span className="truncate w-[200px]">
-                    {uploadedFile && uploadedFile[0].name}
+                    {uploadedFile && uploadedFile.name}
                   </span>
                 </div>
                 <input
@@ -200,7 +225,10 @@ export default function Editor() {
                     placeholder="Search for a project"
                     type="text"
                     name="search"
-                    onChange={handleInputChange}
+                    onChange={(e) => {
+                      handleInputChange(e)
+                      searchByProject(editorInputsValue.search)
+                    }}
                     className="h-full w-full pl-8 pr-3 bg-[#F8F7E2]  border-[2px] border-[#2e2e2e] focus:border-[#fe5b30] outline-none rounded-full"
                   />
                 </div>
@@ -296,7 +324,7 @@ export default function Editor() {
                   onClick={submitProject}
                   className="block ml-auto w-fit bg-[#FE9BBA] py-2 px-4 text-[#F8F7E2] font-medium rounded-full"
                 >
-                  Submit
+                  {isLoading ? 'Sending...' : 'Submit'}
                 </button>
               </div>
             </div>
