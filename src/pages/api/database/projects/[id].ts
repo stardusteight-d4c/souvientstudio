@@ -1,4 +1,5 @@
 import { connectToDatabase } from '@/lib/mongodb'
+import { ObjectId } from 'mongodb'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function handler(
@@ -9,14 +10,15 @@ export default async function handler(
   const { method, body } = req
 
   if (method === 'GET') {
-    const { title } = req.query
-    
+    const { id } = req.query
+
     try {
-      const projects = await db
-        .collection('projects')
-        .find({ title: title })
-        .toArray()
-      res.status(200).json(projects)
+      if (id) {
+        const project = await db
+          .collection('projects')
+          .findOne({ _id: new ObjectId(String(id)) })
+        res.status(200).json(project)
+      }
     } catch (error) {
       res.status(500).json(error)
     }

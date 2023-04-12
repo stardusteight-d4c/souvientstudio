@@ -12,11 +12,15 @@ import {
   hellfire,
 } from '../../assets'
 import { useAppContext } from '@/@context/ContextProvider'
-import Link from 'next/link'
+import { Link } from './integrate/Link'
+import axios from 'axios'
 
 export default function Projects() {
   const [mounted, setMounted] = useState(false)
   const [cardSliderWidth, setCardSliderWidth] = useState(0)
+  const [visualIdentities, setVisualIdentities] = useState([])
+  const [openSequences, setOpenSequences] = useState([])
+  const [personalProjects, setPersonalProjects] = useState([])
   const [onDrag, setOnDrag] = useState(0)
   const cardSlider = useRef() as React.MutableRefObject<HTMLInputElement>
   const { localeContextHome } = useAppContext()
@@ -40,12 +44,34 @@ export default function Projects() {
       )
   }, [onDrag])
 
+  useEffect(() => {
+    ;(async () => {
+      await axios.get('/api/database/projects').then((res) => {
+        setVisualIdentities(
+          res.data.filter((project: any) => project.type === 'Visual identity')
+        )
+        setOpenSequences(
+          res.data.filter((project: any) => project.type === 'Open sequence')
+        )
+        setPersonalProjects(
+          res.data.filter((project: any) => project.type === 'Personal project')
+        )
+      })
+    })()
+  }, [])
+
+  console.log(visualIdentities, openSequences, personalProjects)
+
+  // Pegar todos os projetos e filtrar pelo tipo
+
   const dragAnimate = {
     drag: 'x' as 'x',
+    dragElastic: 0.8,
     ref: cardSlider,
     onDrag: (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) =>
       setOnDrag(info.offset.x),
     dragConstraints: { right: 0, left: -cardSliderWidth },
+    dragTransition: { bounceStiffness: 300, bounceDamping: 10 },
     className: 'flex gap-8',
   }
 
@@ -68,14 +94,10 @@ export default function Projects() {
             <div className="absolute inset-y-0 w-[20px] md:w-[50px] z-50 left-0 bg-gradient-to-r from-[#F8F7E2] via-[#F8F7E2]/50 to-transparent" />
             <div className="absolute inset-y-0 w-[20px] md:w-[50px] z-50 right-0 bg-gradient-to-l from-[#F8F7E2] via-[#F8F7E2]/50 to-transparent" />
             <motion.div {...dragAnimate}>
-              {items.map((item, index) => (
-                <Link
-                  href={`/project/slugggg`}
-                  key={index}
-                  className="card-animate card rounded-3xl overflow-hidden transition-all duration-500 cursor-pointer w-full min-w-[300px] lg:min-w-[400px] h-[300px] group relative select-none"
-                >
+              {visualIdentities.map((project: any, index) => (
+                <Link to={`/project/${project._id}`} key={index}>
                   <img
-                    src={item.src}
+                    src={project.coverImage}
                     alt=""
                     className="w-full h-full object-cover pointer-events-none"
                   />
@@ -83,11 +105,11 @@ export default function Projects() {
                   <div className="content">
                     <div className="title px-4 text-center">
                       <span className="font-semibold text-2xl uppercase">
-                        Jordan
+                        {project.title}
                       </span>
                       <br />
                       <span className="font-medium tracking-widest uppercase text-lg">
-                        Illustration and Composition
+                        {project.subtitle}
                       </span>
                     </div>
                   </div>
@@ -105,13 +127,10 @@ export default function Projects() {
             <div className="absolute inset-y-0 w-[20px] md:w-[50px] z-50 left-0 bg-gradient-to-r from-[#F8F7E2] via-[#F8F7E2]/50 to-transparent" />
             <div className="absolute inset-y-0 w-[20px] md:w-[50px] z-50 right-0 bg-gradient-to-l from-[#F8F7E2] via-[#F8F7E2]/50 to-transparent" />
             <motion.div {...dragAnimate}>
-              {items.map((item, index) => (
-                <div
-                  key={index}
-                  className="card-animate card rounded-3xl overflow-hidden transition-all duration-500 cursor-pointer w-full min-w-[300px] lg:min-w-[400px] h-[300px] group relative select-none"
-                >
+              {openSequences.map((project: any, index) => (
+                <Link to={`/project/${project._id}`} key={index}>
                   <img
-                    src={item.src}
+                    src={project.coverImage}
                     alt=""
                     className="w-full h-full object-cover pointer-events-none"
                   />
@@ -119,15 +138,15 @@ export default function Projects() {
                   <div className="content">
                     <div className="title px-4 text-center">
                       <span className="font-semibold text-2xl uppercase">
-                        Jordan
+                        {project.title}
                       </span>
                       <br />
                       <span className="font-medium tracking-widest uppercase text-lg">
-                        Illustration and Composition
+                        {project.subtitle}
                       </span>
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </motion.div>
           </div>
@@ -141,13 +160,10 @@ export default function Projects() {
             <div className="absolute inset-y-0 w-[20px] md:w-[50px] z-50 left-0 bg-gradient-to-r from-[#F8F7E2] via-[#F8F7E2]/50 to-transparent" />
             <div className="absolute inset-y-0 w-[20px] md:w-[50px] z-50 right-0 bg-gradient-to-l from-[#F8F7E2] via-[#F8F7E2]/50 to-transparent" />
             <motion.div {...dragAnimate}>
-              {items.map((item, index) => (
-                <div
-                  key={index}
-                  className="card-animate card rounded-3xl overflow-hidden transition-all duration-500 cursor-pointer w-full min-w-[300px] lg:min-w-[400px] h-[300px] group relative select-none"
-                >
+              {personalProjects.map((project: any, index) => (
+                <Link to={`/project/${project._id}`} key={index}>
                   <img
-                    src={item.src}
+                    src={project.coverImage}
                     alt=""
                     className="w-full h-full object-cover pointer-events-none"
                   />
@@ -155,15 +171,15 @@ export default function Projects() {
                   <div className="content">
                     <div className="title px-4 text-center">
                       <span className="font-semibold text-2xl uppercase">
-                        Jordan
+                        {project.title}
                       </span>
                       <br />
                       <span className="font-medium tracking-widest uppercase text-lg">
-                        Illustration and Composition
+                        {project.subtitle}
                       </span>
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </motion.div>
           </div>

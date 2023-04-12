@@ -27,28 +27,28 @@ export default async function handler(
   }: { method?: string | undefined; body: ProjectArticle } = req
 
   if (method === 'POST') {
-    const base64Image = body.coverImageFile.base64
-    const uid = new ShortUniqueId({ length: 10 })
-    const fileNameFormatted = body.coverImageFile.name.split(' ').join('_')
-    const fileName = `${uid()}${fileNameFormatted}`
-
-    async function uploadImageToFirebase(image: string, fileName: string) {
-      const storageRef = ref(storage, `images/${fileName}`)
-      uploadString(storageRef, image, 'data_url').then(() => {
-        console.log('Uploaded a base64url string!')
-      })
-      const publicImageURL = `https://firebasestorage.googleapis.com/v0/b/souvientstudio.appspot.com/o/images%${fileName}?alt=media`
-      return publicImageURL
-    }
-
-    const publicImageURL = await uploadImageToFirebase(base64Image, fileName)
-
     try {
+      const base64Image = body.coverImageFile.base64
+      const uid = new ShortUniqueId({ length: 10 })
+      const fileNameFormatted = body.coverImageFile.name.split(' ').join('_')
+      const fileName = `${uid()}${fileNameFormatted}`
+
+      async function uploadImageToFirebase(image: string, fileName: string) {
+        const storageRef = ref(storage, `images/${fileName}`)
+        uploadString(storageRef, image, 'data_url').then(() => {
+          console.log('Uploaded a base64url string!')
+        })
+        const publicImageURL = `https://firebasestorage.googleapis.com/v0/b/souvientstudio.appspot.com/o/images%2F${fileName}?alt=media`
+        return publicImageURL
+      }
+
+      const publicImageURL = await uploadImageToFirebase(base64Image, fileName)
       await db.collection('projects').insertOne({
         type: body.type,
+        coverImage: publicImageURL,
         title: body.title,
         subtitle: body.subtitle,
-        coverImage: publicImageURL,
+        body: body.body,
         date: new Date(),
       })
       res
