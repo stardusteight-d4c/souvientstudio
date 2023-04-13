@@ -327,7 +327,7 @@ export default function Editor() {
                       <li
                         key={index}
                         onClick={() => handleSelected(item.name)}
-                        className="cursor-pointer rounded-md p-1 hover:bg-[#fe5b30]/80 hover:text-[#F8F7E2] w-fit"
+                        className="cursor-pointer rounded-md p-1 hover:bg-[#FE9BBA] hover:text-[#F8F7E2] w-fit"
                       >
                         <item.Icon />
                       </li>
@@ -338,7 +338,7 @@ export default function Editor() {
                       <li
                         key={index}
                         onClick={() => item.execute()}
-                        className="cursor-pointer rounded-md p-1 hover:bg-[#fe5b30]/80 hover:text-[#F8F7E2] w-fit"
+                        className="cursor-pointer rounded-md p-1 hover:bg-[#FE9BBA] hover:text-[#F8F7E2] w-fit"
                       >
                         <item.Icon />
                       </li>

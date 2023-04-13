@@ -34,8 +34,7 @@ export const Link = ({ children, to, ...props }: Props) => {
         click && router.push(to)
         return
       }}
-      draggable={false}
-      className="card-animate card rounded-3xl overflow-hidden transition-all duration-500 cursor-pointer w-full max-w-[300px] lg:max-w-[400px] h-[300px] group relative select-none"
+      className="card-animate card  rounded-[50px] overflow-hidden transition-all duration-500 cursor-pointer w-full lg:min-w-[400px] min-w-[300px] h-[400px] lg:max-w-[400px] lg:h-[600px] group relative select-none"
     >
       {children}
     </div>

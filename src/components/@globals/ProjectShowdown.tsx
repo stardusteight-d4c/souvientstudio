@@ -46,7 +46,7 @@ export function ProjectShowdown(props: Props) {
                 : marked.marked(props?.body ?? ''),
           }}
           className="mt-10"
-        ></div>
+        />
       </div>
     </section>
   )
