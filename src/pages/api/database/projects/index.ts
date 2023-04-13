@@ -24,7 +24,12 @@ export default async function handler(
   const {
     method,
     body,
-  }: { method?: string | undefined; body: ProjectArticle } = req
+    url,
+  }: {
+    method?: string | undefined
+    body: ProjectArticle
+    url?: string | undefined
+  } = req
 
   if (method === 'POST') {
     try {
@@ -60,15 +65,29 @@ export default async function handler(
   }
 
   if (method === 'GET') {
-    try {
-      const projects = await db
-        .collection('projects')
-        .find()
-        .sort({ timestamp: -1 })
-        .toArray()
-      res.status(200).json(projects)
-    } catch (error) {
-      res.status(500).json(error)
+    if (url && url.includes('title=')) {
+      const title = url.split('=')[1]
+      try {
+        const projects = await db
+          .collection('projects')
+          .find({ title: { $regex: title, $options: 'i' } })
+          .sort({ timestamp: -1 })
+          .toArray()
+        res.status(200).json(projects)
+      } catch (error) {
+        res.status(500).json(error)
+      }
+    } else {
+      try {
+        const projects = await db
+          .collection('projects')
+          .find()
+          .sort({ timestamp: -1 })
+          .toArray()
+        res.status(200).json(projects)
+      } catch (error) {
+        res.status(500).json(error)
+      }
     }
   }
 }

@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useRef, useState } from 'react'
+import { ChangeEvent, Key, useEffect, useRef, useState } from 'react'
 import Head from 'next/head'
 import { useAppContext } from '@/@context/ContextProvider'
 import Navbar from '@/components/@globals/Navbar'
@@ -22,6 +22,7 @@ export default function Editor() {
   const [isOpenSavePopUp, setIsOpenSavePopUp] = useState(false)
   const [isOpenImportSavePopUp, setIsOpenImportSavePopUp] = useState(false)
   const [showPreview, setShowPreview] = useState(false)
+  const [resultsSearch, setResultsSearch] = useState<any>()
   const [coverImage, setCoverImage] = useState('')
   const [uploadedFile, setUploadedFile] = useState<File | null>(null)
   const [showSelectDropdown, setShowSelectDropdown] = useState(false)
@@ -58,7 +59,7 @@ export default function Editor() {
         handleClickOutsideOfNetworksListDropDown
       )
     }
-  }, [showSelectDropdown])
+  }, [showSelectDropdown, editorInputsValue.search])
 
   function handleInputChange(
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -127,7 +128,9 @@ export default function Editor() {
   }
 
   async function searchByProject(searchTerm: string) {
-    await axios.get(`/api/database/projects/${searchTerm}`)
+    await axios
+      .get(`/api/database/projects?title=${searchTerm}`)
+      .then((res) => setResultsSearch(res.data))
   }
 
   function closeSavePopUp() {
@@ -217,20 +220,51 @@ export default function Editor() {
                   className="hidden"
                   accept="image/png, image/jpeg"
                 />
-                <div className="relative group w-72 h-8 rounded-full">
+                <div className="relative group w-80 h-8 rounded-full">
                   <div className="absolute group-focus-within:text-[#fe5b30] top-1 left-2 text-[#2e2e2e]/80">
                     <Icon.Search size={24} />
                   </div>
-                  <input
-                    placeholder="Search for a project"
-                    type="text"
-                    name="search"
-                    onChange={(e) => {
-                      handleInputChange(e)
-                      searchByProject(editorInputsValue.search)
-                    }}
-                    className="h-full w-full pl-8 pr-3 bg-[#F8F7E2]  border-[2px] border-[#2e2e2e] focus:border-[#fe5b30] outline-none rounded-full"
-                  />
+                  <div className="h-full w-full flex items-center gap-x-2">
+                    <div id="searchBox" className="h-full ">
+                      <input
+                        placeholder="Search for a project"
+                        type="text"
+                        name="search"
+                        onChange={(e) => {
+                          handleInputChange(e)
+                        }}
+                        className="h-full w-full pl-8 pr-3 bg-[#F8F7E2] border-[2px] border-[#2e2e2e] focus:border-[#fe5b30] outline-none rounded-full"
+                      />
+                      {resultsSearch && editorInputsValue.search !== '' && (
+                        <ul className="absolute overflow-hidden z-50 bg-[#FE9BBA] mt-1 w-full !max-w-[242px] rounded-lg">
+                          {resultsSearch.map((result: any, index: Key) => (
+                            <li
+                              key={index}
+                              onClick={() => {
+                                setEditorInputsValue({
+                                  title: result.title,
+                                  subtitle: result.subtitle,
+                                  textarea: result.body,
+                                  search: '',
+                                })
+                                setSelectedProjectType(result.type)
+                                setCoverImage(result.coverImage)
+                              }}
+                              className="text-sm text-left max-w-[242px] w-full font-medium cursor-pointer hover:bg-[#fc81a8] text-[#F8F7E2] py-[2px] px-4"
+                            >
+                              {result.title} | {result.subtitle}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                    <button
+                      onClick={() => searchByProject(editorInputsValue.search)}
+                      className="block ml-auto w-fit bg-[#FE9BBA] py-1 px-2 text-[#F8F7E2] font-medium rounded-full"
+                    >
+                      Search
+                    </button>
+                  </div>
                 </div>
               </div>
               <div id="selectProjectTypeElement" className="relative w-fit">

@@ -41,9 +41,9 @@ export function ProjectShowdown(props: Props) {
           id="article-body"
           dangerouslySetInnerHTML={{
             __html:
-              props.body === ''
+              props.body && props.body === ''
                 ? 'Describe how fantastic this project is.'
-                : marked.marked(props.body!),
+                : marked.marked(props?.body ?? ''),
           }}
           className="mt-10"
         ></div>

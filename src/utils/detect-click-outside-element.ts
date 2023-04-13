@@ -3,8 +3,6 @@ export function detectClickOutsideElement(
   elementID: string
 ) {
   const element: HTMLElement = document.getElementById(elementID)!
-  const clickedOutside =
-    element?.contains(event.target as Node) &&
-    element?.isSameNode(event.target as Node)
+  const clickedOutside = !element?.contains(event.target as Node)
   return { clickedOutside, elementCliked: event.target }
 }

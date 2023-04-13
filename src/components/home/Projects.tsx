@@ -75,6 +75,8 @@ export default function Projects() {
     className: 'flex gap-8',
   }
 
+  console.log(openSequences.length)
+
   if (!localeContextHome) {
     return <></>
   }
@@ -94,27 +96,33 @@ export default function Projects() {
             <div className="absolute inset-y-0 w-[20px] md:w-[50px] z-50 left-0 bg-gradient-to-r from-[#F8F7E2] via-[#F8F7E2]/50 to-transparent" />
             <div className="absolute inset-y-0 w-[20px] md:w-[50px] z-50 right-0 bg-gradient-to-l from-[#F8F7E2] via-[#F8F7E2]/50 to-transparent" />
             <motion.div {...dragAnimate}>
-              {visualIdentities.map((project: any, index) => (
-                <Link to={`/project/${project._id}`} key={index}>
-                  <img
-                    src={project.coverImage}
-                    alt=""
-                    className="w-full h-full object-cover pointer-events-none"
-                  />
-                  <b className="inset-x-0 transition-all bg-gradient-to-t from-[#FE9BBA]/90 to-transparent bottom-0 h-[100px] hidden group-hover:block"></b>
-                  <div className="content">
-                    <div className="title px-4 text-center">
-                      <span className="font-semibold text-2xl uppercase">
-                        {project.title}
-                      </span>
-                      <br />
-                      <span className="font-medium tracking-widest uppercase text-lg">
-                        {project.subtitle}
-                      </span>
+              {visualIdentities.length === 0 ? (
+                <div className="text-[#2e2e2e] text-xl font-medium py-5 text-center w-full">
+                  No projects found
+                </div>
+              ) : (
+                visualIdentities.map((project: any, index) => (
+                  <Link to={`/project/${project._id}`} key={index}>
+                    <img
+                      src={project.coverImage}
+                      alt=""
+                      className="w-full h-full object-cover pointer-events-none"
+                    />
+                    <b className="inset-x-0 transition-all bg-gradient-to-t from-[#FE9BBA]/90 to-transparent bottom-0 h-[100px] hidden group-hover:block"></b>
+                    <div className="content">
+                      <div className="title px-4 text-center">
+                        <span className="font-semibold text-2xl uppercase">
+                          {project.title}
+                        </span>
+                        <br />
+                        <span className="font-medium tracking-widest uppercase text-lg">
+                          {project.subtitle}
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                </Link>
-              ))}
+                  </Link>
+                ))
+              )}
             </motion.div>
           </div>
         </div>
@@ -127,27 +135,33 @@ export default function Projects() {
             <div className="absolute inset-y-0 w-[20px] md:w-[50px] z-50 left-0 bg-gradient-to-r from-[#F8F7E2] via-[#F8F7E2]/50 to-transparent" />
             <div className="absolute inset-y-0 w-[20px] md:w-[50px] z-50 right-0 bg-gradient-to-l from-[#F8F7E2] via-[#F8F7E2]/50 to-transparent" />
             <motion.div {...dragAnimate}>
-              {openSequences.map((project: any, index) => (
-                <Link to={`/project/${project._id}`} key={index}>
-                  <img
-                    src={project.coverImage}
-                    alt=""
-                    className="w-full h-full object-cover pointer-events-none"
-                  />
-                  <b className="inset-x-0 transition-all bg-gradient-to-t from-[#FE9BBA]/90 to-transparent bottom-0 h-[100px] hidden group-hover:block"></b>
-                  <div className="content">
-                    <div className="title px-4 text-center">
-                      <span className="font-semibold text-2xl uppercase">
-                        {project.title}
-                      </span>
-                      <br />
-                      <span className="font-medium tracking-widest uppercase text-lg">
-                        {project.subtitle}
-                      </span>
+              {openSequences.length === 0 ? (
+                <div className="text-[#2e2e2e] text-xl font-medium py-5 text-center w-full">
+                  No projects found
+                </div>
+              ) : (
+                openSequences.map((project: any, index) => (
+                  <Link to={`/project/${project._id}`} key={index}>
+                    <img
+                      src={project.coverImage}
+                      alt=""
+                      className="w-full h-full object-cover pointer-events-none"
+                    />
+                    <b className="inset-x-0 transition-all bg-gradient-to-t from-[#FE9BBA]/90 to-transparent bottom-0 h-[100px] hidden group-hover:block"></b>
+                    <div className="content">
+                      <div className="title px-4 text-center">
+                        <span className="font-semibold text-2xl uppercase">
+                          {project.title}
+                        </span>
+                        <br />
+                        <span className="font-medium tracking-widest uppercase text-lg">
+                          {project.subtitle}
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                </Link>
-              ))}
+                  </Link>
+                ))
+              )}
             </motion.div>
           </div>
         </div>
@@ -160,27 +174,33 @@ export default function Projects() {
             <div className="absolute inset-y-0 w-[20px] md:w-[50px] z-50 left-0 bg-gradient-to-r from-[#F8F7E2] via-[#F8F7E2]/50 to-transparent" />
             <div className="absolute inset-y-0 w-[20px] md:w-[50px] z-50 right-0 bg-gradient-to-l from-[#F8F7E2] via-[#F8F7E2]/50 to-transparent" />
             <motion.div {...dragAnimate}>
-              {personalProjects.map((project: any, index) => (
-                <Link to={`/project/${project._id}`} key={index}>
-                  <img
-                    src={project.coverImage}
-                    alt=""
-                    className="w-full h-full object-cover pointer-events-none"
-                  />
-                  <b className="inset-x-0 transition-all bg-gradient-to-t from-[#FE9BBA]/90 to-transparent bottom-0 h-[100px] hidden group-hover:block"></b>
-                  <div className="content">
-                    <div className="title px-4 text-center">
-                      <span className="font-semibold text-2xl uppercase">
-                        {project.title}
-                      </span>
-                      <br />
-                      <span className="font-medium tracking-widest uppercase text-lg">
-                        {project.subtitle}
-                      </span>
+              {personalProjects.length === 0 ? (
+                <div className="text-[#2e2e2e] text-xl font-medium py-5 text-center w-full">
+                  No projects found
+                </div>
+              ) : (
+                personalProjects.map((project: any, index) => (
+                  <Link to={`/project/${project._id}`} key={index}>
+                    <img
+                      src={project.coverImage}
+                      alt=""
+                      className="w-full h-full object-cover pointer-events-none"
+                    />
+                    <b className="inset-x-0 transition-all bg-gradient-to-t from-[#FE9BBA]/90 to-transparent bottom-0 h-[100px] hidden group-hover:block"></b>
+                    <div className="content">
+                      <div className="title px-4 text-center">
+                        <span className="font-semibold text-2xl uppercase">
+                          {project.title}
+                        </span>
+                        <br />
+                        <span className="font-medium tracking-widest uppercase text-lg">
+                          {project.subtitle}
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                </Link>
-              ))}
+                  </Link>
+                ))
+              )}
             </motion.div>
           </div>
         </div>
