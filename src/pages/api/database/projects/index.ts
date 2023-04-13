@@ -3,18 +3,8 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import ShortUniqueId from 'short-unique-id'
 import { storage } from '@/lib/firebase'
 import { ref, uploadString } from 'firebase/storage'
-
-interface ProjectArticle {
-  type: string
-  title: string
-  subtitle: string
-  coverImageFile: {
-    type: string
-    name: string
-    base64: string
-  }
-  body: string
-}
+import { uploadImageToFirebase } from '@/utils/upload-image-to-firebase'
+import { IProjectBodyRequest } from '@/@interfaces/IProjectBodyRequest'
 
 export default async function handler(
   req: NextApiRequest,
@@ -27,7 +17,7 @@ export default async function handler(
     url,
   }: {
     method?: string | undefined
-    body: ProjectArticle
+    body: IProjectBodyRequest
     url?: string | undefined
   } = req
 
@@ -37,15 +27,6 @@ export default async function handler(
       const uid = new ShortUniqueId({ length: 10 })
       const fileNameFormatted = body.coverImageFile.name.split(' ').join('_')
       const fileName = `${uid()}${fileNameFormatted}`
-
-      async function uploadImageToFirebase(image: string, fileName: string) {
-        const storageRef = ref(storage, `images/${fileName}`)
-        uploadString(storageRef, image, 'data_url').then(() => {
-          console.log('Uploaded a base64url string!')
-        })
-        const publicImageURL = `https://firebasestorage.googleapis.com/v0/b/souvientstudio.appspot.com/o/images%2F${fileName}?alt=media`
-        return publicImageURL
-      }
 
       const publicImageURL = await uploadImageToFirebase(base64Image, fileName)
       await db.collection('projects').insertOne({

@@ -34,7 +34,7 @@ export const Link = ({ children, to, ...props }: Props) => {
         click && router.push(to)
         return
       }}
-      className="card-animate card  rounded-[50px] overflow-hidden transition-all duration-500 cursor-pointer w-full lg:min-w-[400px] min-w-[300px] h-[400px] lg:max-w-[400px] lg:h-[600px] group relative select-none"
+      className="card-animate card rounded-[50px] overflow-hidden transition-all duration-500 cursor-pointer w-full lg:min-w-[450px] min-w-[300px] h-[400px] lg:max-w-[450px] lg:h-[350px] group relative select-none"
     >
       {children}
     </div>

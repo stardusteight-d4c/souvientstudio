@@ -1,4 +1,4 @@
-import { ILocaleContextHome } from '@/@interfaces/LocaleContexts'
+import { ILocaleContextHome } from '@/@interfaces/ILocaleContexts'
 import React, { createContext, useContext, useState } from 'react'
 
 interface Props {

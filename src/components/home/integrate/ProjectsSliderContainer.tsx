@@ -44,7 +44,7 @@ export default function ProjectsSliderContainer({ projects }: Props) {
               alt=""
               className="w-full h-full object-cover pointer-events-none"
             />
-            <b className="inset-x-0 transition-all duration-75 bg-gradient-to-t from-[#fe9bba] via-[#fe9bba]/50 to-transparent bottom-0 h-[200px] hidden group-hover:block" />
+            <b className="inset-x-0 transition-all duration-75 bg-gradient-to-t from-[#fe9bba] via-[#fe9bba]/50 to-transparent bottom-0 h-[100px] hidden group-hover:block" />
             <div className="content">
               <div className="title px-4 text-center">
                 <span className="font-bold text-2xl uppercase">
@@ -57,7 +57,7 @@ export default function ProjectsSliderContainer({ projects }: Props) {
               </div>
             </div>
           </Link>
-        ))
+        )).reverse()
       )}
     </motion.div>
   )

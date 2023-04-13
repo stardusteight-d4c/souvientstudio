@@ -29,6 +29,10 @@ export function ProjectShowdown(props: Props) {
             Back to editor
           </button>
         </div>
+        <img
+          src={props.coverImage === '' ? coverPlaceholder.src : props.coverImage}
+          className="absolute object-cover rounded-3xl z-50 border-black/50 border-[2px] border-dashed -bottom-[185px] right-20 max-w-[180px] max-h-[125px] min-w-[180px] min-h-[125px]"
+        />
       </div>
       <div className="max-w-[800px] mt-8 text-[#2e2e2e] w-full mx-auto">
         <h1 className="text-[72px] font-semibold">
@@ -41,7 +45,7 @@ export function ProjectShowdown(props: Props) {
           id="article-body"
           dangerouslySetInnerHTML={{
             __html:
-              props.body && props.body === ''
+              props?.body === ''
                 ? 'Describe how fantastic this project is.'
                 : marked.marked(props?.body ?? ''),
           }}

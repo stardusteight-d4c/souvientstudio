@@ -1,54 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { motion, PanInfo } from 'framer-motion'
-
 import { useAppContext } from '@/@context/ContextProvider'
-import { Link } from './integrate/Link'
 import axios from 'axios'
 import ProjectsSliderContainer from './integrate/ProjectsSliderContainer'
+import { IProject } from '@/@interfaces/IProject'
 
-export default function Projects() {
-  const [mounted, setMounted] = useState(false)
-  const [cardSliderWidth, setCardSliderWidth] = useState(0)
-  const [visualIdentities, setVisualIdentities] = useState([])
-  const [openSequences, setOpenSequences] = useState([])
-  const [personalProjects, setPersonalProjects] = useState([])
-  const [onDrag, setOnDrag] = useState(0)
-  const cardSlider = useRef() as React.MutableRefObject<HTMLInputElement>
+interface Props {
+  visualIdentities: IProject[]
+  openSequences: IProject[]
+  personalProjects: IProject[]
+}
+
+export default function Projects(props: Props) {
   const { localeContextHome } = useAppContext()
-
-  useEffect(() => {
-    cardSlider.current &&
-      setCardSliderWidth(
-        cardSlider.current.scrollWidth - cardSlider.current.offsetWidth
-      )
-  }, [onDrag])
-
-  useEffect(() => {
-    ;(async () => {
-      await axios.get('/api/database/projects').then((res) => {
-        setVisualIdentities(
-          res.data.filter((project: any) => project.type === 'Visual identity')
-        )
-        setOpenSequences(
-          res.data.filter((project: any) => project.type === 'Open sequence')
-        )
-        setPersonalProjects(
-          res.data.filter((project: any) => project.type === 'Personal project')
-        )
-      })
-    })()
-  }, [])
-
-  const dragAnimate = {
-    drag: 'x' as 'x',
-    dragElastic: 0.8,
-    ref: cardSlider,
-    onDrag: (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) =>
-      setOnDrag(info.offset.x),
-    dragConstraints: { right: 0, left: -cardSliderWidth },
-    dragTransition: { bounceStiffness: 300, bounceDamping: 10 },
-    className: 'flex gap-x-8',
-  }
 
   if (!localeContextHome) {
     return <></>
@@ -68,7 +31,7 @@ export default function Projects() {
           <div className="overflow-x-hidden h-fit relative">
             <div className="absolute inset-y-0 w-[20px] md:w-[30px] z-50 left-0 bg-gradient-to-r from-[#F8F7E2] via-[#F8F7E2]/50 to-transparent" />
             <div className="absolute inset-y-0 w-[20px] md:w-[30px] z-50 right-0 bg-gradient-to-l from-[#F8F7E2] via-[#F8F7E2]/50 to-transparent" />
-            <ProjectsSliderContainer projects={visualIdentities} />
+            <ProjectsSliderContainer projects={props.visualIdentities} />
           </div>
         </div>
         <div>
@@ -79,7 +42,7 @@ export default function Projects() {
           <div className="overflow-x-hidden h-fit relative">
             <div className="absolute inset-y-0 w-[20px] md:w-[30px] z-50 left-0 bg-gradient-to-r from-[#F8F7E2] via-[#F8F7E2]/50 to-transparent" />
             <div className="absolute inset-y-0 w-[20px] md:w-[30px] z-50 right-0 bg-gradient-to-l from-[#F8F7E2] via-[#F8F7E2]/50 to-transparent" />
-            <ProjectsSliderContainer projects={openSequences} />
+            <ProjectsSliderContainer projects={props.openSequences} />
           </div>
         </div>
         <div>
@@ -90,7 +53,7 @@ export default function Projects() {
           <div className="overflow-x-hidden h-fit relative">
             <div className="absolute inset-y-0 w-[20px] md:w-[30px] z-50 left-0 bg-gradient-to-r from-[#F8F7E2] via-[#F8F7E2]/50 to-transparent" />
             <div className="absolute inset-y-0 w-[20px] md:w-[30px] z-50 right-0 bg-gradient-to-l from-[#F8F7E2] via-[#F8F7E2]/50 to-transparent" />
-            <ProjectsSliderContainer projects={personalProjects} />
+            <ProjectsSliderContainer projects={props.personalProjects} />
           </div>
         </div>
       </div>

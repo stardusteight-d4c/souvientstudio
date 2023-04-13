@@ -23,6 +23,7 @@ export default function Editor() {
   const [isOpenImportSavePopUp, setIsOpenImportSavePopUp] = useState(false)
   const [showPreview, setShowPreview] = useState(false)
   const [resultsSearch, setResultsSearch] = useState<any>()
+  const [selectedToEdit, setSelectedToEdit] = useState<any>()
   const [coverImage, setCoverImage] = useState('')
   const [uploadedFile, setUploadedFile] = useState<File | null>(null)
   const [showSelectDropdown, setShowSelectDropdown] = useState(false)
@@ -127,6 +128,43 @@ export default function Editor() {
     setIsLoading(false)
   }
 
+  async function updateProject() {
+    setIsLoading(true)
+    if (coverImage === '') {
+      alert('Select a cover image!')
+      return
+    } else if (editorInputsValue.title === '') {
+      alert('Enter a title!')
+      return
+    } else if (editorInputsValue.subtitle === '') {
+      alert('Enter a subtitle')
+      return
+    } else if (editorInputsValue.textarea === '') {
+      alert('Please write some article!')
+      return
+    }
+    await axios.put(`/api/database/projects/${selectedToEdit._id}`, {
+      type: selectedProjectType,
+      coverImageFile: {
+        type: uploadedFile?.type,
+        name: uploadedFile?.name,
+        base64: coverImage,
+      },
+      title: editorInputsValue.title,
+      subtitle: editorInputsValue.subtitle,
+      body: editorInputsValue.textarea,
+    })
+    alert('The project article has been updated.')
+    setIsLoading(false)
+  }
+
+  async function deleteProject() {
+    setIsLoading(true)
+    await axios.delete(`/api/database/projects/${selectedToEdit._id}`)
+    alert('The project article has been deleted.')
+    setIsLoading(false)
+  }
+
   async function searchByProject(searchTerm: string) {
     await axios
       .get(`/api/database/projects?title=${searchTerm}`)
@@ -145,6 +183,8 @@ export default function Editor() {
   function backToEditor() {
     setShowPreview(false)
   }
+
+  console.log(selectedToEdit)
 
   const iconsFirstSection = [
     { Icon: Icon.Bold, name: 'bold' },
@@ -195,23 +235,39 @@ export default function Editor() {
             emitBack={backToEditor}
           />
         ) : (
-          <section className="grid py-20 text-[#2e2e2e] place-items-center">
-            <div className="bg-[#F8F7E2] rounded-xl flex flex-col gap-2 p-4 w-[800px] h-fit shadow-xl shadow-[#2e2e2e]/10">
+          <section className="grid py-10 text-[#2e2e2e] place-items-center">
+            <div className="bg-[#F8F7E2] rounded-[35px] flex flex-col gap-2 p-4 w-[800px] h-fit shadow-md shadow-[#2e2e2e]/10">
               <div className="flex justify-between items-center">
                 <div className="flex items-center gap-x-2">
-                  <button
-                    onClick={onClickUpload}
-                    className={`${
-                      uploadedFile ? 'bg-[#fe5b30]' : 'bg-[#FE9BBA]'
-                    } block w-fit whitespace-nowrap py-2 px-4 text-[#F8F7E2] font-medium rounded-full`}
-                  >
-                    {uploadedFile
-                      ? 'Uploaded cover image'
-                      : 'Upload cover image'}
-                  </button>
-                  <span className="truncate w-[200px]">
-                    {uploadedFile && uploadedFile.name}
-                  </span>
+                  {selectedToEdit && !uploadedFile ? (
+                    <>
+                      <button
+                        onClick={onClickUpload}
+                        className="bg-[#FE9BBA] block w-fit whitespace-nowrap py-2 px-4 text-[#F8F7E2] font-medium rounded-full"
+                      >
+                        New cover image
+                      </button>
+                      <span className="truncate w-[200px]">
+                        {selectedToEdit.coverImage}
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <button
+                        onClick={onClickUpload}
+                        className={`${
+                          uploadedFile ? 'bg-[#fe5b30]' : 'bg-[#FE9BBA]'
+                        } block w-fit whitespace-nowrap py-2 px-4 text-[#F8F7E2] font-medium rounded-full`}
+                      >
+                        {uploadedFile
+                          ? 'Uploaded cover image'
+                          : 'Upload cover image'}
+                      </button>
+                      <span className="truncate w-[200px]">
+                        {uploadedFile && uploadedFile.name}
+                      </span>
+                    </>
+                  )}
                 </div>
                 <input
                   type="file"
@@ -233,7 +289,7 @@ export default function Editor() {
                         onChange={(e) => {
                           handleInputChange(e)
                         }}
-                        className="h-full w-full pl-8 pr-3 bg-[#F8F7E2] border-[2px] border-[#2e2e2e] focus:border-[#fe5b30] outline-none rounded-full"
+                        className="h-full w-full pl-8 pr-3 bg-transparent placeholder:text-[#505050] border-[2px] border-[#2e2e2e] focus:border-[#fe5b30] outline-none rounded-full"
                       />
                       {resultsSearch && editorInputsValue.search !== '' && (
                         <ul className="absolute overflow-hidden z-50 bg-[#FE9BBA] mt-1 w-full !max-w-[242px] rounded-lg">
@@ -247,12 +303,14 @@ export default function Editor() {
                                   textarea: result.body,
                                   search: '',
                                 })
+                                setUploadedFile(null)
+                                setSelectedToEdit(result)
                                 setSelectedProjectType(result.type)
                                 setCoverImage(result.coverImage)
                               }}
                               className="text-sm text-left max-w-[242px] w-full font-medium cursor-pointer hover:bg-[#fc81a8] text-[#F8F7E2] py-[2px] px-4"
                             >
-                              {result.title} | {result.subtitle}
+                              {result.title}: {result.subtitle}
                             </li>
                           ))}
                         </ul>
@@ -268,9 +326,10 @@ export default function Editor() {
                 </div>
               </div>
               <div id="selectProjectTypeElement" className="relative w-fit">
+           
                 <div
                   onClick={() => setShowSelectDropdown(!showSelectDropdown)}
-                  className="text-sm flex  justify-center gap-x-2 px-2 cursor-pointer border-[2px] border-[#FE9BBA] py-1 rounded-full"
+                  className="text-sm flex justify-center gap-x-2 px-2 cursor-pointer border-[2px] border-[#FE9BBA] py-1 rounded-full"
                 >
                   {selectedProjectType}
                   <div
@@ -354,12 +413,54 @@ export default function Editor() {
                   value={editorInputsValue.textarea}
                   className="rounded-b-xl h-[300px] mb-2 w-full outline-none  border-[2px] border-[#fc81a8] border-t-0 bg-[#fc81a8]/50 resize-none p-4 text-[#2e2e2e]"
                 />
-                <button
-                  onClick={submitProject}
-                  className="block ml-auto w-fit bg-[#FE9BBA] py-2 px-4 text-[#F8F7E2] font-medium rounded-full"
-                >
-                  {isLoading ? 'Sending...' : 'Submit'}
-                </button>
+                {selectedToEdit ? (
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-x-2">
+                      <span className="font-medium uppercase tracking-tighter">
+                        Editing...
+                      </span>
+                      {selectedToEdit.title}: {selectedToEdit.subtitle}
+                    </div>
+                    <div className="flex items-center ml-auto w-fit gap-x-2">
+                      <button
+                        onClick={() => {
+                          setEditorInputsValue({
+                            title: '',
+                            subtitle: '',
+                            textarea: '',
+                            search: '',
+                          })
+                          setUploadedFile(null)
+                          setSelectedToEdit(null)
+                          setSelectedProjectType(projectsTypes[0])
+                          setCoverImage('')
+                        }}
+                        className="block w-fit border-[2px] border-[#FE9BBA] py-[7px] px-4 text-[#2e2e2e] font-medium rounded-full"
+                      >
+                        Cancel Edit
+                      </button>
+                      <button
+                        onClick={deleteProject}
+                        className="block w-fit bg-[#fe5b30] py-2 px-4 text-[#F8F7E2] font-medium rounded-full"
+                      >
+                        Delete
+                      </button>
+                      <button
+                        onClick={updateProject}
+                        className="block w-fit bg-[#FE9BBA] py-2 px-4 text-[#F8F7E2] font-medium rounded-full"
+                      >
+                        Update
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <button
+                    onClick={submitProject}
+                    className="block ml-auto w-fit bg-[#FE9BBA] py-2 px-4 text-[#F8F7E2] font-medium rounded-full"
+                  >
+                    {isLoading ? 'Sending...' : 'Submit'}
+                  </button>
+                )}
               </div>
             </div>
           </section>
