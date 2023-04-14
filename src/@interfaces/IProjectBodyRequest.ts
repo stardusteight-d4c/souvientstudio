@@ -7,5 +7,6 @@ export interface IProjectBodyRequest {
     name: string
     base64: string
   }
-  body: string
+  bodyEN: string
+  bodyPTBR: string
 }

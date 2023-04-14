@@ -3,5 +3,6 @@ export interface IProject {
   title: string
   subtitle: string
   coverImage: string
-  body: string
+  bodyEN: string
+  bodyPTBR: string
 }

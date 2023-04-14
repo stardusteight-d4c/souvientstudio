@@ -24,7 +24,7 @@ export default function Projects(props: Props) {
     >
       <div className="mx-auto space-y-20">
         <div>
-          <h2 className="text-[42px] px-4 md:px-0 text-[#2e2e2e] block w-fit !tracking-[-2px] font-medium !leading-[41.6px] font-poppins pb-8">
+          <h2 className="text-[38px] px-4 md:px-0 text-[#2e2e2e] block w-fit !tracking-[-2px] font-medium !leading-[41.6px] font-poppins pb-8">
             <span className="text-[#fe5b30]">|</span>{' '}
             {localeContextHome.projects.visualIdentities}
           </h2>
@@ -35,7 +35,7 @@ export default function Projects(props: Props) {
           </div>
         </div>
         <div>
-          <h2 className="text-[42px] px-4 md:px-0 text-[#2e2e2e] block w-fit !tracking-[-2px] font-medium !leading-[41.6px] font-poppins pb-8">
+          <h2 className="text-[38px] px-4 md:px-0 text-[#2e2e2e] block w-fit !tracking-[-2px] font-medium !leading-[41.6px] font-poppins pb-8">
             <span className="text-[#fe5b30]">|</span>{' '}
             {localeContextHome.projects.openSequences}
           </h2>
@@ -46,7 +46,7 @@ export default function Projects(props: Props) {
           </div>
         </div>
         <div>
-          <h2 className="text-[42px] px-4 md:px-0 text-[#2e2e2e] block w-fit !tracking-[-2px] font-medium !leading-[41.6px] font-poppins pb-8">
+          <h2 className="text-[38px] px-4 md:px-0 text-[#2e2e2e] block w-fit !tracking-[-2px] font-medium !leading-[41.6px] font-poppins pb-8">
             <span className="text-[#fe5b30]">|</span>{' '}
             {localeContextHome.projects.personalProjects}
           </h2>

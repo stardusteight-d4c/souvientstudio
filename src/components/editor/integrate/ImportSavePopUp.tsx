@@ -4,21 +4,36 @@ import ReactDOM from 'react-dom'
 
 interface Props {
   emitClosed: (value?: string) => void
+  langContext: 'pt-BR' | 'en'
 }
 
-export function ImportSavePopUp({ emitClosed }: Props) {
+export function ImportSavePopUp({ emitClosed, langContext }: Props) {
   function getSave(): void {
-    const savedText = localStorage.getItem('saveText')
-    if (!savedText) {
-      alert('No save found.')
-      emitClosed()
-      return
+    if (langContext === 'en') {
+      const savedText = localStorage.getItem('saveTextareaEN')
+      if (!savedText) {
+        alert('No save found.')
+        emitClosed()
+        return
+      }
+      const textareaElement: HTMLTextAreaElement = document.getElementById(
+        'textareaEN'
+      ) as HTMLTextAreaElement
+      textareaElement.value = savedText
+      emitClosed(savedText)
+    } else if (langContext === 'pt-BR') {
+      const savedText = localStorage.getItem('saveTextareaPTBR')
+      if (!savedText) {
+        alert('No save found.')
+        emitClosed()
+        return
+      }
+      const textareaElement: HTMLTextAreaElement = document.getElementById(
+        'textareaPTBR'
+      ) as HTMLTextAreaElement
+      textareaElement.value = savedText
+      emitClosed(savedText)
     }
-    const textareaElement: HTMLTextAreaElement = document.getElementById(
-      'textarea'
-    ) as HTMLTextAreaElement
-    textareaElement.value = savedText
-    emitClosed(savedText)
   }
 
   return ReactDOM.createPortal(

@@ -4,15 +4,24 @@ import ReactDOM from 'react-dom'
 
 interface Props {
   emitClosed: () => void
+  langContext: 'pt-BR' | 'en'
 }
 
-export function SavePopUp({ emitClosed }: Props) {
+export function SavePopUp({ emitClosed, langContext }: Props) {
   function saveText() {
-    const textareaElement: HTMLTextAreaElement = document.getElementById(
-      'textarea'
-    ) as HTMLTextAreaElement
-    localStorage.setItem('saveText', textareaElement.value)
-    emitClosed()
+    if (langContext === 'en') {
+      const textareaElement: HTMLTextAreaElement = document.getElementById(
+        'textareaEN'
+      ) as HTMLTextAreaElement
+      localStorage.setItem('saveTextareaEN', textareaElement.value)
+      emitClosed()
+    } else if (langContext === 'pt-BR') {
+      const textareaElement: HTMLTextAreaElement = document.getElementById(
+        'textareaPTBR'
+      ) as HTMLTextAreaElement
+      localStorage.setItem('saveTextareaPTBR', textareaElement.value)
+      emitClosed()
+    }
   }
 
   return ReactDOM.createPortal(

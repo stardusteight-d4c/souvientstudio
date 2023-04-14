@@ -1,5 +1,4 @@
 import { ChangeEvent, Key, useEffect, useRef, useState } from 'react'
-import Head from 'next/head'
 import { useAppContext } from '@/@context/ContextProvider'
 import Navbar from '@/components/@globals/Navbar'
 import axios from 'axios'
@@ -12,12 +11,14 @@ import { ImportSavePopUp } from '@/components/editor/integrate/ImportSavePopUp'
 import { ProjectShowdown } from '@/components/@globals/ProjectShowdown'
 import Header from '@/components/@globals/Header'
 import { useRouter } from 'next/router'
+import { euaFlag, brazilFlag } from '@/assets'
 
 export default function Editor() {
   const [editorInputsValue, setEditorInputsValue] = useState({
     title: '',
     subtitle: '',
-    textarea: '',
+    textareaEN: '',
+    textareaPTBR: '',
     search: '',
   })
   const [isLoading, setIsLoading] = useState(false)
@@ -25,6 +26,9 @@ export default function Editor() {
   const [isOpenImportSavePopUp, setIsOpenImportSavePopUp] = useState(false)
   const [showPreview, setShowPreview] = useState(false)
   const [resultsSearch, setResultsSearch] = useState<any>()
+  const [textareaLangVersion, setTextareaLangVersion] = useState<
+    'en' | 'pt-BR'
+  >('en')
   const [selectedToEdit, setSelectedToEdit] = useState<any>()
   const [coverImage, setCoverImage] = useState('')
   const [uploadedFile, setUploadedFile] = useState<File | null>(null)
@@ -39,8 +43,7 @@ export default function Editor() {
   const router = useRouter()
 
   useEffect(() => {
-    console.log('isClientAuthenticated aa',isClientAuthenticated);
-    
+    console.log('isClientAuthenticated aa', isClientAuthenticated)
     if (isClientAuthenticated !== undefined) {
       !isClientAuthenticated && router.push('/')
     }
@@ -120,8 +123,11 @@ export default function Editor() {
     } else if (editorInputsValue.subtitle === '') {
       alert('Enter a subtitle')
       return
-    } else if (editorInputsValue.textarea === '') {
-      alert('Please write some article!')
+    } else if (editorInputsValue.textareaEN === '') {
+      alert('Please write some article in english!')
+      return
+    } else if (editorInputsValue.textareaPTBR === '') {
+      alert('Please write some article in portuguese!')
       return
     }
     await axios.post('/api/database/projects', {
@@ -133,7 +139,8 @@ export default function Editor() {
       },
       title: editorInputsValue.title,
       subtitle: editorInputsValue.subtitle,
-      body: editorInputsValue.textarea,
+      bodyEN: editorInputsValue.textareaEN,
+      bodyPTBR: editorInputsValue.textareaPTBR,
     })
     alert('The Project has been published!')
     setIsLoading(false)
@@ -150,8 +157,11 @@ export default function Editor() {
     } else if (editorInputsValue.subtitle === '') {
       alert('Enter a subtitle')
       return
-    } else if (editorInputsValue.textarea === '') {
-      alert('Please write some article!')
+    } else if (editorInputsValue.textareaEN === '') {
+      alert('Please write some article in english!')
+      return
+    } else if (editorInputsValue.textareaPTBR === '') {
+      alert('Please write some article in portuguese!')
       return
     }
     await axios.put(`/api/database/projects/${selectedToEdit._id}`, {
@@ -163,7 +173,8 @@ export default function Editor() {
       },
       title: editorInputsValue.title,
       subtitle: editorInputsValue.subtitle,
-      body: editorInputsValue.textarea,
+      bodyEN: editorInputsValue.textareaEN,
+      bodyPTBR: editorInputsValue.textareaPTBR,
     })
     alert('The project article has been updated.')
     setIsLoading(false)
@@ -187,7 +198,11 @@ export default function Editor() {
   }
   function closeImportSavePopUp(value?: string) {
     if (value) {
-      setEditorInputsValue({ ...editorInputsValue, textarea: value })
+      if (textareaLangVersion === 'en') {
+        setEditorInputsValue({ ...editorInputsValue, textareaEN: value })
+      } else if (textareaLangVersion === 'pt-BR') {
+        setEditorInputsValue({ ...editorInputsValue, textareaPTBR: value })
+      }
     }
     setIsOpenImportSavePopUp(false)
   }
@@ -219,9 +234,17 @@ export default function Editor() {
       {isClientAuthenticated && (
         <>
           <Header title="Editor" />
-          {isOpenSavePopUp && <SavePopUp emitClosed={closeSavePopUp} />}
+          {isOpenSavePopUp && (
+            <SavePopUp
+              langContext={textareaLangVersion}
+              emitClosed={closeSavePopUp}
+            />
+          )}
           {isOpenImportSavePopUp && (
-            <ImportSavePopUp emitClosed={closeImportSavePopUp} />
+            <ImportSavePopUp
+              langContext={textareaLangVersion}
+              emitClosed={closeImportSavePopUp}
+            />
           )}
           <main
             className={`${
@@ -234,7 +257,11 @@ export default function Editor() {
                 coverImage={coverImage}
                 title={editorInputsValue.title}
                 subtitle={editorInputsValue.subtitle}
-                body={editorInputsValue.textarea}
+                body={
+                  textareaLangVersion === 'en'
+                    ? editorInputsValue.textareaEN
+                    : editorInputsValue.textareaPTBR
+                }
                 emitBack={backToEditor}
               />
             ) : (
@@ -303,7 +330,8 @@ export default function Editor() {
                                     setEditorInputsValue({
                                       title: result.title,
                                       subtitle: result.subtitle,
-                                      textarea: result.body,
+                                      textareaEN: result.body,
+                                      textareaPTBR: '',
                                       search: '',
                                     })
                                     setUploadedFile(null)
@@ -383,7 +411,32 @@ export default function Editor() {
                       className="text-[24px] placeholder:text-[#505050] transition-all duration-300 focus:translate-x-2 rounded-md font-light -mt-8 bg-transparent outline-none"
                     />
                   </div>
-                  <div className="h-full">
+                  <div className="h-full relative">
+                    <div className="absolute right-0 -top-8">
+                      {textareaLangVersion === 'en' ? (
+                        <div className="flex gap-x-2 items-center">
+                          <span className="text-sm">
+                            Writing the english version
+                          </span>
+                          <img
+                            onClick={() => setTextareaLangVersion('pt-BR')}
+                            src={euaFlag.src}
+                            className="w-8 h-8 cursor-pointer"
+                          />
+                        </div>
+                      ) : (
+                        <div className="flex gap-x-2 items-center">
+                          <span className="text-sm">
+                            Writing the portuguese version
+                          </span>
+                          <img
+                            onClick={() => setTextareaLangVersion('en')}
+                            src={brazilFlag.src}
+                            className="w-8 h-8 cursor-pointer"
+                          />
+                        </div>
+                      )}
+                    </div>
                     <div className="flex items-center justify-between w-full rounded-t-xl border-[2px] border-b-0 border-[#fc81a8]">
                       <ul className="p-2 gap-x-1 flex items-center">
                         {iconsFirstSection.map((item, index) => (
@@ -408,15 +461,27 @@ export default function Editor() {
                         ))}
                       </ul>
                     </div>
-                    <textarea
-                      spellCheck="false"
-                      ref={textareaElement}
-                      name="textarea"
-                      onChange={handleInputChange}
-                      id="textarea"
-                      value={editorInputsValue.textarea}
-                      className="rounded-b-xl h-[300px] mb-2 w-full outline-none  border-[2px] border-[#fc81a8] border-t-0 bg-[#fc81a8]/50 resize-none p-4 text-[#2e2e2e]"
-                    />
+                    {textareaLangVersion === 'en' ? (
+                      <textarea
+                        spellCheck="false"
+                        ref={textareaElement}
+                        name="textareaEN"
+                        onChange={handleInputChange}
+                        id="textareaEN"
+                        value={editorInputsValue.textareaEN}
+                        className="rounded-b-xl h-[300px] mb-2 w-full outline-none  border-[2px] border-[#fc81a8] border-t-0 bg-[#fc81a8]/50 resize-none p-4 text-[#2e2e2e]"
+                      />
+                    ) : (
+                      <textarea
+                        spellCheck="false"
+                        ref={textareaElement}
+                        name="textareaPTBR"
+                        onChange={handleInputChange}
+                        id="textareaPTBR"
+                        value={editorInputsValue.textareaPTBR}
+                        className="rounded-b-xl h-[300px] mb-2 w-full outline-none  border-[2px] border-[#fc81a8] border-t-0 bg-[#fc81a8]/50 resize-none p-4 text-[#2e2e2e]"
+                      />
+                    )}
                     {selectedToEdit ? (
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-x-2">
@@ -431,7 +496,8 @@ export default function Editor() {
                               setEditorInputsValue({
                                 title: '',
                                 subtitle: '',
-                                textarea: '',
+                                textareaEN: '',
+                                textareaPTBR: '',
                                 search: '',
                               })
                               setUploadedFile(null)

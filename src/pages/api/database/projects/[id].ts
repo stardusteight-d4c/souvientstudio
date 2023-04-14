@@ -58,7 +58,8 @@ export default async function handler(
               coverImage: publicImageURL,
               title: body.title,
               subtitle: body.subtitle,
-              body: body.body,
+              bodyEN: body.bodyEN,
+              bodyPTBR: body.bodyPTBR,
               date: new Date(),
             },
           }

@@ -19,9 +19,9 @@ interface Props {
 export default function Project(props: Props) {
   const router = useRouter()
   const { id } = router.query
-  const { lang } = useAppContext()
-  const { localeContextHome, setLocaleContextHome } = useAppContext()
+  const { lang, localeContextHome, setLocaleContextHome } = useAppContext()
   const [project, setProject] = useState<IProject>(props.project)
+  const [body, setBody] = useState<string>()
 
   useEffect(() => {
     ;(async () => {
@@ -29,9 +29,20 @@ export default function Project(props: Props) {
         .get(`/api/locales/home/${lang}`)
         .then((res) => setLocaleContextHome(() => res.data))
     })()
+    console.log('aaa');
+    
+    setBody(lang === 'en' ? project.bodyEN : project.bodyPTBR)
   }, [lang])
 
-  if (!localeContextHome || project === null) {
+  console.log(body)
+  console.log(lang)
+
+  if (
+    !localeContextHome ||
+    project === null ||
+    !project.bodyEN ||
+    !project.bodyPTBR || !body
+  ) {
     return <>Loading...</>
   }
 
@@ -54,7 +65,7 @@ export default function Project(props: Props) {
             <div
               id="article-body"
               dangerouslySetInnerHTML={{
-                __html: project.body && marked.marked(project.body),
+                __html: marked.marked(body!),
               }}
               className="mt-10"
             ></div>

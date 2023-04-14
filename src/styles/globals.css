@@ -260,6 +260,10 @@ body {
 #article-body a {
   text-decoration-line: underline;
 }
+#article-body li {
+  list-style: disc;
+  margin-left: 30px;
+}
 
 /* Loader */
 .spinner4546 {
