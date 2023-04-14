@@ -10,6 +10,7 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 import { ParsedUrlQuery } from 'querystring'
 import { IProject } from '@/@interfaces/IProject'
 import { connectToDatabase } from '@/lib/mongodb'
+import Header from '@/components/@globals/Header'
 
 interface Props {
   project: IProject
@@ -36,20 +37,12 @@ export default function Project(props: Props) {
 
   return (
     <>
-      <Head>
-        <title>Fevient / Project</title>
-        <meta
-          name="souvientstudio |  Graphic Designer"
-          content="Graphic Designer, Visual Design, Product Strategy"
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <Header title={`${project.title}`} />
       <main>
         <Navbar />
         <section>
           <div className="relative">
-            <div className="w-full absolute top-0 z-10 h-[300px] bg-gradient-to-b from-[#FE9BBA]/90 to-[#F8F7E2]/10" />
+            <div className="w-full absolute top-0 z-50 h-[300px] bg-gradient-to-b from-[#FE9BBA]/90 to-transparent" />
             <img
               src={project.coverImage}
               className="object-cover relative w-full h-[300px]"

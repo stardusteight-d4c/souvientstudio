@@ -1,8 +1,6 @@
 import { connectToDatabase } from '@/lib/mongodb'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import ShortUniqueId from 'short-unique-id'
-import { storage } from '@/lib/firebase'
-import { ref, uploadString } from 'firebase/storage'
 import { uploadImageToFirebase } from '@/utils/upload-image-to-firebase'
 import { IProjectBodyRequest } from '@/@interfaces/IProjectBodyRequest'
 

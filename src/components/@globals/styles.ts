@@ -6,7 +6,7 @@ export const navbarStyles = {
     } ${!isDashboardRoute && 'fixed'} z-[1000] w-screen inset-x-0 top-0`
   },
   container: `flex relative items-center max-w-[1445px] px-8 md:px-14 mx-auto justify-between py-8`,
-  fevientLogo: `font-bold cursor-pointer text-[20px] tracking-[-1px] uppercase`,
+  fevientLogo: `font-bold cursor-pointer text-[20px] tracking-[-1px] uppercase text-[#F8F7E2]`,
   desktopUnorderedList: `hidden text-[#F8F7E2] sm:flex items-center gap-x-[40px]`,
   desktopListItem: `effect-underline relative w-fit cursor-pointer duration-500 font-medium list-none`,
   hideMobileMenu: `sm:hidden`,

@@ -14,7 +14,7 @@ export function ProjectShowdown(props: Props) {
   return (
     <section className="min-h-screen">
       <div className="relative">
-        <div className="w-full absolute top-0 z-50 h-[300px] bg-gradient-to-b from-[#FE9BBA]/90 to-[#F8F7E2]/10" />
+        <div className="w-full absolute top-0 z-50 h-[300px] bg-gradient-to-b from-[#FE9BBA]/90 to-transparent" />
         <div>
           <img
             src={

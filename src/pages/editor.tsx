@@ -10,6 +10,7 @@ import { detectClickOutsideElement } from '@/utils/detect-click-outside-element'
 import { SavePopUp } from '@/components/editor/integrate/SavePopUp'
 import { ImportSavePopUp } from '@/components/editor/integrate/ImportSavePopUp'
 import { ProjectShowdown } from '@/components/@globals/ProjectShowdown'
+import Header from '@/components/@globals/Header'
 
 export default function Editor() {
   const [editorInputsValue, setEditorInputsValue] = useState({
@@ -184,8 +185,6 @@ export default function Editor() {
     setShowPreview(false)
   }
 
-  console.log(selectedToEdit)
-
   const iconsFirstSection = [
     { Icon: Icon.Bold, name: 'bold' },
     { Icon: Icon.Italic, name: 'italic' },
@@ -207,15 +206,7 @@ export default function Editor() {
 
   return (
     <>
-      <Head>
-        <title>Fevient / Editor</title>
-        <meta
-          name="souvientstudio |  Graphic Designer"
-          content="Graphic Designer, Visual Design, Product Strategy"
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <Header title="Editor" />
       {isOpenSavePopUp && <SavePopUp emitClosed={closeSavePopUp} />}
       {isOpenImportSavePopUp && (
         <ImportSavePopUp emitClosed={closeImportSavePopUp} />
@@ -326,7 +317,6 @@ export default function Editor() {
                 </div>
               </div>
               <div id="selectProjectTypeElement" className="relative w-fit">
-           
                 <div
                   onClick={() => setShowSelectDropdown(!showSelectDropdown)}
                   className="text-sm flex justify-center gap-x-2 px-2 cursor-pointer border-[2px] border-[#FE9BBA] py-1 rounded-full"

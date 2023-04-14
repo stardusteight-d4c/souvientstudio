@@ -14,6 +14,7 @@ import {
 import Navbar from '@/components/@globals/Navbar'
 import Footer from '@/components/@globals/Footer'
 import { IProject } from '@/@interfaces/IProject'
+import Header from '@/components/@globals/Header'
 
 interface Props {
   visualIdentities: IProject[]
@@ -45,15 +46,7 @@ export default function Home(props: Props) {
 
   return (
     <>
-      <Head>
-        <title>Fevient / Graphic Designer</title>
-        <meta
-          name="souvientstudio |  Graphic Designer"
-          content="Graphic Designer, Visual Design, Product Strategy"
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <Header title="Graphic Designer" />
       <main>
         <Navbar />
         <Hero />
