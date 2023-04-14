@@ -14,6 +14,10 @@ interface ContextAPI {
   setLocaleContextHome: React.Dispatch<
     React.SetStateAction<null | ILocaleContextHome>
   >
+  isClientAuthenticated: boolean | undefined
+  setIsClientAuthenticated: React.Dispatch<
+    React.SetStateAction<boolean | undefined>
+  >
 }
 
 export const MyContext = createContext<ContextAPI>({
@@ -23,6 +27,8 @@ export const MyContext = createContext<ContextAPI>({
   setLang: () => {},
   localeContextHome: null,
   setLocaleContextHome: () => {},
+  isClientAuthenticated: undefined,
+  setIsClientAuthenticated: () => {},
 })
 
 export const ContextProvider = ({ children }: Props) => {
@@ -30,6 +36,9 @@ export const ContextProvider = ({ children }: Props) => {
   const [lang, setLang] = useState('en')
   const [localeContextHome, setLocaleContextHome] =
     useState<null | ILocaleContextHome>(null)
+  const [isClientAuthenticated, setIsClientAuthenticated] = useState<
+    boolean | undefined
+  >(undefined)
 
   const contextValue: ContextAPI = {
     showCurriculum,
@@ -38,6 +47,8 @@ export const ContextProvider = ({ children }: Props) => {
     setLang,
     localeContextHome,
     setLocaleContextHome,
+    isClientAuthenticated,
+    setIsClientAuthenticated,
   }
 
   return (

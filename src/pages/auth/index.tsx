@@ -1,14 +1,11 @@
 import Header from '@/components/@globals/Header'
 import axios from 'axios'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 export default function Auth() {
   const router = useRouter()
   const token = router.query.token
-
-  console.log('token da url:', token)
 
   useEffect(() => {
     if (token) {
@@ -16,29 +13,41 @@ export default function Auth() {
         const res = await axios.post(`/api/auth?token=${token}`)
         if (res.data.status === false) {
           alert(res.data.message)
-          return
+          router.push('/')
         } else {
           alert(res.data.message)
-          return
+          const now = new Date()
+          const expireTime = now.getTime() + 7 * 24 * 60 * 60 * 1000 // expira em 7 dias
+          now.setTime(expireTime)
+          document.cookie = `sessionCookie=${
+            res.data.sessionToken
+          }; expires=${now.toUTCString()}; path=/`
+          router.push('/')
         }
       })()
+    } else {
+      router.push('/')
     }
   }, [token])
 
   return (
     <>
-      <Header title="Authorization" />
-      <main className="min-h-screen flex items-center justify-center h-[100vh] bg-[#FE9BBA] text-[#2e2e2e] overflow-hidden">
-        <div className="spinner4546">
-          <span>L</span>
-          <span>O</span>
-          <span>A</span>
-          <span>D</span>
-          <span>I</span>
-          <span>N</span>
-          <span>G</span>
-        </div>
-      </main>
+      {token && (
+        <>
+          <Header title="Authorization" />
+          <main className="min-h-screen flex items-center justify-center h-[100vh] bg-[#FE9BBA] text-[#2e2e2e] overflow-hidden">
+            <div className="spinner4546">
+              <span>F</span>
+              <span>E</span>
+              <span>V</span>
+              <span>I</span>
+              <span>E</span>
+              <span>N</span>
+              <span>T</span>
+            </div>
+          </main>
+        </>
+      )}
     </>
   )
 }

@@ -17,8 +17,14 @@ export default function Navbar({ notFixed = false }: Props) {
   const [isOpenMenu, setIsOpenMenu] = useState(false)
   const router = useRouter()
   const { lang, setLang } = useAppContext()
-  const { localeContextHome, showCurriculum, setShowCurriculum } =
-    useAppContext()
+  const {
+    localeContextHome,
+    showCurriculum,
+    setShowCurriculum,
+    isClientAuthenticated,
+  } = useAppContext()
+
+  console.log('isClientAuthenticated', isClientAuthenticated)
 
   const isIndexRoute = router.pathname === '/'
 
@@ -55,9 +61,11 @@ export default function Navbar({ notFixed = false }: Props) {
           Fevient
         </Link>
         <ul className={css.desktopUnorderedList}>
-          <Link href="/editor" className={css.desktopListItem}>
-            Editor
-          </Link>
+          {isClientAuthenticated && (
+            <Link href="/editor" className={css.desktopListItem}>
+              Editor
+            </Link>
+          )}
           {isIndexRoute && (
             <li
               onClick={() => handleOpenCurriculum()}

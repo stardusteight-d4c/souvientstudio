@@ -1,7 +1,5 @@
-import { randomUUID } from 'node:crypto'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import jwt from 'jsonwebtoken'
-import nodemailer from 'nodemailer'
 import { sendUrlAuthToRootUserEmail } from '@/lib/nodemailer'
 
 interface Request {
@@ -27,27 +25,26 @@ export default async function handler(
   const secret = process.env.JWT_SECRET_KEY
   const baseUrl = process.env.BASE_URL
 
-  let tmpToken: string
-
-  // gerar token temporário que expira em 15min
-
-  // salvar em uma variável fora da rota, mandar para o email do usuário
-  // um link com queryParam de token?='aslskalkslkdlskldsksd' que caia em uma página
-  // na aplicação que enviará para o servidor confirmar o token e criar uma sessão de 7 dias
-
-  // salvar sessão nos cokies do browser do usuário
-
   if (method === 'POST') {
     if (url && url.includes('token=')) {
-      const token = url.split('=')[1]
-
       try {
+        const token = url.split('=')[1]
         const verifiedToken = jwt.verify(token, secret!)
-        console.log('Token válido e decodificado:', verifiedToken)
-        // criar uma sessão de 7 dias enviar token pro front e salvar nos cookies
-        // sempre que entrar em uma página verificar no server os cookies do browser e pegar o token
-        // e assim retornar se é um user autenticado ou não
-        return res.status(200).json({ status: true, message: 'Valid token.' })
+        if (verifiedToken) {
+          function generateToken() {
+            const payload = {
+              email: verifiedToken,
+              key: serverKey,
+            }
+            return jwt.sign(payload, secret!, { expiresIn: '7d' })
+          }
+          const sessionToken = generateToken()
+          return res.status(200).json({
+            status: true,
+            message: 'Valid token.',
+            sessionToken: sessionToken,
+          })
+        }
       } catch (err) {
         console.error('Invalid Token:', err)
         // redirecionar para login
@@ -63,9 +60,8 @@ export default async function handler(
         }
         return jwt.sign(payload, secret!, { expiresIn: '15min' })
       }
-
       try {
-        tmpToken = generateToken()
+        const tmpToken = generateToken()
         const authUrl = `${baseUrl}/auth?token=${tmpToken}`
         if (body.email !== rootUserEmail || body.serverKey !== serverKey) {
           res
@@ -75,7 +71,8 @@ export default async function handler(
           await sendUrlAuthToRootUserEmail(authUrl)
           res.status(200).json({
             status: true,
-            message: 'The access link has been sent to your email! The link will expire in 15 minutes.',
+            message:
+              'The access link has been sent to your email! The link will expire in 15 minutes.',
           })
         }
       } catch (error) {

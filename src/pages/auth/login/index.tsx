@@ -49,16 +49,19 @@ export default function Login() {
         <div className="flex flex-col items-center justify-center h-[100vh]">
           <div className="flex shadow-sm shadow-black/10 bg-[#F8F7E2] rounded-[50px] px-8 pt-14 pb-10 items-center flex-col gap-4">
             <input
-              type="text"
               placeholder="Email"
+              type='email'
               name="email"
+              value={inputFormData.email}
               onChange={(e) => handleInputChange(e)}
               className="py-1 px-4 bg-[#F8F7E2] placeholder:text-[#505050] border-[2px] border-[#2e2e2e] focus:border-[#fe5b30] outline-none rounded-full"
             />
             <input
-              type="password"
               placeholder="Server key"
+              type='password'
+              autoComplete="new-password"
               name="serverKey"
+              value={inputFormData.serverKey}
               onChange={(e) => handleInputChange(e)}
               className="py-1 px-4 bg-[#F8F7E2] placeholder:text-[#505050] border-[2px] border-[#2e2e2e] focus:border-[#fe5b30] outline-none rounded-full"
             />
