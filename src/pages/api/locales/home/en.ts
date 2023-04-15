@@ -8,7 +8,8 @@ export default function handler(
 ) {
   res.status(200).json({
     nav: {
-      about: 'About',
+      editor: 'Editor',
+      resume: 'Resume',
       contact: 'Contact',
     },
     hero: {

@@ -10,7 +10,8 @@ export default function handler(
 ) {
   res.status(200).json({
     nav: {
-      about: 'Sobre',
+      editor: 'Editor',
+      resume: 'Resumo',
       contact: 'Contato',
     },
     hero: {

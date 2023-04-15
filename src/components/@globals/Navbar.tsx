@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/legacy/image'
-import { brazilFlag, euaFlag } from '@/assets'
 import { useAppContext } from '@/@context/ContextProvider'
 import CurriculumModal from '../home/integrate/CurriculumModal'
 import { navbarStyles as css } from './styles'
 import { useRouter } from 'next/router'
 import { Menu, X } from './atoms'
+import { Flags } from './integrate/Flags'
 
 interface Props {
   notFixed?: boolean
@@ -16,19 +15,28 @@ export default function Navbar({ notFixed = false }: Props) {
   const [isGradientShadowOn, setIsGradientShadowOn] = useState(false)
   const [isOpenMenu, setIsOpenMenu] = useState(false)
   const router = useRouter()
-  const { lang, setLang } = useAppContext()
   const {
     localeContextHome,
     showCurriculum,
     setShowCurriculum,
     isClientAuthenticated,
   } = useAppContext()
-
-  console.log('isClientAuthenticated', isClientAuthenticated)
-
   const isIndexRoute = router.pathname === '/'
+  const [isTop, setIsTop] = useState(true)
 
-  // Salvar preferência do idioma em local storage, cachear as traduções
+  useEffect(() => {
+    function handleScroll() {
+      if (window.pageYOffset === 0) {
+        setIsTop(true)
+      } else {
+        setIsTop(false)
+      }
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
 
   useEffect(() => {
     window.addEventListener('scroll', handleGradientShadowOnScroll)
@@ -55,108 +63,84 @@ export default function Navbar({ notFixed = false }: Props) {
   }
 
   return (
-    <nav className={css.handleWrapper(isGradientShadowOn, notFixed)}>
+    <nav
+      className={css.handleWrapper(isGradientShadowOn, notFixed, isTop)}
+    >
+      {showCurriculum && <CurriculumModal />}
       <div className={css.container}>
         <Link href="/" className={css.fevientLogo}>
           Fevient
         </Link>
         <ul className={css.desktopUnorderedList}>
-          {isClientAuthenticated && (
-            <Link href="/editor" className={css.desktopListItem}>
-              Editor
-            </Link>
-          )}
           {isIndexRoute && (
-            <li
-              onClick={() => handleOpenCurriculum()}
-              className={css.desktopListItem}
-            >
-              Resume
-            </li>
-          )}
-          <li className={css.desktopListItem}>
-            {localeContextHome?.nav.contact}
-          </li>
-          {showCurriculum && <CurriculumModal />}
-          <li>
-            {lang === 'en' ? (
-              <Image
-                src={euaFlag.src}
-                onClick={() => setLang('pt-BR')}
-                alt="united-states-flag/icon"
-                width={25}
-                height={25}
-                className={css.cursorPointer}
-              />
-            ) : (
-              <Image
-                src={brazilFlag.src}
-                onClick={() => setLang('en')}
-                alt="brazil-flag/icon"
-                width={25}
-                height={25}
-                className={css.cursorPointer}
-              />
-            )}
-          </li>
-        </ul>
-        <div className={css.hideMobileMenu}>
-          {isOpenMenu ? (
-            <div
-              onClick={() => setIsOpenMenu(false)}
-              className={css.cursorPointer}
-            >
-              <X />
-            </div>
-          ) : (
-            <div
-              onClick={() => setIsOpenMenu(true)}
-              className={css.cursorPointer}
-            >
-              <Menu />
-            </div>
-          )}
-          {isOpenMenu && (
             <>
-              <div className={css.wrapperMobileMenu} />
-              <div className={css.containerMobileMenu}>
-                <ul className={css.mobileUnorderedList}>
-                  <li
-                    onClick={() => {
-                      handleOpenCurriculum()
-                      setIsOpenMenu(false)
-                    }}
-                    className={css.mobileListItem}
-                  >
-                    {localeContextHome?.nav.about}
-                  </li>
-                  <li className={css.mobileListItem}>
-                    {localeContextHome?.nav.contact}
-                  </li>
-                  <li>
-                    {lang === 'en' ? (
-                      <Image
-                        src={euaFlag.src}
-                        onClick={() => setLang('pt-BR')}
-                        alt="united-states-flag/icon"
-                        width={40}
-                        height={40}
-                      />
-                    ) : (
-                      <Image
-                        src={brazilFlag.src}
-                        onClick={() => setLang('en')}
-                        alt="brazil-flag/icon"
-                        width={40}
-                        height={40}
-                      />
-                    )}
-                  </li>
-                </ul>
-              </div>
+              {isClientAuthenticated && (
+                <Link href="/editor" className={css.desktopListItem}>
+                  {localeContextHome?.nav.editor}
+                </Link>
+              )}
+              <li
+                onClick={() => handleOpenCurriculum()}
+                className={css.desktopListItem}
+              >
+                {localeContextHome?.nav.resume}
+              </li>
+              <li className={css.desktopListItem}>
+                <a href="#contact">{localeContextHome?.nav.contact}</a>
+              </li>
             </>
           )}
-        </div>
+          <Flags />
+        </ul>
+        {isIndexRoute ? (
+          <div className={css.hideMobileMenu}>
+            {isOpenMenu ? (
+              <div
+                onClick={() => setIsOpenMenu(false)}
+                className={css.cursorPointer}
+              >
+                <X />
+              </div>
+            ) : (
+              <div
+                onClick={() => setIsOpenMenu(true)}
+                className={css.cursorPointer}
+              >
+                <Menu />
+              </div>
+            )}
+
+            {isOpenMenu && (
+              <>
+                <div className={css.wrapperMobileMenu} />
+                <div className={css.containerMobileMenu}>
+                  <ul className={css.mobileUnorderedList}>
+                    <li
+                      onClick={() => {
+                        handleOpenCurriculum()
+                        setIsOpenMenu(false)
+                      }}
+                      className={css.mobileListItem}
+                    >
+                      {localeContextHome?.nav.resume}
+                    </li>
+                    <li
+                      onClick={() => setIsOpenMenu(false)}
+                      className={css.mobileListItem}
+                    >
+                      <a href="#contact">{localeContextHome?.nav.contact}</a>
+                    </li>
+                    <Flags />
+                  </ul>
+                </div>
+              </>
+            )}
+          </div>
+        ) : (
+          <div className="block md:hidden">
+            <Flags />
+          </div>
+        )}
       </div>
     </nav>
   )

@@ -1,6 +1,7 @@
 export interface ILocaleContextHome {
   nav: {
-    about: string
+    resume: string
+    editor: string
     contact: string
   }
   hero: {

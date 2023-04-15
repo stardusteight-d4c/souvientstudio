@@ -309,3 +309,18 @@ body {
    transform: translateY(-10px);
   }
  }
+
+ /* nav-animation */
+ @keyframes slideDown {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.nav-animation {
+  animation-name: slideDown;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}

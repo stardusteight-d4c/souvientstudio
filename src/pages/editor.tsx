@@ -330,8 +330,8 @@ export default function Editor() {
                                     setEditorInputsValue({
                                       title: result.title,
                                       subtitle: result.subtitle,
-                                      textareaEN: result.body,
-                                      textareaPTBR: '',
+                                      textareaEN: result.bodyEN,
+                                      textareaPTBR: result.bodyPTBR,
                                       search: '',
                                     })
                                     setUploadedFile(null)

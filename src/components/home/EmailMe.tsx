@@ -8,7 +8,7 @@ export default function EmailMe() {
   }
 
   return (
-    <section className="py-[100px]">
+    <section id="contact" className="py-[100px]">
       <div className="max-w-[1032px] text-center lg:text-start px-4 lg:px-0 mx-auto">
         <span className="text-[#fe5b30] font-medium text-xl font-poppins !tracking-[-0.3px]">
           {localeContextHome.emailMe.collab}
