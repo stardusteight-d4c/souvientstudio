@@ -335,7 +335,6 @@ body {
   }
 }
 
-/* nav-animation */
 @keyframes slideDownNav {
   0% {
     transform: translateY(-100%);
@@ -350,7 +349,6 @@ body {
   animation-fill-mode: forwards;
 }
 
-/* marquee-animation */
 @keyframes slideInRightMarquee {
   from {
     transform: translateX(100%);
@@ -363,7 +361,6 @@ body {
   animation: slideInRightMarquee 3s normal;
 }
 
-/* slider-animation */
 @keyframes slideInSlider {
   0% {
     transform: translateX(-100%);
@@ -382,7 +379,6 @@ body {
   animation: slideInSlider 2s ease-in-out;
 }
 
-/* behance-animation */
 @keyframes opacityBehance {
   0% {
     opacity: 0;
@@ -395,7 +391,6 @@ body {
   animation: opacityBehance 2s ease-in-out;
 }
 
-/* behance-button-animation */
 @keyframes scaleUpButton {
   0% {
     transform: scale(0);
@@ -411,7 +406,6 @@ body {
   animation: scaleUpButton 2s ease-in-out;
 }
 
-/*  Skills Animations */
 @media (min-width: 950px) {
   @keyframes skill-from-up {
     0% {
@@ -467,4 +461,16 @@ body {
   .animate-skill-from-down {
     animation: skill-from-down 1s ease-out;
   }
+}
+
+@keyframes fadeInServiceCard {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.service-card-animation {
+  animation: fadeInServiceCard 1s ease-out;
 }

@@ -30,10 +30,23 @@ export const skillImageStyles = {
 }
 
 export const serviceCardStyles = {
-  handleWrapper: (index: number) => {
+  handleWrapper: (index: number, isVisible: boolean) => {
+    const wrapperElement = document.getElementById(`wrapper-${index}`)
+    const animate = () => {
+      setTimeout(() => {
+        wrapperElement?.classList.remove('opacity-0')
+        wrapperElement?.classList.add('service-card-animation')
+      }, 800 * index)
+    }
+    if (isVisible) {
+      animate()
+    } else {
+      wrapperElement?.classList.add('opacity-0')
+      wrapperElement?.classList.remove('service-card-animation')
+    }
     return `${
       index % 2 === 0 && 'mdd:mt-20'
-    } shadow-lg max-w-[300px] border border-gray/30 h-[270px] text-left w-full flex items-start justify-center flex-col px-[28px] rounded-[40px]`
+    } opacity-0 shadow-lg max-w-[300px] border border-gray/30 h-[270px] text-left w-full flex items-start justify-center flex-col px-[28px] rounded-[40px]`
   },
   emojiImage: `w-[50px] h-[50px] ml object-cover`,
   title: `text-2xl text-black pb-3 pt-2 !leading-[27px] tracking-[-0.3px] font-semibold`,
