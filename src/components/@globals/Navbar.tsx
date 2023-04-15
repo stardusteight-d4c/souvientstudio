@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { useAppContext } from '@/@context/ContextProvider'
-import CurriculumModal from '../home/integrate/CurriculumModal'
-import { navbarStyles as css } from './styles'
 import { useRouter } from 'next/router'
+import { useAppContext } from '@/@context/ContextProvider'
+import { navbarStyles as css } from './styles'
 import { Menu, X } from './atoms'
 import { Flags } from './integrate/Flags'
+import CurriculumModal from '../home/integrate/CurriculumModal'
 
 interface Props {
   notFixed?: boolean
@@ -109,7 +109,6 @@ export default function Navbar({ notFixed = false }: Props) {
                 <Menu />
               </div>
             )}
-
             {isOpenMenu && (
               <>
                 <div className={css.wrapperMobileMenu} />

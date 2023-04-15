@@ -1,44 +1,27 @@
-import { Variants } from 'framer-motion';
+import { Variants } from 'framer-motion'
 
-export const navVariants: Variants = {
+export const starsVariants: (direction: string) => Variants = (
+  direction: string
+) => ({
   hidden: {
-    opacity: 0,
-    y: -100,
-    transition: {
-      type: 'inertia',
-      stiffness: 500,
-      damping: 1000,
-      duration: 0.5,
-      bounceDamping: 2
-    },
-  },
-  show: {
-    opacity: 1,
-    y: 0,
+    x: direction === 'left' ? '-250' : '250',
     transition: {
       type: 'spring',
-      stiffness: 80,
+      stiffness: 300,
+      damping: 140,
     },
-  },
-}
-
-export const starsVariants = (direction: string) => ({
-  hidden: {
-    x: direction === 'left' ? '-100%' : '100%',
-    rotate: 120,
   },
   show: {
     x: 0,
-    rotate: 0,
     transition: {
       type: 'spring',
-      duration: 1.8,
+      duration: 2,
       delay: 0.5,
     },
   },
 })
 
-export const textVariant = (delay: number) => ({
+export const textVariant: (delay: number) => Variants = (delay: number) => ({
   hidden: {
     y: 50,
     opacity: 0,
@@ -48,7 +31,7 @@ export const textVariant = (delay: number) => ({
     opacity: 1,
     transition: {
       type: 'spring',
-      duration: 1.25,
+      duration: 2,
       delay,
     },
   },
@@ -75,27 +58,6 @@ export const textVariant2 = {
     transition: {
       type: 'tween',
       ease: 'easeIn',
-    },
-  },
-}
-
-export const footerVariants = {
-  hidden: {
-    opacity: 0,
-    y: 50,
-    transition: {
-      type: 'spring',
-      stiffness: 300,
-      damping: 140,
-    },
-  },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      type: 'spring',
-      stiffness: 80,
-      delay: 0.5,
     },
   },
 }

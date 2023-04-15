@@ -1,13 +1,20 @@
-import { Key } from 'react'
-import { Link } from './Link'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, Key } from 'react'
 import { motion, PanInfo } from 'framer-motion'
+import { Link } from './Link'
+import { projectSliderContainerStyles as css } from './styles'
+import Image from 'next/legacy/image'
+import { IProject } from '@/@interfaces/IProject'
+import { SliderCard } from './SliderCard'
 
 interface Props {
-  projects: any[]
+  projects: IProject[]
+  sliderTitle: string
 }
 
-export default function ProjectsSliderContainer({ projects }: Props) {
+export default function ProjectsSliderContainer({
+  projects,
+  sliderTitle,
+}: Props) {
   const [cardSliderWidth, setCardSliderWidth] = useState(0)
   const [onDrag, setOnDrag] = useState(0)
   const cardSlider = useRef() as React.MutableRefObject<HTMLInputElement>
@@ -31,34 +38,25 @@ export default function ProjectsSliderContainer({ projects }: Props) {
   }
 
   return (
-    <motion.div {...dragAnimate}>
-      {projects.length === 0 ? (
-        <div className="text-[#2e2e2e] text-xl font-medium py-5 text-center w-full">
-          No projects found
-        </div>
-      ) : (
-        projects.map((project: any, index: Key | null | undefined) => (
-          <Link to={`/project/${project._id}`} key={index}>
-            <img
-              src={project.coverImage}
-              alt=""
-              className="w-full h-full object-cover pointer-events-none"
-            />
-            <b className="inset-x-0 transition-all duration-75 bg-gradient-to-t from-[#fe9bba] via-[#fe9bba]/50 to-transparent bottom-0 h-[100px] hidden group-hover:block" />
-            <div className="content">
-              <div className="title px-4 text-center">
-                <span className="font-bold text-2xl uppercase">
-                  {project.title}
-                </span>
-                <br />
-                <span className="font-medium tracking-widest uppercase text-lg">
-                  {project.subtitle}
-                </span>
-              </div>
-            </div>
-          </Link>
-        )).reverse()
-      )}
-    </motion.div>
+    <div>
+      <h2 className={css.title}>
+        <span className={css.titleSpan}>|</span> {sliderTitle}
+      </h2>
+      <div className={css.wrapper}>
+        <div className={css.overlayLeft} />
+        <div className={css.overlayRight} />
+        <motion.div {...dragAnimate}>
+          {projects.length === 0 ? (
+            <div className={css.noProjectsFound}>No projects found</div>
+          ) : (
+            projects
+              .map((project: IProject, index: Key | null | undefined) => (
+                <SliderCard project={project} key={index} />
+              ))
+              .reverse()
+          )}
+        </motion.div>
+      </div>
+    </div>
   )
 }

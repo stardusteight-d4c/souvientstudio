@@ -1,6 +1,9 @@
+import Image from 'next/legacy/image'
+import { motion } from 'framer-motion'
 import { useAppContext } from '@/@context/ContextProvider'
 import { fernanda, star } from '@/assets'
-import Image from 'next/legacy/image'
+import { starsVariants, textVariant } from '@/lib/motion'
+import { TypingText } from '../@globals/TypingText'
 import { heroStyles as css } from './styles'
 
 export default function Hero() {
@@ -16,15 +19,26 @@ export default function Hero() {
           <div className={css.circle} />
         </div>
       </div>
-
       <div className={css.container}>
         <div className={css.presentationWrapper}>
           <div className={css.avatarContainer}>
             <div className={css.spinnerLeft}>
-              <Image src={star.src} width={84} height={84} />
+              <motion.div
+                variants={starsVariants('left')}
+                initial="hidden"
+                animate="show"
+              >
+                <Image src={star.src} width={84} height={84} />
+              </motion.div>
             </div>
             <div className={css.spinnerRight}>
-              <Image src={star.src} width={64} height={64} />
+              <motion.div
+                variants={starsVariants('right')}
+                initial="hidden"
+                animate="show"
+              >
+                <Image src={star.src} width={64} height={64} />
+              </motion.div>
             </div>
             <div className={css.spinnerBlurEffect}>
               <div className={css.spinnerBlurEffectComplement} />
@@ -39,15 +53,27 @@ export default function Hero() {
               />
             </div>
           </div>
-          <span className={css.presentationTxt}>
-            {localeContextHome?.hero.presentation}
-          </span>
+          <motion.span
+            variants={textVariant(0.5)}
+            initial="hidden"
+            animate="show"
+          >
+            <TypingText
+              title={localeContextHome?.hero.presentation!}
+              textStyles={css.presentationTxt}
+            />
+          </motion.span>
         </div>
-        <h1 className={css.headingOne}>
-          {localeContextHome?.hero.title1}
+        <motion.h1
+          variants={textVariant(0.5)}
+          initial="hidden"
+          animate="show"
+          className={css.headingOne}
+        >
+          {localeContextHome?.hero.title1!}
           {lang === 'en' && <br className={css.breakLine} />}
-          &nbsp;{localeContextHome?.hero.title2}
-        </h1>
+          &nbsp; {localeContextHome?.hero.title2!}
+        </motion.h1>
         <p className={css.subtitle}>{localeContextHome?.hero.subtitle}</p>
         <a
           href="https://www.linkedin.com/in/fercsena/"
