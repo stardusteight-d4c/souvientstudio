@@ -30,13 +30,13 @@ export default function CurriculumModal() {
   }
 
   return ReactDOM.createPortal(
-    <section className="absolute grid place-items-center bg-[#F8F7E2]/80 z-[1200] inset-0">
+    <section className="absolute grid place-items-center bg-white/80 z-[1200] inset-0">
       <div
         id="curriculum-box"
-        className="bg-paper-texture bg-100% absolute top-0 mx-2 w-fit mt-12 shadow-lg shadow-[#2e2e2e]/20 xll:max-w-[1300px] bg-[#F8F7E2] text-[#2e2e2e] border-[4px] border-[#fe5b30]/80 md:px-8 md:py-6 xll:w-full h-fit 2xl:mx-auto"
+        className="bg-paper-texture bg-100% absolute top-0 mx-2 w-fit mt-12 shadow-lg shadow-black/20 xll:max-w-[1300px] bg-white text-black border-[4px] border-orange/80 md:px-8 md:py-6 xll:w-full h-fit 2xl:mx-auto"
       >
         <div className="relative">
-          <div className="sticky md:relative p-4 mb-8 md:p-0 md:mb-0 shadow-md md:shadow-none shadow-[#2e2e2e]/10 bg-[#F8F7E2] md:bg-transparent top-0">
+          <div className="sticky md:relative p-4 mb-8 md:p-0 md:mb-0 shadow-md md:shadow-none shadow-black/10 bg-white md:bg-transparent top-0">
             <div className="flex items-center gap-x-4 ml-auto w-fit">
               <div className="cursor-pointer">
                 <svg
@@ -73,7 +73,7 @@ export default function CurriculumModal() {
                   className="w-[100px] h-[100px] md:w-[125px] md:h-[125px] rounded-full object-cover mr-5"
                   alt=""
                 />
-                <span className="text-center md:text-left text-[#505050] my-8 md:my-0 font-normal block text-sm md:w-full mdd:min-w-[450px] xl:max-w-[600px]">
+                <span className="text-center md:text-left text-gray my-8 md:my-0 font-normal block text-sm md:w-full mdd:min-w-[450px] xl:max-w-[600px]">
                   Hi, my name is Fernanda Chagas de Sena but i go by{' '}
                   <strong className="font-semibold">Fevient</strong>, I am an{' '}
                   <strong className="font-semibold">Graphic Designer</strong>{' '}
@@ -100,7 +100,7 @@ export default function CurriculumModal() {
                     <h3 className="font-medium text-base">
                       Industrial Design And Product Development Engineering
                     </h3>
-                    <span className="block -mt-[2px] text-[#505050] text-sm">
+                    <span className="block -mt-[2px] text-gray text-sm">
                       University of Merida (UEx) / Merida, Spain / 2015 - 2020
                     </span>
                   </div>
@@ -108,7 +108,7 @@ export default function CurriculumModal() {
                     <h3 className="font-medium text-base">
                       Industrial Design And Product Development Engineering
                     </h3>
-                    <span className="block -mt-[2px] text-[#505050] text-sm">
+                    <span className="block -mt-[2px] text-gray text-sm">
                       University of Merida (UEx) / Merida, Spain / 2015 - 2020
                     </span>
                   </div>
@@ -116,7 +116,7 @@ export default function CurriculumModal() {
                     <h3 className="font-medium text-base">
                       Industrial Design And Product Development Engineering
                     </h3>
-                    <span className="block -mt-[2px] text-[#505050] text-sm">
+                    <span className="block -mt-[2px] text-gray text-sm">
                       University of Merida (UEx) / Merida, Spain / 2015 - 2020
                     </span>
                   </div>
@@ -124,7 +124,7 @@ export default function CurriculumModal() {
                     <h3 className="font-medium text-base">
                       Industrial Design And Product Development Engineering
                     </h3>
-                    <span className="block -mt-[2px] text-[#505050] text-sm">
+                    <span className="block -mt-[2px] text-gray text-sm">
                       University of Merida (UEx) / Merida, Spain / 2015 - 2020
                     </span>
                   </div>
@@ -137,7 +137,7 @@ export default function CurriculumModal() {
                     <h3 className="font-medium text-base">
                       Industrial Design And Product Development Engineering
                     </h3>
-                    <span className="block -mt-[2px] text-[#505050] text-sm">
+                    <span className="block -mt-[2px] text-gray text-sm">
                       University of Merida (UEx) / Merida, Spain / 2015 - 2020
                     </span>
                   </div>
@@ -145,7 +145,7 @@ export default function CurriculumModal() {
                     <h3 className="font-medium text-base">
                       Industrial Design And Product Development Engineering
                     </h3>
-                    <span className="block -mt-[2px] text-[#505050] text-sm">
+                    <span className="block -mt-[2px] text-gray text-sm">
                       University of Merida (UEx) / Merida, Spain / 2015 - 2020
                     </span>
                   </div>
@@ -153,7 +153,7 @@ export default function CurriculumModal() {
                     <h3 className="font-medium text-base">
                       Industrial Design And Product Development Engineering
                     </h3>
-                    <span className="block -mt-[2px] text-[#505050] text-sm">
+                    <span className="block -mt-[2px] text-gray text-sm">
                       University of Merida (UEx) / Merida, Spain / 2015 - 2020
                     </span>
                   </div>
@@ -170,7 +170,7 @@ export default function CurriculumModal() {
                     <h3 className="font-medium text-base">
                       Industrial Design And Product Development Engineering
                     </h3>
-                    <span className="block -mt-[2px] text-[#505050] text-sm">
+                    <span className="block -mt-[2px] text-gray text-sm">
                       University of Merida (UEx) / Merida, Spain / 2015 - 2020
                     </span>
                   </div>
@@ -178,7 +178,7 @@ export default function CurriculumModal() {
                     <h3 className="font-medium text-base">
                       Industrial Design And Product Development Engineering
                     </h3>
-                    <span className="block -mt-[2px] text-[#505050] text-sm">
+                    <span className="block -mt-[2px] text-gray text-sm">
                       University of Merida (UEx) / Merida, Spain / 2015 - 2020
                     </span>
                     <ul className="mt-2">
@@ -208,61 +208,61 @@ export default function CurriculumModal() {
                       <div>
                         <h3 className="font-medium text-base">Photoshop</h3>
                         <div className="flex items-center gap-x-1">
-                          <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                          <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                          <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                          <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                          <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                          <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                          <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                          <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                          <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                          <div className="border border-[#2e2e2e] rounded-full w-3 h-3" />
+                          <div className="bg-black rounded-full w-3 h-3" />
+                          <div className="bg-black rounded-full w-3 h-3" />
+                          <div className="bg-black rounded-full w-3 h-3" />
+                          <div className="bg-black rounded-full w-3 h-3" />
+                          <div className="bg-black rounded-full w-3 h-3" />
+                          <div className="bg-black rounded-full w-3 h-3" />
+                          <div className="bg-black rounded-full w-3 h-3" />
+                          <div className="bg-black rounded-full w-3 h-3" />
+                          <div className="bg-black rounded-full w-3 h-3" />
+                          <div className="border border-black rounded-full w-3 h-3" />
                         </div>
                       </div>
                       <div>
                         <h3 className="font-medium text-base">Illustrator</h3>
                         <div className="flex items-center gap-x-1">
-                          <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                          <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                          <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                          <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                          <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                          <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                          <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                          <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                          <div className="border border-[#2e2e2e] rounded-full w-3 h-3" />
-                          <div className="border border-[#2e2e2e] rounded-full w-3 h-3" />
+                          <div className="bg-black rounded-full w-3 h-3" />
+                          <div className="bg-black rounded-full w-3 h-3" />
+                          <div className="bg-black rounded-full w-3 h-3" />
+                          <div className="bg-black rounded-full w-3 h-3" />
+                          <div className="bg-black rounded-full w-3 h-3" />
+                          <div className="bg-black rounded-full w-3 h-3" />
+                          <div className="bg-black rounded-full w-3 h-3" />
+                          <div className="bg-black rounded-full w-3 h-3" />
+                          <div className="border border-black rounded-full w-3 h-3" />
+                          <div className="border border-black rounded-full w-3 h-3" />
                         </div>
                       </div>
                       <div>
                         <h3 className="font-medium text-base">After Effects</h3>
                         <div className="flex items-center gap-x-1">
-                          <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                          <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                          <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                          <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                          <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                          <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                          <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                          <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                          <div className="border border-[#2e2e2e] rounded-full w-3 h-3" />
-                          <div className="border border-[#2e2e2e] rounded-full w-3 h-3" />
+                          <div className="bg-black rounded-full w-3 h-3" />
+                          <div className="bg-black rounded-full w-3 h-3" />
+                          <div className="bg-black rounded-full w-3 h-3" />
+                          <div className="bg-black rounded-full w-3 h-3" />
+                          <div className="bg-black rounded-full w-3 h-3" />
+                          <div className="bg-black rounded-full w-3 h-3" />
+                          <div className="bg-black rounded-full w-3 h-3" />
+                          <div className="bg-black rounded-full w-3 h-3" />
+                          <div className="border border-black rounded-full w-3 h-3" />
+                          <div className="border border-black rounded-full w-3 h-3" />
                         </div>
                       </div>
                       <div>
                         <h3 className="font-medium text-base">Procreate</h3>
                         <div className="flex items-center gap-x-1">
-                          <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                          <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                          <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                          <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                          <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                          <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                          <div className="bg-[#2e2e2e] rounded-full w-3 h-3" />
-                          <div className="border border-[#2e2e2e] rounded-full w-3 h-3" />
-                          <div className="border border-[#2e2e2e] rounded-full w-3 h-3" />
-                          <div className="border border-[#2e2e2e] rounded-full w-3 h-3" />
+                          <div className="bg-black rounded-full w-3 h-3" />
+                          <div className="bg-black rounded-full w-3 h-3" />
+                          <div className="bg-black rounded-full w-3 h-3" />
+                          <div className="bg-black rounded-full w-3 h-3" />
+                          <div className="bg-black rounded-full w-3 h-3" />
+                          <div className="bg-black rounded-full w-3 h-3" />
+                          <div className="bg-black rounded-full w-3 h-3" />
+                          <div className="border border-black rounded-full w-3 h-3" />
+                          <div className="border border-black rounded-full w-3 h-3" />
+                          <div className="border border-black rounded-full w-3 h-3" />
                         </div>
                       </div>
                     </div>
@@ -274,7 +274,7 @@ export default function CurriculumModal() {
                     <div className="flex flex-col gap-y-6">
                       <div>
                         <h3 className="font-medium text-base mb-1">Email</h3>
-                        <span className="block -mt-[2px] text-[#505050] text-sm">
+                        <span className="block -mt-[2px] text-gray text-sm">
                           fernandasenactt@gmail.com
                         </span>
                       </div>
@@ -282,10 +282,10 @@ export default function CurriculumModal() {
                         <h3 className="font-medium text-base mb-1">
                           Languages
                         </h3>
-                        <span className="block -mt-[2px] text-[#505050] text-sm mb-1">
+                        <span className="block -mt-[2px] text-gray text-sm mb-1">
                           Portuguese | Native
                         </span>
-                        <span className="block -mt-[2px] text-[#505050] text-sm">
+                        <span className="block -mt-[2px] text-gray text-sm">
                           English | Fluent
                         </span>
                       </div>
@@ -330,16 +330,16 @@ export default function CurriculumModal() {
                 <div className="flex flex-row justify-between xl:flex-col gap-y-6">
                   <div>
                     <h3 className="font-medium text-base mb-1">Email</h3>
-                    <span className="block -mt-[2px] text-[#505050] text-sm">
+                    <span className="block -mt-[2px] text-gray text-sm">
                       fernandasenactt@gmail.com
                     </span>
                   </div>
                   <div>
                     <h3 className="font-medium text-base mb-1">Languages</h3>
-                    <span className="block -mt-[2px] text-[#505050] text-sm mb-1">
+                    <span className="block -mt-[2px] text-gray text-sm mb-1">
                       Portuguese | Native
                     </span>
-                    <span className="block -mt-[2px] text-[#505050] text-sm">
+                    <span className="block -mt-[2px] text-gray text-sm">
                       English | Fluent
                     </span>
                   </div>
@@ -383,7 +383,7 @@ export default function CurriculumModal() {
                   <a
                     href="https://www.behance.net/fersena"
                     target="_blank"
-                    className="underline underline-[#2e2e2e]"
+                    className="underline underline-black"
                   >
                     https://www.behance.net/fersena
                   </a>

@@ -53,13 +53,13 @@ export default function Project(props: Props) {
         <Navbar />
         <section>
           <div className="relative">
-            <div className="w-full absolute top-0 z-50 h-[300px] bg-gradient-to-b from-[#FE9BBA]/90 to-transparent" />
+            <div className="w-full absolute top-0 z-50 h-[300px] bg-gradient-to-b from-pink/90 to-transparent" />
             <img
               src={project.coverImage}
               className="object-cover relative w-full h-[300px]"
             />
           </div>
-          <div className="max-w-[800px] mt-8 text-[#2e2e2e] w-full mx-auto">
+          <div className="max-w-[800px] mt-8 text-black w-full mx-auto">
             <h1 className="text-[72px] font-semibold">{project.title}</h1>
             <h2 className="text-[50px] font-light -mt-4">{project.subtitle}</h2>
             <div

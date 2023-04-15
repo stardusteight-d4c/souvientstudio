@@ -41,22 +41,22 @@ export const cardServiceData: ICardService[] = [
 export const skillsData: ISkillData[] = [
   {
     image: photoshop.src,
-    alt: 'photoshop',
+    alt: 'Photoshop',
   },
   {
     image: illustrator.src,
-    alt: 'illustrator',
+    alt: 'Illustrator',
   },
   {
     image: afterEffects.src,
-    alt: 'afterEffects',
+    alt: 'After Effects',
   },
   {
     image: figma.src,
-    alt: 'figma',
+    alt: 'Figma',
   },
   {
     image: procreate.src,
-    alt: 'procreate',
+    alt: 'Procreate',
   },
 ]

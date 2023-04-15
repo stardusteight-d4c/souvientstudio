@@ -35,7 +35,7 @@ export default function Auth() {
       {token && (
         <>
           <Header title="Authorization" />
-          <main className="min-h-screen flex items-center justify-center h-[100vh] bg-[#FE9BBA] text-[#2e2e2e] overflow-hidden">
+          <main className="min-h-screen flex items-center justify-center h-[100vh] bg-pink text-black overflow-hidden">
             <div className="spinner4546">
               <span>F</span>
               <span>E</span>

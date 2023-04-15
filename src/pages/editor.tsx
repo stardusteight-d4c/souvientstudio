@@ -248,8 +248,8 @@ export default function Editor() {
           )}
           <main
             className={`${
-              showPreview ? 'bg-[#F8F7E2]' : 'bg-gradient-to-b'
-            }  from-[#FE9BBA] to-transparent overflow-hidden`}
+              showPreview ? 'bg-white' : 'bg-gradient-to-b'
+            }  from-pink to-transparent overflow-hidden`}
           >
             <Navbar notFixed={showPreview ? false : true} />
             {showPreview ? (
@@ -265,15 +265,15 @@ export default function Editor() {
                 emitBack={backToEditor}
               />
             ) : (
-              <section className="grid py-10 text-[#2e2e2e] place-items-center">
-                <div className="bg-[#F8F7E2] rounded-[35px] flex flex-col gap-2 p-4 w-[800px] h-fit shadow-md shadow-[#2e2e2e]/10">
+              <section className="grid py-10 text-black place-items-center">
+                <div className="bg-white rounded-[40px] flex flex-col gap-2 p-4 w-[800px] h-fit shadow-md shadow-black/10">
                   <div className="flex justify-between items-center">
                     <div className="flex items-center gap-x-2">
                       {selectedToEdit && !uploadedFile ? (
                         <>
                           <button
                             onClick={onClickUpload}
-                            className="bg-[#FE9BBA] block w-fit whitespace-nowrap py-2 px-4 text-[#F8F7E2] font-medium rounded-full"
+                            className="bg-pink block w-fit whitespace-nowrap py-2 px-4 text-white font-medium rounded-full"
                           >
                             New cover image
                           </button>
@@ -286,8 +286,8 @@ export default function Editor() {
                           <button
                             onClick={onClickUpload}
                             className={`${
-                              uploadedFile ? 'bg-[#fe5b30]' : 'bg-[#FE9BBA]'
-                            } block w-fit whitespace-nowrap py-2 px-4 text-[#F8F7E2] font-medium rounded-full`}
+                              uploadedFile ? 'bg-orange' : 'bg-pink'
+                            } block w-fit whitespace-nowrap py-2 px-4 text-white font-medium rounded-full`}
                           >
                             {uploadedFile
                               ? 'Uploaded cover image'
@@ -307,7 +307,7 @@ export default function Editor() {
                       accept="image/png, image/jpeg"
                     />
                     <div className="relative group w-80 h-8 rounded-full">
-                      <div className="absolute group-focus-within:text-[#fe5b30] top-1 left-2 text-[#2e2e2e]/80">
+                      <div className="absolute group-focus-within:text-orange top-1 left-2 text-black/80">
                         <Icon.Search size={24} />
                       </div>
                       <div className="h-full w-full flex items-center gap-x-2">
@@ -319,10 +319,10 @@ export default function Editor() {
                             onChange={(e) => {
                               handleInputChange(e)
                             }}
-                            className="h-full w-full pl-8 pr-3 bg-transparent placeholder:text-[#505050] border-[2px] border-[#2e2e2e] focus:border-[#fe5b30] outline-none rounded-full"
+                            className="h-full w-full pl-8 pr-3 bg-transparent placeholder:text-gray border-[2px] border-black focus:border-orange outline-none rounded-full"
                           />
                           {resultsSearch && editorInputsValue.search !== '' && (
-                            <ul className="absolute overflow-hidden z-50 bg-[#FE9BBA] mt-1 w-full !max-w-[242px] rounded-lg">
+                            <ul className="absolute overflow-hidden z-50 bg-pink mt-1 w-full !max-w-[242px] rounded-lg">
                               {resultsSearch.map((result: any, index: Key) => (
                                 <li
                                   key={index}
@@ -339,7 +339,7 @@ export default function Editor() {
                                     setSelectedProjectType(result.type)
                                     setCoverImage(result.coverImage)
                                   }}
-                                  className="text-sm text-left max-w-[242px] w-full font-medium cursor-pointer hover:bg-[#fc81a8] text-[#F8F7E2] py-[2px] px-4"
+                                  className="text-sm text-left max-w-[242px] w-full font-medium cursor-pointer hover:bg-[#fc81a8] text-white py-[2px] px-4"
                                 >
                                   {result.title}: {result.subtitle}
                                 </li>
@@ -351,7 +351,7 @@ export default function Editor() {
                           onClick={() =>
                             searchByProject(editorInputsValue.search)
                           }
-                          className="block ml-auto w-fit bg-[#FE9BBA] py-1 px-2 text-[#F8F7E2] font-medium rounded-full"
+                          className="block ml-auto w-fit bg-pink py-1 px-2 text-white font-medium rounded-full"
                         >
                           Search
                         </button>
@@ -361,7 +361,7 @@ export default function Editor() {
                   <div id="selectProjectTypeElement" className="relative w-fit">
                     <div
                       onClick={() => setShowSelectDropdown(!showSelectDropdown)}
-                      className="text-sm flex justify-center gap-x-2 px-2 cursor-pointer border-[2px] border-[#FE9BBA] py-1 rounded-full"
+                      className="text-sm flex justify-center gap-x-2 px-2 cursor-pointer border-[2px] border-pink py-1 rounded-full"
                     >
                       {selectedProjectType}
                       <div
@@ -373,7 +373,7 @@ export default function Editor() {
                       </div>
                     </div>
                     {showSelectDropdown && (
-                      <div className="absolute z-50 bg-[#FE9BBA] mt-1 w-full rounded-lg overflow-hidden">
+                      <div className="absolute z-50 bg-pink mt-1 w-full rounded-lg overflow-hidden">
                         <ul className="text-center">
                           {projectsTypes.map((type) => {
                             if (type !== selectedProjectType) {
@@ -384,7 +384,7 @@ export default function Editor() {
                                     setSelectedProjectType(type)
                                     setShowSelectDropdown(false)
                                   }}
-                                  className="text-sm font-medium cursor-pointer hover:bg-[#fc81a8] text-[#F8F7E2] py-[2px]"
+                                  className="text-sm font-medium cursor-pointer hover:bg-[#fc81a8] text-white py-[2px]"
                                 >
                                   {type}
                                 </li>
@@ -401,14 +401,14 @@ export default function Editor() {
                       name="title"
                       value={editorInputsValue.title}
                       onChange={handleInputChange}
-                      className="text-[32px] placeholder:text-[#505050] transition-all duration-300 focus:translate-x-2 rounded-md font-semibold bg-transparent outline-none"
+                      className="text-[32px] placeholder:text-gray transition-all duration-300 focus:translate-x-2 rounded-md font-semibold bg-transparent outline-none"
                     />
                     <input
                       placeholder="Subtitle"
                       name="subtitle"
                       value={editorInputsValue.subtitle}
                       onChange={handleInputChange}
-                      className="text-[24px] placeholder:text-[#505050] transition-all duration-300 focus:translate-x-2 rounded-md font-light -mt-8 bg-transparent outline-none"
+                      className="text-[24px] placeholder:text-gray transition-all duration-300 focus:translate-x-2 rounded-md font-light -mt-8 bg-transparent outline-none"
                     />
                   </div>
                   <div className="h-full relative">
@@ -443,7 +443,7 @@ export default function Editor() {
                           <li
                             key={index}
                             onClick={() => handleSelected(item.name)}
-                            className="cursor-pointer rounded-md p-1 hover:bg-[#FE9BBA] hover:text-[#F8F7E2] w-fit"
+                            className="cursor-pointer rounded-md p-1 hover:bg-pink hover:text-white w-fit"
                           >
                             <item.Icon />
                           </li>
@@ -454,7 +454,7 @@ export default function Editor() {
                           <li
                             key={index}
                             onClick={() => item.execute()}
-                            className="cursor-pointer rounded-md p-1 hover:bg-[#FE9BBA] hover:text-[#F8F7E2] w-fit"
+                            className="cursor-pointer rounded-md p-1 hover:bg-pink hover:text-white w-fit"
                           >
                             <item.Icon />
                           </li>
@@ -469,7 +469,7 @@ export default function Editor() {
                         onChange={handleInputChange}
                         id="textareaEN"
                         value={editorInputsValue.textareaEN}
-                        className="rounded-b-xl h-[300px] mb-2 w-full outline-none  border-[2px] border-[#fc81a8] border-t-0 bg-[#fc81a8]/50 resize-none p-4 text-[#2e2e2e]"
+                        className="rounded-b-xl h-[300px] mb-2 w-full outline-none  border-[2px] border-[#fc81a8] border-t-0 bg-[#fc81a8]/50 resize-none p-4 text-black"
                       />
                     ) : (
                       <textarea
@@ -479,7 +479,7 @@ export default function Editor() {
                         onChange={handleInputChange}
                         id="textareaPTBR"
                         value={editorInputsValue.textareaPTBR}
-                        className="rounded-b-xl h-[300px] mb-2 w-full outline-none  border-[2px] border-[#fc81a8] border-t-0 bg-[#fc81a8]/50 resize-none p-4 text-[#2e2e2e]"
+                        className="rounded-b-xl h-[300px] mb-2 w-full outline-none  border-[2px] border-[#fc81a8] border-t-0 bg-[#fc81a8]/50 resize-none p-4 text-black"
                       />
                     )}
                     {selectedToEdit ? (
@@ -505,19 +505,19 @@ export default function Editor() {
                               setSelectedProjectType(projectsTypes[0])
                               setCoverImage('')
                             }}
-                            className="block w-fit border-[2px] border-[#FE9BBA] py-[7px] px-4 text-[#2e2e2e] font-medium rounded-full"
+                            className="block w-fit border-[2px] border-pink py-[7px] px-4 text-black font-medium rounded-full"
                           >
                             Cancel Edit
                           </button>
                           <button
                             onClick={deleteProject}
-                            className="block w-fit bg-[#fe5b30] py-2 px-4 text-[#F8F7E2] font-medium rounded-full"
+                            className="block w-fit bg-orange py-2 px-4 text-white font-medium rounded-full"
                           >
                             Delete
                           </button>
                           <button
                             onClick={updateProject}
-                            className="block w-fit bg-[#FE9BBA] py-2 px-4 text-[#F8F7E2] font-medium rounded-full"
+                            className="block w-fit bg-pink py-2 px-4 text-white font-medium rounded-full"
                           >
                             Update
                           </button>
@@ -526,7 +526,7 @@ export default function Editor() {
                     ) : (
                       <button
                         onClick={submitProject}
-                        className="block ml-auto w-fit bg-[#FE9BBA] py-2 px-4 text-[#F8F7E2] font-medium rounded-full"
+                        className="block ml-auto w-fit bg-pink py-2 px-4 text-white font-medium rounded-full"
                       >
                         {isLoading ? 'Sending...' : 'Submit'}
                       </button>

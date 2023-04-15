@@ -32,12 +32,14 @@ export default function SkillImage({ skill, index }: Props) {
       <div className={css.handleContainer(isVisible, !isEven(index))}>
         <Image
           src={skill.image}
-          alt={skill.alt}
+          alt={`${skill.alt}/img`}
           width={160}
           height={160}
           quality={100}
           className={css.image}
         />
+
+        <div className='bg-orange'>{skill.alt}</div>
       </div>
     </IntersectionObserver>
   )

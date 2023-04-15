@@ -16,8 +16,8 @@ export function Flags(props: Props) {
           onClick={() => setLang('pt-BR')}
           alt="united-states-flag/icon"
           quality={100}
-          width={28}
-          height={28}
+          width={24}
+          height={24}
         />
       ) : (
         <Image
@@ -25,8 +25,8 @@ export function Flags(props: Props) {
           onClick={() => setLang('en')}
           alt="brazil-flag/icon"
           quality={100}
-          width={28}
-          height={28}
+          width={24}
+          height={24}
         />
       )}
     </li>

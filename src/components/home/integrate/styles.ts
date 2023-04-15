@@ -1,19 +1,20 @@
 export const projectSliderContainerStyles = {
-  title: `text-[38px] px-4 md:px-0 text-[#2e2e2e] block w-fit !tracking-[-2px] font-medium !leading-[41.6px] font-poppins pb-8`,
-  titleSpan: `text-[#fe5b30]`,
+  title: `text-[38px] px-4 md:px-0 text-black block w-fit !tracking-[-2px] font-medium !leading-[41.6px] font-poppins pb-8`,
+  titleSpan: `text-orange`,
   wrapper: `overflow-x-hidden h-fit relative z-[10]`,
-  overlayLeft: `absolute inset-y-0 w-[20px] md:w-[30px] z-50 left-0 bg-gradient-to-r from-[#F8F7E2] via-[#F8F7E2]/50 to-transparent`,
-  overlayRight: `absolute inset-y-0 w-[20px] md:w-[30px] z-50 right-0 bg-gradient-to-l from-[#F8F7E2] via-[#F8F7E2]/50 to-transparent`,
-  noProjectsFound: `text-[#2e2e2e] text-xl font-medium py-5 text-center w-full`,
+  overlayLeft: `absolute inset-y-0 w-[20px] md:w-[30px] z-50 left-0 bg-gradient-to-r from-white via-white/50 to-transparent`,
+  overlayRight: `absolute inset-y-0 w-[20px] md:w-[30px] z-50 right-0 bg-gradient-to-l from-white via-white/50 to-transparent`,
+  noProjectsFound: `text-black text-xl font-medium py-5 text-center w-full`,
 }
 
 export const sliderCardStyles = {
   coverImage: `w-full h-full object-cover pointer-events-none`,
-  overlay: `inset-x-0 transition-all duration-75 bg-gradient-to-t from-[#fe9bba] via-[#fe9bba]/50 to-transparent bottom-0 h-[100px] md:hidden group-hover:block`,
+  overlay: `inset-x-0 transition-all duration-75 bg-gradient-to-t from-pink via-pink/50 to-transparent bottom-0 h-[100px] md:hidden group-hover:block`,
   content: `content`,
   titleContainer: `title px-4 text-center`,
   title: `font-bold text-2xl uppercase`,
   subtitle: `font-medium tracking-widest uppercase text-lg`,
+  sliderLink: `card-animate border border-gray/30 card rounded-[40px] overflow-hidden transition-all duration-500 cursor-pointer w-full lg:min-w-[450px] min-w-[300px] max-w-[300px] h-[300px] lg:max-w-[450px] lg:h-[350px] group relative select-none`,
 }
 
 export const skillImageStyles = {
@@ -23,7 +24,7 @@ export const skillImageStyles = {
         ? 'animate-skill-from-up'
         : 'animate-skill-from-down'
       : ''
-    return `${animate} w-[160px] h-[160px] relative inset-0`
+    return `${animate} w-[160px] h-[160px] border border-gray/30 rounded-[40px] relative inset-0`
   },
   image: `w-[160px] h-[160px] hover:scale-90 cursor-default transition-all duration-300 object-cover rounded-[40px]`,
 }
@@ -32,10 +33,9 @@ export const serviceCardStyles = {
   handleWrapper: (index: number) => {
     return `${
       index % 2 === 0 && 'mdd:mt-20'
-    } shadow-lg max-w-[300px] h-[250px] text-left w-full flex items-start justify-center flex-col px-[20px] rounded-3xl`
+    } shadow-lg max-w-[300px] border border-gray/30 h-[270px] text-left w-full flex items-start justify-center flex-col px-[28px] rounded-[40px]`
   },
   emojiImage: `w-[50px] h-[50px] ml object-cover`,
-  title: `text-2xl text-[#2e2e2e] pb-3 pt-2 !leading-[27px] tracking-[-0.3px] font-semibold`,
-  text: `font-inter text-sm !leading-[21px] text-[#505050]`,
-  sliderLink: `card-animate card rounded-[40px] overflow-hidden transition-all duration-500 cursor-pointer w-full lg:min-w-[450px] min-w-[300px] max-w-[300px] h-[300px] lg:max-w-[450px] lg:h-[350px] group relative select-none`,
+  title: `text-2xl text-black pb-3 pt-2 !leading-[27px] tracking-[-0.3px] font-semibold`,
+  text: `font-inter text-sm !leading-[21px] text-gray`,
 }
