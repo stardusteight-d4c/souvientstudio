@@ -17,7 +17,7 @@ export const sliderCardStyles = {
 }
 
 export const skillImageStyles = {
-  image: `w-[160px] h-[160px] hover:scale-95 cursor-default transition-all duration-300 object-cover rounded-[40px]`,
+  image: `w-[160px] h-[160px] hover:scale-90 cursor-default transition-all duration-300 object-cover rounded-[40px]`,
 }
 
 export const serviceCardStyles = {

@@ -59,7 +59,7 @@ export default function Navbar({ notFixed = false }: Props) {
     window.scrollTo({ top: 0, behavior: 'auto' })
     setTimeout(() => {
       setShowCurriculum(true)
-    }, 200)
+    }, 500)
   }
 
   return (
