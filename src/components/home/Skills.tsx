@@ -16,8 +16,8 @@ export default function Skills() {
       <div className={css.container}>
         <h2 className={css.title}>{localeContextHome.skills}</h2>
         <div className={css.skillsWrapper}>
-          {skillsData.map((skill) => (
-            <SkillImage skill={skill} />
+          {skillsData.map((skill, index) => (
+            <SkillImage skill={skill} index={index} key={index} />
           ))}
         </div>
       </div>

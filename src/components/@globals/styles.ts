@@ -1,9 +1,9 @@
 export const navbarStyles = {
-  handleWrapper: (isGradientShadowOn: boolean, isDashboardRoute: boolean, isTop: boolean) => {
+  handleWrapper: (isGradientShadowOn: boolean, isDashboardRoute: boolean) => {
     return `${
       isGradientShadowOn &&
       'bg-gradient-to-b from-[#FE9BBA] via-[#FE9BBA]/50 to-transparent'
-    } ${!isDashboardRoute && 'fixed'}  ${isTop && 'nav-animation'} z-[1000] w-screen inset-x-0 top-0`
+    } ${!isDashboardRoute && 'fixed'} nav-animation z-[1000] w-screen inset-x-0 top-0`
   },
   container: `flex relative items-center max-w-[1445px] px-8 md:px-14 mx-auto justify-between py-8`,
   fevientLogo: `font-bold cursor-pointer text-[20px] tracking-[-1px] uppercase text-[#F8F7E2]`,

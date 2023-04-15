@@ -1,5 +1,5 @@
 import { useAppContext } from '@/@context/ContextProvider'
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import IntersectionObserver from '../@globals/IntersectionObserver'
 import { marqueeStyles as css } from './styles'
 
@@ -17,19 +17,12 @@ export default function Marquee() {
     setIsVisible(true)
   }
 
-  const handleExitViewport = () => {
-    setIsVisible(false)
-  }
-
-  console.log(isVisible);
-  
 
   return (
     <IntersectionObserver
       onEnter={handleEnterViewport}
-      onExit={handleExitViewport}
     >
-      <section className={css.wrapper}>
+      <section className={css.wrapper(isVisible)}>
         <div className={css.leftOverlay} />
         <div className={css.rightOverlay} />
         <div className={css.marqueeWrapper}>

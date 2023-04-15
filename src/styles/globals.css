@@ -24,7 +24,7 @@ body {
 
 /* Underline Effect */
 @media (min-width: 768px) {
-.effect-underline:after {
+  .effect-underline:after {
     content: '';
     position: absolute;
     display: inline-block;
@@ -150,19 +150,39 @@ body {
   position: absolute;
   z-index: 2;
 }
-.card .content {
-  position: absolute;
-  z-index: 3;
-  bottom: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transform: scale(0);
-  transition: 500ms;
+
+@media (min-width: 768px) {
+  .card .content {
+    position: absolute;
+    z-index: 3;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: scale(0);
+    transition: 500ms;
+  }
+  .card:hover .content {
+    transform: scale(1);
+    bottom: 25px;
+  }
 }
-.card:hover .content {
-  transform: scale(1);
-  bottom: 25px;
+
+@media (max-width: 768px) {
+  .card .content {
+    position: absolute;
+    z-index: 3;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: scale(0);
+    transition: 500ms;
+  }
+  .card .content {
+    transform: scale(1);
+    bottom: 25px;
+  }
 }
 
 /* Project Article */
@@ -330,17 +350,121 @@ body {
   animation-fill-mode: forwards;
 }
 
-/* nav-animation */
-@keyframes slideDownMarquee {
-  0% {
-    transform: translateY(100%);
+/* marquee-animation */
+@keyframes slideInRightMarquee {
+  from {
+    transform: translateX(100%);
   }
-  100% {
-    transform: translateY(0);
+  to {
+    transform: translateX(0);
   }
 }
-.marquee-animation {
-  animation-name: slideDown;
-  animation-duration: 1s;
-  animation-fill-mode: forwards;
+.marquee-section-animation {
+  animation: slideInRightMarquee 3s normal;
+}
+
+/* slider-animation */
+@keyframes slideInSlider {
+  0% {
+    transform: translateX(-100%);
+  }
+  60% {
+    transform: translateX(10%);
+  }
+  80% {
+    transform: translateX(-5%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+.slider-animation {
+  animation: slideInSlider 2s ease-in-out;
+}
+
+/* behance-animation */
+@keyframes opacityBehance {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.behance-animation {
+  animation: opacityBehance 2s ease-in-out;
+}
+
+/* behance-button-animation */
+@keyframes scaleUpButton {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.behance-button-animation {
+  animation: scaleUpButton 2s ease-in-out;
+}
+
+/*  Skills Animations */
+@media (min-width: 950px) {
+  @keyframes skill-from-up {
+    0% {
+      transform: translate3d(0px, -200px, 0px);
+      opacity: 0;
+    }
+    100% {
+      transform: translate3d(0px, 0px, 0px);
+      opacity: 1;
+    }
+  }
+  @keyframes skill-from-down {
+    0% {
+      transform: translate3d(0px, 200px, 0px);
+      opacity: 0;
+    }
+    100% {
+      transform: translate3d(0px, 0px, 0px);
+      opacity: 1;
+    }
+  }
+  .animate-skill-from-up {
+    animation: skill-from-up 1s ease-out;
+  }
+  .animate-skill-from-down {
+    animation: skill-from-down 1s ease-out;
+  }
+}
+@media (max-width: 950px) {
+  @keyframes skill-from-up {
+    0% {
+      transform: translate3d(-200px, 0px, 0px);
+      opacity: 0;
+    }
+    100% {
+      transform: translate3d(0px, 0px, 0px);
+      opacity: 1;
+    }
+  }
+  @keyframes skill-from-down {
+    0% {
+      transform: translate3d(200px, 0px, 0px);
+      opacity: 0;
+    }
+    100% {
+      transform: translate3d(0px, 0px, 0px);
+      opacity: 1;
+    }
+  }
+  .animate-skill-from-up {
+    animation: skill-from-up 1s ease-out;
+  }
+  .animate-skill-from-down {
+    animation: skill-from-down 1s ease-out;
+  }
 }

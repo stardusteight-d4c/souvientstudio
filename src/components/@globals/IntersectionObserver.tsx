@@ -6,6 +6,8 @@ type IntersectionObserverProps = {
   threshold?: number | number[]
   onEnter?: () => void
   onExit?: () => void
+  overflowXHidden?: boolean
+  overflowYHidden?: boolean
 }
 
 export default function IntersectionObserver({
@@ -14,6 +16,8 @@ export default function IntersectionObserver({
   threshold,
   onEnter,
   onExit,
+  overflowXHidden = true,
+  overflowYHidden = true,
 }: IntersectionObserverProps) {
   const ref = useRef<HTMLDivElement>(null)
 
@@ -44,5 +48,14 @@ export default function IntersectionObserver({
     }
   }, [rootMargin, threshold, onEnter, onExit])
 
-  return <div ref={ref}>{children}</div>
+  return (
+    <div
+      ref={ref}
+      className={`max-w-[100vw] ${overflowXHidden && 'overflow-x-hidden'} ${
+        overflowYHidden && 'overflow-y-hidden'
+      }`}
+    >
+      {children}
+    </div>
+  )
 }

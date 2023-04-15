@@ -16,7 +16,7 @@ export const starsVariants: (direction: string) => Variants = (
     transition: {
       type: 'spring',
       duration: 2,
-      delay: 0.5,
+      delay: 2,
     },
   },
 })

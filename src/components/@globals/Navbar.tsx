@@ -22,21 +22,6 @@ export default function Navbar({ notFixed = false }: Props) {
     isClientAuthenticated,
   } = useAppContext()
   const isIndexRoute = router.pathname === '/'
-  const [isTop, setIsTop] = useState(true)
-
-  useEffect(() => {
-    function handleScroll() {
-      if (window.pageYOffset === 0) {
-        setIsTop(true)
-      } else {
-        setIsTop(false)
-      }
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
 
   useEffect(() => {
     window.addEventListener('scroll', handleGradientShadowOnScroll)
@@ -64,7 +49,7 @@ export default function Navbar({ notFixed = false }: Props) {
 
   return (
     <nav
-      className={css.handleWrapper(isGradientShadowOn, notFixed, isTop)}
+      className={css.handleWrapper(isGradientShadowOn, notFixed)}
     >
       {showCurriculum && <CurriculumModal />}
       <div className={css.container}>

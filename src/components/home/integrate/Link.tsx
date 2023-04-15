@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
+import { serviceCardStyles as css } from './styles'
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode
@@ -34,7 +35,7 @@ export const Link = ({ children, to, ...props }: Props) => {
         click && router.push(to)
         return
       }}
-      className="card-animate card rounded-[50px] overflow-hidden transition-all duration-500 cursor-pointer w-full lg:min-w-[450px] min-w-[300px] h-[400px] lg:max-w-[450px] lg:h-[350px] group relative select-none"
+      className={css.sliderLink}
     >
       {children}
     </div>

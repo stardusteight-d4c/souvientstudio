@@ -18,7 +18,11 @@ export const heroStyles = {
 }
 
 export const marqueeStyles = {
-  wrapper: `marquee-animation relative max-w-[100vw] pb-[20px] overflow-x-hidden relative`,
+  wrapper: (isVisible: boolean) => {
+    return `${
+      isVisible ? 'marquee-section-animation' : 'hidden'
+    } relative max-w-[100vw] pb-[20px] overflow-x-hidden relative`
+  },
   leftOverlay: `z-[100] bg-gradient-to-r from-[#F8F7E2] via-[#F8F7E2]/80 to-transparent inset-y-0 w-[50px] md:w-[200px] absolute left-0`,
   rightOverlay: `z-[100] bg-gradient-to-l from-[#F8F7E2] via-[#F8F7E2]/80 to-transparent inset-y-0 w-[50px] md:w-[200px] absolute right-0`,
   marqueeWrapper: `w-fit text-[#2e2e2e] cursor-default justify-center relative flex items-center`,
@@ -29,22 +33,30 @@ export const marqueeStyles = {
 }
 
 export const projectsStyles = {
-  wrapper: `pt-[150px] pb-[100px] md:px-4 lg:px-14 relative h-fit max-w-[1445px] mx-auto`,
+  wrapper: `py-[100px] md:px-4 lg:px-14 relative h-fit max-w-[1445px] mx-auto`,
   container: `mx-auto space-y-20`,
 }
 
 export const behanceStyles = {
   wrapper: `pb-[100px]`,
   container: `max-w-[1200px] mx-auto`,
-  paragraph: `!leading-[28.8px] w-full max-w-[340px] mx-auto text-center text-lg text-[#2e2e2e] font-normal`,
-  linkButton: `block mt-[40px] w-fit bg-[#FE9BBA] py-3 px-6 mx-auto text-[#F8F7E2] font-medium rounded-full`,
+  handleParagraph: (isVisible: boolean) => {
+    return `${
+      isVisible && 'behance-animation'
+    } !leading-[28.8px] w-full max-w-[340px] mx-auto text-center text-lg text-[#2e2e2e] font-normal`
+  },
+  handleLinkButton: (isVisible: boolean) => {
+    return `${
+      isVisible && 'behance-button-animation'
+    } block mt-[40px] w-fit bg-[#FE9BBA] py-3 px-6 mx-auto text-[#F8F7E2] font-medium rounded-full`
+  },
 }
 
 export const skillsStyles = {
   wrapper: `pb-[150px] pt-[100px]`,
   container: `max-w-[1200px] px-4 mx-auto`,
   title: `text-[32px] text-[#2e2e2e] block w-fit mx-auto !tracking-[-2px] font-medium !leading-[41.6px] font-poppins`,
-  skillsWrapper: `flex flex-col mdd:flex-row max-w-[1032px] items-center gap-y-6 mdd:justify-between mx-auto mt-[50px]`,
+  skillsWrapper: `flex relative flex-col mdd:flex-row overflow-hidden mdd:overflow-visible max-w-[100vw] mdd:max-w-[1032px] items-center gap-y-6 mdd:justify-between mx-auto mt-[50px]`,
 }
 
 export const servicesStyles = {
