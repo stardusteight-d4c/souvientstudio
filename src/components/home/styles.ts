@@ -29,6 +29,38 @@ export const marqueeStyles = {
 }
 
 export const projectsStyles = {
-  wrapper: `py-[150px] md:px-4 lg:px-14 relative h-fit max-w-[1445px] mx-auto`,
+  wrapper: `pt-[150px] pb-[100px] md:px-4 lg:px-14 relative h-fit max-w-[1445px] mx-auto`,
   container: `mx-auto space-y-20`,
+}
+
+export const behanceStyles = {
+  wrapper: `pb-[100px]`,
+  container: `max-w-[1200px] mx-auto`,
+  paragraph: `!leading-[28.8px] w-full max-w-[340px] mx-auto text-center text-lg text-[#2e2e2e] font-normal`,
+  linkButton: `block mt-[40px] w-fit bg-[#FE9BBA] py-3 px-6 mx-auto text-[#F8F7E2] font-medium rounded-full`,
+}
+
+export const skillsStyles = {
+  wrapper: `pb-[150px] pt-[100px]`,
+  container: `max-w-[1200px] px-4 mx-auto`,
+  title: `text-[32px] text-[#2e2e2e] block w-fit mx-auto !tracking-[-2px] font-medium !leading-[41.6px] font-poppins`,
+  skillsWrapper: `flex flex-col mdd:flex-row max-w-[1032px] items-center gap-y-6 mdd:justify-between mx-auto mt-[50px]`,
+}
+
+export const servicesStyles = {
+  wrapper: `pb-[100px] pt-[50px]`,
+  container: `max-w-[1032px] px-4 lg:px-0 text-center mx-auto`,
+  span: `text-[#fe5b30] font-medium text-xl font-poppins !tracking-[-0.3px]`,
+  title: `text-[32px] text-[#2e2e2e] mb-12 block w-fit mx-auto !tracking-[-2px] font-medium !leading-[41.6px] font-poppins`,
+  cardWrapper: `flex flex-col gap-y-6 mdd:flex-row justify-between items-center`,
+}
+
+export const contactStyles = {
+  wrapper: `py-[100px]`,
+  container: `max-w-[1032px] text-center lg:text-start px-4 lg:px-0 mx-auto`,
+  collab: `text-[#fe5b30] font-medium text-xl font-poppins !tracking-[-0.3px]`,
+  haveAproject: `block mt-1 text-[#2e2e2e] text-[32px] md:text-[48px] !leading-[52.8px] !tracking-[-1px] font-semibold`,
+  contactLinkContainer: `cursor-pointer text-[#2e2e2e] group mx-auto md:mt-3 lg:mt-0 lg:mx-0 w-fit flex flex-col md:flex-row items-center gap-x-2 text-[32px] md:text-[48px] !leading-[52.8px] !tracking-[-1px] font-semibold`,
+  contact: `group-hover:text-[#fe5b30]`,
+  arrow: `fill-[#2e2e2e] w-[42px] h-[42px] md:w-[56px] md:h-[56px] group-hover:fill-[#fe5b30] mt-1 group-hover:rotate-[45deg] group-hover:translate-x-2 transition-all duration-200`,
 }

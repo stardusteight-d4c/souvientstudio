@@ -22,7 +22,6 @@ export const SliderCard = ({ project }: Props) => {
       <div className={css.content}>
         <div className={css.titleContainer}>
           <h3 className={css.title}>{project.title}</h3>
-          <br />
           <span className={css.subtitle}>{project.subtitle}</span>
         </div>
       </div>

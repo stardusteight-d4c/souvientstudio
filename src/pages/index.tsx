@@ -1,7 +1,10 @@
 import { useEffect } from 'react'
-import Head from 'next/head'
-import { useAppContext } from '@/@context/ContextProvider'
 import axios from 'axios'
+import { useAppContext } from '@/@context/ContextProvider'
+import Navbar from '@/components/@globals/Navbar'
+import Footer from '@/components/@globals/Footer'
+import Header from '@/components/@globals/Header'
+import { IProject } from '@/@interfaces/IProject'
 import {
   Hero,
   Marquee,
@@ -9,12 +12,8 @@ import {
   Behance,
   Skills,
   Services,
-  EmailMe,
+  Contact,
 } from '../components/home'
-import Navbar from '@/components/@globals/Navbar'
-import Footer from '@/components/@globals/Footer'
-import { IProject } from '@/@interfaces/IProject'
-import Header from '@/components/@globals/Header'
 
 interface Props {
   visualIdentities: IProject[]
@@ -55,7 +54,7 @@ export default function Home(props: Props) {
         <Behance />
         <Skills />
         <Services />
-        <EmailMe />
+        <Contact />
         <Footer />
       </main>
     </>

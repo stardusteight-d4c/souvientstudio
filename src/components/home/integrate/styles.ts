@@ -15,3 +15,18 @@ export const sliderCardStyles = {
   title: `font-bold text-2xl uppercase`,
   subtitle: `font-medium tracking-widest uppercase text-lg`,
 }
+
+export const skillImageStyles = {
+  image: `w-[160px] h-[160px] hover:scale-95 cursor-default transition-all duration-300 object-cover rounded-[40px]`,
+}
+
+export const serviceCardStyles = {
+  handleWrapper: (index: number) => {
+    return `${
+      index % 2 === 0 && 'mdd:mt-20'
+    } shadow-lg max-w-[300px] h-[250px] text-left w-full flex items-start justify-center flex-col px-[20px] rounded-3xl`
+  },
+  emojiImage: `w-[50px] h-[50px] ml object-cover`,
+  title: `text-2xl text-[#2e2e2e] pb-3 pt-2 !leading-[27px] tracking-[-0.3px] font-semibold`,
+  text: `font-inter text-sm !leading-[21px] text-[#505050]`,
+}

@@ -5,47 +5,48 @@ import {
   afterEffects,
   figma,
   procreate,
-} from '../../assets'
+} from '@/assets'
+import SkillImage from './integrate/SkillImage'
+import { skillsStyles as css } from './styles'
 
 export default function Skills() {
   const { localeContextHome } = useAppContext()
+
+  const skillsData = [
+    {
+      image: photoshop.src,
+      alt: 'photoshop',
+    },
+    {
+      image: illustrator.src,
+      alt: 'illustrator',
+    },
+    {
+      image: afterEffects.src,
+      alt: 'afterEffects',
+    },
+    {
+      image: figma.src,
+      alt: 'figma',
+    },
+    {
+      image: procreate.src,
+      alt: 'procreate',
+    },
+  ]
 
   if (!localeContextHome) {
     return <></>
   }
 
   return (
-    <section className="pb-[150px] pt-[100px]">
-      <div className="max-w-[1200px] px-4 mx-auto">
-        <h2 className="text-[32px] text-[#2e2e2e] block w-fit mx-auto !tracking-[-2px] font-medium !leading-[41.6px] font-poppins">
-          {localeContextHome.skills}
-        </h2>
-        <div className="flex flex-col mdd:flex-row max-w-[1032px] items-center gap-y-6 mdd:justify-between mx-auto mt-[50px]">
-          <img
-            src={photoshop.src}
-            alt=""
-            className="w-[160px] h-[160px] hover:scale-105 cursor-default transition-all duration-300 object-cover rounded-[40px]"
-          />
-          <img
-            src={illustrator.src}
-            alt=""
-            className="w-[160px] h-[160px] hover:scale-105 cursor-default transition-all duration-300 object-cover rounded-[40px]"
-          />
-          <img
-            src={afterEffects.src}
-            alt=""
-            className="w-[160px] h-[160px] hover:scale-105 cursor-default transition-all duration-300 object-cover rounded-[40px]"
-          />
-          <img
-            src={figma.src}
-            alt=""
-            className="w-[160px] h-[160px] hover:scale-105 cursor-default transition-all duration-300 object-cover rounded-[40px]"
-          />
-          <img
-            src={procreate.src}
-            alt=""
-            className="w-[160px] h-[160px] hover:scale-105 cursor-default transition-all duration-300 object-cover rounded-[40px]"
-          />
+    <section className={css.wrapper}>
+      <div className={css.container}>
+        <h2 className={css.title}>{localeContextHome.skills}</h2>
+        <div className={css.skillsWrapper}>
+          {skillsData.map((skill) => (
+            <SkillImage skill={skill} />
+          ))}
         </div>
       </div>
     </section>
