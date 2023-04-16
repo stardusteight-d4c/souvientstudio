@@ -6,6 +6,7 @@ import { navbarStyles as css } from './styles'
 import { Menu, X } from './atoms'
 import { Flags } from './integrate/Flags'
 import CurriculumModal from '../home/integrate/CurriculumModal'
+import AuthWrapper from './AuthWrapper'
 
 interface Props {
   notFixed?: boolean
@@ -15,12 +16,8 @@ export default function Navbar({ notFixed = false }: Props) {
   const [isGradientShadowOn, setIsGradientShadowOn] = useState(false)
   const [isOpenMenu, setIsOpenMenu] = useState(false)
   const router = useRouter()
-  const {
-    localeContextHome,
-    showCurriculum,
-    setShowCurriculum,
-    isClientAuthenticated,
-  } = useAppContext()
+  const { localeContextHome, showCurriculum, setShowCurriculum } =
+    useAppContext()
   const isIndexRoute = router.pathname === '/'
 
   useEffect(() => {
@@ -57,11 +54,11 @@ export default function Navbar({ notFixed = false }: Props) {
         <ul className={css.desktopUnorderedList}>
           {isIndexRoute && (
             <>
-              {isClientAuthenticated && (
+              <AuthWrapper>
                 <Link href="/editor" className={css.desktopListItem}>
                   {localeContextHome?.nav.editor}
                 </Link>
-              )}
+              </AuthWrapper>
               <li
                 onClick={() => handleOpenCurriculum()}
                 className={css.desktopListItem}
@@ -97,11 +94,11 @@ export default function Navbar({ notFixed = false }: Props) {
                 <div className={css.wrapperMobileMenu} />
                 <div className={css.containerMobileMenu}>
                   <ul className={css.mobileUnorderedList}>
-                    {isClientAuthenticated && (
-                      <Link href="/editor"  className={css.mobileListItem}>
+                    <AuthWrapper>
+                      <Link href="/editor" className={css.mobileListItem}>
                         {localeContextHome?.nav.editor}
                       </Link>
-                    )}
+                    </AuthWrapper>
                     <li
                       onClick={() => {
                         handleOpenCurriculum()

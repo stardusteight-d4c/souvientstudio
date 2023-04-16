@@ -16,6 +16,7 @@ export interface IEditorData {
   showPreview: boolean
   selectedToEdit: IProject | null
   uploadedFile: File | null
+  textareaLangVersion: 'en' | 'pt-BR'
   popUps: {
     isOpenSavePopUp: boolean
     isOpenImportSavePopUp: boolean
@@ -39,6 +40,7 @@ export const MyContext = createContext<ContextAPI>({
     showPreview: false,
     selectedToEdit: null,
     uploadedFile: null,
+    textareaLangVersion: 'en',
     popUps: {
       isOpenSavePopUp: false,
       isOpenImportSavePopUp: false,
@@ -59,6 +61,7 @@ export const EditorContextProvider = ({ children }: Props) => {
     showPreview: false,
     selectedToEdit: null,
     uploadedFile: null,
+    textareaLangVersion: 'en',
     popUps: {
       isOpenSavePopUp: false,
       isOpenImportSavePopUp: false,
