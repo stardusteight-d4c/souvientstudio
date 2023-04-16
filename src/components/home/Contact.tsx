@@ -1,4 +1,4 @@
-import { useAppContext } from '@/@context/ContextProvider'
+import { useAppContext } from '@/@context/AppContextProvider'
 import { contactStyles as css } from './styles'
 
 export default function Contact() {

@@ -31,7 +31,7 @@ export const MyContext = createContext<ContextAPI>({
   setIsClientAuthenticated: () => {},
 })
 
-export const ContextProvider = ({ children }: Props) => {
+export const AppContextProvider = ({ children }: Props) => {
   const [showCurriculum, setShowCurriculum] = useState(false)
   const [lang, setLang] = useState('en')
   const [localeContextHome, setLocaleContextHome] =

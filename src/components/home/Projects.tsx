@@ -1,5 +1,5 @@
 import React from 'react'
-import { useAppContext } from '@/@context/ContextProvider'
+import { useAppContext } from '@/@context/AppContextProvider'
 import { IProject } from '@/@interfaces/IProject'
 import ProjectsSliderContainer from './integrate/ProjectsSliderContainer'
 import { projectsStyles as css } from './styles'

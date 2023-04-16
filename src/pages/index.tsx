@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import axios from 'axios'
-import { useAppContext } from '@/@context/ContextProvider'
+import { useAppContext } from '@/@context/AppContextProvider'
 import {
   Navbar,
   Footer,

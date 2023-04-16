@@ -1,5 +1,5 @@
 import { ChangeEvent, Key, useEffect, useRef, useState } from 'react'
-import { useAppContext } from '@/@context/ContextProvider'
+import { useAppContext } from '@/@context/AppContextProvider'
 import Navbar from '@/components/@globals/Navbar'
 import axios from 'axios'
 import { handleMarkdown } from '@/utils/handle-markdown'
@@ -8,25 +8,17 @@ import Footer from '@/components/@globals/Footer'
 import { detectClickOutsideElement } from '@/utils/detect-click-outside-element'
 import { SavePopUp } from '@/components/editor/integrate/SavePopUp'
 import { ImportSavePopUp } from '@/components/editor/integrate/ImportSavePopUp'
-import { ProjectShowdown } from '@/components/@globals'
+import ProjectShowdown from '@/components/editor/ProjectShowdown'
 import Header from '@/components/@globals/Header'
 import { useRouter } from 'next/router'
 import { euaFlag, brazilFlag } from '@/assets'
+import { useEditorContext } from '@/@context/EditorContextProvider'
 
 export default function Editor() {
-  const [editorInputsValue, setEditorInputsValue] = useState({
-    title: '',
-    subtitle: '',
-    textareaEN: '',
-    textareaPTBR: '',
-    search: '',
-  })
+  const { editorData, setEditorData } = useEditorContext()
   const [isLoading, setIsLoading] = useState(false)
-  const [isOpenSavePopUp, setIsOpenSavePopUp] = useState(false)
-  const [isOpenImportSavePopUp, setIsOpenImportSavePopUp] = useState(false)
   const [showPreview, setShowPreview] = useState(false)
   const [resultsSearch, setResultsSearch] = useState<any>()
-  const [showSearchResult, setShowSearchResult] = useState<any>()
   const [textareaLangVersion, setTextareaLangVersion] = useState<
     'en' | 'pt-BR'
   >('en')
@@ -82,7 +74,7 @@ export default function Editor() {
 
       if (clickedOutside && resultsSearch.length > 0) {
         setResultsSearch([])
-        setEditorInputsValue((prevState) => ({
+        setEditorData((prevState) => ({
           ...prevState,
           search: '',
         }))
@@ -101,7 +93,10 @@ export default function Editor() {
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) {
     const { name, value } = event.target
-    setEditorInputsValue({ ...editorInputsValue, [name]: value })
+    setEditorData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }))
   }
 
   function handleSelected(type: string): void {
@@ -138,16 +133,16 @@ export default function Editor() {
     if (coverImage === '') {
       alert('Select a cover image!')
       return
-    } else if (editorInputsValue.title === '') {
+    } else if (editorData.title === '') {
       alert('Enter a title!')
       return
-    } else if (editorInputsValue.subtitle === '') {
+    } else if (editorData.subtitle === '') {
       alert('Enter a subtitle')
       return
-    } else if (editorInputsValue.textareaEN === '') {
+    } else if (editorData.textareaEN === '') {
       alert('Please write some article in english!')
       return
-    } else if (editorInputsValue.textareaPTBR === '') {
+    } else if (editorData.textareaPTBR === '') {
       alert('Please write some article in portuguese!')
       return
     }
@@ -158,10 +153,10 @@ export default function Editor() {
         name: uploadedFile?.name,
         base64: coverImage,
       },
-      title: editorInputsValue.title,
-      subtitle: editorInputsValue.subtitle,
-      bodyEN: editorInputsValue.textareaEN,
-      bodyPTBR: editorInputsValue.textareaPTBR,
+      title: editorData.title,
+      subtitle: editorData.subtitle,
+      bodyEN: editorData.textareaEN,
+      bodyPTBR: editorData.textareaPTBR,
     })
     alert('The Project has been published!')
     setIsLoading(false)
@@ -172,16 +167,16 @@ export default function Editor() {
     if (coverImage === '') {
       alert('Select a cover image!')
       return
-    } else if (editorInputsValue.title === '') {
+    } else if (editorData.title === '') {
       alert('Enter a title!')
       return
-    } else if (editorInputsValue.subtitle === '') {
+    } else if (editorData.subtitle === '') {
       alert('Enter a subtitle')
       return
-    } else if (editorInputsValue.textareaEN === '') {
+    } else if (editorData.textareaEN === '') {
       alert('Please write some article in english!')
       return
-    } else if (editorInputsValue.textareaPTBR === '') {
+    } else if (editorData.textareaPTBR === '') {
       alert('Please write some article in portuguese!')
       return
     }
@@ -192,10 +187,10 @@ export default function Editor() {
         name: uploadedFile?.name,
         base64: coverImage,
       },
-      title: editorInputsValue.title,
-      subtitle: editorInputsValue.subtitle,
-      bodyEN: editorInputsValue.textareaEN,
-      bodyPTBR: editorInputsValue.textareaPTBR,
+      title: editorData.title,
+      subtitle: editorData.subtitle,
+      bodyEN: editorData.textareaEN,
+      bodyPTBR: editorData.textareaPTBR,
     })
     alert('The project article has been updated.')
     setIsLoading(false)
@@ -215,27 +210,45 @@ export default function Editor() {
   }
 
   function closeSavePopUp() {
-    setIsOpenSavePopUp(false)
+    setEditorData((prevState) => ({
+      ...prevState,
+      popUps: {
+        ...prevState.popUps,
+        isOpenSavePopUp: false,
+      },
+    }))
   }
   function closeImportSavePopUp(value?: string) {
     if (value) {
       if (textareaLangVersion === 'en') {
-        setEditorInputsValue({ ...editorInputsValue, textareaEN: value })
+        setEditorData((prevState) => ({
+          ...prevState,
+          textareaEN: value,
+        }))
       } else if (textareaLangVersion === 'pt-BR') {
-        setEditorInputsValue({ ...editorInputsValue, textareaPTBR: value })
+        setEditorData((prevState) => ({
+          ...prevState,
+          textareaPTBR: value,
+        }))
       }
     }
-    setIsOpenImportSavePopUp(false)
+    setEditorData((prevState) => ({
+      ...prevState,
+      popUps: {
+        ...prevState.popUps,
+        isOpenImportSavePopUp: false,
+      },
+    }))
   }
   function backToEditor() {
     setShowPreview(false)
   }
 
   useEffect(() => {
-    if (editorInputsValue.search === '') {
+    if (editorData.search === '') {
       setResultsSearch([])
     }
-  }, [editorInputsValue.search])
+  }, [editorData.search])
 
   const iconsFirstSection = [
     { Icon: Icon.Bold, name: 'bold' },
@@ -252,8 +265,28 @@ export default function Editor() {
   ]
   const iconsSecondSection = [
     { Icon: Icon.Eye, execute: () => setShowPreview(true) },
-    { Icon: Icon.Disk, execute: () => setIsOpenSavePopUp(true) },
-    { Icon: Icon.Download, execute: () => setIsOpenImportSavePopUp(true) },
+    {
+      Icon: Icon.Disk,
+      execute: () =>
+        setEditorData((prevState) => ({
+          ...prevState,
+          popUps: {
+            ...prevState.popUps,
+            isOpenSavePopUp: true,
+          },
+        })),
+    },
+    {
+      Icon: Icon.Download,
+      execute: () =>
+        setEditorData((prevState) => ({
+          ...prevState,
+          popUps: {
+            ...prevState.popUps,
+            isOpenImportSavePopUp: true,
+          },
+        })),
+    },
   ]
 
   return (
@@ -261,13 +294,13 @@ export default function Editor() {
       {isClientAuthenticated && (
         <>
           <Header title="Editor" />
-          {isOpenSavePopUp && (
+          {editorData.popUps.isOpenSavePopUp && (
             <SavePopUp
               langContext={textareaLangVersion}
               emitClosed={closeSavePopUp}
             />
           )}
-          {isOpenImportSavePopUp && (
+          {editorData.popUps.isOpenImportSavePopUp && (
             <ImportSavePopUp
               langContext={textareaLangVersion}
               emitClosed={closeImportSavePopUp}
@@ -282,12 +315,12 @@ export default function Editor() {
             {showPreview ? (
               <ProjectShowdown
                 coverImage={coverImage}
-                title={editorInputsValue.title}
-                subtitle={editorInputsValue.subtitle}
+                title={editorData.title}
+                subtitle={editorData.subtitle}
                 body={
                   textareaLangVersion === 'en'
-                    ? editorInputsValue.textareaEN
-                    : editorInputsValue.textareaPTBR
+                    ? editorData.textareaEN
+                    : editorData.textareaPTBR
                 }
                 emitBack={backToEditor}
               />
@@ -346,25 +379,26 @@ export default function Editor() {
                             placeholder="Search for a project"
                             type="text"
                             name="search"
-                            value={editorInputsValue.search}
+                            value={editorData.search}
                             onChange={(e) => {
                               handleInputChange(e)
                             }}
                             className="h-full w-full pl-8 pr-3 bg-transparent placeholder:text-gray border-[2px] border-black focus:border-orange outline-none rounded-full"
                           />
-                          {resultsSearch && editorInputsValue.search !== '' && (
+                          {resultsSearch && editorData.search !== '' && (
                             <ul className="relative overflow-hidden z-50 bg-pink mt-1 w-full !max-w-[242px] rounded-lg">
                               {resultsSearch.map((result: any, index: Key) => (
                                 <li
                                   key={index}
                                   onClick={() => {
-                                    setEditorInputsValue({
+                                    setEditorData((prevState) => ({
+                                      ...prevState,
                                       title: result.title,
                                       subtitle: result.subtitle,
                                       textareaEN: result.bodyEN,
                                       textareaPTBR: result.bodyPTBR,
                                       search: '',
-                                    })
+                                    }))
                                     setUploadedFile(null)
                                     setSelectedToEdit(result)
                                     setSelectedProjectType(result.type)
@@ -379,10 +413,8 @@ export default function Editor() {
                           )}
                         </div>
                         <button
-                          onClick={() =>
-                            searchByProject(editorInputsValue.search)
-                          }
-                          disabled={editorInputsValue.search.length < 3}
+                          onClick={() => searchByProject(editorData.search)}
+                          disabled={editorData.search.length < 3}
                           className="disabled:bg-pink disabled:cursor-not-allowed bg-orange block ml-auto w-fit py-1 px-2 text-white font-medium rounded-full"
                         >
                           Search
@@ -431,14 +463,14 @@ export default function Editor() {
                     <input
                       placeholder="Title"
                       name="title"
-                      value={editorInputsValue.title}
+                      value={editorData.title}
                       onChange={handleInputChange}
                       className="text-[32px] placeholder:text-gray transition-all duration-300 focus:translate-x-2 rounded-md font-semibold bg-transparent outline-none"
                     />
                     <input
                       placeholder="Subtitle"
                       name="subtitle"
-                      value={editorInputsValue.subtitle}
+                      value={editorData.subtitle}
                       onChange={handleInputChange}
                       className="text-[24px] placeholder:text-gray transition-all duration-300 focus:translate-x-2 rounded-md font-light -mt-8 bg-transparent outline-none"
                     />
@@ -469,7 +501,7 @@ export default function Editor() {
                         </div>
                       )}
                     </div>
-                    <div className='flex md:flex-col'>
+                    <div className="flex md:flex-col">
                       <div className="flex w-10 -ml-2 md:-ml-0 mr-2 md:mr-0 flex-col md:flex-row  items-center my-2 justify-between md:w-full rounded-[40px] md:border-[2px]  border-pink">
                         <ul className="flex flex-col md:flex-row p-2 gap-x-1 items-center">
                           {iconsFirstSection.map((item, index) => (
@@ -501,7 +533,7 @@ export default function Editor() {
                           name="textareaEN"
                           onChange={handleInputChange}
                           id="textareaEN"
-                          value={editorInputsValue.textareaEN}
+                          value={editorData.textareaEN}
                           className="rounded-xl min-h-full md:h-[300px] mb-2 w-full outline-none bg-pink resize-none p-4 text-black"
                         />
                       ) : (
@@ -511,7 +543,7 @@ export default function Editor() {
                           name="textareaPTBR"
                           onChange={handleInputChange}
                           id="textareaPTBR"
-                          value={editorInputsValue.textareaPTBR}
+                          value={editorData.textareaPTBR}
                           className="rounded-xl min-h-full md:h-[300px] mb-2 w-full outline-none bg-pink resize-none p-4 text-black"
                         />
                       )}
@@ -528,13 +560,14 @@ export default function Editor() {
                         <div className="flex items-center ml-auto w-fit gap-x-2">
                           <button
                             onClick={() => {
-                              setEditorInputsValue({
+                              setEditorData((prevState) => ({
+                                ...prevState,
                                 title: '',
                                 subtitle: '',
                                 textareaEN: '',
                                 textareaPTBR: '',
                                 search: '',
-                              })
+                              }))
                               setUploadedFile(null)
                               setSelectedToEdit(null)
                               setSelectedProjectType(projectsTypes[0])

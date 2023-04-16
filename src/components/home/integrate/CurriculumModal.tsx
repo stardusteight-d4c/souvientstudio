@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom'
 import { fernanda } from '@/assets'
-import { useAppContext } from '@/@context/ContextProvider'
+import { useAppContext } from '@/@context/AppContextProvider'
 import { useEffect, useState } from 'react'
 
 export default function CurriculumModal() {

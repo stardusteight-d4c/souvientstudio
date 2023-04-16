@@ -1,6 +1,6 @@
 import Image from 'next/legacy/image'
 import { motion } from 'framer-motion'
-import { useAppContext } from '@/@context/ContextProvider'
+import { useAppContext } from '@/@context/AppContextProvider'
 import { fernanda, star } from '@/assets'
 import { starsVariants, textVariant } from '@/lib/motion'
 import { TypingText } from '../@globals'

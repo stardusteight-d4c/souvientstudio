@@ -1,4 +1,4 @@
-import { useAppContext } from '@/@context/ContextProvider'
+import { useAppContext } from '@/@context/AppContextProvider'
 import { useState } from 'react'
 import { IntersectionObserver } from '../@globals'
 import { behanceStyles as css } from './styles'

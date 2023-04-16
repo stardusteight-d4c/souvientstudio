@@ -1,4 +1,4 @@
-import { useAppContext } from '@/@context/ContextProvider'
+import { useAppContext } from '@/@context/AppContextProvider'
 import { useState } from 'react'
 import { IntersectionObserver } from '../@globals'
 import { marqueeStyles as css } from './styles'

@@ -1,4 +1,4 @@
-import { useAppContext } from '@/@context/ContextProvider'
+import { useAppContext } from '@/@context/AppContextProvider'
 import { Behance, Instagram, LinkedIn } from './atoms'
 import { footerStyles as css } from './styles'
 

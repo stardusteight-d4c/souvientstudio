@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { ParsedUrlQuery } from 'querystring'
-import { useAppContext } from '@/@context/ContextProvider'
+import { useAppContext } from '@/@context/AppContextProvider'
 import { BaseLayout, Header, Loader } from '@/components/@globals'
 import { IProject } from '@/@interfaces/IProject'
 import { connectToDatabase } from '@/lib/mongodb'

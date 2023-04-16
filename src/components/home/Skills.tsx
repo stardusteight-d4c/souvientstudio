@@ -1,4 +1,4 @@
-import { useAppContext } from '@/@context/ContextProvider'
+import { useAppContext } from '@/@context/AppContextProvider'
 import { skillsData } from '@/utils/data'
 import SkillImage from './integrate/SkillImage'
 import { skillsStyles as css } from './styles'

@@ -1,4 +1,4 @@
-import { useAppContext } from '@/@context/ContextProvider'
+import { useAppContext } from '@/@context/AppContextProvider'
 import { cardServiceData } from '@/utils/data'
 import ServiceCard from './integrate/ServiceCard'
 import { servicesStyles as css } from './styles'

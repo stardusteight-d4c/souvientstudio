@@ -1,8 +1,12 @@
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
-import { ContextProvider, useAppContext } from '../@context/ContextProvider'
+import {
+  AppContextProvider,
+  useAppContext,
+} from '@/@context/AppContextProvider'
 import jwt from 'jsonwebtoken'
 import { useEffect } from 'react'
+import { EditorContextProvider } from '@/@context/EditorContextProvider'
 
 interface MyAppProps extends AppProps {
   isClientAuthenticated: boolean
@@ -12,8 +16,10 @@ interface HandleIsClientAuthenticatedContextProps {
   isClientAuthenticated: boolean
 }
 
-function HandleIsClientAuthenticatedContext(props: HandleIsClientAuthenticatedContextProps) {
-  const { isClientAuthenticated,setIsClientAuthenticated } = useAppContext()
+function HandleIsClientAuthenticatedContext(
+  props: HandleIsClientAuthenticatedContextProps
+) {
+  const { isClientAuthenticated, setIsClientAuthenticated } = useAppContext()
   useEffect(() => {
     setIsClientAuthenticated(props.isClientAuthenticated)
   }, [isClientAuthenticated])
@@ -26,18 +32,20 @@ export default function App({
   isClientAuthenticated,
 }: MyAppProps) {
   return (
-    <ContextProvider>
-      <HandleIsClientAuthenticatedContext
-        isClientAuthenticated={isClientAuthenticated}
-      />
-      <Component {...pageProps} />
-    </ContextProvider>
+    <AppContextProvider>
+      <EditorContextProvider>
+        <HandleIsClientAuthenticatedContext
+          isClientAuthenticated={isClientAuthenticated}
+        />
+        <Component {...pageProps} />
+      </EditorContextProvider>
+    </AppContextProvider>
   )
 }
 
 App.getInitialProps = async (context: {
   ctx: { req: { cookies: { sessionCookie: string } } }
-}): Promise<any> => {
+}): Promise<{ isClientAuthenticated: boolean }> => {
   const { ctx } = context
   let isClientAuthenticated = false
 

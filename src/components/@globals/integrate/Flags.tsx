@@ -1,7 +1,7 @@
 import React from 'react'
 import { brazilFlag, euaFlag } from '@/assets'
 import Image from 'next/legacy/image'
-import { useAppContext } from '@/@context/ContextProvider'
+import { useAppContext } from '@/@context/AppContextProvider'
 
 interface Props {
   size?: number
