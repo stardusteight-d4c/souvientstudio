@@ -8,6 +8,10 @@ import { detectClickOutsideElement } from '@/utils/detect-click-outside-element'
 import { useRouter } from 'next/router'
 import { euaFlag, brazilFlag } from '@/assets'
 import { useEditorContext } from '@/@context/EditorContextProvider'
+import { SavePopUp } from './integrate/SavePopUp'
+import { ImportSavePopUp } from './integrate/ImportSavePopUp'
+import { Uploader } from './integrate/Uploader'
+import { SearchProject } from './integrate/SearchProject'
 
 interface Props {}
 
@@ -60,27 +64,6 @@ export default function RichTextEditor(props: Props) {
     }
   }, [showSelectDropdown])
 
-  useEffect(() => {
-    function handleClickOutsideOfNetworksListDropDown(event: MouseEvent) {
-      const { clickedOutside } = detectClickOutsideElement(event, 'searchBox')
-
-      if (clickedOutside && resultsSearch.length > 0) {
-        setResultsSearch([])
-        setEditorData((prevState) => ({
-          ...prevState,
-          search: '',
-        }))
-      }
-    }
-    document.addEventListener('click', handleClickOutsideOfNetworksListDropDown)
-    return () => {
-      document.removeEventListener(
-        'click',
-        handleClickOutsideOfNetworksListDropDown
-      )
-    }
-  }, [resultsSearch])
-
   function handleInputChange(
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) {
@@ -93,37 +76,6 @@ export default function RichTextEditor(props: Props) {
 
   function handleSelected(type: string): void {
     handleMarkdown(textareaElement.current!, type)
-  }
-
-  function onClickUpload(): void {
-    const inputFile = document.getElementById('file-input')!
-    const clickEvent = new MouseEvent('click', { bubbles: true })
-    inputFile.dispatchEvent(clickEvent)
-  }
-
-  function onFileChange(event: ChangeEvent<HTMLInputElement>): void {
-    const input = event.target as HTMLInputElement
-    const files = input.files as FileList
-    const maxFileSize = 3 * 1024 * 1024 // 3MB
-    const file = files[0]
-    if (file && file.size > maxFileSize) {
-      alert('The selected file is larger than 3MB!')
-      input.value = ''
-    } else {
-      const reader = new FileReader()
-      setEditorData((prevState) => ({
-        ...prevState,
-        uploadedFile: file,
-      }))
-      reader.readAsDataURL(file)
-      reader.onload = () => {
-        const base64 = reader.result
-        setEditorData((prevState) => ({
-          ...prevState,
-          coverImage: String(base64),
-        }))
-      }
-    }
   }
 
   async function submitProject() {
@@ -206,12 +158,6 @@ export default function RichTextEditor(props: Props) {
     setIsLoading(false)
   }
 
-  async function searchByProject(searchTerm: string) {
-    await axios
-      .get(`/api/database/projects?title=${searchTerm}`)
-      .then((res) => setResultsSearch(res.data))
-  }
-
   useEffect(() => {
     if (editorData.search === '') {
       setResultsSearch([])
@@ -265,290 +211,205 @@ export default function RichTextEditor(props: Props) {
   ]
 
   return (
-    <div className="bg-white rounded-[40px] flex flex-col gap-2 p-4 w-screen md:w-full md:max-w-[800px] h-fit shadow-md shadow-black/10">
-      <div className="flex flex-col-reverse gap-y-2 md:gap-y-0 md:flex-row justify-between md:items-center">
-        <div className="flex items-center gap-2">
-          {editorData.selectedToEdit && !editorData.uploadedFile ? (
-            <>
-              <button
-                onClick={onClickUpload}
-                className="bg-pink block w-fit whitespace-nowrap py-2 px-4 text-white font-medium rounded-full"
-              >
-                New cover image
-              </button>
-              <span className="truncate w-[200px]">
-                {editorData.selectedToEdit.coverImage}
-              </span>
-            </>
-          ) : (
-            <>
-              <button
-                onClick={onClickUpload}
-                className={`${
-                  editorData.uploadedFile ? 'bg-orange' : 'bg-pink'
-                } block w-fit whitespace-nowrap py-2 px-4 text-white font-medium rounded-full`}
-              >
-                {editorData.uploadedFile
-                  ? 'Uploaded cover image'
-                  : 'Upload cover image'}
-              </button>
-              <span className="truncate w-[200px]">
-                {editorData.uploadedFile && editorData.uploadedFile.name}
-              </span>
-            </>
-          )}
+    <section className="grid py-10 text-black place-items-center">
+      <div className="bg-white rounded-[40px] flex flex-col gap-2 p-4 w-screen md:w-full md:max-w-[800px] h-fit shadow-md shadow-black/10">
+        <div className="flex flex-col-reverse gap-y-2 md:gap-y-0 md:flex-row justify-between md:items-center">
+          <Uploader />
+          <SearchProject
+            handleInputChange={handleInputChange}
+            resultsSearch={resultsSearch}
+            setResultsSearch={setResultsSearch}
+          />
         </div>
-        <input
-          type="file"
-          id="file-input"
-          onChange={(e) => onFileChange(e)}
-          className="hidden"
-          accept="image/png, image/jpeg"
-        />
-        <div className="relative group w-80 h-8 rounded-full">
-          <div className="absolute group-focus-within:text-orange top-1 left-2 text-black/80">
-            <Icon.Search size={24} />
-          </div>
+        <div id="selectProjectTypeElement" className="relative w-fit">
           <div
-            id="searchBox"
-            className="h-full w-full flex items-center gap-x-2"
+            onClick={() => setShowSelectDropdown(!showSelectDropdown)}
+            className="text-sm flex justify-center gap-x-2 px-2 cursor-pointer border-[2px] border-pink py-1 rounded-full"
           >
-            <div className="h-full ">
-              <input
-                placeholder="Search for a project"
-                type="text"
-                name="search"
-                value={editorData.search}
-                onChange={(e) => {
-                  handleInputChange(e)
-                }}
-                className="h-full w-full pl-8 pr-3 bg-transparent placeholder:text-gray border-[2px] border-black focus:border-orange outline-none rounded-full"
-              />
-              {resultsSearch && editorData.search !== '' && (
-                <ul className="relative overflow-hidden z-50 bg-pink mt-1 w-full !max-w-[242px] rounded-lg">
-                  {resultsSearch.map((result: any, index: Key) => (
-                    <li
-                      key={index}
-                      onClick={() => {
-                        setEditorData((prevState) => ({
-                          ...prevState,
-                          type: result.type,
-                          coverImage: result.coverImage,
-                          title: result.title,
-                          subtitle: result.subtitle,
-                          textareaEN: result.bodyEN,
-                          textareaPTBR: result.bodyPTBR,
-                          uploadedFile: null,
-                          selectedToEdit: result,
-                          search: '',
-                        }))
-                      }}
-                      className="text-sm text-left max-w-[242px] w-full font-medium cursor-pointer hover:bg-orange text-white py-[2px] px-4"
-                    >
-                      {result.title}: {result.subtitle}
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-            <button
-              onClick={() => searchByProject(editorData.search)}
-              disabled={editorData.search.length < 3}
-              className="disabled:bg-pink disabled:cursor-not-allowed bg-orange block ml-auto w-fit py-1 px-2 text-white font-medium rounded-full"
+            {editorData.type}
+            <div
+              className={`${
+                showSelectDropdown && '-rotate-180'
+              } transition-all duration-150`}
             >
-              Search
-            </button>
-          </div>
-        </div>
-      </div>
-      <div id="selectProjectTypeElement" className="relative w-fit">
-        <div
-          onClick={() => setShowSelectDropdown(!showSelectDropdown)}
-          className="text-sm flex justify-center gap-x-2 px-2 cursor-pointer border-[2px] border-pink py-1 rounded-full"
-        >
-          {editorData.type}
-          <div
-            className={`${
-              showSelectDropdown && '-rotate-180'
-            } transition-all duration-150`}
-          >
-            <Icon.Caret size={18} />
-          </div>
-        </div>
-        {showSelectDropdown && (
-          <div className="absolute z-50 bg-pink mt-1 w-full rounded-lg overflow-hidden">
-            <ul className="text-center">
-              {projectsTypes.map((type: any) => {
-                if (type !== editorData.type) {
-                  return (
-                    <li
-                      key={type}
-                      onClick={() => {
-                        setEditorData((prevState) => ({
-                          ...prevState,
-                          type: type,
-                        }))
-                        setShowSelectDropdown(false)
-                      }}
-                      className="text-sm font-medium cursor-pointer hover:bg-orange text-white py-[2px]"
-                    >
-                      {type}
-                    </li>
-                  )
-                }
-              })}
-            </ul>
-          </div>
-        )}
-      </div>
-      <div className="flex flex-col gap-y-6 mb-4">
-        <input
-          placeholder="Title"
-          name="title"
-          value={editorData.title}
-          onChange={handleInputChange}
-          className="text-[32px] placeholder:text-gray transition-all duration-300 focus:translate-x-2 rounded-md font-semibold bg-transparent outline-none"
-        />
-        <input
-          placeholder="Subtitle"
-          name="subtitle"
-          value={editorData.subtitle}
-          onChange={handleInputChange}
-          className="text-[24px] placeholder:text-gray transition-all duration-300 focus:translate-x-2 rounded-md font-light -mt-8 bg-transparent outline-none"
-        />
-      </div>
-      <div className="h-full relative">
-        <div className="absolute right-0 -top-8">
-          {editorData.textareaLangVersion === 'en' ? (
-            <div className="flex gap-x-2 cursor-default items-center">
-              <span className="text-sm">Writing the english version</span>
-              <img
-                onClick={() => {
-                  setEditorData((prevState) => ({
-                    ...prevState,
-                    textareaLangVersion: 'pt-BR',
-                  }))
-                }}
-                src={euaFlag.src}
-                className="w-8 h-8 cursor-pointer"
-              />
+              <Icon.Caret size={18} />
             </div>
-          ) : (
-            <div className="flex gap-x-2 items-center">
-              <span className="text-sm">Writing the portuguese version</span>
-              <img
-                onClick={() => {
-                  setEditorData((prevState) => ({
-                    ...prevState,
-                    textareaLangVersion: 'en',
-                  }))
-                }}
-                src={brazilFlag.src}
-                className="w-8 h-8 cursor-pointer"
-              />
+          </div>
+          {showSelectDropdown && (
+            <div className="absolute z-50 bg-pink mt-1 w-full rounded-lg overflow-hidden">
+              <ul className="text-center">
+                {projectsTypes.map((type: any) => {
+                  if (type !== editorData.type) {
+                    return (
+                      <li
+                        key={type}
+                        onClick={() => {
+                          setEditorData((prevState) => ({
+                            ...prevState,
+                            type: type,
+                          }))
+                          setShowSelectDropdown(false)
+                        }}
+                        className="text-sm font-medium cursor-pointer hover:bg-orange text-white py-[2px]"
+                      >
+                        {type}
+                      </li>
+                    )
+                  }
+                })}
+              </ul>
             </div>
           )}
         </div>
-        <div className="flex md:flex-col">
-          <div className="flex w-10 -ml-2 md:-ml-0 mr-2 md:mr-0 flex-col md:flex-row  items-center my-2 justify-between md:w-full rounded-[40px] md:border-[2px]  border-pink">
-            <ul className="flex flex-col md:flex-row p-2 gap-x-1 items-center">
-              {iconsFirstSection.map((item, index) => (
-                <li
-                  key={index}
-                  onClick={() => handleSelected(item.name)}
-                  className="cursor-pointer rounded-full p-1 hover:bg-pink hover:text-white w-fit"
-                >
-                  <item.Icon />
-                </li>
-              ))}
-            </ul>
-            <ul className="p-2 gap-x-1 flex flex-col md:flex-row items-center">
-              {iconsSecondSection.map((item, index) => (
-                <li
-                  key={index}
-                  onClick={() => item.execute()}
-                  className="cursor-pointer rounded-full p-1 hover:bg-pink hover:text-white w-fit"
-                >
-                  <item.Icon />
-                </li>
-              ))}
-            </ul>
-          </div>
-          {editorData.textareaLangVersion === 'en' ? (
-            <textarea
-              spellCheck="false"
-              ref={textareaElement}
-              name="textareaEN"
-              onChange={handleInputChange}
-              id="textareaEN"
-              value={editorData.textareaEN}
-              className="rounded-xl min-h-full md:h-[300px] mb-2 w-full outline-none bg-pink resize-none p-4 text-black"
-            />
-          ) : (
-            <textarea
-              spellCheck="false"
-              ref={textareaElement}
-              name="textareaPTBR"
-              onChange={handleInputChange}
-              id="textareaPTBR"
-              value={editorData.textareaPTBR}
-              className="rounded-xl min-h-full md:h-[300px] mb-2 w-full outline-none bg-pink resize-none p-4 text-black"
-            />
-          )}
+        <div className="flex flex-col gap-y-6 mb-4">
+          <input
+            placeholder="Title"
+            name="title"
+            value={editorData.title}
+            onChange={handleInputChange}
+            className="text-[32px] placeholder:text-gray transition-all duration-300 focus:translate-x-2 rounded-md font-semibold bg-transparent outline-none"
+          />
+          <input
+            placeholder="Subtitle"
+            name="subtitle"
+            value={editorData.subtitle}
+            onChange={handleInputChange}
+            className="text-[24px] placeholder:text-gray transition-all duration-300 focus:translate-x-2 rounded-md font-light -mt-8 bg-transparent outline-none"
+          />
         </div>
+        <div className="h-full relative">
+          <div className="absolute right-0 -top-8">
+            {editorData.textareaLangVersion === 'en' ? (
+              <div className="flex gap-x-2 cursor-default items-center">
+                <span className="text-sm">Writing the english version</span>
+                <img
+                  onClick={() => {
+                    setEditorData((prevState) => ({
+                      ...prevState,
+                      textareaLangVersion: 'pt-BR',
+                    }))
+                  }}
+                  src={euaFlag.src}
+                  className="w-8 h-8 cursor-pointer"
+                />
+              </div>
+            ) : (
+              <div className="flex gap-x-2 items-center">
+                <span className="text-sm">Writing the portuguese version</span>
+                <img
+                  onClick={() => {
+                    setEditorData((prevState) => ({
+                      ...prevState,
+                      textareaLangVersion: 'en',
+                    }))
+                  }}
+                  src={brazilFlag.src}
+                  className="w-8 h-8 cursor-pointer"
+                />
+              </div>
+            )}
+          </div>
+          <div className="flex md:flex-col">
+            <div className="flex w-10 -ml-2 md:-ml-0 mr-2 md:mr-0 flex-col md:flex-row  items-center my-2 justify-between md:w-full rounded-[40px] md:border-[2px]  border-pink">
+              <ul className="flex flex-col md:flex-row p-2 gap-x-1 items-center">
+                {iconsFirstSection.map((item, index) => (
+                  <li
+                    key={index}
+                    onClick={() => handleSelected(item.name)}
+                    className="cursor-pointer rounded-full p-1 hover:bg-pink hover:text-white w-fit"
+                  >
+                    <item.Icon />
+                  </li>
+                ))}
+              </ul>
+              <ul className="p-2 gap-x-1 flex flex-col md:flex-row items-center">
+                {iconsSecondSection.map((item, index) => (
+                  <li
+                    key={index}
+                    onClick={() => item.execute()}
+                    className="cursor-pointer rounded-full p-1 hover:bg-pink hover:text-white w-fit"
+                  >
+                    <item.Icon />
+                  </li>
+                ))}
+              </ul>
+            </div>
+            {editorData.textareaLangVersion === 'en' ? (
+              <textarea
+                spellCheck="false"
+                ref={textareaElement}
+                name="textareaEN"
+                onChange={handleInputChange}
+                id="textareaEN"
+                value={editorData.textareaEN}
+                className="rounded-xl min-h-full md:h-[300px] mb-2 w-full outline-none bg-pink resize-none p-4 text-black"
+              />
+            ) : (
+              <textarea
+                spellCheck="false"
+                ref={textareaElement}
+                name="textareaPTBR"
+                onChange={handleInputChange}
+                id="textareaPTBR"
+                value={editorData.textareaPTBR}
+                className="rounded-xl min-h-full md:h-[300px] mb-2 w-full outline-none bg-pink resize-none p-4 text-black"
+              />
+            )}
+          </div>
 
-        {editorData.selectedToEdit ? (
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-x-2">
-              <span className="font-medium uppercase tracking-tighter">
-                Editing...
-              </span>
-              {editorData.selectedToEdit.title}:{' '}
-              {editorData.selectedToEdit.subtitle}
+          {editorData.selectedToEdit ? (
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-x-2">
+                <span className="font-medium uppercase tracking-tighter">
+                  Editing...
+                </span>
+                {editorData.selectedToEdit.title}:{' '}
+                {editorData.selectedToEdit.subtitle}
+              </div>
+              <div className="flex items-center ml-auto w-fit gap-x-2">
+                <button
+                  onClick={() => {
+                    setEditorData((prevState) => ({
+                      ...prevState,
+                      type: projectsTypes[0],
+                      coverImage: '',
+                      title: '',
+                      subtitle: '',
+                      textareaEN: '',
+                      textareaPTBR: '',
+                      uploadedFile: null,
+                      selectedToEdit: null,
+                      search: '',
+                    }))
+                  }}
+                  className="block w-fit border-[2px] border-pink py-[7px] px-4 text-black font-medium rounded-full"
+                >
+                  Cancel Edit
+                </button>
+                <button
+                  onClick={deleteProject}
+                  className="block w-fit bg-orange py-2 px-4 text-white font-medium rounded-full"
+                >
+                  Delete
+                </button>
+                <button
+                  onClick={updateProject}
+                  className="block w-fit bg-pink py-2 px-4 text-white font-medium rounded-full"
+                >
+                  Update
+                </button>
+              </div>
             </div>
-            <div className="flex items-center ml-auto w-fit gap-x-2">
-              <button
-                onClick={() => {
-                  setEditorData((prevState) => ({
-                    ...prevState,
-                    type: projectsTypes[0],
-                    coverImage: '',
-                    title: '',
-                    subtitle: '',
-                    textareaEN: '',
-                    textareaPTBR: '',
-                    uploadedFile: null,
-                    selectedToEdit: null,
-                    search: '',
-                  }))
-                }}
-                className="block w-fit border-[2px] border-pink py-[7px] px-4 text-black font-medium rounded-full"
-              >
-                Cancel Edit
-              </button>
-              <button
-                onClick={deleteProject}
-                className="block w-fit bg-orange py-2 px-4 text-white font-medium rounded-full"
-              >
-                Delete
-              </button>
-              <button
-                onClick={updateProject}
-                className="block w-fit bg-pink py-2 px-4 text-white font-medium rounded-full"
-              >
-                Update
-              </button>
-            </div>
-          </div>
-        ) : (
-          <button
-            onClick={submitProject}
-            className="block ml-auto w-fit bg-pink py-2 px-4 text-white font-medium rounded-full"
-          >
-            {isLoading ? 'Sending...' : 'Submit'}
-          </button>
-        )}
+          ) : (
+            <button
+              onClick={submitProject}
+              className="block ml-auto w-fit bg-pink py-2 px-4 text-white font-medium rounded-full"
+            >
+              {isLoading ? 'Sending...' : 'Submit'}
+            </button>
+          )}
+        </div>
       </div>
-    </div>
+    </section>
   )
 }
