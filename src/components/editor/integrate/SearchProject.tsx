@@ -3,7 +3,7 @@ import { IProject } from '@/@interfaces/IProject'
 import { Search } from '@/components/@globals/atoms'
 import { detectClickOutsideElement } from '@/utils/detect-click-outside-element'
 import axios from 'axios'
-import React, { Key, useEffect } from 'react'
+import React, { Key, useEffect, useState } from 'react'
 
 interface Props {
   resultsSearch: IProject[]
@@ -19,6 +19,7 @@ export const SearchProject = ({
   setResultsSearch,
 }: Props) => {
   const { editorData, setEditorData } = useEditorContext()
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     function handleClickOutsideOfNetworksListDropDown(event: MouseEvent) {
@@ -41,9 +42,11 @@ export const SearchProject = ({
   }, [resultsSearch])
 
   async function searchByProject(searchTerm: string) {
+    setIsLoading(true)
     await axios
       .get(`/api/database/projects?title=${searchTerm}`)
       .then((res) => setResultsSearch(res.data))
+    setIsLoading(false)
   }
 
   return (
@@ -92,10 +95,10 @@ export const SearchProject = ({
         </div>
         <button
           onClick={() => searchByProject(editorData.search)}
-          disabled={editorData.search.length < 3}
+          disabled={editorData.search.length < 3 || isLoading}
           className="disabled:bg-pink disabled:cursor-not-allowed bg-orange block ml-auto w-fit py-1 px-2 text-white font-medium rounded-full"
         >
-          Search
+          {!isLoading ? 'Search' : 'Searching...'}
         </button>
       </div>
     </div>
