@@ -87,7 +87,7 @@ export async function getStaticProps(context: {
 }) {
   const { id } = context.params as IParams
   const project = await axios.get(
-    `${process.env.BASE_URL}/api/database/projects/${id}?url=${context.resolvedUrl}`
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/database/projects/${id}?url=${context.resolvedUrl}`
   )
   return {
     props: {
