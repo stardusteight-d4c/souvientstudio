@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Image from 'next/legacy/image'
 import { skillImageStyles as css } from './styles'
 import { isEven } from '@/utils/is-even'
-import IntersectionObserver from '@/components/@globals/IntersectionObserver'
+import { IntersectionObserver } from '@/components/@globals'
 
 interface Props {
   skill: {

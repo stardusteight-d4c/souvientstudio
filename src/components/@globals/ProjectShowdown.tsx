@@ -10,7 +10,7 @@ interface Props {
   emitBack: () => void
 }
 
-export function ProjectShowdown(props: Props) {
+export default function ProjectShowdown(props: Props) {
   return (
     <section className="min-h-screen">
       <div className="relative">

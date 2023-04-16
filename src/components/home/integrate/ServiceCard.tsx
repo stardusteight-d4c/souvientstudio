@@ -1,11 +1,11 @@
-import IntersectionObserver from '@/components/@globals/IntersectionObserver'
 import React, { useState } from 'react'
+import { IntersectionObserver } from '@/components/@globals'
 import { serviceCardStyles as css } from './styles'
 
 interface Props {
   emoji: string
-  title: string
-  text: string
+  title?: string
+  text?: string
   index: number
 }
 

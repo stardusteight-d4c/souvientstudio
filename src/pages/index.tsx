@@ -1,9 +1,13 @@
 import { useEffect } from 'react'
 import axios from 'axios'
 import { useAppContext } from '@/@context/ContextProvider'
-import Navbar from '@/components/@globals/Navbar'
-import Footer from '@/components/@globals/Footer'
-import Header from '@/components/@globals/Header'
+import {
+  Navbar,
+  Footer,
+  Header,
+  Loader,
+  BaseLayout,
+} from '@/components/@globals'
 import { IProject } from '@/@interfaces/IProject'
 import {
   Hero,
@@ -15,7 +19,7 @@ import {
   Contact,
 } from '../components/home'
 
-interface Props {
+type Props = {
   visualIdentities: IProject[]
   openSequences: IProject[]
   personalProjects: IProject[]
@@ -40,14 +44,13 @@ export default function Home(props: Props) {
   }
 
   if (!localeContextHome) {
-    return <>Loading...</>
+    return <Loader />
   }
 
   return (
     <>
       <Header title="Graphic Designer" />
-      <main>
-        <Navbar />
+      <BaseLayout>
         <Hero />
         <Marquee />
         <Projects {...projectsProps} />
@@ -55,8 +58,7 @@ export default function Home(props: Props) {
         <Skills />
         <Services />
         <Contact />
-        <Footer />
-      </main>
+      </BaseLayout>
     </>
   )
 }

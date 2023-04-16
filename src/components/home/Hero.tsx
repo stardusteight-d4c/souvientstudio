@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { useAppContext } from '@/@context/ContextProvider'
 import { fernanda, star } from '@/assets'
 import { starsVariants, textVariant } from '@/lib/motion'
-import { TypingText } from '../@globals/TypingText'
+import { TypingText } from '../@globals'
 import { heroStyles as css } from './styles'
 
 export default function Hero() {

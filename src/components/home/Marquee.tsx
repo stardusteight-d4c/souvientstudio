@@ -1,6 +1,6 @@
 import { useAppContext } from '@/@context/ContextProvider'
 import { useState } from 'react'
-import IntersectionObserver from '../@globals/IntersectionObserver'
+import { IntersectionObserver } from '../@globals'
 import { marqueeStyles as css } from './styles'
 
 export default function Marquee() {
@@ -17,11 +17,8 @@ export default function Marquee() {
     setIsVisible(true)
   }
 
-
   return (
-    <IntersectionObserver
-      onEnter={handleEnterViewport}
-    >
+    <IntersectionObserver onEnter={handleEnterViewport}>
       <section className={css.wrapper(isVisible)}>
         <div className={css.leftOverlay} />
         <div className={css.rightOverlay} />

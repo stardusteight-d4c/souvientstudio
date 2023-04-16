@@ -1,6 +1,6 @@
 import { useAppContext } from '@/@context/ContextProvider'
 import { useState } from 'react'
-import IntersectionObserver from '../@globals/IntersectionObserver'
+import { IntersectionObserver } from '../@globals'
 import { behanceStyles as css } from './styles'
 
 export default function Behance() {
@@ -15,10 +15,6 @@ export default function Behance() {
     setIsVisible(false)
   }
 
-  if (!localeContextHome) {
-    return <></>
-  }
-
   return (
     <IntersectionObserver
       onEnter={handleEnterViewport}
@@ -27,14 +23,14 @@ export default function Behance() {
       <section className={css.wrapper}>
         <div className={css.container}>
           <p className={css.handleParagraph(isVisible)}>
-            {localeContextHome.dribbble.span}
+            {localeContextHome?.dribbble.span}
           </p>
           <a
             href="https://www.behance.net/fersena"
             target="_blank"
             className={css.handleLinkButton(isVisible)}
           >
-            {localeContextHome.dribbble.button}
+            {localeContextHome?.dribbble.button}
           </a>
         </div>
       </section>

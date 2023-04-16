@@ -4,23 +4,19 @@ import { contactStyles as css } from './styles'
 export default function Contact() {
   const { localeContextHome } = useAppContext()
 
-  if (!localeContextHome) {
-    return <></>
-  }
-
   return (
     <section id="contact" className={css.wrapper}>
       <div className={css.container}>
-        <span className={css.collab}>{localeContextHome.emailMe.collab}</span>
+        <span className={css.collab}>{localeContextHome?.emailMe.collab}</span>
         <span className={css.haveAproject}>
-          {localeContextHome.emailMe.haveAproject}
+          {localeContextHome?.emailMe.haveAproject}
         </span>
         <a
           href="mailto:fernandasenactt@gmail.com"
           className={css.contactLinkContainer}
         >
           <span className={css.contact}>
-            {localeContextHome.emailMe.contact}
+            {localeContextHome?.emailMe.contact}
           </span>{' '}
           <svg
             xmlns="http://www.w3.org/2000/svg"

@@ -4,11 +4,11 @@ import { IProject } from '@/@interfaces/IProject'
 import { SliderCard } from './SliderCard'
 import { projectSliderContainerStyles as css } from './styles'
 import { SliderTypeTitle } from './SliderTypeTitle'
-import IntersectionObserver from '@/components/@globals/IntersectionObserver'
+import { IntersectionObserver } from '@/components/@globals'
 
 interface Props {
   projects: IProject[]
-  sliderTitle: string
+  sliderTitle?: string
 }
 
 export default function ProjectsSliderContainer({

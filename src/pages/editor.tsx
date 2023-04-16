@@ -8,7 +8,7 @@ import Footer from '@/components/@globals/Footer'
 import { detectClickOutsideElement } from '@/utils/detect-click-outside-element'
 import { SavePopUp } from '@/components/editor/integrate/SavePopUp'
 import { ImportSavePopUp } from '@/components/editor/integrate/ImportSavePopUp'
-import { ProjectShowdown } from '@/components/@globals/ProjectShowdown'
+import { ProjectShowdown } from '@/components/@globals'
 import Header from '@/components/@globals/Header'
 import { useRouter } from 'next/router'
 import { euaFlag, brazilFlag } from '@/assets'
@@ -43,7 +43,6 @@ export default function Editor() {
   const router = useRouter()
 
   useEffect(() => {
-    console.log('isClientAuthenticated aa', isClientAuthenticated)
     if (isClientAuthenticated !== undefined) {
       !isClientAuthenticated && router.push('/')
     }
@@ -210,6 +209,12 @@ export default function Editor() {
     setShowPreview(false)
   }
 
+  useEffect(() => {
+    if (editorInputsValue.search === '') {
+      setResultsSearch([])
+    }
+  }, [editorInputsValue.search])
+
   const iconsFirstSection = [
     { Icon: Icon.Bold, name: 'bold' },
     { Icon: Icon.Italic, name: 'italic' },
@@ -351,7 +356,7 @@ export default function Editor() {
                           onClick={() =>
                             searchByProject(editorInputsValue.search)
                           }
-                          className="block ml-auto w-fit bg-pink py-1 px-2 text-white font-medium rounded-full"
+                          className="block ml-auto w-fit bg-orange py-1 px-2 text-white font-medium rounded-full"
                         >
                           Search
                         </button>

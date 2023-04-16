@@ -7,10 +7,7 @@ interface Props {
 }
 
 export const TypingText = ({ title, textStyles }: Props) => (
-  <motion.p
-    variants={textContainer}
-    className={textStyles}
-  >
+  <motion.p variants={textContainer} className={textStyles}>
     {Array.from(title).map((letter, index) => (
       <motion.span variants={textVariant2} key={index}>
         {letter === ' ' ? '\u00A0' : letter}

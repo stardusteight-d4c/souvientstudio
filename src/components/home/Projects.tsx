@@ -13,24 +13,20 @@ interface Props {
 export default function Projects(props: Props) {
   const { localeContextHome } = useAppContext()
 
-  if (!localeContextHome) {
-    return <></>
-  }
-
   return (
     <section className={css.wrapper}>
       <div className={css.container}>
         <ProjectsSliderContainer
           projects={props.visualIdentities}
-          sliderTitle={localeContextHome.projects.visualIdentities}
+          sliderTitle={localeContextHome?.projects.visualIdentities}
         />
         <ProjectsSliderContainer
           projects={props.openSequences}
-          sliderTitle={localeContextHome.projects.openSequences}
+          sliderTitle={localeContextHome?.projects.openSequences}
         />
         <ProjectsSliderContainer
           projects={props.personalProjects}
-          sliderTitle={localeContextHome.projects.personalProjects}
+          sliderTitle={localeContextHome?.projects.personalProjects}
         />
       </div>
     </section>

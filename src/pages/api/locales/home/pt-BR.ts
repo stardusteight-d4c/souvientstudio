@@ -1,8 +1,5 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { ILocaleContextHome } from '@/@interfaces/ILocaleContexts'
 import type { NextApiRequest, NextApiResponse } from 'next'
-
-// Cachear em cookies ou localstorage
 
 export default function handler(
   req: NextApiRequest,
@@ -56,7 +53,7 @@ export default function handler(
       ],
     },
     emailMe: {
-      collab: 'Trabalhe conosco!',
+      collab: 'Evolua conosco!',
       haveAproject: 'Tem um projeto? Vamos conversar!',
       contact: 'Entre em contato',
     },

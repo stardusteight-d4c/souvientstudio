@@ -1,9 +1,8 @@
-import IntersectionObserver from '@/components/@globals/IntersectionObserver'
-import React, { useState } from 'react'
+import React from 'react'
 import { projectSliderContainerStyles as css } from './styles'
 
 interface Props {
-  sliderTitle: string
+  sliderTitle?: string
 }
 
 export const SliderTypeTitle = ({ sliderTitle }: Props) => {

@@ -1,27 +1,21 @@
-import { useRouter } from 'next/router'
-import Head from 'next/head'
-import Navbar from '@/components/@globals/Navbar'
-import { useAppContext } from '@/@context/ContextProvider'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import Footer from '@/components/@globals/Footer'
-import * as marked from 'marked'
-import { GetStaticPaths, GetStaticProps } from 'next'
 import { ParsedUrlQuery } from 'querystring'
+import { useAppContext } from '@/@context/ContextProvider'
+import { BaseLayout, Header, Loader } from '@/components/@globals'
 import { IProject } from '@/@interfaces/IProject'
 import { connectToDatabase } from '@/lib/mongodb'
-import Header from '@/components/@globals/Header'
+import { Article, Cover } from '@/components/project'
 
-interface Props {
+type Props = {
   project: IProject
 }
 
 export default function Project(props: Props) {
-  const router = useRouter()
-  const { id } = router.query
   const { lang, localeContextHome, setLocaleContextHome } = useAppContext()
-  const [project, setProject] = useState<IProject>(props.project)
+  const [project] = useState<IProject>(props.project)
   const [body, setBody] = useState<string>()
+  const [contentWasNotLoaded, setContentWasNotLoaded] = useState(true)
 
   useEffect(() => {
     ;(async () => {
@@ -29,50 +23,39 @@ export default function Project(props: Props) {
         .get(`/api/locales/home/${lang}`)
         .then((res) => setLocaleContextHome(() => res.data))
     })()
-    console.log('aaa');
-    
     setBody(lang === 'en' ? project.bodyEN : project.bodyPTBR)
   }, [lang])
 
-  console.log(body)
-  console.log(lang)
-
-  if (
-    !localeContextHome ||
-    project === null ||
-    !project.bodyEN ||
-    !project.bodyPTBR || !body
-  ) {
-    return <>Loading...</>
+  if (contentWasNotLoaded) {
+    setTimeout(() => {
+      setContentWasNotLoaded(
+        !localeContextHome ||
+          project === null ||
+          !project.bodyEN ||
+          !project.bodyPTBR ||
+          !body
+      )
+    }, 1000)
+    return (
+      <>
+        <Header title={`${project.title}`} />
+        <Loader />
+      </>
+    )
   }
 
   return (
     <>
       <Header title={`${project.title}`} />
-      <main>
-        <Navbar />
+      <BaseLayout>
         <section>
-          <div className="relative">
-            <div className="w-full absolute top-0 z-50 h-[300px] bg-gradient-to-b from-pink/90 to-transparent" />
-            <img
-              src={project.coverImage}
-              className="object-cover relative w-full h-[300px]"
-            />
-          </div>
-          <div className="max-w-[800px] mt-8 text-black w-full mx-auto">
-            <h1 className="text-[72px] font-semibold">{project.title}</h1>
-            <h2 className="text-[50px] font-light -mt-4">{project.subtitle}</h2>
-            <div
-              id="article-body"
-              dangerouslySetInnerHTML={{
-                __html: marked.marked(body!),
-              }}
-              className="mt-10"
-            ></div>
-          </div>
+          <Cover coverImage={project.coverImage} />
+          <Article
+            headings={{ title: project.title, subtitle: project.subtitle }}
+            body={body!}
+          />
         </section>
-        <Footer />
-      </main>
+      </BaseLayout>
     </>
   )
 }
@@ -83,13 +66,11 @@ export async function getStaticPaths() {
     .collection('projects')
     .find({}, { projection: { _id: 1 } })
     .toArray()) as []
-
   const ids = projectsIds.map((project: { _id: string }) => ({
     params: {
       id: String(project._id),
     },
   }))
-
   return {
     paths: ids,
     fallback: false,
@@ -112,6 +93,6 @@ export async function getStaticProps(context: {
     props: {
       project: project.data,
     },
-    revalidate: 30 * 60, // 30min in seconds
+    revalidate: 30 * 60, // 30 min in sec
   }
 }
