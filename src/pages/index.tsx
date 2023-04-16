@@ -81,5 +81,12 @@ export async function getStaticProps(context: { resolvedUrl: any }) {
     }
   } catch (error) {
     console.log(error)
+    return {
+      props: {
+        visualIdentities: [],
+        openSequences: [],
+        personalProjects: [],
+      },
+    }
   }
 }
