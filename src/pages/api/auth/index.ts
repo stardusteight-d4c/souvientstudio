@@ -23,7 +23,7 @@ export default async function handler(
   const serverKey = process.env.SERVER_KEY
   const rootUserEmail = process.env.ROOT_USER_EMAIL
   const secret = process.env.JWT_SECRET_KEY
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
+  const baseUrl = process.env.BASE_URL
 
   if (method === 'POST') {
     if (url && url.includes('token=')) {
