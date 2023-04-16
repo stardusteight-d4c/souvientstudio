@@ -266,8 +266,7 @@ body {
 }
 /* IMAGE */
 #article-body img {
-  border-radius: 50px;
-  width: 600px;
+  width: 100%;
   margin-inline: auto;
   object-fit: cover;
 }
