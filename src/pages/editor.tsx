@@ -26,6 +26,7 @@ export default function Editor() {
   const [isOpenImportSavePopUp, setIsOpenImportSavePopUp] = useState(false)
   const [showPreview, setShowPreview] = useState(false)
   const [resultsSearch, setResultsSearch] = useState<any>()
+  const [showSearchResult, setShowSearchResult] = useState<any>()
   const [textareaLangVersion, setTextareaLangVersion] = useState<
     'en' | 'pt-BR'
   >('en')
@@ -73,7 +74,28 @@ export default function Editor() {
         handleClickOutsideOfNetworksListDropDown
       )
     }
-  }, [showSelectDropdown, editorInputsValue.search])
+  }, [showSelectDropdown])
+
+  useEffect(() => {
+    function handleClickOutsideOfNetworksListDropDown(event: MouseEvent) {
+      const { clickedOutside } = detectClickOutsideElement(event, 'searchBox')
+
+      if (clickedOutside && resultsSearch.length > 0) {
+        setResultsSearch([])
+        setEditorInputsValue((prevState) => ({
+          ...prevState,
+          search: '',
+        }))
+      }
+    }
+    document.addEventListener('click', handleClickOutsideOfNetworksListDropDown)
+    return () => {
+      document.removeEventListener(
+        'click',
+        handleClickOutsideOfNetworksListDropDown
+      )
+    }
+  }, [resultsSearch])
 
   function handleInputChange(
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -271,9 +293,9 @@ export default function Editor() {
               />
             ) : (
               <section className="grid py-10 text-black place-items-center">
-                <div className="bg-white rounded-[40px] flex flex-col gap-2 p-4 w-[800px] h-fit shadow-md shadow-black/10">
-                  <div className="flex justify-between items-center">
-                    <div className="flex items-center gap-x-2">
+                <div className="bg-white rounded-[40px] flex flex-col gap-2 p-4 w-screen md:w-full md:max-w-[800px] h-fit shadow-md shadow-black/10">
+                  <div className="flex flex-col-reverse gap-y-2 md:gap-y-0 md:flex-row justify-between md:items-center">
+                    <div className="flex items-center gap-2">
                       {selectedToEdit && !uploadedFile ? (
                         <>
                           <button
@@ -315,19 +337,23 @@ export default function Editor() {
                       <div className="absolute group-focus-within:text-orange top-1 left-2 text-black/80">
                         <Icon.Search size={24} />
                       </div>
-                      <div className="h-full w-full flex items-center gap-x-2">
-                        <div id="searchBox" className="h-full ">
+                      <div
+                        id="searchBox"
+                        className="h-full w-full flex items-center gap-x-2"
+                      >
+                        <div className="h-full ">
                           <input
                             placeholder="Search for a project"
                             type="text"
                             name="search"
+                            value={editorInputsValue.search}
                             onChange={(e) => {
                               handleInputChange(e)
                             }}
                             className="h-full w-full pl-8 pr-3 bg-transparent placeholder:text-gray border-[2px] border-black focus:border-orange outline-none rounded-full"
                           />
                           {resultsSearch && editorInputsValue.search !== '' && (
-                            <ul className="absolute overflow-hidden z-50 bg-pink mt-1 w-full !max-w-[242px] rounded-lg">
+                            <ul className="relative overflow-hidden z-50 bg-pink mt-1 w-full !max-w-[242px] rounded-lg">
                               {resultsSearch.map((result: any, index: Key) => (
                                 <li
                                   key={index}
@@ -344,7 +370,7 @@ export default function Editor() {
                                     setSelectedProjectType(result.type)
                                     setCoverImage(result.coverImage)
                                   }}
-                                  className="text-sm text-left max-w-[242px] w-full font-medium cursor-pointer hover:bg-[#fc81a8] text-white py-[2px] px-4"
+                                  className="text-sm text-left max-w-[242px] w-full font-medium cursor-pointer hover:bg-orange text-white py-[2px] px-4"
                                 >
                                   {result.title}: {result.subtitle}
                                 </li>
@@ -356,7 +382,8 @@ export default function Editor() {
                           onClick={() =>
                             searchByProject(editorInputsValue.search)
                           }
-                          className="block ml-auto w-fit bg-orange py-1 px-2 text-white font-medium rounded-full"
+                          disabled={editorInputsValue.search.length < 3}
+                          className="disabled:bg-pink disabled:cursor-not-allowed bg-orange block ml-auto w-fit py-1 px-2 text-white font-medium rounded-full"
                         >
                           Search
                         </button>
@@ -389,7 +416,7 @@ export default function Editor() {
                                     setSelectedProjectType(type)
                                     setShowSelectDropdown(false)
                                   }}
-                                  className="text-sm font-medium cursor-pointer hover:bg-[#fc81a8] text-white py-[2px]"
+                                  className="text-sm font-medium cursor-pointer hover:bg-orange text-white py-[2px]"
                                 >
                                   {type}
                                 </li>
@@ -419,7 +446,7 @@ export default function Editor() {
                   <div className="h-full relative">
                     <div className="absolute right-0 -top-8">
                       {textareaLangVersion === 'en' ? (
-                        <div className="flex gap-x-2 items-center">
+                        <div className="flex gap-x-2 cursor-default items-center">
                           <span className="text-sm">
                             Writing the english version
                           </span>
@@ -442,51 +469,54 @@ export default function Editor() {
                         </div>
                       )}
                     </div>
-                    <div className="flex items-center justify-between w-full rounded-t-xl border-[2px] border-b-0 border-[#fc81a8]">
-                      <ul className="p-2 gap-x-1 flex items-center">
-                        {iconsFirstSection.map((item, index) => (
-                          <li
-                            key={index}
-                            onClick={() => handleSelected(item.name)}
-                            className="cursor-pointer rounded-md p-1 hover:bg-pink hover:text-white w-fit"
-                          >
-                            <item.Icon />
-                          </li>
-                        ))}
-                      </ul>
-                      <ul className="p-2 gap-x-1 flex items-center">
-                        {iconsSecondSection.map((item, index) => (
-                          <li
-                            key={index}
-                            onClick={() => item.execute()}
-                            className="cursor-pointer rounded-md p-1 hover:bg-pink hover:text-white w-fit"
-                          >
-                            <item.Icon />
-                          </li>
-                        ))}
-                      </ul>
+                    <div className='flex md:flex-col'>
+                      <div className="flex w-10 -ml-2 md:-ml-0 mr-2 md:mr-0 flex-col md:flex-row  items-center my-2 justify-between md:w-full rounded-[40px] md:border-[2px]  border-pink">
+                        <ul className="flex flex-col md:flex-row p-2 gap-x-1 items-center">
+                          {iconsFirstSection.map((item, index) => (
+                            <li
+                              key={index}
+                              onClick={() => handleSelected(item.name)}
+                              className="cursor-pointer rounded-full p-1 hover:bg-pink hover:text-white w-fit"
+                            >
+                              <item.Icon />
+                            </li>
+                          ))}
+                        </ul>
+                        <ul className="p-2 gap-x-1 flex flex-col md:flex-row items-center">
+                          {iconsSecondSection.map((item, index) => (
+                            <li
+                              key={index}
+                              onClick={() => item.execute()}
+                              className="cursor-pointer rounded-full p-1 hover:bg-pink hover:text-white w-fit"
+                            >
+                              <item.Icon />
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      {textareaLangVersion === 'en' ? (
+                        <textarea
+                          spellCheck="false"
+                          ref={textareaElement}
+                          name="textareaEN"
+                          onChange={handleInputChange}
+                          id="textareaEN"
+                          value={editorInputsValue.textareaEN}
+                          className="rounded-xl min-h-full md:h-[300px] mb-2 w-full outline-none bg-pink resize-none p-4 text-black"
+                        />
+                      ) : (
+                        <textarea
+                          spellCheck="false"
+                          ref={textareaElement}
+                          name="textareaPTBR"
+                          onChange={handleInputChange}
+                          id="textareaPTBR"
+                          value={editorInputsValue.textareaPTBR}
+                          className="rounded-xl min-h-full md:h-[300px] mb-2 w-full outline-none bg-pink resize-none p-4 text-black"
+                        />
+                      )}
                     </div>
-                    {textareaLangVersion === 'en' ? (
-                      <textarea
-                        spellCheck="false"
-                        ref={textareaElement}
-                        name="textareaEN"
-                        onChange={handleInputChange}
-                        id="textareaEN"
-                        value={editorInputsValue.textareaEN}
-                        className="rounded-b-xl h-[300px] mb-2 w-full outline-none  border-[2px] border-[#fc81a8] border-t-0 bg-[#fc81a8]/50 resize-none p-4 text-black"
-                      />
-                    ) : (
-                      <textarea
-                        spellCheck="false"
-                        ref={textareaElement}
-                        name="textareaPTBR"
-                        onChange={handleInputChange}
-                        id="textareaPTBR"
-                        value={editorInputsValue.textareaPTBR}
-                        className="rounded-b-xl h-[300px] mb-2 w-full outline-none  border-[2px] border-[#fc81a8] border-t-0 bg-[#fc81a8]/50 resize-none p-4 text-black"
-                      />
-                    )}
+
                     {selectedToEdit ? (
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-x-2">

@@ -48,9 +48,7 @@ export default function Navbar({ notFixed = false }: Props) {
   }
 
   return (
-    <nav
-      className={css.handleWrapper(isGradientShadowOn, notFixed)}
-    >
+    <nav className={css.handleWrapper(isGradientShadowOn, notFixed)}>
       {showCurriculum && <CurriculumModal />}
       <div className={css.container}>
         <Link href="/" className={css.fevientLogo}>
@@ -73,9 +71,9 @@ export default function Navbar({ notFixed = false }: Props) {
               <li className={css.desktopListItem}>
                 <a href="#contact">{localeContextHome?.nav.contact}</a>
               </li>
+              <Flags />
             </>
           )}
-          <Flags />
         </ul>
         {isIndexRoute ? (
           <div className={css.hideMobileMenu}>
@@ -114,14 +112,14 @@ export default function Navbar({ notFixed = false }: Props) {
                     >
                       <a href="#contact">{localeContextHome?.nav.contact}</a>
                     </li>
-                    <Flags />
+                    <Flags size={38} />
                   </ul>
                 </div>
               </>
             )}
           </div>
         ) : (
-          <div className="block md:hidden">
+          <div>
             <Flags />
           </div>
         )}

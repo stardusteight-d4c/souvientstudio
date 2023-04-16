@@ -3,9 +3,11 @@ import { brazilFlag, euaFlag } from '@/assets'
 import Image from 'next/legacy/image'
 import { useAppContext } from '@/@context/ContextProvider'
 
-interface Props {}
+interface Props {
+  size?: number
+}
 
-export function Flags(props: Props) {
+export function Flags({ size = 24 }: Props) {
   const { lang, setLang } = useAppContext()
 
   return (
@@ -16,8 +18,8 @@ export function Flags(props: Props) {
           onClick={() => setLang('pt-BR')}
           alt="united-states-flag/icon"
           quality={100}
-          width={24}
-          height={24}
+          width={size}
+          height={size}
         />
       ) : (
         <Image
@@ -25,8 +27,8 @@ export function Flags(props: Props) {
           onClick={() => setLang('en')}
           alt="brazil-flag/icon"
           quality={100}
-          width={24}
-          height={24}
+          width={size}
+          height={size}
         />
       )}
     </li>
