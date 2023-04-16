@@ -3,12 +3,13 @@ import { useRouter } from 'next/router'
 import axios from 'axios'
 import { useAppContext } from '@/@context/AppContextProvider'
 import { useEditorContext } from '@/@context/EditorContextProvider'
-import { AuthWrapper, Header } from '@/components/@globals'
+import { Header } from '@/components/@globals'
 import {
   RichTextEditor,
   BaseLayoutEditor,
   ProjectShowdown,
 } from '@/components/editor'
+import AuthWrapper from '@/components/@globals/AuthWrapper'
 
 export default function Editor() {
   const { editorData, setEditorData } = useEditorContext()

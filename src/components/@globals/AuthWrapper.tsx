@@ -4,7 +4,7 @@ interface Props {
   children: React.ReactNode
 }
 
-const AuthWrapper = ({ children }: Props) => {
+export const AuthWrapper = ({ children }: Props) => {
   const { isClientAuthenticated } = useAppContext()
   return isClientAuthenticated ? <>{children}</> : null
 }
