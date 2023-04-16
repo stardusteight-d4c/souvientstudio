@@ -85,14 +85,18 @@ export async function getStaticProps(context: {
   params: IParams
   resolvedUrl: any
 }) {
-  const { id } = context.params as IParams
-  const project = await axios.get(
-    `${process.env.BASE_URL}/api/database/projects/${id}?url=${context.resolvedUrl}`
-  )
-  return {
-    props: {
-      project: project.data,
-    },
-    revalidate: 30 * 60, // 30 min in sec
+  try {
+    const { id } = context.params as IParams
+    const project = await axios.get(
+      `${process.env.BASE_URL}/api/database/projects/${id}?url=${context.resolvedUrl}`
+    )
+    return {
+      props: {
+        project: project.data,
+      },
+      revalidate: 30 * 60, // 30 min in sec
+    }
+  } catch (error) {
+    console.log()
   }
 }

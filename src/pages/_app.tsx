@@ -46,10 +46,10 @@ export default function App({
 App.getInitialProps = async (context: {
   ctx: { req: { cookies: { sessionCookie: string } } }
 }): Promise<{ isClientAuthenticated: boolean }> => {
-  const { ctx } = context
-  let isClientAuthenticated = false
-
   try {
+    const { ctx } = context
+    let isClientAuthenticated = false
+
     if (ctx.req.cookies.sessionCookie) {
       const sessionCookieToken = ctx.req.cookies.sessionCookie
       jwt.verify(sessionCookieToken, process.env.JWT_SECRET_KEY!)

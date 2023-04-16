@@ -1,13 +1,7 @@
 import { useEffect } from 'react'
 import axios from 'axios'
 import { useAppContext } from '@/@context/AppContextProvider'
-import {
-  Navbar,
-  Footer,
-  Header,
-  Loader,
-  BaseLayout,
-} from '@/components/@globals'
+import { Header, Loader, BaseLayout } from '@/components/@globals'
 import { IProject } from '@/@interfaces/IProject'
 import {
   Hero,
@@ -64,24 +58,28 @@ export default function Home(props: Props) {
 }
 
 export async function getStaticProps(context: { resolvedUrl: any }) {
-  const { data } = await axios.get(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/database/projects?url=${context.resolvedUrl}`
-  )
-  const visualIdentities: IProject[] = data.filter(
-    (project: IProject) => project.type === 'Visual identity'
-  )
-  const openSequences: IProject[] = data.filter(
-    (project: IProject) => project.type === 'Open sequence'
-  )
-  const personalProjects: IProject[] = data.filter(
-    (project: IProject) => project.type === 'Personal project'
-  )
-  return {
-    props: {
-      visualIdentities,
-      openSequences,
-      personalProjects,
-    },
-    revalidate: 30 * 60, // 30min in seconds
+  try {
+    const { data } = await axios.get(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/database/projects?url=${context.resolvedUrl}`
+    )
+    const visualIdentities: IProject[] = data.filter(
+      (project: IProject) => project.type === 'Visual identity'
+    )
+    const openSequences: IProject[] = data.filter(
+      (project: IProject) => project.type === 'Open sequence'
+    )
+    const personalProjects: IProject[] = data.filter(
+      (project: IProject) => project.type === 'Personal project'
+    )
+    return {
+      props: {
+        visualIdentities,
+        openSequences,
+        personalProjects,
+      },
+      revalidate: 30 * 60, // 30min in seconds
+    }
+  } catch (error) {
+    console.log(error)
   }
 }
