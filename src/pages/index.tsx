@@ -60,7 +60,7 @@ export default function Home(props: Props) {
 export async function getStaticProps(context: { resolvedUrl: any }) {
   try {
     const { data } = await axios.get(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/database/projects?url=${context.resolvedUrl}`
+      `${process.env.BASE_URL}/api/database/projects?url=${context.resolvedUrl}`
     )
     const visualIdentities: IProject[] = data.filter(
       (project: IProject) => project.type === 'Visual identity'
