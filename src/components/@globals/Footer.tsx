@@ -6,9 +6,24 @@ export default function Footer() {
   const { localeContextHome } = useAppContext()
 
   const socialLinks = [
-    { link: 'https://www.instagram.com/fevient/', Icon: Instagram, size: 20 },
-    { link: 'https://www.behance.net/fersena/', Icon: Behance, size: 22 },
-    { link: 'https://www.linkedin.com/in/fercsena/', Icon: LinkedIn, size: 20 },
+    {
+      link: 'https://www.instagram.com/fevient/',
+      Icon: Instagram,
+      size: 20,
+      name: 'Instagram',
+    },
+    {
+      link: 'https://www.behance.net/fersena/',
+      Icon: Behance,
+      size: 22,
+      name: 'Behance',
+    },
+    {
+      link: 'https://www.linkedin.com/in/fercsena/',
+      Icon: LinkedIn,
+      size: 20,
+      name: 'LinkedIn',
+    },
   ]
 
   return (
@@ -22,7 +37,11 @@ export default function Footer() {
           <ul className={css.unorderedList}>
             {socialLinks.map((item, index) => (
               <li key={index}>
-                <a href={item.link} target="_blank">
+                <a
+                  href={item.link}
+                  target="_blank"
+                  aria-label={`Follow me in ${item.name}`}
+                >
                   <item.Icon size={item.size} />
                 </a>
               </li>

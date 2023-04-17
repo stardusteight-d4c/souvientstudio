@@ -136,7 +136,7 @@ body {
 }
 .animate-marquee {
   animation: marquee linear infinite;
-  animation-duration: 200s;
+  animation-duration: 60s;
 }
 
 /* Card Projects */

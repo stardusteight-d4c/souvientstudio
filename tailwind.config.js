@@ -23,7 +23,7 @@ module.exports = {
         black: '#2e2e2e',
         white: '#F8F7E2',
         pink: '#FE9BBA',
-        orange: '#751D00',
+        orange: '#FE5B30',
         gray: '#505050',
       },
       backgroundSize: {
