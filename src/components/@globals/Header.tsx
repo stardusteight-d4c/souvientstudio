@@ -9,7 +9,7 @@ export default function Header({ title }: Props) {
     <Head>
       <title>{`Fevient / ${String(title)}`}</title>
       <meta
-        name="souvientstudio |  Graphic Designer"
+        name="description"
         content="Graphic Designer, Visual Design, Product Strategy"
       />
       <meta name="viewport" content="width=device-width, initial-scale=1" />

@@ -52,7 +52,6 @@ export default function ProjectsSliderContainer({
         <SliderTypeTitle sliderTitle={sliderTitle} />
         <div className={css.wrapper}>
           <div className={css.overlayLeft} />
-          {/* <div className={css.overlayRight} /> */}
           <motion.div {...dragAnimate}>
             {projects.length === 0 ? (
               <div className={css.noProjectsFound}>No projects found</div>

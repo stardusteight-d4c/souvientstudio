@@ -28,7 +28,7 @@ export default function Hero() {
                 initial="hidden"
                 animate="show"
               >
-                <Image src={star.src} width={84} height={84} />
+                <Image src={star.src} alt="star/svg" width={84} height={84} />
               </motion.div>
             </div>
             <div className={css.spinnerRight}>
@@ -37,7 +37,7 @@ export default function Hero() {
                 initial="hidden"
                 animate="show"
               >
-                <Image src={star.src} width={64} height={64} />
+                <Image src={star.src} alt="star/svg" width={64} height={64} />
               </motion.div>
             </div>
             <div className={css.spinnerBlurEffect}>
@@ -46,9 +46,9 @@ export default function Hero() {
             <div className={css.avatar}>
               <Image
                 src={fernanda.src}
+                alt="fernanda/img"
                 width={100}
                 height={100}
-                quality={100}
                 className={css.avatar}
               />
             </div>
