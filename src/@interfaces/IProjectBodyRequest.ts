@@ -1,5 +1,7 @@
+import { IProjectType } from "./IProjectType"
+
 export interface IProjectBodyRequest {
-  type: string
+  type: IProjectType
   title: string
   subtitle: string
   coverImageFile: {

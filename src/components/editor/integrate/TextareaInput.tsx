@@ -1,5 +1,6 @@
-import { useEditorContext } from '@/@context/EditorContextProvider'
 import React from 'react'
+import { useEditorContext } from '@/@context/EditorContextProvider'
+import { textareaInputStyles as css } from './styles'
 
 interface Props {
   textareaElement: React.RefObject<HTMLTextAreaElement>
@@ -8,10 +9,10 @@ interface Props {
   ) => void
 }
 
-export const TextareaInput = ({
+export default function TextareaInput({
   textareaElement,
   handleInputChange,
-}: Props) => {
+}: Props) {
   const { editorData } = useEditorContext()
 
   return (
@@ -24,7 +25,7 @@ export const TextareaInput = ({
           onChange={handleInputChange}
           id="textareaEN"
           value={editorData.textareaEN}
-          className="rounded-xl min-h-full md:h-[300px] mb-2 w-full outline-none bg-pink resize-none p-4 text-black"
+          className={css.input}
         />
       ) : (
         <textarea
@@ -34,7 +35,7 @@ export const TextareaInput = ({
           onChange={handleInputChange}
           id="textareaPTBR"
           value={editorData.textareaPTBR}
-          className="rounded-xl min-h-full md:h-[300px] mb-2 w-full outline-none bg-pink resize-none p-4 text-black"
+          className={css.input}
         />
       )}
     </>

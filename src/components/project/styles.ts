@@ -1,6 +1,6 @@
 export const coverStyles = {
   wrapper: `relative`,
-  image: `object-cover relative w-full h-[300px]`,
+  image: `object-cover relative !w-full min-w-[100vw] max-w-[100vw] h-[300px]`,
 }
 
 export const articleStyles = {

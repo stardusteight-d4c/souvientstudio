@@ -1,7 +1,8 @@
-import { coverPlaceholder } from '@/assets'
 import React from 'react'
 import * as marked from 'marked'
+import { coverPlaceholder } from '@/assets'
 import { Article, Cover } from '../project'
+import { projectShowdownStyles as css } from './styles'
 
 interface Props {
   coverImage?: string
@@ -16,41 +17,28 @@ export default function ProjectShowdown(props: Props) {
     title: props.title === '' ? 'Untitled' : props.title!,
     subtitle: props.subtitle === '' ? 'No subtitle' : props.subtitle!,
   }
-  return (
-    <section className="min-h-screen">
-      <div className="relative">
-        <div>
-          <Cover
-            coverImage={
-              props.coverImage === ''
-                ? coverPlaceholder.src!
-                : props.coverImage!
-            }
-          />
+  const bodyProps =
+    props?.body === ''
+      ? 'Describe how fantastic this project is.'
+      : marked.marked(props?.body ?? '')
+  const coverProps =
+    props.coverImage === '' ? coverPlaceholder.src! : props.coverImage!
+  const thumbnailSrc =
+    props.coverImage === '' ? coverPlaceholder.src : props.coverImage
 
-          <button
-            onClick={props.emitBack}
-            className="block relative left-1/2 -translate-x-1/2 -mt-12 z-50 font-bold uppercase w-fit text-black py-2 px-4 bg-white rounded-full"
-          >
+  return (
+    <section className={css.wrapper}>
+      <div className={css.container}>
+        <div>
+          <Cover coverImage={coverProps} />
+          <button onClick={props.emitBack} className={css.backToEditorButton}>
             Back to editor
           </button>
         </div>
-        <img
-          src={
-            props.coverImage === '' ? coverPlaceholder.src : props.coverImage
-          }
-          className="absolute hidden lg:block object-cover rounded-3xl z-50 border-black/50 border-[2px] border-dashed -bottom-[185px] right-20 max-w-[180px] max-h-[125px] min-w-[180px] min-h-[125px]"
-        />
+        <img src={thumbnailSrc} className={css.thumbnail} />
       </div>
-      <div className="max-w-[800px] mt-8 text-black w-full mx-auto">
-        <Article
-          headings={headingsProps}
-          body={
-            props?.body === ''
-              ? 'Describe how fantastic this project is.'
-              : marked.marked(props?.body ?? '')
-          }
-        />
+      <div className={css.articleWrapper}>
+        <Article headings={headingsProps} body={bodyProps} />
       </div>
     </section>
   )

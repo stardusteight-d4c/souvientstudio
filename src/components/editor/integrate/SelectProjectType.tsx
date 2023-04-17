@@ -1,69 +1,53 @@
+import React, { useRef, useState } from 'react'
 import { useEditorContext } from '@/@context/EditorContextProvider'
+import { IProjectType } from '@/@interfaces/IProjectType'
 import { Caret } from '@/components/@globals/atoms'
-import { detectClickOutsideElement } from '@/utils/detect-click-outside-element'
-import React, { useEffect, useState } from 'react'
+import { useClickOutside } from '@/components/hooks/useClickOutside'
+import { selectProjectTypeStyles as css } from './styles'
 
 interface Props {}
 
-export const SelectProjectType = (props: Props) => {
+export default function SelectProjectType(props: Props) {
   const { editorData, setEditorData } = useEditorContext()
   const [showSelectDropdown, setShowSelectDropdown] = useState(false)
-  const projectsTypes: any = [
+  const typeBoxRef = useRef(null)
+  const handleClickOutsideTypeBoxRef = () => setShowSelectDropdown(false)
+  useClickOutside({ ref: typeBoxRef, callback: handleClickOutsideTypeBoxRef })
+  const projectsTypes: IProjectType[] = [
     'Visual identity',
     'Open sequence',
     'Personal project',
   ]
 
-  useEffect(() => {
-    function handleClickOutsideOfNetworksListDropDown(event: MouseEvent) {
-      const { clickedOutside } = detectClickOutsideElement(
-        event,
-        'selectProjectTypeElement'
-      )
-      if (clickedOutside && showSelectDropdown === true) {
-        setShowSelectDropdown(false)
-      }
-    }
-    document.addEventListener('click', handleClickOutsideOfNetworksListDropDown)
-    return () => {
-      document.removeEventListener(
-        'click',
-        handleClickOutsideOfNetworksListDropDown
-      )
-    }
-  }, [showSelectDropdown])
+  function selectProjectType(type: IProjectType) {
+    setEditorData((prevState) => ({
+      ...prevState,
+      type: type,
+    }))
+    setShowSelectDropdown(false)
+  }
 
   return (
-    <div id="selectProjectTypeElement" className="relative w-fit">
+    <div ref={typeBoxRef} className={css.wrapper}>
       <div
         onClick={() => setShowSelectDropdown(!showSelectDropdown)}
-        className="text-sm flex justify-center gap-x-2 px-2 cursor-pointer border-[2px] border-pink py-1 rounded-full"
+        className={css.container}
       >
         {editorData.type}
-        <div
-          className={`${
-            showSelectDropdown && '-rotate-180'
-          } transition-all duration-150`}
-        >
+        <div className={css.handleCaretDirection(showSelectDropdown)}>
           <Caret size={18} />
         </div>
       </div>
       {showSelectDropdown && (
-        <div className="absolute z-50 bg-pink mt-1 w-full rounded-lg overflow-hidden">
-          <ul className="text-center">
-            {projectsTypes.map((type: any) => {
+        <div className={css.dropdown}>
+          <ul className={css.unorderedList}>
+            {projectsTypes.map((type: IProjectType) => {
               if (type !== editorData.type) {
                 return (
                   <li
                     key={type}
-                    onClick={() => {
-                      setEditorData((prevState) => ({
-                        ...prevState,
-                        type: type,
-                      }))
-                      setShowSelectDropdown(false)
-                    }}
-                    className="text-sm font-medium cursor-pointer hover:bg-orange text-white py-[2px]"
+                    onClick={() => selectProjectType(type)}
+                    className={css.listItem}
                   >
                     {type}
                   </li>

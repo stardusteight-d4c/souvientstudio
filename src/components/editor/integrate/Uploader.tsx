@@ -1,9 +1,10 @@
-import { useEditorContext } from '@/@context/EditorContextProvider'
 import React, { ChangeEvent } from 'react'
+import { useEditorContext } from '@/@context/EditorContextProvider'
+import { uploaderStyles as css } from './styles'
 
 interface Props {}
 
-export const Uploader = (props: Props) => {
+export default function Uploader(props: Props) {
   const { editorData, setEditorData } = useEditorContext()
 
   function onClickUpload(): void {
@@ -39,16 +40,13 @@ export const Uploader = (props: Props) => {
 
   return (
     <>
-      <div className="flex items-center gap-2">
+      <div className={css.wrapper}>
         {editorData.selectedToEdit && !editorData.uploadedFile ? (
           <>
-            <button
-              onClick={onClickUpload}
-              className="bg-pink block w-fit whitespace-nowrap py-2 px-4 text-white font-medium rounded-full"
-            >
+            <button onClick={onClickUpload} className={css.newCoverButton}>
               New cover image
             </button>
-            <span className="truncate w-[200px]">
+            <span className={css.truncateTxt}>
               {editorData.selectedToEdit.coverImage}
             </span>
           </>
@@ -56,15 +54,13 @@ export const Uploader = (props: Props) => {
           <>
             <button
               onClick={onClickUpload}
-              className={`${
-                editorData.uploadedFile ? 'bg-orange' : 'bg-pink'
-              } block w-fit whitespace-nowrap py-2 px-4 text-white font-medium rounded-full`}
+              className={css.handleUploadButton(editorData.uploadedFile)}
             >
               {editorData.uploadedFile
                 ? 'Uploaded cover image'
                 : 'Upload cover image'}
             </button>
-            <span className="truncate w-[200px]">
+            <span className={css.truncateTxt}>
               {editorData.uploadedFile && editorData.uploadedFile.name}
             </span>
           </>

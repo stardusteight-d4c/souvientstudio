@@ -1,11 +1,10 @@
-import { useEditorContext } from '@/@context/EditorContextProvider'
 import React from 'react'
-import { ImportSavePopUp } from './ImportSavePopUp'
-import { SavePopUp } from './SavePopUp'
+import { useEditorContext } from '@/@context/EditorContextProvider'
+import { ImportSavePopUp, SavePopUp } from '.'
 
 interface Props {}
 
-export const PopUpsHandler = (props: Props) => {
+export default function PopUpsHandler(props: Props) {
   const { editorData, setEditorData } = useEditorContext()
 
   function closeSavePopUp() {

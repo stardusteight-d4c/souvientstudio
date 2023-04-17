@@ -1,7 +1,8 @@
 import { IProject } from "./IProject"
+import { IProjectType } from "./IProjectType"
 
 export interface IEditorData {
-  type: 'Visual identity' | 'Open sequence' | 'Personal project'
+  type: IProjectType
   coverImage: string
   title: string
   subtitle: string

@@ -1,13 +1,14 @@
-import { Download } from '@/components/@globals/atoms'
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { Download } from '@/components/@globals/atoms'
+import { importSavePopUpStyles as css } from './styles'
 
 interface Props {
   emitClosed: (value?: string) => void
   langContext: 'pt-BR' | 'en'
 }
 
-export function ImportSavePopUp({ emitClosed, langContext }: Props) {
+export default function ImportSavePopUp({ emitClosed, langContext }: Props) {
   function getSave(): void {
     if (langContext === 'en') {
       const savedText = localStorage.getItem('saveTextareaEN')
@@ -38,30 +39,25 @@ export function ImportSavePopUp({ emitClosed, langContext }: Props) {
 
   return ReactDOM.createPortal(
     <>
-      <div className="bg-black/20 fixed inset-0" />
-      <section className="bg-white fixed py-8 px-14 text-black w-fit rounded-2xl top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">
-        <div className="flex flex-col items-center justify-center">
-          <div className="text-orange">
+      <div className={css.overlay} />
+      <section className={css.wrapper}>
+        <div className={css.alertInfoContainer}>
+          <div className={css.txtOrange}>
             <Download size={48} />
           </div>
-          <h2 className="font-poppins text-2xl font-semibold mt-2 mb-1">
-            Are you sure?
-          </h2>
-          <span className="max-w-[250px] w-full text-center text-sm text-gray pb-4 block">
+          <h2 className={css.areYouSure}>Are you sure?</h2>
+          <span className={css.span}>
             This action will import the saved text, your current progress will
             be lost. Do you wish to continue?
           </span>
         </div>
-        <div className="flex items-center justify-center gap-x-4 mt-4">
-          <button
-            onClick={getSave}
-            className="hover:scale-105 text-white z-50 relative bg-orange transition-all duration-300 rounded-full block w-[105px] p-2 active:scale-100 outline-none"
-          >
+        <div className={css.buttonsContainer}>
+          <button onClick={getSave} className={css.handleButton('bg-orange')}>
             Import
           </button>
           <button
             onClick={() => emitClosed()}
-            className="hover:scale-105 text-white z-50 relative bg-gray transition-all duration-300 rounded-full block w-[105px] p-2 active:scale-100 outline-none"
+            className={css.handleButton('bg-gray')}
           >
             Cancel
           </button>

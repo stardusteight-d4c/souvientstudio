@@ -47,10 +47,11 @@ export default async function handler(
   if (method === 'GET') {
     if (url && url.includes('title=')) {
       const title = url.split('=')[1]
+      const decodedTitleQueryParam = decodeURIComponent(title)
       try {
         const projects = await db
           .collection('projects')
-          .find({ title: { $regex: title, $options: 'i' } })
+          .find({ title: { $regex: decodedTitleQueryParam, $options: 'i' } })
           .sort({ timestamp: -1 })
           .toArray()
         res.status(200).json(projects)

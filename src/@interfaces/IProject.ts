@@ -1,6 +1,8 @@
+import { IProjectType } from "./IProjectType"
+
 export interface IProject {
   _id?: string
-  type: 'Visual identity' | 'Open sequence' | 'Personal project'
+  type: IProjectType
   title: string
   subtitle: string
   coverImage: string

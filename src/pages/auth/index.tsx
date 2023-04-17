@@ -14,8 +14,10 @@ export default function Auth() {
         const res = await axios.post(`/api/auth?token=${token}`)
         if (res.data.status === false) {
           alert(res.data.message)
-          router.push('/')
-        } else {
+          setTimeout(() => {
+            router.push('/auth/login')
+          }, 1000)
+        } else if (res.data.status === true) {
           alert(res.data.message)
           const now = new Date()
           const expireTime = now.getTime() + 7 * 24 * 60 * 60 * 1000 // expira em 7 dias
@@ -23,7 +25,9 @@ export default function Auth() {
           document.cookie = `sessionCookie=${
             res.data.sessionToken
           }; expires=${now.toUTCString()}; path=/`
-          router.push('/')
+          setTimeout(() => {
+            router.push('/')
+          }, 1000)
         }
       })()
     } else {

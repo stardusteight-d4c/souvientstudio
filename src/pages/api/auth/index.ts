@@ -47,7 +47,6 @@ export default async function handler(
         }
       } catch (err) {
         console.error('Invalid Token:', err)
-        // redirecionar para login
         return res
           .status(200)
           .json({ status: false, message: 'Invalid or expired token.' })

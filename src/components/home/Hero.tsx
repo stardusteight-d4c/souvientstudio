@@ -49,6 +49,7 @@ export default function Hero() {
                 alt="fernanda/img"
                 width={100}
                 height={100}
+                quality={100}
                 className={css.avatar}
               />
             </div>
