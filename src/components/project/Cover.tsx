@@ -7,7 +7,6 @@ interface Props {
 export default function Cover({ coverImage }: Props) {
   return (
     <div className={css.wrapper}>
-      <div className={css.overlay} />
       <img src={coverImage} className={css.image} />
     </div>
   )

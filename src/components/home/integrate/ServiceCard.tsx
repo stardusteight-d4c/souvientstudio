@@ -15,14 +15,10 @@ export default function ServiceCard(props: Props) {
   const handleEnterViewport = () => {
     setIsVisible(true)
   }
-  const handleExitViewport = () => {
-    setIsVisible(false)
-  }
 
   return (
     <IntersectionObserver
       onEnter={handleEnterViewport}
-      onExit={handleExitViewport}
       overflowYHidden={false}
       overflowXHidden={false}
     >

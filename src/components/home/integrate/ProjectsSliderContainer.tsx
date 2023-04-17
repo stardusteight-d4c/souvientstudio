@@ -43,12 +43,16 @@ export default function ProjectsSliderContainer({
   }
 
   return (
-    <IntersectionObserver onEnter={handleEnterViewport}>
+    <IntersectionObserver
+      overflowXHidden={false}
+      overflowYHidden={false}
+      onEnter={handleEnterViewport}
+    >
       <div>
         <SliderTypeTitle sliderTitle={sliderTitle} />
         <div className={css.wrapper}>
           <div className={css.overlayLeft} />
-          <div className={css.overlayRight} />
+          {/* <div className={css.overlayRight} /> */}
           <motion.div {...dragAnimate}>
             {projects.length === 0 ? (
               <div className={css.noProjectsFound}>No projects found</div>

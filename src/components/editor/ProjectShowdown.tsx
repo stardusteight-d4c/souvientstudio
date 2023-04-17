@@ -19,7 +19,6 @@ export default function ProjectShowdown(props: Props) {
   return (
     <section className="min-h-screen">
       <div className="relative">
-        <div className="w-full absolute top-0 z-50 h-[300px] bg-gradient-to-b from-pink/90 to-transparent" />
         <div>
           <Cover
             coverImage={

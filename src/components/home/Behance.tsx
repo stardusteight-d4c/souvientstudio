@@ -11,15 +11,8 @@ export default function Behance() {
     setIsVisible(true)
   }
 
-  const handleExitViewport = () => {
-    setIsVisible(false)
-  }
-
   return (
-    <IntersectionObserver
-      onEnter={handleEnterViewport}
-      onExit={handleExitViewport}
-    >
+    <IntersectionObserver onEnter={handleEnterViewport}>
       <section className={css.wrapper}>
         <div className={css.container}>
           <p className={css.handleParagraph(isVisible)}>

@@ -12,6 +12,7 @@ module.exports = {
       xl: '1280px',
       xll: '1320px',
       '2xl': '1536px',
+      '3xl': '1736px',
     },
     fontFamily: {
       inter: 'Inter, sans-serif',

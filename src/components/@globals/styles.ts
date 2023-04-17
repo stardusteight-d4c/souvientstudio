@@ -18,7 +18,7 @@ export const navbarStyles = {
 }
 
 export const footerStyles = {
-  wrapper: `pt-20 pb-4 max-w-[100vw] overflow-hidden`,
+  wrapper: `pt-20 pb-4 w-full max-w-[100vw] overflow-hidden`,
   container: `max-w-[1032px] px-4 lg:px-0 mx-auto`,
   contentContainer: `text-sm text-black flex flex-col gap-y-4 md:flex-row items-center justify-between`,
   span: `text-center md:text-left`,

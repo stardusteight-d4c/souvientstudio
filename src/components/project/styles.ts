@@ -1,6 +1,5 @@
 export const coverStyles = {
   wrapper: `relative`,
-  overlay: `w-full absolute top-0 z-50 h-[300px] bg-gradient-to-b from-pink/90 to-transparent`,
   image: `object-cover relative w-full h-[300px]`,
 }
 

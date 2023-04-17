@@ -9,7 +9,7 @@ import {
   BaseLayoutEditor,
   ProjectShowdown,
 } from '@/components/editor'
-import AuthWrapper from '@/components/@globals/AuthWrapper'
+import { AuthWrapper } from '@/components/@globals'
 
 export default function Editor() {
   const { editorData, setEditorData } = useEditorContext()

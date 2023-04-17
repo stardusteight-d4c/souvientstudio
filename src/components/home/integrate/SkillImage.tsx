@@ -18,14 +18,10 @@ export default function SkillImage({ skill, index }: Props) {
   const handleEnterViewport = () => {
     setIsVisible(true)
   }
-  const handleExitViewport = () => {
-    setIsVisible(false)
-  }
 
   return (
     <IntersectionObserver
       onEnter={handleEnterViewport}
-      onExit={handleExitViewport}
       overflowYHidden={false}
       overflowXHidden={false}
     >
