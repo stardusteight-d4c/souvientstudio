@@ -32,7 +32,7 @@ export default function SkillImage({ skill, index }: Props) {
           alt={`${skill.alt}/img`}
           width={160}
           height={160}
-          quality={100}
+          quality={80}
           className={css.image}
         />
       </div>
