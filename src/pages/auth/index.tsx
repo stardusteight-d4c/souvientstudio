@@ -27,6 +27,7 @@ export default function Auth() {
           }; expires=${now.toUTCString()}; path=/`
           setTimeout(() => {
             router.push('/')
+            window.location.reload()
           }, 1000)
         }
       })()

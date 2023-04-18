@@ -9,6 +9,7 @@ export default function Form(props: Props) {
     email: '',
     serverKey: '',
   })
+  const [isLoading, setIsLoading] = useState(false)
 
   function handleInputChange(
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -25,10 +26,12 @@ export default function Form(props: Props) {
       alert('Enter server key.')
       return
     }
+    setIsLoading(true)
     const res = await axios.post('/api/auth', {
       email: inputFormData.email,
       serverKey: inputFormData.serverKey,
     })
+    setIsLoading(false)
     if (res.data.status === false) {
       alert(res.data.message)
       return
@@ -58,7 +61,7 @@ export default function Form(props: Props) {
         className={css.input}
       />
       <button onClick={requestAccessLink} className={css.requestAccessLinkBtn}>
-        Request Access Link
+        {!isLoading ? 'Request Access Link' : 'Loading...'}
       </button>
     </>
   )
