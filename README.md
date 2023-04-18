@@ -6,7 +6,7 @@
   Fevient, Web Designer Portfolio
 </h1>
 
-The project is a portfolio developed with a stack of modern and popular technologies in web development.
+The project is a Web Designer portfolio developed with a stack of modern and popular technologies in web development.
 
 On the frontend, choosing React with TypeScript and Next.js allows you to build an application that is easy to maintain and scale. The use of TailwindCSS for styling ensures visual standardization and agility in layout development. The inclusion of Framer Motion allows the creation of complex and elegant animations, raising the level of interactivity of the interface. The use of custom hooks and the Context API facilitate the management of the application state and reduce the code complexity. The inclusion of the Decorator Pattern demonstrates a concern with good programming practices.
 
