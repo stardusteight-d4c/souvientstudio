@@ -43,25 +43,45 @@ export default function App({
   )
 }
 
+// App.getInitialProps = async (context: {
+//   ctx: { req: { cookies: { sessionCookie: string } } }
+// }): Promise<{ isClientAuthenticated: boolean }> => {
+//   try {
+//     const { ctx } = context
+//     if (ctx.req.cookies.sessionCookie) {
+//       const sessionCookieToken = ctx.req.cookies.sessionCookie
+//       jwt.verify(sessionCookieToken, process.env.JWT_SECRET_KEY!)
+//       return {
+//         isClientAuthenticated: true,
+//       }
+//     } else {
+//       return {
+//         isClientAuthenticated: false,
+//       }
+//     }
+//   } catch (err) {
+//     return {
+//       isClientAuthenticated: false,
+//     }
+//   }
+// }
+
 App.getInitialProps = async (context: {
   ctx: { req: { cookies: { sessionCookie: string } } }
 }): Promise<{ isClientAuthenticated: boolean }> => {
-  try {
-    const { ctx } = context
-    if (ctx.req.cookies.sessionCookie) {
-      const sessionCookieToken = ctx.req.cookies.sessionCookie
-      jwt.verify(sessionCookieToken, process.env.JWT_SECRET_KEY!)
-      return {
-        isClientAuthenticated: true,
-      }
-    } else {
-      return {
-        isClientAuthenticated: false,
-      }
-    }
-  } catch (err) {
-    return {
-      isClientAuthenticated: false,
+  const { ctx } = context
+  const isServer = !!ctx.req;
+  let isClientAuthenticated = false;
+
+  if (isServer && ctx.req.cookies.sessionCookie) {
+    const sessionCookieToken = ctx.req.cookies.sessionCookie;
+    try {
+      jwt.verify(sessionCookieToken, process.env.JWT_SECRET_KEY!);
+      isClientAuthenticated = true;
+    } catch (err) {
+      console.log(err);
     }
   }
-}
+
+  return { isClientAuthenticated };
+};

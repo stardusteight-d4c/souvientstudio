@@ -6,7 +6,12 @@ interface Props {
 
 export const AuthWrapper = ({ children }: Props) => {
   const { isClientAuthenticated } = useAppContext()
-  return isClientAuthenticated === true ? <>{children}</> : <></>
+
+  if (isClientAuthenticated === true && isClientAuthenticated !== undefined) {
+    return <>{children}</>
+  } else {
+    return null
+  }
 }
 
 export default AuthWrapper
