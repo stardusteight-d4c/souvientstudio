@@ -38,7 +38,7 @@ export default function Project(props: Props) {
     }, 1000)
     return (
       <>
-        <Header title={`${project.title}`} />
+        <Header title={`${project?.title}`} />
         <Loader />
       </>
     )
@@ -46,12 +46,12 @@ export default function Project(props: Props) {
 
   return (
     <>
-      <Header title={`${project.title}`} />
+      <Header title={`${project?.title}`} />
       <BaseLayout>
         <section>
-          <Cover coverImage={project.coverImage} />
+          <Cover coverImage={project?.coverImage} />
           <Article
-            headings={{ title: project.title, subtitle: project.subtitle }}
+            headings={{ title: project?.title, subtitle: project?.subtitle }}
             body={body!}
           />
         </section>
