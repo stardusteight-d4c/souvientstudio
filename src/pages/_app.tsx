@@ -53,8 +53,15 @@ App.getInitialProps = async (context: {
     if (isServer && ctx.req.cookies.sessionCookie) {
       const sessionCookieToken = ctx.req.cookies.sessionCookie
       try {
-        jwt.verify(sessionCookieToken, process.env.JWT_SECRET_KEY!)
-        isClientAuthenticated = true
+        const decodedToken = jwt.verify(
+          sessionCookieToken,
+          process.env.JWT_SECRET_KEY!
+        )
+        if (decodedToken) {
+          isClientAuthenticated = true
+        } else {
+          isClientAuthenticated = false
+        }
       } catch (err) {
         console.log(err)
       }
