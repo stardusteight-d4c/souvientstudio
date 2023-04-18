@@ -16,9 +16,7 @@ export default function Auth() {
         const res = await axios.post(`/api/auth?token=${token}`)
         if (res.data.status === false) {
           alert(res.data.message)
-          setTimeout(() => {
-            router.push('/auth/login')
-          }, 1000)
+          router.push('/auth/login')
         } else if (res.data.status === true) {
           alert('Valid token.')
           const now = new Date()

@@ -22,7 +22,7 @@ export default async function handler(
   } = req
   const serverKey = process.env.SERVER_KEY
   const rootUserEmail = process.env.ROOT_USER_EMAIL
-  const secret = process.env.JWT_SECRET_KEY
+  const secret = process.env.NEXT_PUBLIC_JWT_SECRET_KEY
   const baseUrl = process.env.BASE_URL
 
   if (method === 'POST') {
