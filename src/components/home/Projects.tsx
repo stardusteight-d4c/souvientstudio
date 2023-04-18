@@ -14,10 +14,10 @@ export default function Projects(props: Props) {
   const { localeContextHome } = useAppContext()
 
   return (
-    <div className='max-w-screen overflow-x-hidden'>
-      <section className={css.wrapper}>
-        <div className={css.container}>
-          <div className="bg-white absolute z-50 top-0 bottom-0 left-[36px] -right-[500px] -translate-x-full" />
+    <div className={css.wrapper}>
+      <section className={css.contentWrapper}>
+        <div className={css.contentContainer}>
+          <div className={css.overflowLeftHide} />
           <ProjectsSliderContainer
             projects={props.visualIdentities}
             sliderTitle={localeContextHome?.projects.visualIdentities}

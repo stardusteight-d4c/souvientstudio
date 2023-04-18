@@ -33,8 +33,10 @@ export const marqueeStyles = {
 }
 
 export const projectsStyles = {
-  wrapper: `py-[100px] md:px-4 lg:px-14 relative h-fit max-w-[1445px] mx-auto`,
-  container: `mx-auto space-y-20`,
+  wrapper: `max-w-screen overflow-x-hidden`,
+  contentWrapper: `py-[100px] md:px-4 lg:px-14 relative h-fit max-w-[1445px] mx-auto`,
+  contentContainer: `mx-auto space-y-20`,
+  overflowLeftHide: `bg-white hidden lg:block absolute z-50 top-0 bottom-0 left-[36px] -right-[500px] -translate-x-full`,
 }
 
 export const behanceStyles = {
@@ -43,7 +45,7 @@ export const behanceStyles = {
   handleParagraph: (isVisible: boolean) => {
     return `${
       isVisible && 'behance-animation'
-    } !leading-[28.8px] w-full max-w-[340px] mx-auto text-center text-lg text-black font-normal`
+    } !leading-[28.8px] w-full px-2 max-w-[320px] md:max-w-[340px] mx-auto text-center text-lg text-black font-normal`
   },
   handleLinkButton: (isVisible: boolean) => {
     return `${

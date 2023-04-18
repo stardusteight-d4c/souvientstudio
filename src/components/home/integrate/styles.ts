@@ -1,5 +1,5 @@
 export const projectSliderContainerStyles = {
-  title: `text-[38px] px-4 md:px-0 text-black block w-fit !tracking-[-2px] font-medium !leading-[41.6px] font-poppins pb-8`,
+  title: `text-[32px] md:text-[38px] px-2 md:px-4 md:px-0 text-black block w-fit !tracking-[-2px] font-medium !leading-[41.6px] font-poppins pb-8`,
   titleSpan: `text-orange`,
   wrapper: `h-fit relative z-[10]`,
   overlayLeft: `absolute inset-y-0 w-[20px] md:w-[50px] z-50 -left-5 bg-gradient-to-r from-white via-white/50 to-transparent`,

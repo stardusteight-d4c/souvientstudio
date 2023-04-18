@@ -39,7 +39,7 @@ export default function ProjectsSliderContainer({
       setOnDrag(info.offset.x),
     dragConstraints: { right: 0, left: -cardSliderWidth },
     dragTransition: { bounceStiffness: 50, bounceDamping: 8 },
-    className: `${isVisible && 'slider-animation'} flex gap-x-2 `,
+    className: `${isVisible && 'slider-animation'} flex gap-x-2`,
   }
 
   return (
