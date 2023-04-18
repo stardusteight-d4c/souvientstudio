@@ -48,17 +48,16 @@ App.getInitialProps = async (context: {
 }): Promise<{ isClientAuthenticated: boolean }> => {
   try {
     const { ctx } = context
-    let isClientAuthenticated = false
-
     if (ctx.req.cookies.sessionCookie) {
       const sessionCookieToken = ctx.req.cookies.sessionCookie
       jwt.verify(sessionCookieToken, process.env.JWT_SECRET_KEY!)
-      isClientAuthenticated = true
+      return {
+        isClientAuthenticated: true,
+      }
     } else {
-      isClientAuthenticated = false
-    }
-    return {
-      isClientAuthenticated: isClientAuthenticated,
+      return {
+        isClientAuthenticated: false,
+      }
     }
   } catch (err) {
     return {

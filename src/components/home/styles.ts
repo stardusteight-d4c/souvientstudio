@@ -14,7 +14,7 @@ export const heroStyles = {
   headingOne: `text-black z-50 relative text-4xl md:text-[50px] mdd:text-[72px] text-center mt-[20px] leading-[40.4px] md:!leading-[58.4px] h-fit mdd:!leading-[86.4px] mx-auto w-full max-w-[350px] sm:max-w-[928px] font-semibold font-poppins !tracking-[-1px]`,
   breakLine: `hidden sm:block`,
   subtitle: `text-gray text-lg mt-[20px] w-full max-w-[350px] sm:max-w-[580px] mx-auto !leading-[28.8px] text-center`,
-  linkButton: `hover:scale-105 uppercase text-black z-50 relative bg-pink transition-all duration-300 rounded-full w-fit block py-3 px-8 active:scale-100 outline-none mx-auto mt-[40px]`,
+  linkButton: `hover:scale-105 uppercase text-[#FFFFFF] z-50 relative bg-pink transition-all duration-300 rounded-full w-fit block py-3 px-8 active:scale-100 outline-none mx-auto mt-[40px]`,
 }
 
 export const marqueeStyles = {
@@ -50,7 +50,7 @@ export const behanceStyles = {
   handleLinkButton: (isVisible: boolean) => {
     return `${
       isVisible && 'behance-button-animation'
-    } block mt-[40px] w-fit bg-pink py-3 px-6 mx-auto text-black font-medium rounded-full`
+    } block mt-[40px] w-fit bg-pink py-3 px-6 mx-auto text-[#FFFFFF] font-medium rounded-full`
   },
 }
 

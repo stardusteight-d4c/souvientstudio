@@ -8,7 +8,7 @@ export const projectSliderContainerStyles = {
 
 export const sliderCardStyles = {
   coverImage: `w-full h-full object-cover pointer-events-none`,
-  overlay: `inset-x-0 transition-all duration-75 bg-gradient-to-t from-pink/50 to-transparent bottom-0 h-[100px] md:hidden group-hover:block`,
+  overlay: `inset-x-0 transition-all duration-75 bg-gradient-to-t from-transparent via-pink/50 to-transparent bottom-0 h-[100px] md:hidden group-hover:block`,
   content: `content`,
   titleContainer: `title px-4 text-center`,
   title: `font-bold text-2xl uppercase`,
