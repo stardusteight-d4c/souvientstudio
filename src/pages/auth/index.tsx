@@ -1,8 +1,8 @@
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
+import axios from 'axios'
 import { Loader } from '@/components/@globals'
 import Header from '@/components/@globals/Header'
-import axios from 'axios'
-import { useRouter } from 'next/router'
-import { useEffect } from 'react'
 
 export default function Auth() {
   const router = useRouter()
