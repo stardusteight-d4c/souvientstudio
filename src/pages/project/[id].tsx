@@ -94,7 +94,7 @@ export async function getStaticProps(context: {
       props: {
         project: project.data,
       },
-      revalidate: 30 * 60, // 30 min in sec
+      revalidate: 3 * 60, // 3 min in sec
     }
   } catch (error) {
     console.log(error)
@@ -102,7 +102,7 @@ export async function getStaticProps(context: {
       props: {
         project: [],
       },
-      revalidate: 30 * 60, // 30 min in sec
+      revalidate: 3 * 60, // 3 min in sec
     }
   }
 }

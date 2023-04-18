@@ -77,7 +77,7 @@ export async function getStaticProps(context: { resolvedUrl: any }) {
         openSequences,
         personalProjects,
       },
-      revalidate: 30 * 60, // 30min in seconds
+      revalidate: 5 * 60, // 5min in seconds
     }
   } catch (error) {
     console.log(error)
@@ -87,6 +87,7 @@ export async function getStaticProps(context: { resolvedUrl: any }) {
         openSequences: [],
         personalProjects: [],
       },
+      revalidate: 5 * 60, // 5min in seconds
     }
   }
 }
