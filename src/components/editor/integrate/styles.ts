@@ -64,7 +64,7 @@ export const publishOperationStyles = {
 }
 
 export const searchProjectStyles = {
-  wrapper: `relative group w-80 h-8 rounded-full`,
+  wrapper:`relative group max-w-[320px] h-8 rounded-full`,
   searchIcon: `absolute group-focus-within:text-orange top-1 left-2 text-black/80`,
   container: `h-full w-full flex items-center gap-x-2`,
   inputANDResultBoxContainer: `h-full`,

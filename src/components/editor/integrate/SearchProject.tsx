@@ -3,8 +3,8 @@ import axios from 'axios'
 import { useEditorContext } from '@/@context/EditorContextProvider'
 import { IProject } from '@/@interfaces/IProject'
 import { Search } from '@/components/@globals/atoms'
-import { searchProjectStyles as css } from './styles'
 import { useClickOutside } from '@/components/hooks/useClickOutside'
+import { searchProjectStyles as css } from './styles'
 
 interface Props {
   handleInputChange: (
@@ -24,7 +24,10 @@ export default function SearchProject({ handleInputChange }: Props) {
       search: '',
     }))
   }
-  useClickOutside({ ref: searchBoxRef, callback: handleClickOutsideSearchBoxRef })
+  useClickOutside({
+    ref: searchBoxRef,
+    callback: handleClickOutsideSearchBoxRef,
+  })
 
   useEffect(() => {
     if (editorData.search === '') {
@@ -54,7 +57,7 @@ export default function SearchProject({ handleInputChange }: Props) {
       search: '',
     }))
   }
-
+  
   return (
     <div className={css.wrapper}>
       <div className={css.searchIcon}>
