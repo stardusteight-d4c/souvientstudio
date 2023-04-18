@@ -25,9 +25,10 @@ export default function Auth() {
           document.cookie = `sessionCookie=${
             res.data.sessionToken
           }; expires=${now.toUTCString()}; path=/`
+          alert('cookieSession was set successfully!')
+          router.reload()
           setTimeout(() => {
             router.push('/')
-            window.location.reload()
           }, 1000)
         }
       })()
