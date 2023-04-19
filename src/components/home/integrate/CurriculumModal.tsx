@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 import { useAppContext } from '@/@context/AppContextProvider'
-import { X } from '@/components/@globals/atoms'
+import { X, Download } from '@/components/@globals/atoms'
 import { curriculumModalStyles as css } from './styles'
 
 export default function CurriculumModal() {
@@ -33,8 +33,15 @@ export default function CurriculumModal() {
     <section className={css.wrapper}>
       <div className={css.overlay} />
       <div id="curriculum-box" className={css.box}>
-        <div onClick={() => setShowCurriculum(false)} className={css.close}>
-          <X />
+        <div className={css.actionsContainer}>
+          <div>
+            <a href="fernanda-sena.pdf" download>
+              <Download />
+            </a>
+          </div>
+          <div onClick={() => setShowCurriculum(false)}>
+            <X />
+          </div>
         </div>
         <embed
           src="fernanda-sena.pdf"
