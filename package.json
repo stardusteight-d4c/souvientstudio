@@ -27,7 +27,6 @@
     "typescript": "5.0.3"
   },
   "devDependencies": {
-    "@types/animejs": "^3.1.7",
     "@types/jsonwebtoken": "^9.0.1",
     "@types/marked": "^4.0.8",
     "@types/nodemailer": "^6.4.7",
