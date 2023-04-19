@@ -99,15 +99,16 @@ export default function Navbar({ notFixed = false }: Props) {
                         {localeContextHome?.nav.editor}
                       </Link>
                     </AuthWrapper>
-                    <li
+                    <a
+                      href="fernanda-sena.pdf"
+                      target="_blank"
                       onClick={() => {
-                        handleOpenCurriculum()
                         setIsOpenMenu(false)
                       }}
                       className={css.mobileListItem}
                     >
                       {localeContextHome?.nav.resume}
-                    </li>
+                    </a>
                     <li
                       onClick={() => setIsOpenMenu(false)}
                       className={css.mobileListItem}

@@ -11,6 +11,7 @@ export { AlignRight } from './AlignRight'
 export { Eye } from './Eye'
 export { Disk } from './Disk'
 export { Download } from './Download'
+export { Share } from './Share'
 
 export { Search } from './Search'
 export { X } from './X'

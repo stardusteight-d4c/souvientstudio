@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 import { useAppContext } from '@/@context/AppContextProvider'
-import { X, Download } from '@/components/@globals/atoms'
+import { X, Download, Share } from '@/components/@globals/atoms'
 import { curriculumModalStyles as css } from './styles'
 
 export default function CurriculumModal() {
@@ -34,6 +34,11 @@ export default function CurriculumModal() {
       <div className={css.overlay} />
       <div id="curriculum-box" className={css.box}>
         <div className={css.actionsContainer}>
+          <div>
+            <a href="fernanda-sena.pdf" target="_blank">
+              <Share />
+            </a>
+          </div>
           <div>
             <a href="fernanda-sena.pdf" download>
               <Download />

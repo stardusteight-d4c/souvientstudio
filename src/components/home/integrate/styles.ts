@@ -1,9 +1,9 @@
 export const curriculumModalStyles = {
   wrapper: `absolute grid place-items-center z-[1200] inset-0`,
   overlay: `fixed inset-0 bg-white/50 z-10`,
-  box: `absolute border-[4px] z-50 border-orange top-0 md:mx-2 w-full mt-12 shadow-lg shadow-black/20 lg:max-w-[1300px] bg-white text-black xll:w-full h-fit 2xl:mx-auto`,
-  actionsContainer: `absolute -right-[4px] gap-x-1 px-1 cursor-pointer -top-8 bg-orange flex items-center`,
-  embed: `w-full h-[900px] md:h-[600px]`,
+  box: `absolute border-[4px] z-50 border-orange top-0 md:mx-2 w-full mt-20 shadow-lg shadow-black/20 lg:max-w-[1000px] bg-white text-black xll:w-full h-fit 2xl:mx-auto`,
+  actionsContainer: `absolute -right-[4px] gap-x-2 py-1 px-2 cursor-pointer -top-10 bg-orange flex items-center`,
+  embed: `w-full h-[900px]`,
 }
 
 export const projectSliderContainerStyles = {
