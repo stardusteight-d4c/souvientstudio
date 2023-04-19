@@ -1,3 +1,11 @@
+export const curriculumModalStyles = {
+  wrapper: `absolute grid place-items-center z-[1200] inset-0`,
+  overlay: `fixed inset-0 bg-white/50 z-10`,
+  box: `absolute border-[4px] z-50 border-orange top-0 md:mx-2 w-full mt-12 shadow-lg shadow-black/20 lg:max-w-[1300px] bg-white text-black xll:w-full h-fit 2xl:mx-auto`,
+  close: `absolute -right-[4px] cursor-pointer -top-8 bg-orange`,
+  embed: `w-full h-[900px] md:h-[600px]`,
+}
+
 export const projectSliderContainerStyles = {
   title: `text-[32px] md:text-[38px] px-2 md:px-4 md:px-0 text-black block w-fit !tracking-[-2px] font-medium !leading-[41.6px] font-poppins pb-8`,
   titleSpan: `text-orange`,
